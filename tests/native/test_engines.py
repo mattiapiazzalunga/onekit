@@ -80,7 +80,8 @@ def test_metadata_engine():
     from pypdf import PdfReader
     assert PdfReader(io.BytesIO(result.files[0].data)).metadata.title == "OneKit"
     stripped = execute("file-metadata-remove", result.files)
-    assert not PdfReader(io.BytesIO(stripped.files[0].data)).metadata.get("/Title")
+    metadata = PdfReader(io.BytesIO(stripped.files[0].data)).metadata
+    assert not (metadata or {}).get("/Title")
 
 
 SAMPLES = {"javascript": "const value={a:1};", "typescript": "const value:number=1;", "jsx": "const view=<div>OneKit</div>;", "tsx": "const view=<div>OneKit</div>;", "html": "<p>OneKit</p>", "css": "body{color:blue}", "scss": "$color: blue; body { color: $color; }", "less": "@color: blue; body { color: @color; }", "markdown": "# OneKit\n\nText", "mdx": "# OneKit\n\n<Panel />", "graphql": "query { toolkit { name } }", "vue": "<template><p>OneKit</p></template>", "svelte": "<p>OneKit</p>", "astro": "---\nconst name='OneKit';\n---\n<p>{name}</p>", "solidity": "pragma solidity ^0.8.0; contract OneKit {}", "php": "<?php $name = 'OneKit';"}
