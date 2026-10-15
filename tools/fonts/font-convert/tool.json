@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "font-convert",
+  "name": "Convert font",
+  "group": "fonts",
+  "handler": "fonts",
+  "accepts": [
+    "ttf",
+    "otf",
+    "woff",
+    "woff2"
+  ],
+  "produces": "*",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Changes font containers; does not transform TrueType outlines into CFF outlines or vice versa.",
+  "packages": [
+    "fonttools",
+    "brotli"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "format"
+  ]
+}

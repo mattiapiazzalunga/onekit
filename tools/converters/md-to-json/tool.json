@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "md-to-json",
+  "name": "Markdown to JSON",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "md"
+  ],
+  "produces": "json",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Structured conversion; the output represents the source data.",
+  "packages": [],
+  "engines": [
+    "pandoc"
+  ],
+  "multiple": false,
+  "options": []
+}

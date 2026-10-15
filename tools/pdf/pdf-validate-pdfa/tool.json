@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "pdf-validate-pdfa",
+  "name": "Validate pdfa PDF",
+  "group": "pdf",
+  "handler": "pdf",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "json",
+  "browser": false,
+  "fidelity": "exact",
+  "note": "Page operations preserve content. Encryption permissions are advisory.",
+  "packages": [],
+  "engines": [
+    "verapdf"
+  ],
+  "multiple": false,
+  "options": []
+}

@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "file-metadata-remove",
+  "name": "Remove metadata",
+  "group": "inspector",
+  "handler": "inspector",
+  "accepts": [
+    "*"
+  ],
+  "produces": "*",
+  "browser": false,
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [],
+  "engines": [
+    "exiftool"
+  ],
+  "multiple": false,
+  "options": []
+}

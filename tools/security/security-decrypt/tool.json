@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "security-decrypt",
+  "name": "Decrypt files or folders",
+  "group": "security",
+  "handler": "security",
+  "accepts": [
+    "*"
+  ],
+  "produces": "*",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Authenticated AES-256-GCM with scrypt. Losing the password makes recovery impossible.",
+  "packages": [
+    "pycryptodome"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "password"
+  ]
+}

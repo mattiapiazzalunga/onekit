@@ -1,0 +1,22 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "md-to-docx",
+  "name": "Markdown to Word",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "md"
+  ],
+  "produces": "docx",
+  "browser": true,
+  "fidelity": "compromise",
+  "note": "CommonMark headings, lists, emphasis and code are exported. Images, advanced layouts and Markdown extensions may need adjustment.",
+  "packages": [
+    "markdown-it-py",
+    "python-docx"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

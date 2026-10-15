@@ -1,0 +1,19 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "base64-to-image",
+  "name": "Base64 to Image",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "base64"
+  ],
+  "produces": "image",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Structured conversion; the output represents the source data.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

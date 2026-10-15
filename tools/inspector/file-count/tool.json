@@ -1,0 +1,19 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "file-count",
+  "name": "Count text",
+  "group": "inspector",
+  "handler": "inspector",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

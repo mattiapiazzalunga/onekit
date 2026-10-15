@@ -1,0 +1,24 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "pdf-to-webp",
+  "name": "PDF to WEBP",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "webp",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "pypdfium2",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "dpi"
+  ]
+}

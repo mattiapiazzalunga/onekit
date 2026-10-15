@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "image-extract-pdf",
+  "name": "Extract images from PDF",
+  "group": "images",
+  "handler": "images",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "image",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [
+    "pycryptodome",
+    "pypdf",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

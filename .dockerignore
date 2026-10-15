@@ -1,0 +1,12 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+.git
+.venv
+__pycache__
+.pytest_cache
+dist
+.env
+dependency-licenses.json
+node_modules
+.engines
+.browser-test

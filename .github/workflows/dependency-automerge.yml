@@ -1,0 +1,28 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+name: Compatible dependency automerge
+on:
+  workflow_run:
+    workflows: [Checks]
+    types: [completed]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  enable:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      # Only trusted default-branch code runs with a write token. PR code is never executed here.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.13'
+      - run: python scripts/dependency_automerge.py
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          GH_REPO: ${{ github.repository }}

@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "docx-to-md",
+  "name": "Word to Markdown",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "docx"
+  ],
+  "produces": "md",
+  "browser": true,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "python-docx"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

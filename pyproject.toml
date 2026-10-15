@@ -1,0 +1,56 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "onekit-tools"
+dynamic = ["version"]
+description = "One simple toolkit. An offline CLI and shared browser processing core."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Mattia Piazzalunga", email = "hello@mattiapiazzalunga.com"}]
+keywords = ["cli", "pdf", "diff", "conversion", "privacy", "utilities"]
+classifiers = ["Development Status :: 3 - Alpha", "Environment :: Console", "Operating System :: OS Independent", "Programming Language :: Python :: 3", "Topic :: Utilities"]
+dependencies = []
+
+[project.optional-dependencies]
+documents = ["markdown-it-py>=4.2,<5", "markdownify>=1.2.3,<2", "python-docx>=1.2,<2", "python-pptx>=1.0.2,<2", "openpyxl>=3.1.5,<4"]
+pdf = ["pypdf>=6.20.1,<7", "pypdfium2>=5.14,<6", "reportlab>=4.4,<5"]
+images = ["Pillow>=12.3,<13"]
+security = ["pycryptodome>=3.24.1,<4"]
+fonts = ["fonttools>=4.67,<5", "brotli>=1.2,<2; sys_platform != 'win32' or platform_machine != 'ARM64'"]
+ocr = ["pytesseract>=0.3.13,<0.4"]
+devtools = ["ruff>=0.17,<0.18", "jsonschema>=4.26,<5", "PyYAML>=6.0.3,<7", "defusedxml>=0.7.1,<0.8", "json5>=0.14,<1", "tomli-w>=1.2,<2", "xmlschema>=4.2,<5"]
+signing = ["pyhanko>=0.34,<1"]
+all = ["onekit-tools[documents,pdf,images,security,fonts,ocr,devtools]"]
+test = ["pytest>=9.1,<10", "ruff>=0.17,<0.18", "build>=1.6,<2", "hatchling==1.32.4", "pip-audit>=2.10,<3", "pip-licenses>=5.5,<6"]
+
+[project.scripts]
+onekit = "onekit.cli:main"
+
+[project.urls]
+Homepage = "https://onekit.org"
+Repository = "https://github.com/mattiapiazzalunga/onekit"
+Issues = "https://github.com/mattiapiazzalunga/onekit/issues"
+Requests = "https://onekit.org/requests/"
+Author = "https://www.mattiapiazzalunga.com"
+
+[tool.hatch.version]
+path = "src/onekit/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/onekit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+addopts = "-m 'not native'"
+markers = ["native: integration checks that require separately installed external engines"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120

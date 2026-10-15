@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="0 0 1254 1254" role="img" aria-labelledby="title desc">
+  <title id="title">Cubo sfumato blu e viola</title>
+  <desc id="desc">Logo di un cubo isometrico tridimensionale con tre facce arrotondate, sfumature ciano, blu e viola, e riflessi curvi.</desc>
+  <defs>
+    <linearGradient id="topGradient" x1="280" y1="270" x2="820" y2="810" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#46eafb"/>
+      <stop offset=".14" stop-color="#3ed6fb"/>
+      <stop offset=".43" stop-color="#3b80fb"/>
+      <stop offset=".73" stop-color="#481cf9"/>
+      <stop offset="1" stop-color="#4710f7"/>
+    </linearGradient>
+    <linearGradient id="leftGradient" x1="188" y1="466" x2="620" y2="1050" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2cdbfb"/>
+      <stop offset=".22" stop-color="#0caafa"/>
+      <stop offset=".51" stop-color="#087bf3"/>
+      <stop offset=".78" stop-color="#083fe3"/>
+      <stop offset="1" stop-color="#0728d9"/>
+    </linearGradient>
+    <linearGradient id="leftShine" x1="234" y1="477" x2="585" y2="834" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#58edfc" stop-opacity=".48"/>
+      <stop offset=".33" stop-color="#25cafd" stop-opacity=".37"/>
+      <stop offset=".73" stop-color="#1269fc" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#0754ff" stop-opacity=".62"/>
+    </linearGradient>
+    <linearGradient id="rightGradient" x1="637" y1="600" x2="1040" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f0a79"/>
+      <stop offset=".22" stop-color="#1a138f"/>
+      <stop offset=".52" stop-color="#351fcf"/>
+      <stop offset=".78" stop-color="#662ff0"/>
+      <stop offset="1" stop-color="#8f58fa"/>
+    </linearGradient>
+    <linearGradient id="rightShine" x1="646" y1="946" x2="1035" y2="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4038ed"/>
+      <stop offset=".45" stop-color="#7449f6"/>
+      <stop offset="1" stop-color="#9657fb"/>
+    </linearGradient>
+    <linearGradient id="rightBottom" x1="655" y1="1000" x2="1030" y2="765" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4b3be1" stop-opacity=".44"/>
+      <stop offset=".7" stop-color="#9b58ff" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#a760ff" stop-opacity=".1"/>
+    </linearGradient>
+    <clipPath id="leftClip">
+      <path d="M 239,469 C 251,463 265,467 282,475 L 562,631 C 589,646 600,668 600,697 L 600,993 C 601,1026 576,1044 551,1036 C 543,1034 538,1032 530,1028 L 254,868 C 228,853 216,831 216,805 L 216,510 C 216,490 223,477 239,469 Z"/>
+    </clipPath>
+    <clipPath id="rightClip">
+      <path d="M 969,475 C 1007,452 1037,472 1037,509 L 1037,799 C 1037,832 1022,852 995,868 L 715,1031 C 680,1053 649,1038 649,1005 L 649,691 C 649,659 667,639 692,626 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- The three faces remain separate vector shapes. -->
+  <path id="face-top" d="M 593,209 C 615,199 643,202 665,213 L 939,363 C 978,384 976,411 944,433 L 666,591 C 641,606 620,606 594,595 L 311,431 C 279,412 279,383 297,367 C 301,363 305,360 311,357 L 563,219 C 573,214 583,211 593,209 Z" fill="url(#topGradient)"/>
+
+  <path id="face-left" d="M 239,469 C 251,463 265,467 282,475 L 562,631 C 589,646 600,668 600,697 L 600,993 C 601,1026 576,1044 551,1036 C 543,1034 538,1032 530,1028 L 254,868 C 228,853 216,831 216,805 L 216,510 C 216,490 223,477 239,469 Z" fill="url(#leftGradient)"/>
+  <g clip-path="url(#leftClip)">
+    <path id="sheen-left" d="M 216,511 C 267,648 403,800 600,839 L 600,697 C 600,668 589,646 562,631 L 282,475 C 265,467 251,463 239,469 C 223,477 216,490 216,511 Z" fill="url(#leftShine)"/>
+  </g>
+
+  <path id="face-right" d="M 969,475 C 1007,452 1037,472 1037,509 L 1037,799 C 1037,832 1022,852 995,868 L 715,1031 C 680,1053 649,1038 649,1005 L 649,691 C 649,659 667,639 692,626 Z" fill="url(#rightGradient)"/>
+  <g clip-path="url(#rightClip)">
+    <path id="sheen-right" d="M 1037,546 C 1050,730 900,888 649,952 L 649,1005 C 649,1038 680,1053 715,1031 L 995,868 C 1022,852 1037,832 1037,799 Z" fill="url(#rightShine)"/>
+    <path id="gloss-right" d="M 1037,546 C 1050,730 900,888 649,952 L 649,1005 C 649,1038 680,1053 715,1031 L 995,868 C 1022,852 1037,832 1037,799 Z" fill="url(#rightBottom)"/>
+  </g>
+</svg>

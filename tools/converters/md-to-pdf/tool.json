@@ -1,0 +1,22 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "md-to-pdf",
+  "name": "Markdown to PDF",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "md"
+  ],
+  "produces": "pdf",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [],
+  "engines": [
+    "pandoc",
+    "pdflatex"
+  ],
+  "multiple": false,
+  "options": []
+}

@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "file-inspect",
+  "name": "Inspect file",
+  "group": "inspector",
+  "handler": "inspector",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [
+    "Pillow",
+    "pycryptodome",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

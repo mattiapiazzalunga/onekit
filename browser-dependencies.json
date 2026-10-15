@@ -1,0 +1,6 @@
+{
+  "pyodide": "314.0.7",
+  "builtins": {"Pillow":"pillow","fonttools":"fonttools","brotli":"brotli","pycryptodome":"pycryptodome","PyYAML":"pyyaml","lxml":"lxml","rpds-py":"rpds-py"},
+  "packages": {"pypdf":"6.20.1","markdown-it-py":"4.2.0","markdownify":"1.2.3","openpyxl":"3.1.5","reportlab":"4.5.1","python-docx":"1.2.0","python-pptx":"1.0.2","tomli-w":"1.2.0","json5":"0.17.3","jsonschema":"4.26.0","xmlschema":"4.3.2"},
+  "requires": {"markdown-it-py":["mdurl"],"markdownify":["beautifulsoup4","six"],"beautifulsoup4":["soupsieve","typing-extensions"],"openpyxl":["et-xmlfile"],"reportlab":["Pillow","charset-normalizer"],"python-docx":["lxml","typing-extensions"],"python-pptx":["lxml","Pillow","xlsxwriter","typing-extensions"],"jsonschema":["attrs","jsonschema-specifications","referencing","rpds-py"],"jsonschema-specifications":["referencing"],"referencing":["attrs","rpds-py","typing-extensions"],"xmlschema":["elementpath"]}
+}

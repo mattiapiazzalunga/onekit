@@ -1,0 +1,24 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "pdf-to-jpeg",
+  "name": "PDF to JPEG",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "jpeg",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "pypdfium2",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "dpi"
+  ]
+}

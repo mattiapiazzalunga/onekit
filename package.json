@@ -1,0 +1,8 @@
+{
+  "name": "onekit-browser-contract",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {"test": "node scripts/test_browser.mjs"},
+  "dependencies": {"pyodide": "314.0.7"}
+}

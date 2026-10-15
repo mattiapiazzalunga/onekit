@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "pdf-to-docx",
+  "name": "PDF to Word",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "docx",
+  "browser": true,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "pycryptodome",
+    "pypdf",
+    "python-docx"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

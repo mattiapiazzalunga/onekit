@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "csv-to-json",
+  "name": "CSV to JSON",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "csv"
+  ],
+  "produces": "json",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Structured conversion; the output represents the source data.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "delimiter"
+  ]
+}

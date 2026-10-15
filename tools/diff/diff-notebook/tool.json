@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "diff-notebook",
+  "name": "Compare Jupyter notebook files",
+  "group": "diff",
+  "handler": "diff",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Notebook comparison can include Markdown, code or both. LaTeX text mode omits commands.",
+  "packages": [],
+  "engines": [],
+  "multiple": true,
+  "options": [
+    "mode"
+  ]
+}

@@ -1,0 +1,16 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+name: Bug report
+description: Report a reproducible OneKit problem
+body:
+  - type: input
+    id: version
+    attributes: {label: OneKit version and operating system}
+    validations: {required: true}
+  - type: textarea
+    id: reproduction
+    attributes: {label: Reproduction and expected behavior, description: Use synthetic files. Do not include private content or credentials.}
+    validations: {required: true}
+  - type: textarea
+    id: diagnosis
+    attributes: {label: Relevant doctor report and error message}

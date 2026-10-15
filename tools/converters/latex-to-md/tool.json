@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "latex-to-md",
+  "name": "LaTeX to Markdown",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "latex"
+  ],
+  "produces": "md",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [],
+  "engines": [
+    "pandoc"
+  ],
+  "multiple": false,
+  "options": []
+}

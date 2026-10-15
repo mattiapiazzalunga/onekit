@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "audio-convert",
+  "name": "Convert audio",
+  "group": "audio",
+  "handler": "media",
+  "accepts": [
+    "*"
+  ],
+  "produces": "*",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Available codecs depend on your FFmpeg build; re-encoding can lose quality.",
+  "packages": [],
+  "engines": [
+    "ffmpeg"
+  ],
+  "multiple": false,
+  "options": [
+    "format",
+    "codec",
+    "bitrate"
+  ]
+}

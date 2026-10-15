@@ -1,0 +1,22 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "file-encoding-convert",
+  "name": "Convert text encoding",
+  "group": "inspector",
+  "handler": "inspector",
+  "accepts": [
+    "*"
+  ],
+  "produces": "*",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "source_encoding",
+    "encoding"
+  ]
+}

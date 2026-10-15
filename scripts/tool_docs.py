@@ -1,0 +1,41 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+"""Generate each tool's own directory without duplicating processing logic."""
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from onekit.catalog import manifest
+
+for tool in manifest():
+    directory = ROOT / "tools" / tool["group"] / tool["id"]
+    directory.mkdir(parents=True, exist_ok=True)
+    metadata = {"copyright": "Copyright 2026 Mattia Piazzalunga", "spdx": "Apache-2.0", **tool}
+    (directory / "tool.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+    text = f"""<!-- Copyright 2026 Mattia Piazzalunga -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# {tool['name']}
+
+Command: `onekit run {tool['id']}`. Use `onekit run --help` for input and output arguments.
+
+Category: **{tool['group']}**. Browser support: **{'available' if tool['browser'] else 'in development'}**.
+Fidelity: **{tool['fidelity']}**. {tool['note']}
+
+Accepted types: `{', '.join(tool['accepts'])}`. Output type: `{tool['produces']}`.
+Accepts multiple inputs: **{'yes' if tool['multiple'] else 'no'}**.
+
+Options: {', '.join('`'+name+'`' for name in tool['options']) or 'none'}.
+
+Python packages: {', '.join(tool['packages']) or 'standard library or external engine'}.
+External engines: {', '.join(tool['engines']) or 'see the developer engine matrix for language adapters'}.
+
+Processing implementation: [shared family adapter](../../../src/onekit/tools/{tool['handler']}/__init__.py).
+Contracts and regression fixtures: [tests](../../../tests/test_core.py).
+Engine setup and licenses: [engine guide](../../../docs/engines.md).
+
+This directory is generated from the shared catalog by `python scripts/tool_docs.py`.
+Edit the registry and family adapter, add regression fixtures, then regenerate the directory.
+"""
+    (directory / "README.md").write_text(text, encoding="utf-8")

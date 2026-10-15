@@ -1,0 +1,31 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "image-crop",
+  "name": "Crop image",
+  "group": "images",
+  "handler": "images",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "image",
+  "browser": true,
+  "fidelity": "compromise",
+  "note": "Lossy formats discard detail. Animation and metadata can be removed; use a lossless format to preserve pixels.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "box",
+    "format",
+    "quality"
+  ]
+}

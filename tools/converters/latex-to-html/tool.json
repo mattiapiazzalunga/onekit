@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "latex-to-html",
+  "name": "LaTeX to HTML",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "latex"
+  ],
+  "produces": "html",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [],
+  "engines": [
+    "pandoc"
+  ],
+  "multiple": false,
+  "options": []
+}

@@ -1,0 +1,19 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "dev-minify-jsx",
+  "name": "Minify JSX",
+  "group": "developer",
+  "handler": "developer",
+  "accepts": [
+    "*"
+  ],
+  "produces": "*",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Validation checks the configured parser or compiler; project-wide types, imports and dependencies may require a local project.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

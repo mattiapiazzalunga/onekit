@@ -1,0 +1,22 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "pdf-to-html",
+  "name": "PDF to HTML",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "html",
+  "browser": true,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "pycryptodome",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": []
+}

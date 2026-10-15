@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "archive-convert",
+  "name": "Convert archive",
+  "group": "archives",
+  "handler": "archives",
+  "accepts": [
+    "zip",
+    "tar",
+    "gz",
+    "bz2",
+    "xz"
+  ],
+  "produces": "*",
+  "browser": true,
+  "fidelity": "exact",
+  "note": "ZIP and TAR variants are supported. Archive links and unsafe paths are rejected.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "format"
+  ]
+}

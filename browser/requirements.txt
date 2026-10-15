@@ -1,0 +1,26 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+# Pure Python browser dependencies. Compiled packages come from Pyodide's lock.
+pypdf==6.20.1
+markdown-it-py==4.2.0
+mdurl==0.1.2
+markdownify==1.2.3
+six==1.17.0
+beautifulsoup4==4.15.0
+soupsieve==3.0.3
+typing-extensions==4.16.0
+openpyxl==3.1.5
+et-xmlfile==2.0.0
+reportlab==4.5.1
+charset-normalizer==3.5.2
+python-docx==1.2.0
+python-pptx==1.0.2
+xlsxwriter==3.2.9
+tomli-w==1.2.0
+json5==0.17.3
+jsonschema==4.26.0
+attrs==26.1.0
+jsonschema-specifications==2025.9.1
+referencing==0.37.0
+xmlschema==4.3.2
+elementpath==5.1.4

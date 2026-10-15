@@ -1,0 +1,22 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "diff-pdf",
+  "name": "Compare PDF files",
+  "group": "diff",
+  "handler": "diff",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "browser": true,
+  "fidelity": "compromise",
+  "note": "Compares extracted text, not visual layout.",
+  "packages": [
+    "pycryptodome",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": true,
+  "options": []
+}

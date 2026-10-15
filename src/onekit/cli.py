@@ -1,0 +1,190 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: Apache-2.0
+from __future__ import annotations
+
+import argparse
+import getpass
+import gettext
+import importlib.util
+import json
+import os
+import shutil
+import sys
+import tempfile
+from pathlib import Path
+
+from . import __version__
+from .api import execute, pipeline
+from .catalog import TOOLS, manifest
+from .models import Artifact, OneKitError
+
+_ = gettext.translation("onekit", localedir=Path(__file__).parent / "locales", fallback=True).gettext
+
+PACKAGE_MODULES = {"PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdown_it", "python-docx": "docx", "python-pptx": "pptx", "fonttools": "fontTools", "pycryptodome": "Crypto"}
+
+
+def doctor(tool_id=None):
+    from .tools.native import COPYLEFT, executable
+    report = []
+    for tool in ([TOOLS[tool_id]] if tool_id else TOOLS.values()):
+        packages = list(tool.packages)
+        engines = list(tool.engines)
+        if tool.group == "developer" and not tool.browser:
+            from .tools.developer import engine_for
+            engine = engine_for(tool)
+            if engine:
+                engines.append(engine)
+        missing = [name for name in packages if importlib.util.find_spec(PACKAGE_MODULES.get(name, name.replace("-", "_"))) is None]
+        blocked = [name for name in engines if name in COPYLEFT and os.environ.get("ONEKIT_ALLOW_COPYLEFT") == "0"]
+        for name in engines:
+            if name in blocked:
+                continue
+            try:
+                executable(name)
+            except OneKitError:
+                missing.append(name)
+        if "node" in engines and not (Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node")) / "node_modules").is_dir():
+            missing.append("OneKit Node engines (onekit engines install)")
+        report.append({"tool": tool.id, "ready": not missing and not blocked, "missing": missing, "policyBlocked": blocked, "browser": tool.browser})
+    return report
+
+
+def read_files(paths, folders=False):
+    files = []
+    for value in paths:
+        path = Path(value)
+        if path.is_symlink():
+            raise OneKitError("Symlink inputs are not supported.")
+        if path.is_dir() and folders:
+            for child in sorted(path.rglob("*")):
+                if child.is_symlink():
+                    raise OneKitError("Folders containing symlinks are not supported.")
+                if child.is_file():
+                    if len(files) >= 256 or child.stat().st_size > 128 * 1024 * 1024:
+                        raise OneKitError("Folder exceeds input limits.")
+                    files.append(Artifact((Path(path.name) / child.relative_to(path)).as_posix(), child.read_bytes()))
+        elif path.is_file():
+            if path.stat().st_size > 128 * 1024 * 1024:
+                raise OneKitError("File exceeds 128 MiB.")
+            files.append(Artifact(path.name, path.read_bytes()))
+        else:
+            raise OneKitError(f"Cannot read '{path}'.")
+    return files
+
+
+def write_files(result, destination, force=False):
+    target = Path(destination)
+    as_directory = len(result.files) > 1 or target.is_dir() or not target.suffix
+    paths = [(target / file.name if as_directory else target, file) for file in result.files]
+    if len({str(path.resolve()) for path, _ in paths}) != len(paths):
+        raise OneKitError("Multiple outputs have the same file name; rename the inputs.")
+    for path, _ in paths:
+        for parent in (path, *path.parents):
+            if parent.is_symlink():
+                raise OneKitError("Output paths cannot contain symlinks.")
+        if path.exists() and not force:
+            raise OneKitError(f"'{path}' already exists. Choose another destination or pass --force.")
+    for path, file in paths:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        descriptor, temporary = tempfile.mkstemp(prefix=".onekit-", dir=path.parent)
+        try:
+            with os.fdopen(descriptor, "wb") as stream:
+                stream.write(file.data)
+            os.replace(temporary, path)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
+        print(path)
+    for warning in result.warnings:
+        print(f"Warning: {warning}", file=sys.stderr)
+
+
+def parser():
+    root = argparse.ArgumentParser(prog="onekit", description=_("One simple toolkit. Your files stay yours."))
+    root.add_argument("--version", action="version", version=__version__)
+    commands = root.add_subparsers(dest="command", required=True)
+    listing = commands.add_parser("list", help="Browse all tools and their fidelity notes")
+    listing.add_argument("--json", action="store_true")
+    listing.add_argument("--group")
+    diagnosis = commands.add_parser("doctor", help="Check optional Python packages and system engines")
+    diagnosis.add_argument("tool", nargs="?", choices=TOOLS, metavar="TOOL")
+    diagnosis.add_argument("--json", action="store_true")
+    engines = commands.add_parser("engines", help="Install the optional, version-locked Node developer engines")
+    engines.add_argument("action", choices=["install"])
+    engines.add_argument("--directory", type=Path)
+    for name in ("run", "pipeline"):
+        command = commands.add_parser(name)
+        if name == "run":
+            command.add_argument("tool", choices=TOOLS, metavar="TOOL")
+            command.add_argument("--options", default="{}", help="JSON object of tool options")
+        else:
+            command.add_argument("--steps", required=True, help="JSON file with a list of {tool, options} objects")
+        command.add_argument("files", nargs="+")
+        command.add_argument("-o", "--output", required=True)
+        command.add_argument("--force", action="store_true")
+        command.add_argument("--ask-password", action="store_true", help="Read a password without exposing it in shell history")
+    return root
+
+
+def main(argv=None):
+    args = parser().parse_args(argv)
+    try:
+        if args.command == "list":
+            tools = [item for item in manifest() if not args.group or item["group"] == args.group]
+            if args.json:
+                print(json.dumps(tools, indent=2))
+            else:
+                for tool in tools:
+                    print(f"{tool['id']:34} {'browser + CLI' if tool['browser'] else 'CLI':14} {tool['fidelity']}  {tool['name']}")
+            return 0
+        if args.command == "engines":
+            install_node_engines(args.directory)
+            return 0
+        if args.command == "doctor":
+            report = doctor(args.tool)
+            if args.json:
+                print(json.dumps(report, indent=2))
+            else:
+                for item in report:
+                    print(f"{item['tool']:34} {'ready' if item['ready'] else 'needs setup'}  {', '.join(item['missing'] + item['policyBlocked'])}")
+            return 0 if all(item["ready"] for item in report) else 1
+        if args.command == "run":
+            options = json.loads(args.options)
+            if not isinstance(options, dict):
+                raise OneKitError("--options must contain a JSON object.")
+            if args.ask_password:
+                options["password"] = getpass.getpass("Password: ")
+            result = execute(args.tool, read_files(args.files, args.tool == "security-encrypt"), options)
+        else:
+            steps = json.loads(Path(args.steps).read_text(encoding="utf-8"))
+            if args.ask_password:
+                password = getpass.getpass("Password: ")
+                for step in steps:
+                    step.setdefault("options", {})["password"] = password
+            result = pipeline(steps, read_files(args.files))
+        write_files(result, args.output, args.force)
+        return 0
+    except (OneKitError, OSError, ValueError) as exc:
+        print(f"onekit: {exc}", file=sys.stderr)
+        return 2
+    except KeyboardInterrupt:
+        print("onekit: cancelled", file=sys.stderr)
+        return 130
+
+
+def install_node_engines(directory=None):
+    from .tools.native import command
+    target = directory or Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node"))
+    target.mkdir(parents=True, exist_ok=True)
+    source = Path(__file__).parent / "tools" / "developer" / "node"
+    if (target / "package.json").exists() and json.loads((target / "package.json").read_text())["name"] != "onekit-developer-engines":
+        raise OneKitError("This directory contains a different Node project; choose another destination.")
+    for name in ("package.json", "package-lock.json"):
+        shutil.copyfile(source / name, target / name)
+    command("npm", ["ci", "--ignore-scripts", "--no-fund"], target, timeout=300)
+    command("npm", ["audit", "--audit-level=low"], target)
+    print(f"Developer engines installed in {target}.")
+
+
+if __name__ == "__main__":
+    sys.exit(main())

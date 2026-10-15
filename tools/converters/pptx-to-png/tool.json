@@ -1,0 +1,21 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "Apache-2.0",
+  "id": "pptx-to-png",
+  "name": "PowerPoint to PNG",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "pptx"
+  ],
+  "produces": "png",
+  "browser": false,
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [],
+  "engines": [
+    "soffice"
+  ],
+  "multiple": false,
+  "options": []
+}
