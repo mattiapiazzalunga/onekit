@@ -10,9 +10,14 @@ Fidelity: **compromise**. Formatting, fonts, layout, formulas or unsupported ele
 Accepted types: `png, jpeg, webp, gif, bmp, tiff, ico`. Output type: `pptx`.
 Accepts multiple inputs: **no**.
 
+Input validation: **typed**. Required file count: **1–1**.
+CLI: **67,108,864 bytes per file**, **134,217,728 bytes total**.
+Browser: **33,554,432 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: none.
 
-Python packages: python-pptx.
+Python packages: python-pptx, Pillow.
 External engines: see the developer engine matrix for language adapters.
 
 Processing implementation: [shared family adapter](../../../src/onekit/tools/converters/__init__.py).

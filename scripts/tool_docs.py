@@ -26,6 +26,11 @@ Fidelity: **{tool['fidelity']}**. {tool['note']}
 Accepted types: `{', '.join(tool['accepts'])}`. Output type: `{tool['produces']}`.
 Accepts multiple inputs: **{'yes' if tool['multiple'] else 'no'}**.
 
+Input validation: **{tool['input_mode']}**. Required file count: **{tool['min_files']}–{tool['max_files']}**.
+CLI: **{tool['max_file_bytes']:,} bytes per file**, **{tool['max_total_bytes']:,} bytes total**.
+Browser: **{tool['browser_max_file_bytes']:,} bytes per file**, **{tool['browser_max_total_bytes']:,} bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: {', '.join('`'+name+'`' for name in tool['options']) or 'none'}.
 
 Python packages: {', '.join(tool['packages']) or 'standard library or external engine'}.

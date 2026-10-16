@@ -14,7 +14,8 @@ import tempfile
 from pathlib import Path
 
 from . import __version__
-from .api import execute, pipeline
+from .api import execute, pipeline, validate_steps
+from .validation import MAX_BYTES
 from .catalog import TOOLS, manifest
 from .models import Artifact, OneKitError
 
@@ -24,7 +25,7 @@ PACKAGE_MODULES = {"PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdow
 
 
 def doctor(tool_id=None):
-    from .tools.native import COPYLEFT, executable
+    from .tools.native import COPYLEFT, command, executable
     report = []
     for tool in ([TOOLS[tool_id]] if tool_id else TOOLS.values()):
         packages = list(tool.packages)
@@ -45,12 +46,39 @@ def doctor(tool_id=None):
                 missing.append(name)
         if "node" in engines and not (Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node")) / "node_modules").is_dir():
             missing.append("OneKit Node engines (onekit engines install)")
+        if tool.id == "dev-format-powershell" and "pwsh" not in missing:
+            try:
+                command("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){exit 1}"], Path.cwd(), timeout=10)
+            except (OneKitError, OSError):
+                missing.append("PSScriptAnalyzer (Install-Module PSScriptAnalyzer -Scope CurrentUser)")
         report.append({"tool": tool.id, "ready": not missing and not blocked, "missing": missing, "policyBlocked": blocked, "browser": tool.browser})
     return report
 
 
-def read_files(paths, folders=False):
+def read_files(paths, folders=False, tool=None, mapped=False):
+    if tool and not folders and not mapped and not tool.min_files <= len(paths) <= tool.max_files:
+        raise OneKitError(f"{tool.name} requires {tool.min_files}–{tool.max_files} input file(s).")
     files = []
+    total = 0
+
+    def append(path, name):
+        nonlocal total
+        size = path.stat().st_size
+        if size > (tool.max_file_bytes if tool else MAX_BYTES):
+            raise OneKitError(f"'{path.name}' exceeds the tool's per-file size limit.")
+        if tool and tool.accepts != ("*",) and Artifact(name, b"").kind not in tool.accepts:
+            raise OneKitError(f"Expected file types: {', '.join(tool.accepts)}. Rejected '{path.name}'.")
+        if len(files) >= (tool.max_files if tool and not mapped else 256) or total + size > min(MAX_BYTES, tool.max_total_bytes if tool else MAX_BYTES):
+            raise OneKitError("Input exceeds the limit of 256 files or 128 MiB.")
+        with path.open("rb") as stream:
+            data = stream.read(min(MAX_BYTES - total, tool.max_file_bytes if tool else MAX_BYTES) + 1)
+        if tool and len(data) > tool.max_file_bytes:
+            raise OneKitError("File grew beyond the tool's per-file size limit while reading.")
+        total += len(data)
+        if total > MAX_BYTES:
+            raise OneKitError("Input exceeds 128 MiB.")
+        files.append(Artifact(name, data))
+
     for value in paths:
         path = Path(value)
         if path.is_symlink():
@@ -60,13 +88,9 @@ def read_files(paths, folders=False):
                 if child.is_symlink():
                     raise OneKitError("Folders containing symlinks are not supported.")
                 if child.is_file():
-                    if len(files) >= 256 or child.stat().st_size > 128 * 1024 * 1024:
-                        raise OneKitError("Folder exceeds input limits.")
-                    files.append(Artifact((Path(path.name) / child.relative_to(path)).as_posix(), child.read_bytes()))
+                    append(child, (Path(path.name) / child.relative_to(path)).as_posix())
         elif path.is_file():
-            if path.stat().st_size > 128 * 1024 * 1024:
-                raise OneKitError("File exceeds 128 MiB.")
-            files.append(Artifact(path.name, path.read_bytes()))
+            append(path, path.name)
         else:
             raise OneKitError(f"Cannot read '{path}'.")
     return files
@@ -154,14 +178,16 @@ def main(argv=None):
                 raise OneKitError("--options must contain a JSON object.")
             if args.ask_password:
                 options["password"] = getpass.getpass("Password: ")
-            result = execute(args.tool, read_files(args.files, args.tool == "security-encrypt"), options)
+            result = execute(args.tool, read_files(args.files, args.tool == "security-encrypt", TOOLS[args.tool]), options)
         else:
             steps = json.loads(Path(args.steps).read_text(encoding="utf-8"))
+            validate_steps(steps)
             if args.ask_password:
                 password = getpass.getpass("Password: ")
                 for step in steps:
                     step.setdefault("options", {})["password"] = password
-            result = pipeline(steps, read_files(args.files))
+            first = TOOLS[steps[0]["tool"]]
+            result = pipeline(steps, read_files(args.files, tool=first, mapped=not first.multiple))
         write_files(result, args.output, args.force)
         return 0
     except (OneKitError, OSError, ValueError) as exc:

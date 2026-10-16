@@ -28,7 +28,6 @@ def save(writer):
 
 
 def run(tool, files, options):
-    from pypdf import PdfReader, PdfWriter
     op = tool.id.removeprefix("pdf-")
     if op == "sign":
         from pyhanko.sign import signers
@@ -42,6 +41,7 @@ def run(tool, files, options):
     if op == "validate-pdfa":
         from ..native import run_verapdf
         return run_verapdf(files[0])
+    from pypdf import PdfReader, PdfWriter
     reader = PdfReader(io.BytesIO(files[0].data), strict=False)
     if reader.is_encrypted:
         password = options.get("password", "")
@@ -64,7 +64,8 @@ def run(tool, files, options):
     elif op in ("organize", "extract-pages", "remove-pages"):
         selected = pages_option(require(options, "pages"), len(reader.pages))
         if op == "remove-pages":
-            selected = [index for index in range(len(reader.pages)) if index not in set(selected)]
+            removed = set(selected)
+            selected = [index for index in range(len(reader.pages)) if index not in removed]
         if not selected:
             raise OneKitError("The result must contain at least one page.")
         for index in selected:

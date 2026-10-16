@@ -1,5 +1,6 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: Apache-2.0
+import json
 import tempfile
 from pathlib import Path
 
@@ -15,6 +16,12 @@ def run(tool, files, options):
         work = Path(directory)
         source = work / f"input.{files[0].kind or 'bin'}"
         source.write_bytes(files[0].data)
+        report = json.loads(command("ffprobe", ["-v", "error", "-protocol_whitelist", "file,pipe", "-show_entries", "stream=codec_type:stream_disposition=attached_pic", "-of", "json", source.name], directory, timeout=30))
+        streams = report.get("streams", [])
+        video = any(stream.get("codec_type") == "video" and not stream.get("disposition", {}).get("attached_pic") for stream in streams)
+        audio = any(stream.get("codec_type") == "audio" for stream in streams)
+        if tool.group == "video" and not video or tool.group == "audio" and (not audio or video):
+            raise OneKitError(f"The input does not contain a supported {tool.group} stream for this tool.")
         arguments = ["-nostdin", "-hide_banner", "-loglevel", "error", "-protocol_whitelist", "file,pipe", "-i", source.name, "-map_metadata", "-1"]
         if tool.group == "audio" and format != "mp4":
             arguments += ["-vn"]

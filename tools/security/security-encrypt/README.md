@@ -10,6 +10,11 @@ Fidelity: **exact**. Authenticated AES-256-GCM with scrypt. Losing the password 
 Accepted types: `*`. Output type: `onekit`.
 Accepts multiple inputs: **yes**.
 
+Input validation: **any**. Required file count: **1–256**.
+CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
+Browser: **33,554,432 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: `password`.
 
 Python packages: pycryptodome.

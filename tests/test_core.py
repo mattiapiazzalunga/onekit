@@ -109,7 +109,8 @@ def browser_case(tool):
         if id == "dev-validate-json-schema":
             language = "json-schema"
         value = {"json": '{"b":2,"a":1}', "json5": '{"b":2,"a":1}', "jsonc": '{"a":1 /* comment */}', "json-schema": '{"type":"object"}', "yaml": 'name: OneKit', "xsd": '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"><xs:element name="item" type="xs:string"/></xs:schema>', "python": "x = 1\n", "xml": "<root/>", "svg": '<svg xmlns="http://www.w3.org/2000/svg"/>', "toml": 'name = "OneKit"', "csv": "a,b\n1,2"}[language]
-        return [Artifact(f"input.{language}", value.encode())], options
+        extension = {"python": "py", "json-schema": "json"}.get(language, language)
+        return [Artifact(f"input.{extension}", value.encode())], options
     return [Artifact("text.txt", b"OneKit works\non your device.\n")], options
 
 

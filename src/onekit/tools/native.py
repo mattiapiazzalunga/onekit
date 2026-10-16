@@ -10,12 +10,14 @@ from pathlib import Path
 
 from ..models import Artifact, OneKitError, Result
 
-COPYLEFT = {"pandoc", "soffice", "gs", "ffmpeg", "verapdf", "exiftool", "7z", "terraform", "hclfmt", "latexindent", "hadolint"}
+COPYLEFT = {"pandoc", "soffice", "gs", "ffmpeg", "ffprobe", "verapdf", "exiftool", "7z", "terraform", "hclfmt", "latexindent", "hadolint"}
 
 
 def executable(name):
     if name in COPYLEFT and os.environ.get("ONEKIT_ALLOW_COPYLEFT") == "0":
         raise OneKitError(f"'{name}' is outside the default permissive license policy. This optional adapter is disabled. Review docs/engines.md before explicitly enabling it.")
+    if os.name == "nt" and name in ("bash", "sh"):
+        return windows_shell(name, shutil.which(name))
     aliases = {"gs": ("gs", "gswin64c", "gswin32c"), "soffice": ("soffice", "libreoffice")}
     for candidate in aliases.get(name, (name,)):
         path = shutil.which(candidate)
@@ -25,6 +27,22 @@ def executable(name):
         if local.is_file():
             return str(local)
     raise OneKitError(f"Install '{name}' and add it to PATH. Run 'onekit doctor' for engine requirements.")
+
+
+def windows_shell(name, path):
+    # System32/bash.exe launches WSL; it is not a Windows-compatible file parser.
+    system32 = Path(os.environ.get("SystemRoot", "C:/Windows")) / "System32"
+    if path and Path(path).parent != system32:
+        return path
+    roots = [Path(os.environ.get("ProgramFiles", "C:/Program Files")) / "Git"]
+    if os.environ.get("LOCALAPPDATA"):
+        roots.append(Path(os.environ["LOCALAPPDATA"]) / "Programs" / "Git")
+    for root in roots:
+        for directory in ("usr/bin", "bin"):
+            candidate = root / directory / f"{name}.exe"
+            if candidate.is_file():
+                return str(candidate)
+    raise OneKitError(f"Install '{name}' (for example Git for Windows) and add it to PATH. The Windows WSL launcher cannot be used as this engine.")
 
 
 def command(engine, arguments, cwd, *, stdin=None, timeout=120):
@@ -64,7 +82,7 @@ def convert_document(file, source, target, options):
         out = work / f"output.{ 'tex' if target == 'latex' else target}"
         if source in ("docx", "pptx", "xlsx"):
             command("soffice", [f"-env:UserInstallation={ (work / 'profile').as_uri() }", "--headless", "--convert-to", "pdf", "--outdir", directory, input_path.name], directory)
-            pdf = Artifact("input.pdf", (work / "input.pdf").read_bytes())
+            pdf = Artifact(f"{file.stem}.pdf", (work / "input.pdf").read_bytes())
             if target == "png":
                 from .converters import pdf_images
                 return Result(pdf_images(pdf, dpi=int(options.get("dpi", 144))))

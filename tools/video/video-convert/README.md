@@ -7,13 +7,18 @@ Command: `onekit run video-convert`. Use `onekit run --help` for input and outpu
 Category: **video**. Browser support: **in development**.
 Fidelity: **compromise**. Available codecs depend on your FFmpeg build; re-encoding can lose quality.
 
-Accepted types: `*`. Output type: `*`.
+Accepted types: `mp4, webm, mkv, mov, avi, gif, mpeg, mpg, m4v, ogv, ts`. Output type: `*`.
 Accepts multiple inputs: **no**.
+
+Input validation: **typed**. Required file count: **1–1**.
+CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
+Browser: **33,554,432 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
 
 Options: `format`, `codec`, `bitrate`.
 
 Python packages: standard library or external engine.
-External engines: ffmpeg.
+External engines: ffmpeg, ffprobe.
 
 Processing implementation: [shared family adapter](../../../src/onekit/tools/media/__init__.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).

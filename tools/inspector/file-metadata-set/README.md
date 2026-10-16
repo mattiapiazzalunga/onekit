@@ -10,6 +10,11 @@ Fidelity: **exact**. Preserves the selected content; validate important outputs.
 Accepted types: `*`. Output type: `*`.
 Accepts multiple inputs: **no**.
 
+Input validation: **any**. Required file count: **1–1**.
+CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
+Browser: **33,554,432 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: `metadata`.
 
 Python packages: standard library or external engine.

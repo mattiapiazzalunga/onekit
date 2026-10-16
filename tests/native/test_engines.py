@@ -8,6 +8,9 @@ from pathlib import Path
 import pytest
 
 from onekit import Artifact, execute, pipeline
+from onekit.catalog import TOOLS
+from onekit.cli import main
+from onekit.tools.developer import engine_for
 from test_core import pdf, png
 
 pytestmark = pytest.mark.native
@@ -99,3 +102,38 @@ def test_node_format_and_validation(language):
 def test_node_minifiers(language):
     text = '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0L10 10"/></svg>' if language == "svg" else SAMPLES[language]
     assert execute(f"dev-minify-{language}", [Artifact("input.txt", text.encode())]).files[0].data
+
+
+NODE_SAMPLES = {**SAMPLES, "json5": '{unquoted: 1}', "jsonc": '{"value": 1 /* comment */}', "yaml": "value: 1\n", "svg": '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0L10 10"/></svg>'}
+
+
+@pytest.mark.parametrize("tool", [tool for tool in TOOLS.values() if tool.group == "developer" and not tool.browser and engine_for(tool) == "node"], ids=lambda tool: tool.id)
+def test_node_developer_tools_through_cli(tool, tmp_path):
+    language = tool.id.rsplit("-", 1)[-1]
+    source = tmp_path / "input.txt"
+    source.write_text(NODE_SAMPLES[language], encoding="utf-8")
+    destination = tmp_path / "output.txt"
+    assert main(["run", tool.id, str(source), "-o", str(destination)]) == 0
+    assert destination.read_bytes()
+    if tool.id.startswith("dev-validate-"):
+        assert json.loads(destination.read_text())["valid"]
+
+
+@pytest.mark.parametrize("language,filename,valid,invalid", [
+    ("java", "OneKit.java", "public class OneKit {}", "public class OneKit {"),
+    ("powershell", "input.ps1", "$value = 1", "function Broken {"),
+    ("bash", "input.sh", "echo OneKit\n", "if then\n"),
+    ("shell", "input.sh", "echo OneKit\n", "if then\n"),
+])
+def test_native_parsers_accept_valid_and_reject_invalid_syntax(language, filename, valid, invalid):
+    for source, expected in ((valid, True), (invalid, False)):
+        result = execute(f"dev-validate-{language}", [Artifact(filename, source.encode())])
+        assert result.details["valid"] is expected
+
+
+def test_python_formatter_cli(tmp_path):
+    source = tmp_path / "input.py"
+    source.write_text("value=1\n")
+    output = tmp_path / "formatted.py"
+    assert main(["run", "dev-format-python", str(source), "-o", str(output)]) == 0
+    assert output.read_text() == "value = 1\n"

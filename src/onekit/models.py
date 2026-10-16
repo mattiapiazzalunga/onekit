@@ -28,7 +28,7 @@ class Artifact:
 
     @property
     def kind(self) -> str:
-        aliases = {"jpg": "jpeg", "htm": "html", "markdown": "md", "yml": "yaml", "tex": "latex"}
+        aliases = {"jpg": "jpeg", "tif": "tiff", "htm": "html", "markdown": "md", "yml": "yaml", "tex": "latex"}
         ext = PurePosixPath(self.name).suffix.lower().lstrip(".")
         return aliases.get(ext, ext)
 

@@ -10,6 +10,11 @@ Fidelity: **exact**. Changes font containers; does not transform TrueType outlin
 Accepted types: `ttf, otf, woff, woff2`. Output type: `*`.
 Accepts multiple inputs: **no**.
 
+Input validation: **typed**. Required file count: **1–1**.
+CLI: **16,777,216 bytes per file**, **134,217,728 bytes total**.
+Browser: **16,777,216 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: `format`.
 
 Python packages: fonttools, brotli.

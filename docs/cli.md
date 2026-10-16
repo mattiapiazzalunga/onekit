@@ -24,11 +24,15 @@ Spreadsheet `sheet` selects a worksheet, defaulting to the active one. Excel rea
 
 Encoding conversion accepts `source_encoding` and `encoding`. Other text tools use UTF-8. Metadata `metadata` is a JSON object of ExifTool tag/value pairs; coverage is limited to its supported formats. Inspector signatures do not identify every proprietary file type.
 
+Decryption defaults to restoring individual files. Set `restore` to `zip` to emit one `restored.zip` retaining nested folder paths; the browser provides the same option. Folder encryption in the browser uses the folder picker and processes its contents locally.
+
 Notebook comparison `mode` is `both`, `markdown` or `code`. LaTeX mode is `all` or heuristic `text`. PDF/Word comparison extracts text. Diff JSON contains normalized sides, changed blocks and a unified patch, including trailing-newline differences. OCR `language` uses installed Tesseract codes and `dpi` is 36–300. PDF/A conversion requires a licensed `icc_profile`; validate archival output independently.
 
 Media options include `format`, `codec` and `bitrate`, depending on the FFmpeg build. Fonts support `ttf`, `otf`, `woff` and `woff2`, preserving outline technology. Archives support ZIP and TAR/gzip/bzip2/xz combinations.
 
 ## Limits and errors
+
+See [input validation](input-validation.md) for the enforced per-tool types, byte/count limits, signature/container checks and archive expansion rules. These apply to direct Python API calls and every pipeline step as well as the CLI. Run `onekit list --json` for exact machine-readable contracts.
 
 Core inputs: 256 files and 128 MiB. Pipelines: 16 steps. Images/rendered pages: 40 million pixels. Comparisons: 10,000 lines and 2 million characters. Archive expansion: 128 MiB, 4096 entries and ratio checks. External engines have timeouts. Large valid inputs can exceed these deliberate limits.
 

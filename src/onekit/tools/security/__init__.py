@@ -11,6 +11,9 @@ def run(tool, files, options):
     from Crypto.Cipher import AES
     from Crypto.Protocol.KDF import scrypt
     from ..archives import pack, unpack
+    restore = options.get("restore", "files")
+    if tool.id == "security-decrypt" and restore not in ("files", "zip"):
+        raise OneKitError("restore must be files or zip.")
     password = str(require(options, "password")).encode("utf-8")
     if len(password) < 12:
         raise OneKitError("Use a password with at least 12 characters.")
@@ -35,4 +38,7 @@ def run(tool, files, options):
         plaintext = cipher.decrypt_and_verify(data[offset+28:-16], data[-16:])
     except ValueError as exc:
         raise OneKitError("Wrong password or damaged encrypted file.") from exc
-    return Result(unpack(plaintext))
+    files = unpack(plaintext, limit=options.get("_max_expanded_bytes", 128 * 1024 * 1024))
+    if restore == "zip":
+        return Result([Artifact("restored.zip", plaintext)])
+    return Result(files)

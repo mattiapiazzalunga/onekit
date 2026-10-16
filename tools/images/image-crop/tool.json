@@ -27,5 +27,12 @@
     "box",
     "format",
     "quality"
-  ]
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 67108864,
+  "max_total_bytes": 134217728,
+  "browser_max_total_bytes": 33554432,
+  "browser_max_file_bytes": 33554432
 }

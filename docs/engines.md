@@ -43,6 +43,10 @@ Install Node.js 24+ and run `onekit engines install` for locked Prettier/plugins
 
 Install upstream compilers/launchers for your OS and add the documented commands to PATH. Some isolated files need their project dependencies or exact Java class filename. Formatting/parser validation does not prove project-wide type correctness.
 
+On Windows, Bash/Shell adapters prefer an actual interpreter on PATH and then detect Git for Windows in its standard system/user installation directories. The System32 WSL launcher is not treated as a compatible local parser. PowerShell syntax validation requires `pwsh`; formatting additionally requires PSScriptAnalyzer (`Install-Module PSScriptAnalyzer -Scope CurrentUser`). `onekit doctor dev-format-powershell` checks that module separately and reports its setup command. These programs/modules are not downloaded while processing files.
+
 ## Platform qualifications
+
+CI license checks also install and traverse the separate signing extra (`scripts/check_licenses.py --include-signing`). MIT-0 is recognized as a permissive license ([SPDX text](https://spdx.org/licenses/MIT-0.html)). The locked `certifi` 2026.7.22 Mozilla trust-store data is an explicit version-specific MPL-2.0 exception; retain its unmodified upstream license/notices when redistributing it ([upstream notice](https://github.com/certifi/python-certifi/blob/master/LICENSE)). New versions require another review. This exception does not generally admit other MPL packages or change OneKit's Apache-2.0 license.
 
 The universal Python core supports Linux, Windows and macOS including ARM64. Native extras and external engines determine additional requirements. CI declares x64/ARM runners on all three OS families. On Windows ARM, Brotli/WOFF2 and the separate signing cryptography stack may require native build tools or x64 Python under emulation. WOFF/TTF/OTF do not require the WOFF2 encoder. The `all` extra excludes separate signing. Report these optional constraints rather than claiming a native wheel exists when it does not.

@@ -10,6 +10,11 @@ Fidelity: **compromise**. Formatting, fonts, layout, formulas or unsupported ele
 Accepted types: `pdf`. Output type: `md`.
 Accepts multiple inputs: **no**.
 
+Input validation: **typed**. Required file count: **1–1**.
+CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
+Browser: **33,554,432 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: none.
 
 Python packages: pycryptodome, pypdf.

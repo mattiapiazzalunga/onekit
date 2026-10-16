@@ -5,6 +5,7 @@ import csv
 import io
 import json
 import os
+import re
 import tempfile
 import tomllib
 from pathlib import Path
@@ -21,6 +22,7 @@ VALIDATORS = {"javascript": ("node", ["--check", "input.js"], "js"), "typescript
 FORMATTERS["dockerfile"] = ("dockerfmt", [], "Dockerfile")
 FORMATTERS["ruby"] = ("rufo", [], "rb")
 FORMATTERS["terraform"] = ("tofu", ["fmt", "-"], "tf")
+FORMATTERS["powershell"] = ("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){[Console]::Error.Write('Install PSScriptAnalyzer with Install-Module PSScriptAnalyzer -Scope CurrentUser.');exit 1};$s=[Console]::In.ReadToEnd();Invoke-Formatter -ScriptDefinition $s"], "ps1")
 VALIDATORS.update({
     "csharp": ("csc", ["/nologo", "/target:library", "input.cs"], "cs"),
     "kotlin": ("kotlinc", ["input.kt", "-d", "output.jar"], "kt"),
@@ -59,7 +61,7 @@ def run(tool, files, options):
     text = file.text()
     if operation == "validate":
         try:
-            validate(language, text, options)
+            validate(language, text, options, filename=file.name)
             report = {"valid": True, "language": language, "scope": "parser or configured project checks"}
         except (ValueError, SyntaxError, ElementTree.ParseError, OneKitError) as exc:
             if isinstance(exc, OneKitError) and ("Install " in str(exc) or "policy" in str(exc) or "No validator" in str(exc)):
@@ -85,7 +87,7 @@ def run(tool, files, options):
     return Result([output(file, file.kind or "txt", result)])
 
 
-def validate(language, text, options):
+def validate(language, text, options, *, filename=None):
     if language == "json":
         parse_json(text)
     elif language == "python":
@@ -100,16 +102,28 @@ def validate(language, text, options):
         rows = list(csv.reader(io.StringIO(text), strict=True))
         if rows and any(len(row) != len(rows[0]) for row in rows):
             raise ValueError("CSV rows have inconsistent field counts.")
-    elif language in ("json5", "jsonc"):
+    elif language == "json5":
         import json5
         json5.loads(text)
+    elif language == "jsonc":
+        string = r'"(?:\\.|[^"\\])*"'
+        # Keep string contents intact while removing comments and trailing commas.
+        cleaned = re.sub(string + r'|//[^\r\n]*|/\*[\s\S]*?\*/', lambda m: m[0] if m[0].startswith('"') else re.sub(r'[^\r\n]', ' ', m[0]), text)
+        cleaned = re.sub(string + r'|,\s*(?=[}\]])', lambda m: m[0] if m[0].startswith('"') else '', cleaned)
+        parse_json(cleaned)
     elif language == "yaml":
         import yaml
-        yaml.safe_load(text)
+        try:
+            yaml.safe_load(text)
+        except yaml.YAMLError as exc:
+            raise ValueError(str(exc)) from exc
     elif language == "json-schema":
         import jsonschema
-        schema = json.loads(text)
-        jsonschema.validators.validator_for(schema).check_schema(schema)
+        schema = parse_json(text)
+        try:
+            jsonschema.validators.validator_for(schema).check_schema(schema)
+        except jsonschema.exceptions.SchemaError as exc:
+            raise ValueError(exc.message) from exc
     elif language in ("openapi", "asyncapi"):
         from ...models import Artifact
         from ..native import command
@@ -125,7 +139,9 @@ def validate(language, text, options):
         from ..native import command
         engine, args, suffix = VALIDATORS[language]
         with tempfile.TemporaryDirectory(prefix="onekit-") as directory:
-            Path(directory, f"input.{suffix}").write_text(text, encoding="utf-8")
+            name = Path(filename).name if language == "java" and filename and filename.endswith(".java") else f"input.{suffix}"
+            args = [name if arg == f"input.{suffix}" else arg for arg in args]
+            Path(directory, name).write_text(text, encoding="utf-8")
             command(engine, args, directory)
     else:
         # The same parser used to format rejects syntactically invalid inputs.

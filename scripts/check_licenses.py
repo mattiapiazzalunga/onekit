@@ -1,6 +1,7 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: Apache-2.0
 """Fail closed on unreviewed runtime licenses; report exact versions and source URLs."""
+import argparse
 import importlib.metadata as metadata
 import json
 import re
@@ -9,14 +10,18 @@ from pathlib import Path
 
 from packaging.requirements import Requirement
 
-PERMISSIVE = {"MIT", "MIT License", "MIT-CMU", "BSD", "BSD License", "BSD-2-Clause", "BSD-3-Clause", "Apache-2.0", "Apache Software License", "Python Software Foundation License", "PSF-2.0", "ISC", "ISC License (ISCL)", "Zlib", "Unlicense", "Public Domain", "CC0-1.0", "0BSD"}
+PERMISSIVE = {"MIT", "MIT-0", "MIT License", "MIT-CMU", "BSD", "BSD License", "BSD-2-Clause", "BSD-3-Clause", "Apache-2.0", "Apache Software License", "Python Software Foundation License", "PSF-2.0", "ISC", "ISC License (ISCL)", "Zlib", "Unlicense", "Public Domain", "CC0-1.0", "0BSD"}
 # PDFium's distribution includes a complete third-party notice inventory. A new
 # version requires a new explicit review rather than silently inheriting approval.
-REVIEWED = {("pypdfium2", "5.14.0"): "BSD-3-Clause, Apache-2.0, dependency licenses"}
+REVIEWED = {
+    ("pypdfium2", "5.14.0"): "BSD-3-Clause, Apache-2.0, dependency licenses",
+    # Unmodified Mozilla trust-store data. Keep upstream notices; review each update.
+    ("certifi", "2026.7.22"): "MPL-2.0",
+}
 
 
-def check():
-    records, seen, pending = {}, set(), [("onekit-tools", ("all",))]
+def check(*, include_signing=False):
+    records, seen, pending = {}, set(), [("onekit-tools", ("all", "signing") if include_signing else ("all",))]
     while pending:
         name, extras = pending.pop()
         key = (name.lower().replace("_", "-"), tuple(sorted(extras)))
@@ -48,4 +53,6 @@ def check():
 
 
 if __name__ == "__main__":
-    sys.exit(check())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--include-signing", action="store_true", help="Also audit the separately installed signing extra (mandatory in CI).")
+    sys.exit(check(include_signing=parser.parse_args().include_signing))

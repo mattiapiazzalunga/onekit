@@ -10,6 +10,11 @@ Fidelity: **exact**. Notebook comparison can include Markdown, code or both. LaT
 Accepted types: `*`. Output type: `json`.
 Accepts multiple inputs: **yes**.
 
+Input validation: **text**. Required file count: **2–2**.
+CLI: **8,388,608 bytes per file**, **134,217,728 bytes total**.
+Browser: **2,000,000 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
 Options: none.
 
 Python packages: standard library or external engine.

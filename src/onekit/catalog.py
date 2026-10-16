@@ -19,6 +19,13 @@ class Tool:
     engines: tuple[str, ...] = ()
     multiple: bool = False
     options: tuple[str, ...] = ()
+    input_mode: str = "typed"
+    min_files: int = 1
+    max_files: int = 1
+    max_file_bytes: int = 128 * 1024 * 1024
+    max_total_bytes: int = 128 * 1024 * 1024
+    browser_max_total_bytes: int = 32 * 1024 * 1024
+    browser_max_file_bytes: int = 32 * 1024 * 1024
 
 
 TOOLS: dict[str, Tool] = {}
@@ -52,7 +59,7 @@ for source, targets in CONVERSIONS.items():
         if pair == ("md", "pdf") or pair == ("html", "pdf"):
             engine = ("pandoc", "pdflatex")
         if pair == ("image", "pptx"):
-            packages = ("python-pptx",)
+            packages = ("python-pptx", "Pillow")
         if pair == ("pdf", "docx"):
             packages = ("pypdf", "python-docx")
         add(f"{source}-to-{target}", f"{LABELS.get(source, source.upper())} to {LABELS.get(target, target.upper())}", "converters", "converters", IMAGE_TYPES if source == "image" else (source,), target, browser=browser, packages=packages, engines=engine, fidelity="exact" if pair in PURE and source != "html" else "compromise", note="Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first." if pair not in PURE else "Structured conversion; the output represents the source data.", options=("sheet",) if source == "xlsx" else ())
@@ -107,6 +114,58 @@ TOOLS["pdf-rotate"] = replace(TOOLS["pdf-rotate"], options=("angle", "pages"))
 for id in ("md-to-docx",):
     TOOLS[id] = replace(TOOLS[id], packages=("markdown-it-py", "python-docx"))
 TOOLS["md-to-docx"] = replace(TOOLS["md-to-docx"], note="CommonMark headings, lists, emphasis and code are exported. Images, advanced layouts and Markdown extensions may need adjustment.")
+TOOLS["pdf-to-pdfa"] = replace(TOOLS["pdf-to-pdfa"], options=("icc_profile",))
+TOOLS["ocr-to-pdf"] = replace(TOOLS["ocr-to-pdf"], packages=("pytesseract", "Pillow", "pypdfium2", "pypdf", "pycryptodome"))
+TOOLS["docx-to-png"] = replace(TOOLS["docx-to-png"], packages=("pypdfium2", "Pillow"), options=("dpi",))
+TOOLS["pptx-to-png"] = replace(TOOLS["pptx-to-png"], packages=("pypdfium2", "Pillow"), options=("dpi",))
+TOOLS["security-decrypt"] = replace(TOOLS["security-decrypt"], options=("password", "restore"))
+
+
+LANGUAGE_EXTENSIONS = {
+    "javascript": ("js", "mjs", "cjs"), "typescript": ("ts", "mts", "cts"), "jsx": ("jsx",), "tsx": ("tsx",),
+    "python": ("py", "pyi"), "java": ("java",), "c": ("c", "h"), "cpp": ("cpp", "cc", "cxx", "hpp", "h"),
+    "csharp": ("cs",), "go": ("go",), "rust": ("rs",), "php": ("php",), "ruby": ("rb",), "kotlin": ("kt", "kts"),
+    "swift": ("swift",), "dart": ("dart",), "scala": ("scala", "sc"), "lua": ("lua",), "bash": ("sh", "bash"),
+    "shell": ("sh",), "powershell": ("ps1", "psm1", "psd1"), "sql": ("sql",), "html": ("html",), "css": ("css",),
+    "scss": ("scss",), "less": ("less",), "xml": ("xml",), "xsd": ("xsd", "xml"), "svg": ("svg", "xml"),
+    "json": ("json",), "json5": ("json5", "json"), "jsonc": ("jsonc", "json"), "json-schema": ("json",),
+    "yaml": ("yaml",), "toml": ("toml",), "csv": ("csv",), "markdown": ("md",), "mdx": ("mdx",),
+    "latex": ("latex",), "graphql": ("graphql", "gql"), "vue": ("vue",), "svelte": ("svelte",), "astro": ("astro",),
+    "solidity": ("sol",), "hcl": ("hcl",), "terraform": ("tf", "tfvars"), "dockerfile": ("dockerfile",),
+    "r": ("r",), "julia": ("jl",), "elixir": ("ex", "exs"), "haskell": ("hs", "lhs"),
+    "openapi": ("json", "yaml"), "asyncapi": ("json", "yaml"),
+}
+for id, tool in list(TOOLS.items()):
+    accepts, mode = tool.accepts, "typed"
+    if tool.group == "developer":
+        language = id.split("-", 2)[2]
+        accepts = (*LANGUAGE_EXTENSIONS[language], "txt", *(("",) if language in ("dockerfile", "bash", "shell") else ()))
+        mode = "text"
+    elif tool.group == "diff":
+        accepts = {"diff-pdf": ("pdf",), "diff-word": ("docx",), "diff-notebook": ("ipynb",), "diff-json": ("json", "txt"), "diff-latex": ("latex", "txt")}.get(id, ("*",))
+        mode = "typed" if id in ("diff-pdf", "diff-word") else "text"
+    elif id == "security-decrypt":
+        accepts = ("onekit",)
+    elif id in ("file-count", "file-encoding-convert"):
+        mode = "encoded-text" if id.endswith("encoding-convert") else "text"
+    elif tool.accepts == ("*",):
+        mode = "any"
+    elif tool.group == "converters" and tool.accepts[0] in ("md", "latex", "html", "json", "csv", "base64"):
+        mode = "text"
+    elif tool.group in ("audio", "video"):
+        mode = "typed"
+    if id == "audio-convert":
+        accepts = ("mp3", "wav", "flac", "ogg", "aac", "m4a", "mp4", "aif", "aiff", "opus", "wma")
+        mode = "typed"
+    elif id == "video-convert":
+        accepts = ("mp4", "webm", "mkv", "mov", "avi", "gif", "mpeg", "mpg", "m4v", "ogv", "ts")
+        mode = "typed"
+    limit = 8 * 1024 * 1024 if mode in ("text", "encoded-text") else 16 * 1024 * 1024 if tool.group == "fonts" else 64 * 1024 * 1024 if tool.group == "images" or tool.accepts == IMAGE_TYPES else 128 * 1024 * 1024
+    TOOLS[id] = replace(tool, accepts=accepts, input_mode=mode, min_files=2 if tool.group == "diff" or id == "pdf-merge" else 1, max_files=2 if tool.group == "diff" else 256 if tool.multiple else 1, max_file_bytes=limit, browser_max_file_bytes=min(limit, 2_000_000 if tool.group == "diff" else 32 * 1024 * 1024))
+TOOLS["image-to-base64"] = replace(TOOLS["image-to-base64"], packages=("Pillow",))
+TOOLS["base64-to-image"] = replace(TOOLS["base64-to-image"], accepts=("base64", "txt"))
+for id in ("video-convert", "audio-convert"):
+    TOOLS[id] = replace(TOOLS[id], engines=("ffmpeg", "ffprobe"))
 
 
 def manifest():

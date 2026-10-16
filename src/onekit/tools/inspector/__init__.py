@@ -14,11 +14,22 @@ SIGNATURES = [(b"%PDF-", "application/pdf"), (b"\x89PNG\r\n\x1a\n", "image/png")
 def inspect(file):
     data = file.data
     kind = next((mime for signature, mime in SIGNATURES if data.startswith(signature)), "application/octet-stream")
+    if data.startswith(b"RIFF"):
+        kind = {b"WEBP": "image/webp", b"WAVE": "audio/wav", b"AVI ": "video/x-msvideo"}.get(data[8:12], kind)
+    elif data[4:8] == b"ftyp" and len(data) >= 12:
+        brand = data[8:12]
+        kind = "audio/mp4" if brand in (b"M4A ", b"M4B ") else "image/avif" if brand in (b"avif", b"avis") else "video/quicktime" if brand == b"qt  " else "video/mp4"
+    elif data.startswith(b"\x00\x01\x00\x00"):
+        kind = "font/ttf"
+    elif data.startswith(b"OTTO"):
+        kind = "font/otf"
+    elif data.startswith(b"ID3"):
+        kind = "audio/mpeg"
     details = {"name": file.name, "bytes": len(data), "mime": kind, "sha256": hashlib.sha256(data).hexdigest(), "sha512": hashlib.sha512(data).hexdigest(), "encoding": None, "structure": None, "errors": [], "metadata": {}}
     try:
         text = data.decode("utf-8-sig")
-        details["encoding"] = "UTF-8"
-        if kind == "application/octet-stream":
+        if kind == "application/octet-stream" and not any(ord(char) < 32 and char not in "\t\n\r\f" for char in text):
+            details["encoding"] = "UTF-8"
             details["mime"] = "text/plain"
         if file.kind in ("json", "ipynb"):
             value = json.loads(text)
@@ -26,6 +37,8 @@ def inspect(file):
     except UnicodeDecodeError:
         if data.startswith((codecs.BOM_UTF16_LE, codecs.BOM_UTF16_BE)):
             details["encoding"] = "UTF-16"
+            if kind == "application/octet-stream":
+                details["mime"] = "text/plain"
     except ValueError as exc:
         details["errors"].append(str(exc))
     if zipfile.is_zipfile(io.BytesIO(data)):

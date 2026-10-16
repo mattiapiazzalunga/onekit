@@ -10,7 +10,12 @@ Fidelity: **compromise**. Formatting, fonts, layout, formulas or unsupported ele
 Accepted types: `pdf`. Output type: `pdfa`.
 Accepts multiple inputs: **no**.
 
-Options: none.
+Input validation: **typed**. Required file count: **1–1**.
+CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
+Browser: **33,554,432 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
+
+Options: `icc_profile`.
 
 Python packages: standard library or external engine.
 External engines: gs.

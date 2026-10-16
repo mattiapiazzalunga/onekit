@@ -7,7 +7,7 @@ import io
 import json
 import re
 
-from ...models import OneKitError, Result, output
+from ...models import OneKitError, Result, output, parse_json
 
 
 def pdf_images(file, format="png", dpi=144):
@@ -58,10 +58,13 @@ def run(tool, files, options):
             from ..images import open_image, encode
             return Result([output(file, "pdf", encode(open_image(file), "pdf"))])
         from pptx import Presentation
-        from pptx.util import Inches
+        from ..images import open_image, encode
+        image = open_image(file)
         presentation = Presentation()
         slide = presentation.slides.add_slide(presentation.slide_layouts[6])
-        slide.shapes.add_picture(io.BytesIO(file.data), Inches(0), Inches(0), width=presentation.slide_width)
+        width = min(presentation.slide_width, int(presentation.slide_height * image.width / image.height))
+        height = int(width * image.height / image.width)
+        slide.shapes.add_picture(io.BytesIO(encode(image, "png")), (presentation.slide_width-width)//2, (presentation.slide_height-height)//2, width=width, height=height)
         buffer = io.BytesIO()
         presentation.save(buffer)
         return Result([output(file, "pptx", buffer.getvalue())])
@@ -131,26 +134,29 @@ def tables(file, source, target, options):
         reader = csv.DictReader(io.StringIO(file.text()), delimiter=str(options.get("delimiter", ",")))
         if reader.fieldnames and len(set(reader.fieldnames)) != len(reader.fieldnames):
             raise OneKitError("CSV column headers must be unique.")
-        rows = list(reader)
+        keys = reader.fieldnames or []
+        rows = bounded_rows(reader)
         if any(None in row for row in rows):
             raise OneKitError("CSV rows contain more fields than their header.")
     elif source == "json":
-        rows = json.loads(file.text())
+        rows = parse_json(file.text())
         if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
             raise OneKitError("Expected a JSON array of objects.")
+        keys = list(dict.fromkeys(key for row in rows for key in row))
     else:
         from openpyxl import load_workbook
         book = load_workbook(io.BytesIO(file.data), read_only=True, data_only=True)
-        sheet = book[options["sheet"]] if options.get("sheet") else book.active
-        values = sheet.iter_rows(values_only=True)
-        keys = [str(value) if value is not None else f"Column {index+1}" for index, value in enumerate(next(values, []))]
-        if len(set(keys)) != len(keys):
-            raise OneKitError("Column headers must be unique.")
-        rows = [dict(zip(keys, row)) for row in values]
-        book.close()
+        try:
+            sheet = book[options["sheet"]] if options.get("sheet") else book.active
+            values = sheet.iter_rows(values_only=True)
+            keys = [str(value) if value is not None else f"Column {index+1}" for index, value in enumerate(next(values, []))]
+            if len(set(keys)) != len(keys):
+                raise OneKitError("Column headers must be unique.")
+            rows = bounded_rows(dict(zip(keys, row)) for row in values)
+        finally:
+            book.close()
     if len(rows) > 100000:
         raise OneKitError("Tables may contain at most 100,000 rows.")
-    keys = list(dict.fromkeys(key for row in rows for key in row))
     if target == "json":
         return Result([output(file, "json", json.dumps(rows, ensure_ascii=False, indent=2, default=str))])
     if target == "csv":
@@ -176,3 +182,12 @@ def tables(file, source, target, options):
     buffer = io.BytesIO()
     book.save(buffer)
     return Result([output(file, "xlsx", buffer.getvalue())])
+
+
+def bounded_rows(rows):
+    result = []
+    for row in rows:
+        if len(result) >= 100000:
+            raise OneKitError("Tables may contain at most 100,000 rows.")
+        result.append(row)
+    return result

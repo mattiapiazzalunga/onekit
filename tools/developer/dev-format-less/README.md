@@ -7,8 +7,13 @@ Command: `onekit run dev-format-less`. Use `onekit run --help` for input and out
 Category: **developer**. Browser support: **in development**.
 Fidelity: **exact**. Validation checks the configured parser or compiler; project-wide types, imports and dependencies may require a local project.
 
-Accepted types: `*`. Output type: `*`.
+Accepted types: `less, txt`. Output type: `*`.
 Accepts multiple inputs: **no**.
+
+Input validation: **text**. Required file count: **1–1**.
+CLI: **8,388,608 bytes per file**, **134,217,728 bytes total**.
+Browser: **8,388,608 bytes per file**, **33,554,432 bytes total**.
+Content checks run before processing. Renaming a file does not change its actual format.
 
 Options: none.
 

@@ -23,7 +23,8 @@
     "pytesseract",
     "Pillow",
     "pypdfium2",
-    "python-docx"
+    "pypdf",
+    "pycryptodome"
   ],
   "engines": [
     "tesseract"
@@ -32,5 +33,12 @@
   "options": [
     "language",
     "dpi"
-  ]
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728,
+  "browser_max_total_bytes": 33554432,
+  "browser_max_file_bytes": 33554432
 }

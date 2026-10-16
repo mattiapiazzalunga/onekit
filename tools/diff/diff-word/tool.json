@@ -6,7 +6,7 @@
   "group": "diff",
   "handler": "diff",
   "accepts": [
-    "*"
+    "docx"
   ],
   "produces": "json",
   "browser": true,
@@ -17,5 +17,12 @@
   ],
   "engines": [],
   "multiple": true,
-  "options": []
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 2,
+  "max_files": 2,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728,
+  "browser_max_total_bytes": 33554432,
+  "browser_max_file_bytes": 2000000
 }
