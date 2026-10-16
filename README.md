@@ -7,7 +7,7 @@
 
 An offline Python toolkit for conversions, PDFs, images, archives, fonts, file inspection, encryption, developer utilities, OCR and comparisons. Use this CLI or the graphical interface at **[onekit.org](https://onekit.org)**. Both use the same processing core and catalog.
 
-**Status:** initial development version `0.1.0`. Stable downloads exist only after their release workflow completes. The distribution is `onekit-tools`; the separately owned PyPI project called `onekit` is unrelated.
+**Status:** release candidate `0.2.0`. Stable downloads exist only after the release workflow completes. The distribution is `onekit-tools`; the separately owned PyPI project called `onekit` is unrelated.
 
 ## Install
 
@@ -65,7 +65,7 @@ Content-preserving operations and conversions with compromises are distinguished
 
 ## Pipelines and development
 
-`onekit pipeline --steps workflow.json INPUTS -o OUTPUT` composes an ordered JSON array of `{ "tool": "...", "options": {} }` steps. Each receives prior outputs. Single-input steps map over multiple outputs; merge steps receive the collection. Incompatible types stop processing.
+`onekit pipeline --steps workflow.json INPUTS -o OUTPUT` accepts a portable `onekit-workflow` JSON document exported by the web app, or a legacy ordered JSON array of `{ "tool": "...", "options": {} }` steps. Each receives prior outputs. Single-input steps map over multiple outputs; merge steps receive the collection. Incompatible types stop processing.
 
 Read [architecture](docs/architecture.md), [engine setup and licenses](docs/engines.md), [release operations](docs/releases.md), [contribution requirements](CONTRIBUTING.md) and [security](SECURITY.md). New features and fixes require regression tests. GitHub Actions checks platform compatibility, browser contracts, native integrations, security, licenses and packaging before publication. Dependabot monitors locks, browser requirements, Node engines, Actions and Docker. Conservative compatible lock-only updates can auto-merge after all checks.
 
@@ -74,3 +74,13 @@ Report bugs and suggestions through [GitHub issues](https://github.com/mattiapia
 ## License and creator
 
 Created by **[Mattia Piazzalunga](https://www.mattiapiazzalunga.com)**. Copyright © 2026 Mattia Piazzalunga. Licensed under [Apache-2.0](LICENSE); see [NOTICE](NOTICE), [AUTHORS.txt](AUTHORS.txt) and [CONTRIBUTORS.txt](CONTRIBUTORS.txt). Third-party components retain their licenses. External engines are separate programs with their own redistribution obligations.
+
+Export and reimport workflows without processing input files:
+
+```sh
+onekit workflow export steps.json -o workflow.onekit.json
+onekit workflow import workflow.onekit.json -o saved-workflow.json
+onekit pipeline --steps saved-workflow.json input.json -o output.json
+```
+
+The web app imports and exports the same versioned JSON, including block positions and expansion state. Workflow files contain tool settings; input files and passwords are excluded from exports. Reenter passwords before running. Browser imports report unsupported tools or option values without replacing the current workflow. CLI-only workflows can still be imported, exported and run with the CLI.

@@ -14,10 +14,11 @@ import tempfile
 from pathlib import Path
 
 from . import __version__
-from .api import execute, pipeline, validate_steps
-from .validation import MAX_BYTES
+from .api import execute, pipeline
 from .catalog import TOOLS, manifest
 from .models import Artifact, OneKitError
+from .validation import MAX_BYTES
+from .workflows import dump_workflow, load_workflow
 
 _ = gettext.translation("onekit", localedir=Path(__file__).parent / "locales", fallback=True).gettext
 
@@ -57,7 +58,7 @@ def doctor(tool_id=None):
 
 def read_files(paths, folders=False, tool=None, mapped=False):
     if tool and not folders and not mapped and not tool.min_files <= len(paths) <= tool.max_files:
-        raise OneKitError(f"{tool.name} requires {tool.min_files}–{tool.max_files} input file(s).")
+        raise OneKitError(f"{tool.name} requires {tool.min_files}â€“{tool.max_files} input file(s).")
     files = []
     total = 0
 
@@ -136,13 +137,18 @@ def parser():
     engines = commands.add_parser("engines", help="Install the optional, version-locked Node developer engines")
     engines.add_argument("action", choices=["install"])
     engines.add_argument("--directory", type=Path)
+    workflow = commands.add_parser("workflow", help="Import or export a portable workflow JSON document")
+    workflow.add_argument("action", choices=["import", "export"])
+    workflow.add_argument("source", help="Workflow document or legacy steps JSON file")
+    workflow.add_argument("-o", "--output", required=True)
+    workflow.add_argument("--force", action="store_true")
     for name in ("run", "pipeline"):
         command = commands.add_parser(name)
         if name == "run":
             command.add_argument("tool", choices=TOOLS, metavar="TOOL")
             command.add_argument("--options", default="{}", help="JSON object of tool options")
         else:
-            command.add_argument("--steps", required=True, help="JSON file with a list of {tool, options} objects")
+            command.add_argument("--steps", required=True, help="Portable workflow JSON or legacy list of {tool, options} objects")
         command.add_argument("files", nargs="+")
         command.add_argument("-o", "--output", required=True)
         command.add_argument("--force", action="store_true")
@@ -172,6 +178,12 @@ def main(argv=None):
                 for item in report:
                     print(f"{item['tool']:34} {'ready' if item['ready'] else 'needs setup'}  {', '.join(item['missing'] + item['policyBlocked'])}")
             return 0 if all(item["ready"] for item in report) else 1
+        if args.command == "workflow":
+            from .models import Result
+            document = load_workflow(args.source)
+            write_files(Result([Artifact("workflow.onekit.json", dump_workflow(document))]), args.output, args.force)
+            print("Workflow saved. Input files and passwords are not included.", file=sys.stderr)
+            return 0
         if args.command == "run":
             options = json.loads(args.options)
             if not isinstance(options, dict):
@@ -180,8 +192,7 @@ def main(argv=None):
                 options["password"] = getpass.getpass("Password: ")
             result = execute(args.tool, read_files(args.files, args.tool == "security-encrypt", TOOLS[args.tool]), options)
         else:
-            steps = json.loads(Path(args.steps).read_text(encoding="utf-8"))
-            validate_steps(steps)
+            steps = load_workflow(args.steps)["steps"]
             if args.ask_password:
                 password = getpass.getpass("Password: ")
                 for step in steps:

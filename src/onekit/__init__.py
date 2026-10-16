@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """OneKit's shared, offline processing API."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from .api import execute, pipeline
 from .models import Artifact, OneKitError, Result

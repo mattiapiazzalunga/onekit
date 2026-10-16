@@ -41,3 +41,26 @@ Exit codes: 0 success; 1 incomplete doctor report; 2 input/processing error; 130
 English is the default. Future CLI translations use gettext domain `onekit` under `onekit/locales`; IDs, command names and JSON keys remain language-independent.
 
 Notebook merge accepts `merge` with `from` (`left` or `right`) and the zero-based changed-cell `block` index, together with `mode`. It emits the updated target notebook and preserves excluded cells and notebook metadata. Unified patches describe the compared representation and are not generally patches for raw PDF, Word or notebook containers.
+
+## Portable workflows
+
+`onekit workflow export SOURCE -o workflow.onekit.json` validates a legacy steps array or a workflow document and saves a portable document. `onekit workflow import workflow.onekit.json -o saved.json` validates and saves an imported document. Both commands preserve the editor layout, omit passwords and refuse existing output paths unless `--force` is supplied. Neither command processes files.
+
+Run an imported workflow with `onekit pipeline --steps saved.json INPUTS -o OUTPUT`. Legacy steps arrays remain supported. Workflow documents are UTF-8 JSON, at most 1 MiB, with the following structure:
+
+```json
+{
+  "format": "onekit-workflow",
+  "version": 1,
+  "steps": [{"tool": "dev-format-json", "options": {}}],
+  "layout": {
+    "nodes": [
+      {"x": 0, "y": 0, "expanded": false},
+      {"x": 20, "y": 10, "expanded": true},
+      {"x": 0, "y": 0, "expanded": false}
+    ]
+  }
+}
+```
+
+`layout` is optional and ignored during execution. Nodes are ordered as input, steps, actions. Coordinates are finite pixel offsets from the default layout, bounded to ±10000. Version 1 supports 1–16 steps. Input files are selected separately. Passwords can be supplied with `--ask-password`. Exported browser-compatible workflows can be reopened using **Import workflow** in the web app; tools unavailable in the browser require the CLI.
