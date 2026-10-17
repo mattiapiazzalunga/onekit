@@ -163,6 +163,15 @@ for id, tool in list(TOOLS.items()):
     limit = 8 * 1024 * 1024 if mode in ("text", "encoded-text") else 16 * 1024 * 1024 if tool.group == "fonts" else 64 * 1024 * 1024 if tool.group == "images" or tool.accepts == IMAGE_TYPES else 128 * 1024 * 1024
     TOOLS[id] = replace(tool, accepts=accepts, input_mode=mode, min_files=2 if tool.group == "diff" or id == "pdf-merge" else 1, max_files=2 if tool.group == "diff" else 256 if tool.multiple else 1, max_file_bytes=limit, browser_max_file_bytes=min(limit, 2_000_000 if tool.group == "diff" else 32 * 1024 * 1024))
 TOOLS["image-to-base64"] = replace(TOOLS["image-to-base64"], packages=("Pillow",))
+# Large-file support is opt-in: rendering, text extraction, compression and
+# encryption have different expansion costs and retain their existing limits.
+LARGE_BROWSER_PDF_TOOLS = frozenset({
+    "pdf-merge", "pdf-split", "pdf-remove-pages", "pdf-organize",
+    "pdf-extract-pages", "pdf-repair", "pdf-rotate", "pdf-unlock",
+})
+for id in LARGE_BROWSER_PDF_TOOLS:
+    TOOLS[id] = replace(TOOLS[id], browser_max_file_bytes=100 * 1024 * 1024,
+                        browser_max_total_bytes=100 * 1024 * 1024)
 TOOLS["base64-to-image"] = replace(TOOLS["base64-to-image"], accepts=("base64", "txt"))
 for id in ("video-convert", "audio-convert"):
     TOOLS[id] = replace(TOOLS[id], engines=("ffmpeg", "ffprobe"))

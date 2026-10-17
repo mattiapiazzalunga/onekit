@@ -15,10 +15,11 @@ def document():
             "layout": {"nodes": [{"x": 20, "y": 10, "expanded": True}] * 3}}
 
 
-def test_cli_roundtrip_and_execution(tmp_path):
-    source = tmp_path / "web.onekit.json"
+@pytest.mark.parametrize("extension", [".1kit", ".onekit.json", ".json"])
+def test_cli_roundtrip_and_execution(tmp_path, extension):
+    source = tmp_path / ("web" + extension)
     source.write_text(json.dumps(document()), encoding="utf-8")
-    imported, exported = tmp_path / "imported.json", tmp_path / "exported.json"
+    imported, exported = tmp_path / "imported.1kit", tmp_path / "exported.1kit"
     assert main(["workflow", "import", str(source), "-o", str(imported)]) == 0
     assert main(["workflow", "export", str(imported), "-o", str(exported)]) == 0
     assert load_workflow(exported) == document()
@@ -28,6 +29,14 @@ def test_cli_roundtrip_and_execution(tmp_path):
     assert main(["pipeline", "--steps", str(exported), str(input_file), "-o", str(output)]) == 0
     assert json.loads(output.read_text()) == {"hello": 1}
     assert main(["workflow", "export", str(source), "-o", str(exported)]) == 2
+
+
+def test_cli_directory_export_uses_1kit_filename(tmp_path):
+    source = tmp_path / "legacy.json"
+    source.write_text(json.dumps(document()), encoding="utf-8")
+    output = tmp_path / "exports"
+    assert main(["workflow", "export", str(source), "-o", str(output)]) == 0
+    assert load_workflow(output / "workflow.1kit") == document()
 
 
 def test_legacy_and_password_redaction():

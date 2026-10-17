@@ -44,9 +44,9 @@ Notebook merge accepts `merge` with `from` (`left` or `right`) and the zero-base
 
 ## Portable workflows
 
-`onekit workflow export SOURCE -o workflow.onekit.json` validates a legacy steps array or a workflow document and saves a portable document. `onekit workflow import workflow.onekit.json -o saved.json` validates and saves an imported document. Both commands preserve the editor layout, omit passwords and refuse existing output paths unless `--force` is supplied. Neither command processes files.
+`onekit workflow export SOURCE -o workflow.1kit` validates a legacy steps array or a workflow document and saves a portable document. `onekit workflow import workflow.1kit -o saved.1kit` validates and saves an imported document. Both commands preserve the editor layout, omit passwords and refuse existing output paths unless `--force` is supplied. Neither command processes files.
 
-Run an imported workflow with `onekit pipeline --steps saved.json INPUTS -o OUTPUT`. Legacy steps arrays remain supported. Workflow documents are UTF-8 JSON, at most 1 MiB, with the following structure:
+Run an imported workflow with `onekit pipeline --steps saved.1kit INPUTS -o OUTPUT`. The .1kit extension identifies OneKit documents; legacy .json and .onekit.json workflow files and steps arrays remain supported. Workflow documents are UTF-8 JSON, at most 1 MiB, with the following structure:
 
 ```json
 {

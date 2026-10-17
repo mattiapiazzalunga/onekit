@@ -25,7 +25,8 @@ def execute(tool_id: str, files: list[Artifact], options: dict | None = None, *,
         settings = dict(options or {})
         settings["_max_expanded_bytes"] = min(MAX_BYTES, tool.browser_max_total_bytes) if browser else MAX_BYTES
         result = importlib.import_module(f"onekit.tools.{tool.handler}").run(tool, files, settings)
-        check_batch(result.files, browser=browser, output=True)
+        check_batch(result.files, browser=browser, output=True,
+                    max_bytes=tool.browser_max_total_bytes if browser else None)
     except OneKitError:
         raise
     except ImportError as exc:
@@ -57,14 +58,16 @@ def pipeline(steps: list[dict], files: list[Artifact], *, browser=False) -> Resu
     for step in steps:
         tool_id = step["tool"]
         tool = TOOLS[tool_id]
-        check_batch(files, browser=browser)
+        check_batch(files, browser=browser,
+                    max_bytes=tool.browser_max_total_bytes if browser else None)
         if len(files) > 1 and not tool.multiple:
             result = Result([])
             for file in files:
                 part = execute(tool_id, [file], step.get("options", {}), browser=browser)
                 result.files.extend(part.files)
                 result.warnings.extend(part.warnings)
-                check_batch(result.files, browser=browser, output=True)
+                check_batch(result.files, browser=browser, output=True,
+                            max_bytes=tool.browser_max_total_bytes if browser else None)
         else:
             result = execute(tool_id, files, step.get("options", {}), browser=browser)
         files = result.files

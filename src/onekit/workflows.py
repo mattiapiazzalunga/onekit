@@ -1,6 +1,6 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: Apache-2.0
-"""Portable workflow documents shared by the CLI and browser editor."""
+"""Portable .1kit workflow documents shared by the CLI and browser editor."""
 import copy
 import json
 import math
@@ -10,6 +10,7 @@ from .api import validate_steps
 from .models import OneKitError
 
 MAX_WORKFLOW_BYTES = 1024 * 1024
+WORKFLOW_FILENAME = "workflow.1kit"
 
 
 def workflow_document(value, *, redact=False):

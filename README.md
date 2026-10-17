@@ -65,7 +65,7 @@ Content-preserving operations and conversions with compromises are distinguished
 
 ## Pipelines and development
 
-`onekit pipeline --steps workflow.json INPUTS -o OUTPUT` accepts a portable `onekit-workflow` JSON document exported by the web app, or a legacy ordered JSON array of `{ "tool": "...", "options": {} }` steps. Each receives prior outputs. Single-input steps map over multiple outputs; merge steps receive the collection. Incompatible types stop processing.
+`onekit pipeline --steps workflow.1kit INPUTS -o OUTPUT` accepts a portable `.1kit` document (JSON with a `onekit-workflow` format identifier) exported by the web app, or a legacy ordered JSON array of `{ "tool": "...", "options": {} }` steps. Each receives prior outputs. Single-input steps map over multiple outputs; merge steps receive the collection. Incompatible types stop processing.
 
 Read [architecture](docs/architecture.md), [engine setup and licenses](docs/engines.md), [release operations](docs/releases.md), [contribution requirements](CONTRIBUTING.md) and [security](SECURITY.md). New features and fixes require regression tests. GitHub Actions checks platform compatibility, browser contracts, native integrations, security, licenses and packaging before publication. Dependabot monitors locks, browser requirements, Node engines, Actions and Docker. Conservative compatible lock-only updates can auto-merge after all checks.
 
@@ -78,9 +78,9 @@ Created by **[Mattia Piazzalunga](https://www.mattiapiazzalunga.com)**. Copyrigh
 Export and reimport workflows without processing input files:
 
 ```sh
-onekit workflow export steps.json -o workflow.onekit.json
-onekit workflow import workflow.onekit.json -o saved-workflow.json
-onekit pipeline --steps saved-workflow.json input.json -o output.json
+onekit workflow export steps.json -o workflow.1kit
+onekit workflow import workflow.1kit -o saved-workflow.1kit
+onekit pipeline --steps saved-workflow.1kit input.json -o output.json
 ```
 
-The web app imports and exports the same versioned JSON, including block positions and expansion state. Workflow files contain tool settings; input files and passwords are excluded from exports. Reenter passwords before running. Browser imports report unsupported tools or option values without replacing the current workflow. CLI-only workflows can still be imported, exported and run with the CLI.
+The web app saves workflows with the `.1kit` extension and imports the same versioned JSON, including block positions and expansion state. Older `.json` and `.onekit.json` workflows remain compatible. Workflow files contain tool settings; input files and passwords are excluded from exports. Reenter passwords before running. Browser imports report unsupported tools or option values without replacing the current workflow. CLI-only workflows can still be imported, exported and run with the CLI.

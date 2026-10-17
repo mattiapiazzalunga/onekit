@@ -13,14 +13,16 @@ from .models import Artifact, OneKitError, parse_json
 
 MAX_FILES = 256
 MAX_BYTES = 128 * 1024 * 1024
-BROWSER_BYTES = 32 * 1024 * 1024
+BROWSER_BYTES = 100 * 1024 * 1024
 MAX_PIXELS = 40_000_000
 TEXT_CONTROLS = re.compile(r"[\x00-\x08\x0b\x0e-\x1f\x7f]")
 TEXT_BYTES = bytes(value for value in range(256) if value not in (*range(9), 11, *range(14, 32), 127))
 
 
-def check_batch(files, *, browser=False, output=False):
+def check_batch(files, *, browser=False, output=False, max_bytes=None):
     limit = BROWSER_BYTES if browser else MAX_BYTES
+    if max_bytes is not None:
+        limit = min(limit, max_bytes)
     if not isinstance(files, (list, tuple)) or any(not isinstance(file, Artifact) or not isinstance(file.data, bytes) for file in files):
         raise OneKitError("Inputs must be a list of files containing byte data.")
     if len(files) > MAX_FILES or sum(len(file.data) for file in files) > limit:

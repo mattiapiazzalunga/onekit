@@ -8,13 +8,14 @@ Every catalog entry declares allowed input extensions, an input mode, minimum/ma
 
 | Scope | CLI | Browser |
 | --- | --- | --- |
-| Total input/output batch | 128 MiB, at most 256 files | 32 MiB, at most 256 files |
+| Total input/output batch | 128 MiB, at most 256 files | 100 MiB global ceiling; 32 MiB unless the tool explicitly supports large files, at most 256 files |
 | Text/developer input, including encoding conversion | 8 MiB per file | 8 MiB per file |
 | Diff input | Exactly two files; text up to 8 MiB per file | Exactly two files, up to 2,000,000 bytes each |
 | Raster image input | 64 MiB per file | 32 MiB per file |
 | Font input | 16 MiB per file | 16 MiB per file |
 | Other binary input | 128 MiB per file | 32 MiB per file |
 | PDF merge | 2–256 files within the batch limit | 2–256 files within the batch limit |
+| PDF merge, split, remove pages, organize, extract pages, repair, rotate, unlock | 128 MiB per file | 100 MiB per file and total input/output batch |
 | Decoded raster images | At most 40 million pixels across frames | Same |
 | Archive/Office expansion | At most 128 MiB of file data and 4096 entries | At most 32 MiB of file data and 4096 entries |
 

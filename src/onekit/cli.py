@@ -18,7 +18,7 @@ from .api import execute, pipeline
 from .catalog import TOOLS, manifest
 from .models import Artifact, OneKitError
 from .validation import MAX_BYTES
-from .workflows import dump_workflow, load_workflow
+from .workflows import WORKFLOW_FILENAME, dump_workflow, load_workflow
 
 _ = gettext.translation("onekit", localedir=Path(__file__).parent / "locales", fallback=True).gettext
 
@@ -137,9 +137,9 @@ def parser():
     engines = commands.add_parser("engines", help="Install the optional, version-locked Node developer engines")
     engines.add_argument("action", choices=["install"])
     engines.add_argument("--directory", type=Path)
-    workflow = commands.add_parser("workflow", help="Import or export a portable workflow JSON document")
+    workflow = commands.add_parser("workflow", help="Import or export a portable .1kit workflow document")
     workflow.add_argument("action", choices=["import", "export"])
-    workflow.add_argument("source", help="Workflow document or legacy steps JSON file")
+    workflow.add_argument("source", help="OneKit .1kit workflow document or legacy JSON file")
     workflow.add_argument("-o", "--output", required=True)
     workflow.add_argument("--force", action="store_true")
     for name in ("run", "pipeline"):
@@ -181,7 +181,7 @@ def main(argv=None):
         if args.command == "workflow":
             from .models import Result
             document = load_workflow(args.source)
-            write_files(Result([Artifact("workflow.onekit.json", dump_workflow(document))]), args.output, args.force)
+            write_files(Result([Artifact(WORKFLOW_FILENAME, dump_workflow(document))]), args.output, args.force)
             print("Workflow saved. Input files and passwords are not included.", file=sys.stderr)
             return 0
         if args.command == "run":

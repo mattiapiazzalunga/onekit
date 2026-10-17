@@ -26,7 +26,7 @@ def test_catalog_has_an_explicit_bounded_contract_for_every_tool():
         assert tool.input_mode in ("any", "text", "encoded-text", "typed")
         assert 1 <= tool.min_files <= tool.max_files <= 256
         assert 0 < tool.max_file_bytes <= tool.max_total_bytes <= 128 * 1024 * 1024
-        assert 0 < tool.browser_max_file_bytes <= tool.browser_max_total_bytes <= 32 * 1024 * 1024
+        assert 0 < tool.browser_max_file_bytes <= tool.browser_max_total_bytes <= 100 * 1024 * 1024
         if tool.input_mode == "any":
             assert tool.id in unrestricted
         if tool.input_mode == "typed":
