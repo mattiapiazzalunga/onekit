@@ -15,14 +15,10 @@ from xml.etree import ElementTree
 from ...models import Artifact, OneKitError, Result, output, parse_json
 
 PRETTIER = {"javascript": "babel", "typescript": "typescript", "jsx": "babel", "tsx": "typescript", "html": "html", "css": "css", "scss": "scss", "less": "less", "json5": "json5", "jsonc": "json", "yaml": "yaml", "markdown": "markdown", "mdx": "mdx", "graphql": "graphql", "vue": "vue", "svelte": "svelte", "astro": "astro", "solidity": "solidity", "php": "php"}
-FORMATTERS = {"java": ("google-java-format", ["-"], "java"), "c": ("clang-format", [], "c"), "cpp": ("clang-format", [], "cpp"), "csharp": ("clang-format", [], "cs"), "go": ("gofmt", [], "go"), "rust": ("rustfmt", ["--emit", "stdout"], "rs"), "ruby": ("rubocop", ["-a", "--stdin", "input.rb", "--stderr"], "rb"), "kotlin": ("ktfmt", ["--stdin-name=input.kt", "-"], "kt"), "swift": ("swift-format", ["format"], "swift"), "dart": ("dart", ["format", "--output=show"], "dart"), "scala": ("scalafmt", ["--stdin"], "scala"), "lua": ("lua-format", [], "lua"), "bash": ("shfmt", [], "sh"), "shell": ("shfmt", [], "sh"), "sql": ("sqlformat", ["--reindent", "-"], "sql"), "latex": ("latexindent", ["-"], "tex"), "hcl": ("hclfmt", [], "hcl"), "terraform": ("terraform", ["fmt", "-"], "tf"), "dockerfile": ("prettier", ["--parser", "dockerfile"], "Dockerfile"), "r": ("Rscript", ["-e", 'cat(paste(styler::style_text(readLines(file("stdin"))), collapse="\\n"))'], "R"), "julia": ("julia", ["--startup-file=no", "-e", "using JuliaFormatter; print(format_text(read(stdin, String)))"], "jl"), "elixir": ("mix", ["format", "-"], "ex"), "haskell": ("ormolu", [], "hs"), "powershell": ("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "$s=[Console]::In.ReadToEnd(); Invoke-Formatter -ScriptDefinition $s"], "ps1")}
+FORMATTERS = {"java": ("google-java-format", ["-"], "java"), "c": ("clang-format", [], "c"), "cpp": ("clang-format", [], "cpp"), "csharp": ("clang-format", [], "cs"), "go": ("gofmt", [], "go"), "rust": ("rustfmt", ["--emit", "stdout"], "rs"), "ruby": ("rufo", [], "rb"), "kotlin": ("ktfmt", ["--stdin-name=input.kt", "-"], "kt"), "swift": ("swift-format", ["format"], "swift"), "dart": ("dart", ["format", "--output=show"], "dart"), "scala": ("scalafmt", ["--stdin"], "scala"), "lua": ("lua-format", [], "lua"), "bash": ("shfmt", [], "sh"), "shell": ("shfmt", [], "sh"), "sql": ("sqlformat", ["--reindent", "-"], "sql"), "latex": ("latexindent", ["-"], "tex"), "hcl": ("hclfmt", [], "hcl"), "terraform": ("tofu", ["fmt", "-"], "tf"), "dockerfile": ("dockerfmt", [], "Dockerfile"), "r": ("Rscript", ["-e", 'cat(paste(styler::style_text(readLines(file("stdin"))), collapse="\\n"))'], "R"), "julia": ("julia", ["--startup-file=no", "-e", "using JuliaFormatter; print(format_text(read(stdin, String)))"], "jl"), "elixir": ("mix", ["format", "-"], "ex"), "haskell": ("ormolu", [], "hs"), "powershell": ("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){[Console]::Error.Write('Install PSScriptAnalyzer with Install-Module PSScriptAnalyzer -Scope CurrentUser.');exit 1};$s=[Console]::In.ReadToEnd();Invoke-Formatter -ScriptDefinition $s"], "ps1")}
 VALIDATORS = {"javascript": ("node", ["--check", "input.js"], "js"), "typescript": ("tsc", ["--noEmit", "--strict", "input.ts"], "ts"), "jsx": ("tsc", ["--noEmit", "--allowJs", "--jsx", "preserve", "input.jsx"], "jsx"), "tsx": ("tsc", ["--noEmit", "--jsx", "preserve", "input.tsx"], "tsx"), "java": ("javac", ["-proc:none", "input.java"], "java"), "c": ("clang", ["-fsyntax-only", "input.c"], "c"), "cpp": ("clang++", ["-fsyntax-only", "input.cpp"], "cpp"), "go": ("gofmt", ["-e", "input.go"], "go"), "rust": ("rustfmt", ["--check", "input.rs"], "rs"), "php": ("php", ["-l", "input.php"], "php"), "ruby": ("ruby", ["-c", "input.rb"], "rb"), "bash": ("bash", ["-n", "input.sh"], "sh"), "shell": ("sh", ["-n", "input.sh"], "sh"), "lua": ("luac", ["-p", "input.lua"], "lua"), "dart": ("dart", ["analyze", "input.dart"], "dart"), "dockerfile": ("hadolint", ["input.Dockerfile"], "Dockerfile"), "terraform": ("terraform", ["fmt", "-check", "input.tf"], "tf"), "hcl": ("hclfmt", ["input.hcl"], "hcl"), "haskell": ("ghc", ["-fno-code", "input.hs"], "hs"), "elixir": ("elixir", ["--no-halt", "-e", 'Code.string_to_quoted!(File.read!("input.ex")); System.halt(0)'], "ex")}
 
 
-FORMATTERS["dockerfile"] = ("dockerfmt", [], "Dockerfile")
-FORMATTERS["ruby"] = ("rufo", [], "rb")
-FORMATTERS["terraform"] = ("tofu", ["fmt", "-"], "tf")
-FORMATTERS["powershell"] = ("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){[Console]::Error.Write('Install PSScriptAnalyzer with Install-Module PSScriptAnalyzer -Scope CurrentUser.');exit 1};$s=[Console]::In.ReadToEnd();Invoke-Formatter -ScriptDefinition $s"], "ps1")
 VALIDATORS.update({
     "csharp": ("csc", ["/nologo", "/target:library", "input.cs"], "cs"),
     "kotlin": ("kotlinc", ["input.kt", "-d", "output.jar"], "kt"),
@@ -45,7 +41,6 @@ def engine_for(tool):
         operation == "format" and language in ("xml", "svg", "toml") or
         operation == "validate" and language in ("python", "xml", "svg", "json5", "jsonc", "yaml", "toml", "xsd", "json-schema", "csv")):
         return None
-    _, operation, language = tool.id.split("-", 2)
     if language in ("openapi", "asyncapi"):
         return "redocly" if language == "openapi" else "asyncapi"
     if operation == "minify" and language != "json":
@@ -132,7 +127,6 @@ def validate(language, text, options, *, filename=None):
         except jsonschema.exceptions.SchemaError as exc:
             raise ValueError(exc.message) from exc
     elif language in ("openapi", "asyncapi"):
-        from ...models import Artifact
         from ..native import command
         with tempfile.TemporaryDirectory(prefix="onekit-") as directory:
             Path(directory, "spec.json").write_text(text, encoding="utf-8")

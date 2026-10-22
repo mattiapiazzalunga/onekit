@@ -4,9 +4,12 @@ import codecs
 import hashlib
 import io
 import json
+import re
 import zipfile
 
 from ...models import OneKitError, Result, output
+
+TEXT_CONTROLS = re.compile(r"[\x00-\x08\x0b\x0e-\x1f]")
 
 SIGNATURES = [(b"%PDF-", "application/pdf"), (b"\x89PNG\r\n\x1a\n", "image/png"), (b"\xff\xd8\xff", "image/jpeg"), (b"GIF8", "image/gif"), (b"BM", "image/bmp"), (b"II\x2a\x00", "image/tiff"), (b"MM\x00\x2a", "image/tiff"), (b"\x00\x00\x01\x00", "image/ico"), (b"PK\x03\x04", "application/zip"), (b"\x1f\x8b", "application/gzip"), (b"7z\xbc\xaf\x27\x1c", "application/x-7z-compressed"), (b"OggS", "audio/ogg"), (b"fLaC", "audio/flac"), (b"wOFF", "font/woff"), (b"wOF2", "font/woff2")]
 
@@ -28,7 +31,7 @@ def inspect(file):
     details = {"name": file.name, "bytes": len(data), "mime": kind, "sha256": hashlib.sha256(data).hexdigest(), "sha512": hashlib.sha512(data).hexdigest(), "encoding": None, "structure": None, "errors": [], "metadata": {}}
     try:
         text = data.decode("utf-8-sig")
-        if kind == "application/octet-stream" and not any(ord(char) < 32 and char not in "\t\n\r\f" for char in text):
+        if kind == "application/octet-stream" and not TEXT_CONTROLS.search(text):
             details["encoding"] = "UTF-8"
             details["mime"] = "text/plain"
         if file.kind in ("json", "ipynb"):

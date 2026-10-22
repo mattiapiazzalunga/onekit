@@ -40,8 +40,12 @@ def mask_image(image, regions):
     from PIL import Image, ImageDraw
     # A fresh RGB allocation carries no EXIF, comments, palette or hidden alpha pixels.
     clean = Image.new("RGB", image.size, "white")
-    rgba = image.convert("RGBA")
-    clean.paste(rgba, mask=rgba.getchannel("A"))
+    if image.mode in ("RGB", "L") and "transparency" not in image.info:
+        clean.paste(image)
+    else:
+        with image.convert("RGBA") as rgba:
+            with rgba.getchannel("A") as alpha:
+                clean.paste(rgba, mask=alpha)
     draw = ImageDraw.Draw(clean)
     for region in regions:
         left, top, right, bottom = pixel_box(region, *clean.size)

@@ -158,3 +158,32 @@ def test_existing_opaque_annotation_cover_is_not_removed_to_reveal_private_text(
     output = PdfReader(io.BytesIO(result.files[0].data))
     assert output.pages[0].images[0].image.convert("RGB").getpixel((100, 100)) == (0, 0, 0)
     assert not output.pages[0].get("/Annots")
+
+
+@pytest.mark.parametrize("mode", ["RGB", "L", "RGBA", "LA", "P"])
+@pytest.mark.parametrize("transparent", [False, True])
+def test_mask_image_preserves_flattening_and_removes_metadata(mode, transparent):
+    from PIL import Image, ImageDraw
+    from onekit.tools.redaction import mask_image, pixel_box
+
+    source = Image.new(mode, (17, 13))
+    if mode == "P":
+        source.putpalette([value for i in range(256) for value in (i, 255-i, i//2)])
+    for y in range(source.height):
+        for x in range(source.width):
+            source.putpixel((x, y), (x*11, y*13, 90) if mode == "RGB" else
+                            (x*11, y*13, 90, (x+y)*8) if mode == "RGBA" else
+                            (x*11, (x+y)*8) if mode == "LA" else x*11)
+    source.info["comment"] = "private"
+    if transparent and mode in ("RGB", "L", "P"):
+        source.info["transparency"] = source.getpixel((0, 0))
+    regions = [{"page": 1, "x": .2, "y": .2, "width": .3, "height": .4}]
+    expected = Image.new("RGB", source.size, "white")
+    rgba = source.convert("RGBA")
+    expected.paste(rgba, mask=rgba.getchannel("A"))
+    left, top, right, bottom = pixel_box(regions[0], *source.size)
+    ImageDraw.Draw(expected).rectangle((left, top, right-1, bottom-1), fill="black")
+    actual = mask_image(source, regions)
+    assert actual.tobytes() == expected.tobytes()
+    assert actual.info == {}
+    assert source.info["comment"] == "private"

@@ -9,11 +9,10 @@ import json
 import re
 import stat
 import tarfile
-import tempfile
 import tomllib
 import zipfile
 import zlib
-from pathlib import Path, PurePosixPath
+from pathlib import PurePosixPath
 
 from license_expression import ExpressionError
 

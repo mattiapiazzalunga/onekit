@@ -2,16 +2,14 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 import io
 import json
-import os
-from pathlib import Path
 
 import pytest
 
-from onekit import Artifact, execute, pipeline
+from onekit import Artifact, execute
 from onekit.catalog import TOOLS
 from onekit.cli import main
 from onekit.tools.developer import engine_for
-from test_core import pdf, png
+from test_core import pdf
 
 pytestmark = pytest.mark.native
 
