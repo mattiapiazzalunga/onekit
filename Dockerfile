@@ -12,7 +12,7 @@ FROM python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c
 LABEL org.opencontainers.image.title="OneKit" \
       org.opencontainers.image.source="https://github.com/mattiapiazzalunga/onekit" \
       org.opencontainers.image.licenses="LicenseRef-PolyForm-Shield-1.0.0" \
-      org.opencontainers.image.authors="Mattia Piazzalunga"
+      org.opencontainers.image.authors="Mattia Piazzalunga <hello@mattiapiazzalunga.com>"
 COPY --from=build /opt/venv /opt/venv
 COPY LICENSE NOTICE /usr/share/doc/onekit/
 ENV PATH="/opt/venv/bin:$PATH" PYTHONDONTWRITEBYTECODE=1

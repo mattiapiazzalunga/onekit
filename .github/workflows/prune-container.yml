@@ -1,0 +1,21 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+name: Keep only OneKit container 0.5.0
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+concurrency:
+  group: onekit-container-cleanup
+  cancel-in-progress: false
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: Preserve the 0.5.0 OCI graph and remove obsolete package versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/prune_container_versions.py

@@ -12,7 +12,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = "LicenseRef-PolyForm-Shield-1.0.0"
 license-files = ["LICENSE", "NOTICE"]
-authors = [{name = "Mattia Piazzalunga", email = "developers@onekit.org"}]
+authors = [{name = "Mattia Piazzalunga", email = "hello@mattiapiazzalunga.com"}]
 keywords = ["cli", "pdf", "diff", "conversion", "privacy", "utilities"]
 classifiers = ["Development Status :: 3 - Alpha", "Environment :: Console", "Operating System :: OS Independent", "Programming Language :: Python :: 3", "Topic :: Utilities"]
 dependencies = []
@@ -45,7 +45,7 @@ License = "https://github.com/mattiapiazzalunga/onekit/blob/main/LICENSE"
 Documentation = "https://onekit.org/docs/"
 Issues = "https://github.com/mattiapiazzalunga/onekit/issues"
 Requests = "https://onekit.org/requests/"
-Author = "https://www.mattiapiazzalunga.com"
+Author = "mailto:hello@mattiapiazzalunga.com"
 
 [tool.hatch.version]
 path = "src/onekit/__init__.py"
