@@ -1,0 +1,26 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-repair",
+  "name": "Repair PDF",
+  "group": "pdf",
+  "handler": "pdf",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Repair is best effort. Editing adds text overlays. Signing requires a PKCS#12 certificate.",
+  "packages": [
+    "pycryptodome",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

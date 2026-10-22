@@ -1,0 +1,36 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+.git
+.venv
+__pycache__
+.pytest_cache
+dist
+.env
+dependency-licenses.json
+node_modules
+.engines
+
+# Local reports, temporary data, credentials and build artifacts
+*.log
+*.tmp
+*.temp
+*.bak
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+coverage.xml
+htmlcov/
+build/
+*.egg-info/
+*.tsbuildinfo
+*.p12
+*.pfx
+.DS_Store
+Thumbs.db
+**/*.log
+**/*.tmp
+**/__pycache__/
+**/node_modules/

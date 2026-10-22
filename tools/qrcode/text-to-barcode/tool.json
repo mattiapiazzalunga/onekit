@@ -1,0 +1,35 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "text-to-barcode",
+  "name": "Generate barcode",
+  "group": "qrcode",
+  "handler": "barcode",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "png",
+  "fidelity": "exact",
+  "note": "Generates Code 128, Code 39, EAN-13, EAN-8, UPC-A, ITF and ISBN-13 locally. Retail check digits are validated or calculated; identifiers are not registered or assigned by OneKit.",
+  "packages": [
+    "python-barcode",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "barcode_type",
+    "format",
+    "module_width",
+    "height",
+    "quiet_zone",
+    "show_text",
+    "font_size",
+    "dpi"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 1024,
+  "max_total_bytes": 134217728
+}

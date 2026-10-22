@@ -1,0 +1,3 @@
+[project]
+license = "LicenseRef-PolyForm-Shield-1.0.0"
+license-files = ["LICENSE", "NOTICE"]

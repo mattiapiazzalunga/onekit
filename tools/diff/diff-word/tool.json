@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "diff-word",
+  "name": "Compare Word files",
+  "group": "diff",
+  "handler": "diff",
+  "accepts": [
+    "docx"
+  ],
+  "produces": "json",
+  "fidelity": "compromise",
+  "note": "Compares extracted text, not visual layout.",
+  "packages": [
+    "python-docx"
+  ],
+  "engines": [],
+  "multiple": true,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 2,
+  "max_files": 2,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,26 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "file-encoding-convert",
+  "name": "Convert text encoding",
+  "group": "inspector",
+  "handler": "inspector",
+  "accepts": [
+    "*"
+  ],
+  "produces": "*",
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "source_encoding",
+    "encoding"
+  ],
+  "input_mode": "encoded-text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

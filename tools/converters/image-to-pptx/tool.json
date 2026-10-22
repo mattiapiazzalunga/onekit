@@ -1,0 +1,32 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-to-pptx",
+  "name": "Image to PowerPoint",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "pptx",
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "python-pptx",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 67108864,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,28 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-sign",
+  "name": "Sign PDF",
+  "group": "pdf",
+  "handler": "pdf",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Repair is best effort. Editing adds text overlays. Signing requires a PKCS#12 certificate.",
+  "packages": [
+    "pyhanko"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "certificate",
+    "password"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

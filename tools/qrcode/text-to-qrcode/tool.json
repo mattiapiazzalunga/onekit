@@ -1,0 +1,41 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "text-to-qrcode",
+  "name": "Text to QR code",
+  "group": "qrcode",
+  "handler": "qrcode",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "png",
+  "fidelity": "exact",
+  "note": "Creates a standard QR code locally. Capacity depends on the content and error correction. Keep the quiet zone and test the code before printing.",
+  "packages": [
+    "segno",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "format",
+    "shape",
+    "corner_style",
+    "overlay_type",
+    "overlay_text",
+    "overlay_image_base64",
+    "overlay_size",
+    "error_correction",
+    "scale",
+    "border",
+    "dark",
+    "light",
+    "transparent_background",
+    "include_payload"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16384,
+  "max_total_bytes": 134217728
+}

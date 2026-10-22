@@ -1,0 +1,40 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "ocr-to-latex",
+  "name": "OCR to LaTeX",
+  "group": "ocr",
+  "handler": "ocr",
+  "accepts": [
+    "pdf",
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "latex",
+  "fidelity": "compromise",
+  "note": "Recognition depends on scan quality and installed language packs. Equations and layout may need manual correction.",
+  "packages": [
+    "pytesseract",
+    "Pillow",
+    "pypdfium2",
+    "python-docx"
+  ],
+  "engines": [
+    "tesseract"
+  ],
+  "multiple": false,
+  "options": [
+    "language",
+    "dpi"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

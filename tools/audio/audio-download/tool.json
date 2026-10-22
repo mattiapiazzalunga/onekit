@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "audio-download",
+  "name": "Download audio",
+  "group": "audio",
+  "handler": "link_tools",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "*",
+  "fidelity": "compromise",
+  "note": "Download a direct audio file or an audio source exposed by an accessible page. Original mode preserves downloaded bytes; MP3 conversion is lossy. Up to 128 MiB. Login and protected streams may prevent downloads. Use only with permission.",
+  "packages": [],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [
+    "format",
+    "quality"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16384,
+  "max_total_bytes": 134217728
+}

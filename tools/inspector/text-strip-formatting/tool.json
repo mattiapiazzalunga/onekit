@@ -1,0 +1,31 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "text-strip-formatting",
+  "name": "Remove text formatting",
+  "group": "inspector",
+  "handler": "plain_text",
+  "accepts": [
+    "txt",
+    "html",
+    "md",
+    "docx"
+  ],
+  "produces": "txt",
+  "fidelity": "compromise",
+  "note": "Turn pasted text, UTF-8/UTF-16 text files, HTML, Markdown or Word DOCX body text into a UTF-8 TXT file locally. Removes styles, links and markup while retaining readable text and basic paragraph/table breaks. Plain text preserves literal punctuation. No OCR; DOCX headers, footers, images and comments are omitted. Up to 8 MiB per input.",
+  "packages": [
+    "markdown-it-py",
+    "defusedxml"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "input_format"
+  ],
+  "input_mode": "any",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

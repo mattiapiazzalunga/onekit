@@ -1,0 +1,30 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "qrcode-to-vcard",
+  "name": "QR code to vCard",
+  "group": "converters",
+  "handler": "qrcode",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "bmp",
+    "gif"
+  ],
+  "produces": "vcf",
+  "fidelity": "exact",
+  "note": "Extracts vCard contacts stored directly in QR images. Other payloads, including contact download links, are rejected; no URLs are opened.",
+  "packages": [
+    "Pillow",
+    "zxing-cpp"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16777216,
+  "max_total_bytes": 134217728
+}

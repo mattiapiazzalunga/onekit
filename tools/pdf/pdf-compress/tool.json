@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-compress",
+  "name": "Compress PDF",
+  "group": "pdf",
+  "handler": "pdf",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Light preserves image quality. Balanced and Maximum may reduce image quality and resolution. The original is kept if no smaller output is found.",
+  "packages": [
+    "pycryptodome",
+    "pypdf",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "compression_level"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

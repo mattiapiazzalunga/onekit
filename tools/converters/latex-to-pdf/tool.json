@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "latex-to-pdf",
+  "name": "LaTeX to PDF",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "latex"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [],
+  "engines": [
+    "pdflatex"
+  ],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

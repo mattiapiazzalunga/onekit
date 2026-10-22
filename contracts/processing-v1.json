@@ -1,0 +1,3950 @@
+{
+  "format": "onekit-processing-contract",
+  "version": 1,
+  "apiVersion": 1,
+  "artifact": {
+    "fields": [
+      "name",
+      "data"
+    ],
+    "name": "portable-relative-path",
+    "data": "bytes"
+  },
+  "result": {
+    "fields": [
+      "files",
+      "warnings",
+      "details"
+    ]
+  },
+  "pipeline": {
+    "minSteps": 1,
+    "maxSteps": 16,
+    "fields": [
+      "tool",
+      "options"
+    ]
+  },
+  "workflow": {
+    "format": "onekit-workflow",
+    "version": 1,
+    "fields": [
+      "format",
+      "version",
+      "steps"
+    ]
+  },
+  "tools": [
+    {
+      "id": "md-to-latex",
+      "accepts": [
+        "md"
+      ],
+      "produces": "latex",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "md-to-json",
+      "accepts": [
+        "md"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "md-to-html",
+      "accepts": [
+        "md"
+      ],
+      "produces": "html",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "md-to-pdf",
+      "accepts": [
+        "md"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "md-to-docx",
+      "accepts": [
+        "md"
+      ],
+      "produces": "docx",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-pdfa",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdfa",
+      "multiple": false,
+      "options": [
+        "icc_profile"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-png",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-jpeg",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "jpeg",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-webp",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "webp",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-tiff",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "tiff",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-docx",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "docx",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-html",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "html",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-pptx",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pptx",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-to-md",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "md",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-to-base64",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "base64",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-to-pdf",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-to-pptx",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "pptx",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "base64-to-image",
+      "accepts": [
+        "base64",
+        "txt"
+      ],
+      "produces": "image",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "docx-to-pdf",
+      "accepts": [
+        "docx"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "docx-to-png",
+      "accepts": [
+        "docx"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "docx-to-md",
+      "accepts": [
+        "docx"
+      ],
+      "produces": "md",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pptx-to-pdf",
+      "accepts": [
+        "pptx"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pptx-to-png",
+      "accepts": [
+        "pptx"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "latex-to-html",
+      "accepts": [
+        "latex"
+      ],
+      "produces": "html",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "latex-to-pdf",
+      "accepts": [
+        "latex"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "latex-to-md",
+      "accepts": [
+        "latex"
+      ],
+      "produces": "md",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "html-to-pdf",
+      "accepts": [
+        "html"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "html-to-latex",
+      "accepts": [
+        "html"
+      ],
+      "produces": "latex",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "html-to-json",
+      "accepts": [
+        "html"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "html-to-md",
+      "accepts": [
+        "html"
+      ],
+      "produces": "md",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "xlsx-to-pdf",
+      "accepts": [
+        "xlsx"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "sheet"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "xlsx-to-csv",
+      "accepts": [
+        "xlsx"
+      ],
+      "produces": "csv",
+      "multiple": false,
+      "options": [
+        "sheet"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "xlsx-to-json",
+      "accepts": [
+        "xlsx"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "sheet"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "json-to-xlsx",
+      "accepts": [
+        "json"
+      ],
+      "produces": "xlsx",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "csv-to-xlsx",
+      "accepts": [
+        "csv"
+      ],
+      "produces": "xlsx",
+      "multiple": false,
+      "options": [
+        "delimiter"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "csv-to-json",
+      "accepts": [
+        "csv"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "delimiter"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-merge",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": true,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 2,
+      "max_files": 256,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-split",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-remove-pages",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "pages"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-organize",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "pages"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-extract-pages",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "pages"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-compress",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "compression_level"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-repair",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-edit",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "mode",
+        "edits",
+        "password",
+        "text",
+        "x",
+        "y",
+        "page"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-rotate",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "angle",
+        "pages"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-sign",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "certificate",
+        "password"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-protect",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "password"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-unlock",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "password"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-validate-pdfa",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-compress",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "image",
+      "multiple": false,
+      "options": [
+        "format",
+        "quality"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-crop",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "image",
+      "multiple": false,
+      "options": [
+        "box",
+        "format",
+        "quality"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-convert",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "image",
+      "multiple": false,
+      "options": [
+        "format",
+        "quality"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-extract-pdf",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "image",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-to-favicon",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format",
+        "fit"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 67108864,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "video-convert",
+      "accepts": [
+        "mp4",
+        "webm",
+        "mkv",
+        "mov",
+        "avi",
+        "gif",
+        "mpeg",
+        "mpg",
+        "m4v",
+        "ogv",
+        "ts"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format",
+        "codec",
+        "bitrate"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "audio-convert",
+      "accepts": [
+        "mp3",
+        "wav",
+        "flac",
+        "ogg",
+        "aac",
+        "m4a",
+        "mp4",
+        "aif",
+        "aiff",
+        "opus",
+        "wma"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format",
+        "codec",
+        "bitrate"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "archive-convert",
+      "accepts": [
+        "zip",
+        "tar",
+        "gz",
+        "bz2",
+        "xz"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "font-convert",
+      "accepts": [
+        "ttf",
+        "otf",
+        "woff",
+        "woff2"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "file-inspect",
+      "accepts": [
+        "*"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "file-metadata-set",
+      "accepts": [
+        "*"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "metadata"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "file-metadata-remove",
+      "accepts": [
+        "*"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "file-count",
+      "accepts": [
+        "*"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "file-encoding-convert",
+      "accepts": [
+        "*"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "source_encoding",
+        "encoding"
+      ],
+      "input_mode": "encoded-text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "security-encrypt",
+      "accepts": [
+        "*"
+      ],
+      "produces": "zip",
+      "multiple": true,
+      "options": [
+        "password"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 256,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "security-decrypt",
+      "accepts": [
+        "zip"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "password",
+        "restore"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-javascript",
+      "accepts": [
+        "js",
+        "mjs",
+        "cjs",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-typescript",
+      "accepts": [
+        "ts",
+        "mts",
+        "cts",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-jsx",
+      "accepts": [
+        "jsx",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-tsx",
+      "accepts": [
+        "tsx",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-python",
+      "accepts": [
+        "py",
+        "pyi",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-java",
+      "accepts": [
+        "java",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-c",
+      "accepts": [
+        "c",
+        "h",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-cpp",
+      "accepts": [
+        "cpp",
+        "cc",
+        "cxx",
+        "hpp",
+        "h",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-csharp",
+      "accepts": [
+        "cs",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-go",
+      "accepts": [
+        "go",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-rust",
+      "accepts": [
+        "rs",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-php",
+      "accepts": [
+        "php",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-ruby",
+      "accepts": [
+        "rb",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-kotlin",
+      "accepts": [
+        "kt",
+        "kts",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-swift",
+      "accepts": [
+        "swift",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-dart",
+      "accepts": [
+        "dart",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-scala",
+      "accepts": [
+        "scala",
+        "sc",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-lua",
+      "accepts": [
+        "lua",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-bash",
+      "accepts": [
+        "sh",
+        "bash",
+        "txt",
+        ""
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-shell",
+      "accepts": [
+        "sh",
+        "txt",
+        ""
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-powershell",
+      "accepts": [
+        "ps1",
+        "psm1",
+        "psd1",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-sql",
+      "accepts": [
+        "sql",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-html",
+      "accepts": [
+        "html",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-css",
+      "accepts": [
+        "css",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-scss",
+      "accepts": [
+        "scss",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-less",
+      "accepts": [
+        "less",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-xml",
+      "accepts": [
+        "xml",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-svg",
+      "accepts": [
+        "svg",
+        "xml",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-json",
+      "accepts": [
+        "json",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-json5",
+      "accepts": [
+        "json5",
+        "json",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-jsonc",
+      "accepts": [
+        "jsonc",
+        "json",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-yaml",
+      "accepts": [
+        "yaml",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-toml",
+      "accepts": [
+        "toml",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-markdown",
+      "accepts": [
+        "md",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-mdx",
+      "accepts": [
+        "mdx",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-latex",
+      "accepts": [
+        "latex",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-graphql",
+      "accepts": [
+        "graphql",
+        "gql",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-vue",
+      "accepts": [
+        "vue",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-svelte",
+      "accepts": [
+        "svelte",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-astro",
+      "accepts": [
+        "astro",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-solidity",
+      "accepts": [
+        "sol",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-hcl",
+      "accepts": [
+        "hcl",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-terraform",
+      "accepts": [
+        "tf",
+        "tfvars",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-dockerfile",
+      "accepts": [
+        "dockerfile",
+        "txt",
+        ""
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-r",
+      "accepts": [
+        "r",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-julia",
+      "accepts": [
+        "jl",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-elixir",
+      "accepts": [
+        "ex",
+        "exs",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-format-haskell",
+      "accepts": [
+        "hs",
+        "lhs",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-javascript",
+      "accepts": [
+        "js",
+        "mjs",
+        "cjs",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-typescript",
+      "accepts": [
+        "ts",
+        "mts",
+        "cts",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-jsx",
+      "accepts": [
+        "jsx",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-tsx",
+      "accepts": [
+        "tsx",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-python",
+      "accepts": [
+        "py",
+        "pyi",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-java",
+      "accepts": [
+        "java",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-c",
+      "accepts": [
+        "c",
+        "h",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-cpp",
+      "accepts": [
+        "cpp",
+        "cc",
+        "cxx",
+        "hpp",
+        "h",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-csharp",
+      "accepts": [
+        "cs",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-go",
+      "accepts": [
+        "go",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-rust",
+      "accepts": [
+        "rs",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-php",
+      "accepts": [
+        "php",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-ruby",
+      "accepts": [
+        "rb",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-kotlin",
+      "accepts": [
+        "kt",
+        "kts",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-swift",
+      "accepts": [
+        "swift",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-dart",
+      "accepts": [
+        "dart",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-scala",
+      "accepts": [
+        "scala",
+        "sc",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-lua",
+      "accepts": [
+        "lua",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-bash",
+      "accepts": [
+        "sh",
+        "bash",
+        "txt",
+        ""
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-shell",
+      "accepts": [
+        "sh",
+        "txt",
+        ""
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-powershell",
+      "accepts": [
+        "ps1",
+        "psm1",
+        "psd1",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-sql",
+      "accepts": [
+        "sql",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "dialect"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-html",
+      "accepts": [
+        "html",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-css",
+      "accepts": [
+        "css",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-scss",
+      "accepts": [
+        "scss",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-less",
+      "accepts": [
+        "less",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-xml",
+      "accepts": [
+        "xml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-svg",
+      "accepts": [
+        "svg",
+        "xml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-json",
+      "accepts": [
+        "json",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-json5",
+      "accepts": [
+        "json5",
+        "json",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-jsonc",
+      "accepts": [
+        "jsonc",
+        "json",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-yaml",
+      "accepts": [
+        "yaml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-toml",
+      "accepts": [
+        "toml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-markdown",
+      "accepts": [
+        "md",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-mdx",
+      "accepts": [
+        "mdx",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-latex",
+      "accepts": [
+        "latex",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-graphql",
+      "accepts": [
+        "graphql",
+        "gql",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-vue",
+      "accepts": [
+        "vue",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-svelte",
+      "accepts": [
+        "svelte",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-astro",
+      "accepts": [
+        "astro",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-solidity",
+      "accepts": [
+        "sol",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-hcl",
+      "accepts": [
+        "hcl",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-terraform",
+      "accepts": [
+        "tf",
+        "tfvars",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-dockerfile",
+      "accepts": [
+        "dockerfile",
+        "txt",
+        ""
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-r",
+      "accepts": [
+        "r",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-julia",
+      "accepts": [
+        "jl",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-elixir",
+      "accepts": [
+        "ex",
+        "exs",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-haskell",
+      "accepts": [
+        "hs",
+        "lhs",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-xsd",
+      "accepts": [
+        "xsd",
+        "xml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-json-schema",
+      "accepts": [
+        "json",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-csv",
+      "accepts": [
+        "csv",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-openapi",
+      "accepts": [
+        "json",
+        "yaml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-validate-asyncapi",
+      "accepts": [
+        "json",
+        "yaml",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-javascript",
+      "accepts": [
+        "js",
+        "mjs",
+        "cjs",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-typescript",
+      "accepts": [
+        "ts",
+        "mts",
+        "cts",
+        "txt"
+      ],
+      "produces": "js",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-jsx",
+      "accepts": [
+        "jsx",
+        "txt"
+      ],
+      "produces": "js",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-tsx",
+      "accepts": [
+        "tsx",
+        "txt"
+      ],
+      "produces": "js",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-html",
+      "accepts": [
+        "html",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-css",
+      "accepts": [
+        "css",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-json",
+      "accepts": [
+        "json",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-svg",
+      "accepts": [
+        "svg",
+        "xml",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-minify-graphql",
+      "accepts": [
+        "graphql",
+        "gql",
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "ocr-to-pdf",
+      "accepts": [
+        "pdf",
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "language",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "ocr-to-docx",
+      "accepts": [
+        "pdf",
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "docx",
+      "multiple": false,
+      "options": [
+        "language",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "ocr-to-md",
+      "accepts": [
+        "pdf",
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "md",
+      "multiple": false,
+      "options": [
+        "language",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "ocr-to-latex",
+      "accepts": [
+        "pdf",
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "latex",
+      "multiple": false,
+      "options": [
+        "language",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "ocr-to-html",
+      "accepts": [
+        "pdf",
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "html",
+      "multiple": false,
+      "options": [
+        "language",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "ocr-to-json",
+      "accepts": [
+        "pdf",
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "language",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-text",
+      "accepts": [
+        "*"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-json",
+      "accepts": [
+        "json",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-notebook",
+      "accepts": [
+        "ipynb"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [
+        "mode"
+      ],
+      "input_mode": "text",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-latex",
+      "accepts": [
+        "latex",
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [
+        "mode"
+      ],
+      "input_mode": "text",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-pdf",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-word",
+      "accepts": [
+        "docx"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "diff-code",
+      "accepts": [
+        "*"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 2,
+      "max_files": 2,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "video-download",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "quality",
+        "cookies",
+        "cookies_from_browser",
+        "format_id",
+        "referer",
+        "list_formats"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "text-to-qrcode",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "format",
+        "shape",
+        "corner_style",
+        "overlay_type",
+        "overlay_text",
+        "overlay_image_base64",
+        "overlay_size",
+        "error_correction",
+        "scale",
+        "border",
+        "dark",
+        "light",
+        "transparent_background",
+        "include_payload"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "url-to-qrcode",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "format",
+        "shape",
+        "corner_style",
+        "overlay_type",
+        "overlay_text",
+        "overlay_image_base64",
+        "overlay_size",
+        "error_correction",
+        "scale",
+        "border",
+        "dark",
+        "light",
+        "transparent_background",
+        "include_payload"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "wifi-to-qrcode",
+      "accepts": [
+        "json"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "format",
+        "shape",
+        "corner_style",
+        "overlay_type",
+        "overlay_text",
+        "overlay_image_base64",
+        "overlay_size",
+        "error_correction",
+        "scale",
+        "border",
+        "dark",
+        "light",
+        "transparent_background",
+        "include_payload"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "vcard-to-qrcode",
+      "accepts": [
+        "json",
+        "vcf"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "format",
+        "shape",
+        "corner_style",
+        "overlay_type",
+        "overlay_text",
+        "overlay_image_base64",
+        "overlay_size",
+        "error_correction",
+        "scale",
+        "border",
+        "dark",
+        "light",
+        "transparent_background",
+        "include_payload"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "scan-qrcode",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "reverse-qrcode",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "qrcode-to-text",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "txt",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "qrcode-to-json",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "text-to-barcode",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "barcode_type",
+        "format",
+        "module_width",
+        "height",
+        "quiet_zone",
+        "show_text",
+        "font_size",
+        "dpi"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 1024,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "scan-barcode",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "barcode-to-text",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "txt",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "dev-regex-test",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "pattern",
+        "flags",
+        "max_matches",
+        "enable_replacement",
+        "replacement"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 131072,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-redact",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "regions",
+        "dpi"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-redact",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "regions"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "pdf-watermark",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "pdf",
+      "multiple": false,
+      "options": [
+        "text",
+        "pages",
+        "font",
+        "font_size",
+        "color",
+        "opacity",
+        "angle",
+        "position",
+        "layout",
+        "margin",
+        "watermark_type",
+        "image_base64",
+        "image_width"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-effects",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "effect",
+        "scope",
+        "strength",
+        "color",
+        "regions"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "vcard-generate",
+      "accepts": [
+        "json"
+      ],
+      "produces": "vcf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "qrcode-to-vcard",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "bmp",
+        "gif"
+      ],
+      "produces": "vcf",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16777216,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-upscale",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "scale"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-remove-background",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "video-compress",
+      "accepts": [
+        "mp4",
+        "webm",
+        "mkv",
+        "mov",
+        "avi",
+        "gif",
+        "mpeg",
+        "mpg",
+        "m4v",
+        "ogv",
+        "ts"
+      ],
+      "produces": "mp4",
+      "multiple": false,
+      "options": [
+        "compression_level"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "video-speed",
+      "accepts": [
+        "mp4",
+        "webm",
+        "mkv",
+        "mov",
+        "avi",
+        "gif",
+        "mpeg",
+        "mpg",
+        "m4v",
+        "ogv",
+        "ts"
+      ],
+      "produces": "mp4",
+      "multiple": false,
+      "options": [
+        "speed"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "video-to-gif",
+      "accepts": [
+        "mp4",
+        "webm",
+        "mkv",
+        "mov",
+        "avi",
+        "gif",
+        "mpeg",
+        "mpg",
+        "m4v",
+        "ogv",
+        "ts"
+      ],
+      "produces": "gif",
+      "multiple": false,
+      "options": [
+        "start",
+        "duration",
+        "fps",
+        "width"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "audio-to-text",
+      "accepts": [
+        "mp3",
+        "wav",
+        "flac",
+        "ogg",
+        "aac",
+        "m4a",
+        "mp4",
+        "aif",
+        "aiff",
+        "opus",
+        "wma"
+      ],
+      "produces": "txt",
+      "multiple": false,
+      "options": [
+        "language"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-pdf",
+      "accepts": [
+        "pdf"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-word",
+      "accepts": [
+        "docx",
+        "docm",
+        "doc"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-powerpoint",
+      "accepts": [
+        "pptx",
+        "pptm",
+        "ppt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-excel",
+      "accepts": [
+        "xlsx",
+        "xlsm",
+        "xls"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-video",
+      "accepts": [
+        "mp4",
+        "webm",
+        "mkv",
+        "mov",
+        "avi",
+        "gif",
+        "mpeg",
+        "mpg",
+        "m4v",
+        "ogv",
+        "ts"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-audio",
+      "accepts": [
+        "mp3",
+        "wav",
+        "flac",
+        "ogg",
+        "aac",
+        "m4a",
+        "mp4",
+        "aif",
+        "aiff",
+        "opus",
+        "wma"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-image",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico",
+        "svg"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-font",
+      "accepts": [
+        "ttf",
+        "otf",
+        "woff",
+        "woff2"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-epub",
+      "accepts": [
+        "epub"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-code",
+      "accepts": [
+        "*"
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 256,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "license-dataset",
+      "accepts": [
+        "csv",
+        "json",
+        "jsonld",
+        "txt",
+        "md",
+        "license",
+        ""
+      ],
+      "produces": "json",
+      "multiple": true,
+      "options": [
+        "ref"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 256,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "audio-youtube-download",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format",
+        "quality"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "audio-download",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [
+        "format",
+        "quality"
+      ],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-download",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "*",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "image-rotate-flip",
+      "accepts": [
+        "png",
+        "jpeg",
+        "webp",
+        "gif",
+        "bmp",
+        "tiff",
+        "ico"
+      ],
+      "produces": "png",
+      "multiple": false,
+      "options": [
+        "angle",
+        "flip"
+      ],
+      "input_mode": "typed",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 134217728,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "url-inspect",
+      "accepts": [
+        "txt"
+      ],
+      "produces": "json",
+      "multiple": false,
+      "options": [],
+      "input_mode": "text",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 16384,
+      "max_total_bytes": 134217728
+    },
+    {
+      "id": "text-strip-formatting",
+      "accepts": [
+        "txt",
+        "html",
+        "md",
+        "docx"
+      ],
+      "produces": "txt",
+      "multiple": false,
+      "options": [
+        "input_format"
+      ],
+      "input_mode": "any",
+      "min_files": 1,
+      "max_files": 1,
+      "max_file_bytes": 8388608,
+      "max_total_bytes": 134217728
+    }
+  ]
+}

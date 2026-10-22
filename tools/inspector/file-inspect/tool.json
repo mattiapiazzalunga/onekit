@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "file-inspect",
+  "name": "Inspect file",
+  "group": "inspector",
+  "handler": "inspector",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Preserves the selected content; validate important outputs.",
+  "packages": [
+    "Pillow",
+    "pycryptodome",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "any",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

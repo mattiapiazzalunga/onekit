@@ -1,0 +1,34 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-download",
+  "name": "Download video",
+  "group": "video",
+  "handler": "video_download",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "*",
+  "fidelity": "exact",
+  "note": "Downloads from YouTube and other yt-dlp sites, up to 128 MiB. Site support varies; an internet connection is required.",
+  "packages": [
+    "yt-dlp"
+  ],
+  "engines": [
+    "ffmpeg"
+  ],
+  "multiple": false,
+  "options": [
+    "quality",
+    "cookies",
+    "cookies_from_browser",
+    "format_id",
+    "referer",
+    "list_formats"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16384,
+  "max_total_bytes": 134217728
+}

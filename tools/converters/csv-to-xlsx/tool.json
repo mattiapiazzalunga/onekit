@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "csv-to-xlsx",
+  "name": "CSV to Excel",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "csv"
+  ],
+  "produces": "xlsx",
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "openpyxl"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "delimiter"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

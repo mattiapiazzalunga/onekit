@@ -1,0 +1,24 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "dev-minify-tsx",
+  "name": "Minify TSX",
+  "group": "developer",
+  "handler": "developer",
+  "accepts": [
+    "tsx",
+    "txt"
+  ],
+  "produces": "js",
+  "fidelity": "compromise",
+  "note": "Produces minified JavaScript (.js). TypeScript types are removed; JSX and TSX are compiled. Keep the original source.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

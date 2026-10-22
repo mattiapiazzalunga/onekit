@@ -1,0 +1,30 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "reverse-qrcode",
+  "name": "Reverse QR code",
+  "group": "qrcode",
+  "handler": "qrcode",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "bmp",
+    "gif"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Reads QR payloads locally from an image; Reverse reveals the stored content, not the original image or generator settings. No links are opened automatically.",
+  "packages": [
+    "Pillow",
+    "zxing-cpp"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16777216,
+  "max_total_bytes": 134217728
+}

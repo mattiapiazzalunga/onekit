@@ -1,0 +1,24 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "base64-to-image",
+  "name": "Base64 to Image",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "base64",
+    "txt"
+  ],
+  "produces": "image",
+  "fidelity": "exact",
+  "note": "Structured conversion; the output represents the source data.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "vcard-generate",
+  "name": "Generate vCard",
+  "group": "qrcode",
+  "handler": "contacts",
+  "accepts": [
+    "json"
+  ],
+  "produces": "vcf",
+  "fidelity": "exact",
+  "note": "Creates a vCard 3.0 or 4.0 contact file from the fields you provide. Empty fields are omitted. No QR capacity limit applies.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16384,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,31 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "font-convert",
+  "name": "Convert font",
+  "group": "fonts",
+  "handler": "fonts",
+  "accepts": [
+    "ttf",
+    "otf",
+    "woff",
+    "woff2"
+  ],
+  "produces": "*",
+  "fidelity": "exact",
+  "note": "Changes font containers; does not transform TrueType outlines into CFF outlines or vice versa.",
+  "packages": [
+    "fonttools",
+    "brotli"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "format"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16777216,
+  "max_total_bytes": 134217728
+}

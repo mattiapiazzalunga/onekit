@@ -1,0 +1,37 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-effects",
+  "name": "Blur, pixelate & image effects",
+  "group": "images",
+  "handler": "image_effects",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Blur, pixelate, box blur, solid cover or grayscale in one tool. Apply to the whole image or selected areas, with adjustable intensity and a fresh PNG export. Blur and pixelation do not guarantee permanent removal of sensitive details. Single-frame images only.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "effect",
+    "scope",
+    "strength",
+    "color",
+    "regions"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

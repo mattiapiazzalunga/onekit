@@ -1,0 +1,34 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-rotate-flip",
+  "name": "Rotate and flip image",
+  "group": "images",
+  "handler": "image_transform",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "exact",
+  "note": "Apply EXIF orientation, rotate clockwise by 0, 90, 180 or 270 degrees, then reflect horizontally, vertically or both. Exports a PNG without metadata, preserving decoded pixels and transparency. Single-frame images only; up to 40 million pixels.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "angle",
+    "flip"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

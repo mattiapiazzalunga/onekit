@@ -1,0 +1,26 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "md-to-docx",
+  "name": "Markdown to Word",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "md"
+  ],
+  "produces": "docx",
+  "fidelity": "compromise",
+  "note": "CommonMark headings, lists, emphasis and code are exported. Images, advanced layouts and Markdown extensions may need adjustment.",
+  "packages": [
+    "markdown-it-py",
+    "python-docx"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

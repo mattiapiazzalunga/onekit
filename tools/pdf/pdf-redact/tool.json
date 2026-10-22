@@ -1,0 +1,31 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-redact",
+  "name": "Permanently redact PDF",
+  "group": "pdf",
+  "handler": "redaction",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Permanently masks selected areas and rebuilds every page from raster pixels. Original text, attachments, comments, forms and metadata are not copied; selectable text and vector quality are lost. The original file is unchanged.",
+  "packages": [
+    "pypdfium2",
+    "Pillow",
+    "reportlab",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "regions",
+    "dpi"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

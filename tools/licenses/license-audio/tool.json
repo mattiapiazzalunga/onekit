@@ -1,0 +1,40 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "license-audio",
+  "name": "Audio license checker",
+  "group": "licenses",
+  "handler": "license_check",
+  "accepts": [
+    "mp3",
+    "wav",
+    "flac",
+    "ogg",
+    "aac",
+    "m4a",
+    "mp4",
+    "aif",
+    "aiff",
+    "opus",
+    "wma"
+  ],
+  "produces": "json",
+  "fidelity": "compromise",
+  "note": "An estimate based on declarations and metadata, not a rights certificate or legal clearance. Verify every finding with the original source and rights holder. Missing information never means free to use. Authors and copyright holders may differ. Files are analyzed locally; links are downloaded directly from their source. Archives are bounded and scans can be incomplete.",
+  "packages": [
+    "license-expression",
+    "defusedxml"
+  ],
+  "engines": [
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [
+    "ref"
+  ],
+  "input_mode": "any",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

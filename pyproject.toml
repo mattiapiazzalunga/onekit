@@ -1,0 +1,64 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "onekit-tools"
+dynamic = ["version"]
+description = "One simple toolkit. An offline CLI and Python processing library."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "LicenseRef-PolyForm-Shield-1.0.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Mattia Piazzalunga", email = "developers@onekit.org"}]
+keywords = ["cli", "pdf", "diff", "conversion", "privacy", "utilities"]
+classifiers = ["Development Status :: 3 - Alpha", "Environment :: Console", "Operating System :: OS Independent", "Programming Language :: Python :: 3", "Topic :: Utilities"]
+dependencies = []
+
+[project.optional-dependencies]
+licenses = ["license-expression==30.4.4", "defusedxml==0.7.1", "olefile==0.47", "pypdf>=6.20.1,<7", "Pillow>=13,<14", "fonttools>=4.67,<5", "brotli>=1.2,<2; sys_platform != 'win32' or platform_machine != 'ARM64'"]
+video = ["yt-dlp>=2026.8.19,<2027", "yt-dlp-ejs==0.8.0"]
+qrcode = ["segno>=1.6.6,<2", "python-barcode==0.16.1", "zxing-cpp>=3.1.1,<4", "Pillow>=13,<14"]
+barcode = ["python-barcode==0.16.1", "zxing-cpp>=3.1.1,<4", "Pillow>=13,<14"]
+documents = ["markdown-it-py>=4.2,<5", "markdownify>=1.2.3,<2", "python-docx>=1.2,<2", "python-pptx>=1.0.2,<2", "openpyxl>=3.1.5,<4"]
+pdf = ["pypdf>=6.20.1,<7", "pypdfium2>=5.14,<6", "reportlab>=4.4,<5", "Pillow>=13,<14"]
+images = ["Pillow>=13,<14"]
+background = ["Pillow>=13,<14", "onnxruntime>=1.23.2,<2", "numpy>=2.3,<3", "pooch>=1.8.2,<2"]
+transcription = ["faster-whisper>=1.2.1,<2"]
+security = ["pycryptodome>=3.24.1,<4", "stream-zip==0.0.84", "stream-unzip==0.0.91", "stream-inflate==0.0.12"]
+fonts = ["fonttools>=4.67,<5", "brotli>=1.2,<2; sys_platform != 'win32' or platform_machine != 'ARM64'"]
+ocr = ["pytesseract>=0.3.13,<0.4"]
+devtools = ["ruff>=0.17,<0.18", "jsonschema>=4.26,<5", "PyYAML>=6.0.3,<7", "defusedxml>=0.7.1,<0.8", "json5>=0.14,<1", "tomli-w>=1.2,<2", "xmlschema>=4.2,<5"]
+signing = ["pyhanko>=0.34,<1"]
+all = ["onekit-tools[documents,pdf,images,security,fonts,ocr,devtools,qrcode,licenses]"]
+test = ["pytest>=9.1,<10", "ruff>=0.17,<0.18", "build>=1.6,<2", "hatchling==1.32.4", "pip-audit>=2.10,<3", "pip-licenses>=5.5,<6"]
+
+[project.scripts]
+onekit = "onekit.cli:main"
+
+[project.urls]
+Homepage = "https://onekit.org"
+Repository = "https://github.com/mattiapiazzalunga/onekit"
+License = "https://github.com/mattiapiazzalunga/onekit/blob/main/LICENSE"
+Documentation = "https://onekit.org/docs/"
+Issues = "https://github.com/mattiapiazzalunga/onekit/issues"
+Requests = "https://onekit.org/requests/"
+Author = "https://www.mattiapiazzalunga.com"
+
+[tool.hatch.version]
+path = "src/onekit/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/onekit"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+addopts = "-m 'not native'"
+markers = ["native: integration checks that require separately installed external engines"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120

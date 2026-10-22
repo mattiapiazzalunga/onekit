@@ -1,0 +1,34 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-to-favicon",
+  "name": "Image to favicon",
+  "group": "images",
+  "handler": "favicon",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "*",
+  "fidelity": "compromise",
+  "note": "Resizes the first image frame to square icons. Fit keeps the whole image with transparent padding; fill crops the edges. Original files stay unchanged.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "format",
+    "fit"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 67108864,
+  "max_total_bytes": 134217728
+}

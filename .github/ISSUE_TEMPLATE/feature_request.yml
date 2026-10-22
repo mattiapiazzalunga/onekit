@@ -1,0 +1,12 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+name: Feature request
+description: Suggest a tool or improvement
+body:
+  - type: textarea
+    id: need
+    attributes: {label: What task should OneKit make simpler?}
+    validations: {required: true}
+  - type: textarea
+    id: formats
+    attributes: {label: Input/output formats and constraints, description: Include CLI expectations and fidelity requirements.}

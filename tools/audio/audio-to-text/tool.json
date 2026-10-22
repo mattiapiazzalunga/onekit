@@ -1,0 +1,37 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "audio-to-text",
+  "name": "Audio to text",
+  "group": "audio",
+  "handler": "transcription",
+  "accepts": [
+    "mp3",
+    "wav",
+    "flac",
+    "ogg",
+    "aac",
+    "m4a",
+    "mp4",
+    "aif",
+    "aiff",
+    "opus",
+    "wma"
+  ],
+  "produces": "txt",
+  "fidelity": "compromise",
+  "note": "Transcribes locally with Whisper tiny (multilingual). The model downloads on first use; no audio is uploaded. Recognition can make mistakes.",
+  "packages": [
+    "faster-whisper"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "language"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

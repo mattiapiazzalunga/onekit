@@ -1,0 +1,41 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-watermark",
+  "name": "Add watermark to PDF",
+  "group": "pdf",
+  "handler": "pdf.watermark",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "exact",
+  "note": "Adds a text or PNG/JPEG image watermark to all or selected pages, retaining source text and graphics. Supports Western European text, single or repeated layout, rotation and opacity. The original file is unchanged.",
+  "packages": [
+    "pypdf",
+    "reportlab",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "text",
+    "pages",
+    "font",
+    "font_size",
+    "color",
+    "opacity",
+    "angle",
+    "position",
+    "layout",
+    "margin",
+    "watermark_type",
+    "image_base64",
+    "image_width"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

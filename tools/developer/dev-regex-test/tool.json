@@ -1,0 +1,31 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "dev-regex-test",
+  "name": "Regex tester",
+  "group": "developer",
+  "handler": "regex_tester",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Tests JavaScript regular expressions locally with captures, named groups, UTF-16 positions and replacement. Up to 128 KiB of text, 1000 matches and 1 MiB of output. Execution is time limited; the CLI requires Node.js.",
+  "packages": [],
+  "engines": [
+    "node"
+  ],
+  "multiple": false,
+  "options": [
+    "pattern",
+    "flags",
+    "max_matches",
+    "enable_replacement",
+    "replacement"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 131072,
+  "max_total_bytes": 134217728
+}

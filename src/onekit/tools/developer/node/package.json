@@ -1,0 +1,17 @@
+{
+  "name": "onekit-developer-engines",
+  "version": "0.1.0",
+  "private": true,
+  "license": "LicenseRef-PolyForm-Shield-1.0.0",
+  "dependencies": {
+    "prettier": "3.9.10",
+    "esbuild": "0.28.2",
+    "html-minifier-terser": "7.2.0",
+    "svgo": "4.1.0",
+    "graphql": "17.0.2",
+    "prettier-plugin-svelte": "4.1.1",
+    "prettier-plugin-astro": "1.1.1",
+    "prettier-plugin-solidity": "2.4.1",
+    "@prettier/plugin-php": "0.25.0"
+  }
+}

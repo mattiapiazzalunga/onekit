@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "dev-format-scala",
+  "name": "Format Scala",
+  "group": "developer",
+  "handler": "developer",
+  "accepts": [
+    "scala",
+    "sc",
+    "txt"
+  ],
+  "produces": "*",
+  "fidelity": "exact",
+  "note": "Validation checks the configured parser or compiler; project-wide types, imports and dependencies may require a local project.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

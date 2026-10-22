@@ -1,0 +1,33 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-upscale",
+  "name": "Upscale image",
+  "group": "images",
+  "handler": "image_upscale",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Enlarges a single-frame image 2\u00d7, 3\u00d7 or 4\u00d7 with Lanczos resampling. This is not AI detail reconstruction. Exports PNG, up to 40 million output pixels.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "scale"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

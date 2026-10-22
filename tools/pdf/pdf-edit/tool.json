@@ -1,0 +1,35 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-edit",
+  "name": "Edit PDF",
+  "group": "pdf",
+  "handler": "pdf",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Edit supported text boxes using the original font. Longer text is fitted to its original width. Scans, text inside reusable forms and unavailable font characters cannot be edited. This is not a redaction tool. The legacy text option adds an overlay.",
+  "packages": [
+    "pycryptodome",
+    "pypdf",
+    "reportlab"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "mode",
+    "edits",
+    "password",
+    "text",
+    "x",
+    "y",
+    "page"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

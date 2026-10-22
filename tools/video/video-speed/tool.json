@@ -1,0 +1,38 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-speed",
+  "name": "Change video speed",
+  "group": "video",
+  "handler": "video_edit",
+  "accepts": [
+    "mp4",
+    "webm",
+    "mkv",
+    "mov",
+    "avi",
+    "gif",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "ogv",
+    "ts"
+  ],
+  "produces": "mp4",
+  "fidelity": "compromise",
+  "note": "Processes locally with FFmpeg. Re-encoding may lose quality. GIF output has no audio.",
+  "packages": [],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [
+    "speed"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,34 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-convert",
+  "name": "Convert image",
+  "group": "images",
+  "handler": "images",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "image",
+  "fidelity": "compromise",
+  "note": "Lossy formats discard detail. Animation and metadata can be removed; use a lossless format to preserve pixels.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "format",
+    "quality"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 67108864,
+  "max_total_bytes": 134217728
+}

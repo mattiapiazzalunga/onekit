@@ -1,0 +1,23 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /src/onekit/tools/developer/node
+    schedule: {interval: weekly, day: monday, time: "06:00", timezone: Europe/Rome}
+    open-pull-requests-limit: 20
+  - package-ecosystem: uv
+    directory: /
+    schedule: {interval: weekly, day: monday, time: "06:00", timezone: Europe/Rome}
+    open-pull-requests-limit: 20
+    groups:
+      compatible:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: weekly, day: monday, time: "06:00", timezone: Europe/Rome}
+    open-pull-requests-limit: 20
+  - package-ecosystem: docker
+    directory: /
+    schedule: {interval: weekly, day: monday, time: "06:00", timezone: Europe/Rome}
+    open-pull-requests-limit: 20

@@ -1,0 +1,8 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+version = 1
+[[annotations]]
+path = ["**/*.json", "**/package-lock.json", "uv.lock"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Mattia Piazzalunga"
+SPDX-License-Identifier = "LicenseRef-PolyForm-Shield-1.0.0"

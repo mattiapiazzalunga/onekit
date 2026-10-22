@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "url-inspect",
+  "name": "URL inspector",
+  "group": "inspector",
+  "handler": "link_tools",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "json",
+  "fidelity": "compromise",
+  "note": "Inspect URL components, HTTP status, final URL and available response headers directly from your device. Records up to 10 HTTP redirects. Network failures leave a partial report. This is not a phishing, malware, DNS or ownership check.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 16384,
+  "max_total_bytes": 134217728
+}

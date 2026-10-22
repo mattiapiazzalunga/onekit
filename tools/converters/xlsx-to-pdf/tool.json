@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "xlsx-to-pdf",
+  "name": "Excel to PDF",
+  "group": "converters",
+  "handler": "converters",
+  "accepts": [
+    "xlsx"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "packages": [
+    "openpyxl"
+  ],
+  "engines": [
+    "soffice"
+  ],
+  "multiple": false,
+  "options": [
+    "sheet"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

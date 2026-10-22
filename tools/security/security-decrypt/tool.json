@@ -1,0 +1,30 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "security-decrypt",
+  "name": "Decrypt files or folders",
+  "group": "security",
+  "handler": "security",
+  "accepts": [
+    "zip"
+  ],
+  "produces": "*",
+  "fidelity": "exact",
+  "note": "AES-256 encrypted ZIP, compatible with 7-Zip. File names remain visible. Losing the password makes recovery impossible.",
+  "packages": [
+    "pycryptodome",
+    "stream-zip",
+    "stream-unzip"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "password",
+    "restore"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

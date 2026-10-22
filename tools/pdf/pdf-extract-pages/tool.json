@@ -1,0 +1,28 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-extract-pages",
+  "name": "Extract pages PDF",
+  "group": "pdf",
+  "handler": "pdf",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "exact",
+  "note": "Page operations preserve content. Encryption permissions are advisory.",
+  "packages": [
+    "pycryptodome",
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "pages"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}
