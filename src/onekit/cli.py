@@ -287,7 +287,7 @@ def install_node_engines(directory=None):
         raise OneKitError("This directory contains a different Node project; choose another destination.")
     for name in ("package.json", "package-lock.json"):
         shutil.copyfile(source / name, target / name)
-    command("npm", ["ci", "--ignore-scripts", "--no-fund"], target, timeout=300)
+    command("npm", ["ci", "--ignore-scripts", "--no-fund", "--no-audit"], target, timeout=300)
     command("npm", ["audit", "--audit-level=low"], target)
     print(f"Developer engines installed in {target}.")
 
