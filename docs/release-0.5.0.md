@@ -1,6 +1,6 @@
 <!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
-# OneKit 0.1.0
+# OneKit 0.5.0
 
 Initial release of the offline CLI and Python processing API with 230 tools for
 documents, PDFs, images, media, archives, fonts, developer utilities, QR codes,
