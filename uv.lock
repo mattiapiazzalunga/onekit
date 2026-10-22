@@ -1765,6 +1765,15 @@ wheels = [
 ]
 
 [[package]]
+name = "olefile"
+version = "0.47"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/69/1b/077b508e3e500e1629d366249c3ccb32f95e50258b231705c09e3c7a4366/olefile-0.47.zip", hash = "sha256:599383381a0bf3dfbd932ca0ca6515acd174ed48870cbf7fee123d698c192c1c", size = 112240, upload-time = "2023-12-01T16:22:53.025Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/17/d3/b64c356a907242d719fc668b71befd73324e47ab46c8ebbbede252c154b2/olefile-0.47-py2.py3-none-any.whl", hash = "sha256:543c7da2a7adadf21214938bb79c83ea12b473a4b6ee4ad4bf854e7715e13d1f", size = 114565, upload-time = "2023-12-01T16:22:51.518Z" },
+]
+
+[[package]]
 name = "onekit-tools"
 source = { editable = "." }
 
@@ -1775,8 +1784,10 @@ all = [
     { name = "fonttools" },
     { name = "json5" },
     { name = "jsonschema" },
+    { name = "license-expression" },
     { name = "markdown-it-py" },
     { name = "markdownify" },
+    { name = "olefile" },
     { name = "openpyxl" },
     { name = "pillow" },
     { name = "pycryptodome" },
@@ -1832,6 +1843,15 @@ fonts = [
 images = [
     { name = "pillow" },
 ]
+licenses = [
+    { name = "brotli", marker = "platform_machine != 'ARM64' or sys_platform != 'win32'" },
+    { name = "defusedxml" },
+    { name = "fonttools" },
+    { name = "license-expression" },
+    { name = "olefile" },
+    { name = "pillow" },
+    { name = "pypdf" },
+]
 ocr = [
     { name = "pytesseract" },
 ]
@@ -1869,28 +1889,37 @@ transcription = [
 ]
 video = [
     { name = "yt-dlp" },
+    { name = "yt-dlp-ejs" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "brotli", marker = "(platform_machine != 'ARM64' and extra == 'all') or (sys_platform != 'win32' and extra == 'all')", specifier = ">=1.2,<2" },
     { name = "brotli", marker = "(platform_machine != 'ARM64' and extra == 'fonts') or (sys_platform != 'win32' and extra == 'fonts')", specifier = ">=1.2,<2" },
+    { name = "brotli", marker = "(platform_machine != 'ARM64' and extra == 'licenses') or (sys_platform != 'win32' and extra == 'licenses')", specifier = ">=1.2,<2" },
     { name = "build", marker = "extra == 'test'", specifier = ">=1.6,<2" },
+    { name = "defusedxml", marker = "extra == 'all'", specifier = "==0.7.1" },
     { name = "defusedxml", marker = "extra == 'all'", specifier = ">=0.7.1,<0.8" },
     { name = "defusedxml", marker = "extra == 'devtools'", specifier = ">=0.7.1,<0.8" },
+    { name = "defusedxml", marker = "extra == 'licenses'", specifier = "==0.7.1" },
     { name = "faster-whisper", marker = "extra == 'transcription'", specifier = ">=1.2.1,<2" },
     { name = "fonttools", marker = "extra == 'all'", specifier = ">=4.67,<5" },
     { name = "fonttools", marker = "extra == 'fonts'", specifier = ">=4.67,<5" },
+    { name = "fonttools", marker = "extra == 'licenses'", specifier = ">=4.67,<5" },
     { name = "hatchling", marker = "extra == 'test'", specifier = "==1.32.4" },
     { name = "json5", marker = "extra == 'all'", specifier = ">=0.14,<1" },
     { name = "json5", marker = "extra == 'devtools'", specifier = ">=0.14,<1" },
     { name = "jsonschema", marker = "extra == 'all'", specifier = ">=4.26,<5" },
     { name = "jsonschema", marker = "extra == 'devtools'", specifier = ">=4.26,<5" },
+    { name = "license-expression", marker = "extra == 'all'", specifier = "==30.4.4" },
+    { name = "license-expression", marker = "extra == 'licenses'", specifier = "==30.4.4" },
     { name = "markdown-it-py", marker = "extra == 'all'", specifier = ">=4.2,<5" },
     { name = "markdown-it-py", marker = "extra == 'documents'", specifier = ">=4.2,<5" },
     { name = "markdownify", marker = "extra == 'all'", specifier = ">=1.2.3,<2" },
     { name = "markdownify", marker = "extra == 'documents'", specifier = ">=1.2.3,<2" },
     { name = "numpy", marker = "extra == 'background'", specifier = ">=2.3,<3" },
+    { name = "olefile", marker = "extra == 'all'", specifier = "==0.47" },
+    { name = "olefile", marker = "extra == 'licenses'", specifier = "==0.47" },
     { name = "onnxruntime", marker = "extra == 'background'", specifier = ">=1.23.2,<2" },
     { name = "openpyxl", marker = "extra == 'all'", specifier = ">=3.1.5,<4" },
     { name = "openpyxl", marker = "extra == 'documents'", specifier = ">=3.1.5,<4" },
@@ -1898,6 +1927,7 @@ requires-dist = [
     { name = "pillow", marker = "extra == 'background'", specifier = ">=13,<14" },
     { name = "pillow", marker = "extra == 'barcode'", specifier = ">=13,<14" },
     { name = "pillow", marker = "extra == 'images'", specifier = ">=13,<14" },
+    { name = "pillow", marker = "extra == 'licenses'", specifier = ">=13,<14" },
     { name = "pillow", marker = "extra == 'pdf'", specifier = ">=13,<14" },
     { name = "pillow", marker = "extra == 'qrcode'", specifier = ">=13,<14" },
     { name = "pip-audit", marker = "extra == 'test'", specifier = ">=2.10,<3" },
@@ -1907,6 +1937,7 @@ requires-dist = [
     { name = "pycryptodome", marker = "extra == 'security'", specifier = ">=3.24.1,<4" },
     { name = "pyhanko", marker = "extra == 'signing'", specifier = ">=0.34,<1" },
     { name = "pypdf", marker = "extra == 'all'", specifier = ">=6.20.1,<7" },
+    { name = "pypdf", marker = "extra == 'licenses'", specifier = ">=6.20.1,<7" },
     { name = "pypdf", marker = "extra == 'pdf'", specifier = ">=6.20.1,<7" },
     { name = "pypdfium2", marker = "extra == 'all'", specifier = ">=5.14,<6" },
     { name = "pypdfium2", marker = "extra == 'pdf'", specifier = ">=5.14,<6" },
@@ -1940,11 +1971,12 @@ requires-dist = [
     { name = "xmlschema", marker = "extra == 'all'", specifier = ">=4.2,<5" },
     { name = "xmlschema", marker = "extra == 'devtools'", specifier = ">=4.2,<5" },
     { name = "yt-dlp", marker = "extra == 'video'", specifier = ">=2026.8.19,<2027" },
+    { name = "yt-dlp-ejs", marker = "extra == 'video'", specifier = "==0.8.0" },
     { name = "zxing-cpp", marker = "extra == 'all'", specifier = ">=3.1.1,<4" },
     { name = "zxing-cpp", marker = "extra == 'barcode'", specifier = ">=3.1.1,<4" },
     { name = "zxing-cpp", marker = "extra == 'qrcode'", specifier = ">=3.1.1,<4" },
 ]
-provides-extras = ["all", "background", "barcode", "devtools", "documents", "fonts", "images", "ocr", "pdf", "qrcode", "security", "signing", "test", "transcription", "video"]
+provides-extras = ["all", "background", "barcode", "devtools", "documents", "fonts", "images", "licenses", "ocr", "pdf", "qrcode", "security", "signing", "test", "transcription", "video"]
 
 [[package]]
 name = "onnxruntime"
@@ -3361,6 +3393,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1e/e0/832fa4ca334b766a06933a196066edc3dba37cdb6f14cd98d59bcc69a4b4/yt_dlp-2026.8.19.tar.gz", hash = "sha256:9e213e48cea35c66b378e4447903f118f6392a5fa380a2b6d7070ec86f4e0af1", size = 3052025, upload-time = "2026-08-19T23:48:59.291Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/69/b2/8cd1613f56eed7ceb64fbd4df3f1c01246bfb098e6f398228bafda22b80b/yt_dlp-2026.8.19-py3-none-any.whl", hash = "sha256:1d57897e94c6665a0a6f9bc54b34e584284e32c034ffab3a7df25d8f7b24eedf", size = 3185533, upload-time = "2026-08-19T23:48:56.925Z" },
+]
+
+[[package]]
+name = "yt-dlp-ejs"
+version = "0.8.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/e6/cceb9530e8f4e5940f6f7822d90e9d94f1b85343329a16baaf47bbbb3de1/yt_dlp_ejs-0.8.0.tar.gz", hash = "sha256:d5fa1639f63b5c4af8d932495f60689d5370f1a095782c944f7f62a303eb104e", size = 96571, upload-time = "2026-03-17T22:49:19.299Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e3/bd/520769863744b669440a924271a6159ddd82ad5ae26b4ac4d4b69e9f8d44/yt_dlp_ejs-0.8.0-py3-none-any.whl", hash = "sha256:79300e5fca7f937a1eeede11f0456862c1b41107ce1d726871e0207424f4bdb4", size = 53443, upload-time = "2026-03-17T22:49:17.736Z" },
 ]
 
 [[package]]
