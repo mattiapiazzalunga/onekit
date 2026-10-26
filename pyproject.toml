@@ -27,7 +27,7 @@ pdf = ["pypdf>=6.21.2,<7", "pypdfium2>=5.14,<6", "reportlab>=4.4,<5", "Pillow>=1
 images = ["Pillow>=13,<14"]
 background = ["Pillow>=13,<14", "onnxruntime>=1.23.2,<2", "numpy>=2.3,<3", "pooch>=1.8.2,<2"]
 transcription = ["faster-whisper>=1.2.1,<2"]
-security = ["pycryptodome>=3.24.1,<4", "stream-zip==0.0.84", "stream-unzip==0.0.91", "stream-inflate==0.0.12"]
+security = ["pycryptodome>=3.24.1,<4", "stream-zip==0.0.84", "stream-unzip==0.0.101", "stream-inflate==0.0.43"]
 fonts = ["fonttools>=4.67,<5", "brotli>=1.2,<2; sys_platform != 'win32' or platform_machine != 'ARM64'"]
 ocr = ["pytesseract>=0.3.13,<0.4"]
 devtools = ["ruff>=0.17,<0.18", "jsonschema>=4.26,<5", "PyYAML>=6.0.3,<7", "defusedxml>=0.7.1,<0.8", "json5>=0.14,<1", "tomli-w>=1.2,<2", "xmlschema>=4.2,<5"]
