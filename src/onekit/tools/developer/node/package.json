@@ -12,6 +12,6 @@
     "prettier-plugin-svelte": "4.1.1",
     "prettier-plugin-astro": "1.1.1",
     "prettier-plugin-solidity": "2.4.1",
-    "@prettier/plugin-php": "0.25.0"
+    "@prettier/plugin-php": "0.26.0"
   }
 }
