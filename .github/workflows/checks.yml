@@ -31,7 +31,7 @@ jobs:
           - {os: macos-15-intel, python: '3.13'}
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ inputs.ref || github.ref }}
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
@@ -46,7 +46,7 @@ jobs:
   security-and-licenses:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ inputs.ref || github.ref }}
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
@@ -65,7 +65,7 @@ jobs:
   packaging:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ inputs.ref || github.ref }}
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
@@ -85,7 +85,7 @@ jobs:
     env:
       ONEKIT_NODE_ENGINE_PATH: ${{ github.workspace }}/.engines/node
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ inputs.ref || github.ref }}
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
