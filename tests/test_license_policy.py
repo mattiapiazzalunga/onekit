@@ -7,7 +7,7 @@ def test_missing_metadata_requires_exact_reviewed_license_and_version(tmp_path, 
     from check_licenses import verified_file_license
     license_file = tmp_path / 'resvg_py-0.5.0.dist-info/licenses/LICENSE'
     license_file.parent.mkdir(parents=True)
-    content = (Path(__file__).parent / 'fixtures/resvg-py-0.5.0-LICENSE.txt').read_bytes()
+    content = (Path(__file__).parent / 'fixtures/resvg-py-0.5.0-LICENSE.txt').read_bytes().replace(b'\r\n', b'\n')
     distribution = SimpleNamespace(metadata={'Name': 'resvg_py'}, version='0.5.0',
                                    files=[license_file.relative_to(tmp_path)],
                                    locate_file=lambda file: tmp_path / file)
