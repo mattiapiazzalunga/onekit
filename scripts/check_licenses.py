@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 """Fail closed on unreviewed runtime licenses; report exact versions and source URLs."""
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -23,6 +24,17 @@ REVIEWED = {
 }
 
 
+def verified_file_license(distribution):
+    if (distribution.metadata['Name'].lower().replace('_', '-'), distribution.version) != ('resvg-py', '0.5.0'):
+        return None
+    for file in distribution.files or []:
+        if str(file).replace('\\', '/').endswith('.dist-info/licenses/LICENSE'):
+            content = Path(distribution.locate_file(file)).read_bytes().replace(b'\r\n', b'\n')
+            if hashlib.sha256(content).hexdigest() == '2f22fb1bcbf69e040d4c9c0b1f1aecbac22fd631d71fbc3a303637d896feb760':
+                return 'MIT'
+    return None
+
+
 def check(*, include_signing=False, include_pdfa=False):
     records, seen, pending = {}, set(), [("onekit-tools", ("all", "signing") if include_signing else ("all",))]
     if include_pdfa:
@@ -36,6 +48,8 @@ def check(*, include_signing=False, include_pdfa=False):
         distribution = metadata.distribution(name)
         info = distribution.metadata
         license = info.get("License-Expression") or info.get("License") or "UNKNOWN"
+        if license == "UNKNOWN":
+            license = verified_file_license(distribution) or license
         classifiers = [c.rsplit(" :: ", 1)[-1] for c in info.get_all("Classifier", []) if c.startswith("License ::")]
         candidates = [license, *classifiers]
         approved = any(candidate in PERMISSIVE or all(term.strip(" ()") in PERMISSIVE for term in re.split(r"\s+(?:OR|AND)\s+|;\s*", candidate)) for candidate in candidates)

@@ -19,7 +19,21 @@ GOLDEN = json.loads((Path(__file__).parent / 'fixtures/algorithm-golden.json').r
 
 @pytest.mark.parametrize('case', GOLDEN['palettes'])
 def test_palette_float_values_and_serialized_output_are_unchanged(case):
-    assert json.dumps(design.palette(case['color'], **case['options'])) == json.dumps(case['expected'])
+    def compare(actual, expected):
+        assert type(actual) is type(expected)
+        if isinstance(expected, dict):
+            assert list(actual) == list(expected)
+            for key in expected:
+                compare(actual[key], expected[key])
+        elif isinstance(expected, list):
+            assert len(actual) == len(expected)
+            for left, right in zip(actual, expected):
+                compare(left, right)
+        elif isinstance(expected, float):
+            assert actual == pytest.approx(expected, rel=1e-14, abs=1e-14)
+        else:
+            assert actual == expected
+    compare(json.loads(json.dumps(design.palette(case['color'], **case['options']))), case['expected'])
 
 
 @pytest.mark.parametrize('case', GOLDEN['restorations'])

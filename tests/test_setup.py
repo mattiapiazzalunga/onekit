@@ -113,6 +113,9 @@ def test_original_audio_download_needs_no_transcoding_engine(monkeypatch):
 
 
 def test_pdfa_setup_installs_only_the_reviewed_level_b_runtime(monkeypatch):
+    from collections import namedtuple
+    version = namedtuple('Version', 'major minor micro releaselevel serial')
+    monkeypatch.setattr(setup.sys, 'version_info', version(3, 13, 0, 'final', 0))
     calls = []
     monkeypatch.setattr(setup, "run", calls.append)
     setup.python_packages(["pdftopdfa==0.9.24"])
@@ -122,3 +125,10 @@ def test_pdfa_setup_installs_only_the_reviewed_level_b_runtime(monkeypatch):
     assert calls[1][-1] == "pdftopdfa==0.9.24"
     assert "pdfminer.six==20260107" in calls[1]
     assert not any("paddle" in str(arg) or "cryptography" in str(arg) for call in calls for arg in call)
+
+
+def test_pdfa_setup_rejects_unsupported_python_before_installing(monkeypatch):
+    monkeypatch.setattr(setup.sys, 'version_info', (3, 11, 0))
+    monkeypatch.setattr(setup, 'run', lambda *_: pytest.fail('Unexpected installation'))
+    with pytest.raises(OneKitError, match='Python 3.12 or newer'):
+        setup.python_packages(['pdftopdfa==0.9.24'])

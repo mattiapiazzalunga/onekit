@@ -1,4 +1,7 @@
 import json
+import argparse
+import ast
+import inspect
 import subprocess
 import sys
 import re
@@ -53,6 +56,19 @@ def test_catalogs_remain_aligned():
         assert catalog.keys() == source.keys(), language
         for key, value in catalog.items():
             assert sorted(i18n.re.findall(r"\{\d+\}", key)) == sorted(i18n.re.findall(r"\{\d+\}", value)), (language, key)
+
+
+def test_registered_argparse_messages_cover_current_python():
+    root = Path(__file__).resolve().parents[1]
+    registered = json.loads((root / 'scripts/argparse-messages.json').read_text(encoding='utf-8'))['messages']
+    current = set()
+    source = re.sub(r'(?m)^(\s*)lazy import ', r'\1import ', inspect.getsource(argparse))
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in ('_', 'ngettext'):
+            for argument in node.args[:2 if node.func.id == 'ngettext' else 1]:
+                if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
+                    current.add(argument.value)
+    assert current <= set(registered), current - set(registered)
 
 
 def test_translated_documentation_preserves_code_and_link_destinations(monkeypatch):

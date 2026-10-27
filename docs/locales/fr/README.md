@@ -12,7 +12,7 @@ Langues : [English](../../../README.md) · [Italiano](../it/README.md) · [Fran�
 
 Une trousse hors ligne Python avec 230 outils pour les conversions, PDF, images, archives, polices, inspection de fichiers, cryptage, utilitaires pour développeurs, OCR et comparaisons. Utilisez ce CLI ou l'interface graphique à **[onekit.org](https://onekit.org)**.
 
-**Version source :** `0.6.0`. Les téléchargements stables existent seulement après la fin du processus de publication. La distribution est `onekit-tools` ; le projet PyPI, appartenant à une entité distincte et appelé `onekit`, n’est pas lié.
+**Version source :** `0.6.1`. Les téléchargements stables existent seulement après la fin du processus de publication. La distribution est `onekit-tools` ; le projet PyPI, appartenant à une entité distincte et appelé `onekit`, n’est pas lié.
 
 Le [guide des contacts et des médias](docs/contact-media.md) présente la création de vCard autonomes, l’extraction de vCard à partir de codes QR, l’agrandissement des images, la suppression de l’arrière-plan, la compression et le réglage de la vitesse des vidéos et GIF, ainsi que la transcription audio locale.
 

@@ -86,9 +86,9 @@ def json_node(value, tag='item', name=None):
         node.set('name',xml_text(name))
     if isinstance(value,dict):
         node.set('type','object')
-        node.extend(json_node(part,name=key) for key,part in value.items())
+        node.extend([json_node(part,name=key) for key,part in value.items()])
     elif isinstance(value,list):
-        node.set('type','array');node.extend(json_node(part) for part in value)
+        node.set('type','array');node.extend([json_node(part) for part in value])
     elif value is None:
         node.set('type','null')
     elif isinstance(value,bool):

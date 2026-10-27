@@ -1,7 +1,5 @@
 """Extract independently maintained CLI messages and documentation prose."""
 import ast
-import argparse
-import inspect
 from html.parser import HTMLParser
 import json
 import re
@@ -36,13 +34,8 @@ for source in (ROOT / "src/onekit").rglob("*.py"):
                     number += 1
             add("".join(parts))
 
-for node in ast.walk(ast.parse(inspect.getsource(argparse))):
-    if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "_" and node.args and isinstance(node.args[0], ast.Constant):
-        add(node.args[0].value)
-    if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "ngettext":
-        for argument in node.args[:2]:
-            if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
-                add(argument.value)
+for text in json.loads((ROOT / "scripts/argparse-messages.json").read_text(encoding="utf-8"))["messages"]:
+    add(text)
 for text in ("usage:", "options", "positional arguments", "Warning:", "ready", "Interface language"):
     texts.add(text)
 texts.add("Languages:")

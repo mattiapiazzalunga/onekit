@@ -1,0 +1,76 @@
+{
+  "sources": [
+    {
+      "python": "3.11",
+      "url": "https://raw.githubusercontent.com/python/cpython/3.11/Lib/argparse.py",
+      "sha256": "e878677e158d0bc0fb5119e0df74d94236f3653777bc9f2ea3fee49c167fe001"
+    },
+    {
+      "python": "3.12",
+      "url": "https://raw.githubusercontent.com/python/cpython/3.12/Lib/argparse.py",
+      "sha256": "7cc582dcb3b76e2c957f78a3f74e9809d6c311d6aab7bcaa2c9954d0cbff5f30"
+    },
+    {
+      "python": "3.13",
+      "url": "https://raw.githubusercontent.com/python/cpython/3.13/Lib/argparse.py",
+      "sha256": "51d0cac86f746dccdb2488515ee0c2ad0969c599a0e2d6006cdbbce5cd00b3cb"
+    },
+    {
+      "python": "3.14",
+      "url": "https://raw.githubusercontent.com/python/cpython/3.14/Lib/argparse.py",
+      "sha256": "b9f0fa53be3d7c9c10a71a8eecc538a27c32fbe7abe337818d0d36e138bfc5c5"
+    },
+    {
+      "python": "3.15",
+      "url": "https://raw.githubusercontent.com/python/cpython/3.15/Lib/argparse.py",
+      "sha256": "4857acfc44ee2339b2ae856df66fadda22cf7a437395d9c792db7bf66998e154"
+    }
+  ],
+  "messages": [
+    " (default: %(default)s)",
+    "%(heading)s:",
+    "%(prog)s: error: %(message)s\n",
+    "%(prog)s: warning: %(message)s\n",
+    "%r is not callable",
+    "'required' is an invalid argument for positionals",
+    ".__call__() not defined",
+    "ambiguous option: %(option)s could match %(matches)s",
+    "argument \"-\" with mode %r",
+    "argument %(argument_name)s: %(message)s",
+    "argument '%(argument_name)s' is deprecated",
+    "can't open '%(filename)s': %(error)s",
+    "cannot have multiple subparser arguments",
+    "cannot merge actions - two groups are named %r",
+    "command '%(parser_name)s' is deprecated",
+    "conflicting option string: %s",
+    "conflicting option strings: %s",
+    "conflicting subparser alias: %s",
+    "conflicting subparser: %s",
+    "dest= is required for options like %r",
+    "expected %s argument",
+    "expected %s arguments",
+    "expected at least one argument",
+    "expected at most one argument",
+    "expected one argument",
+    "ignored explicit argument %r",
+    "invalid %(type)s value: %(value)r",
+    "invalid choice: %(value)r (choose from %(choices)s)",
+    "invalid choice: %(value)r, maybe you meant %(closest)r? (choose from %(choices)s)",
+    "invalid conflict_resolution value: %r",
+    "invalid option string %(option)r: must start with a character %(prefix_chars)r",
+    "mutually exclusive arguments must be optional",
+    "not allowed with argument %s",
+    "one of the arguments %s is required",
+    "option '%(option)s' is deprecated",
+    "options",
+    "positional arguments",
+    "show program's version number and exit",
+    "show this help message and exit",
+    "subcommands",
+    "the following arguments are required: %s",
+    "unexpected option string: %s",
+    "unknown parser %(parser_name)r (choices: %(choices)s)",
+    "unrecognized arguments: %s",
+    "usage: "
+  ]
+}

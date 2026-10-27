@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 """OneKit's shared, offline processing API."""
 
-__version__ = "0.6.0"
+__version__ = "0.6.1"
 
 from .api import execute, pipeline
 from .execution import ExecutionContext, ToolLimits

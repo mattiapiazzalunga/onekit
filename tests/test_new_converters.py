@@ -94,9 +94,10 @@ def test_svg_scaling_changes_content_size_without_clipping_or_blank_padding():
     assert image.getpixel((100,80)) == (255,0,0,255)
 
 
-def test_json_xml_rejects_characters_xml_cannot_represent():
+@pytest.mark.parametrize('data', [b'{"a":"\\u0000"}', b'{"\\u0000":"a"}', b'["\\u0000"]'])
+def test_json_xml_rejects_characters_xml_cannot_represent(data):
     with pytest.raises(OneKitError,match='control characters'):
-        execute('json-to-xml',[Artifact('data.json',b'{"a":"\\u0000"}')])
+        execute('json-to-xml',[Artifact('data.json',data)])
 
 
 def test_xml_spreadsheet_roundtrip_preserves_headers_and_formula_strings():
