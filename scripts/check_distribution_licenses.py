@@ -7,6 +7,15 @@ import tomllib
 import zipfile
 from email.parser import BytesParser
 from pathlib import Path
+from urllib.parse import urlsplit
+
+
+def validate_project_urls(entries):
+    for entry in entries:
+        label, separator, url = entry.partition(', ')
+        parsed = urlsplit(url)
+        if not separator or not label or len(label) > 32 or parsed.scheme not in ('https', 'http') or not parsed.hostname or any(character.isspace() for character in url):
+            raise ValueError('Distribution Project-URL must contain a label and an HTTP(S) URL: ' + entry)
 
 
 def check(directory):
@@ -30,6 +39,7 @@ def check(directory):
             raise ValueError("Missing distribution metadata")
         for data in metadata:
             message = BytesParser().parsebytes(data)
+            validate_project_urls(message.get_all('Project-URL', []))
             if message["License-Expression"] != expected:
                 raise ValueError("Incorrect distribution License-Expression")
             if set(message.get_all("License-File", [])) != {"LICENSE", "NOTICE"}:

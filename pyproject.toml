@@ -50,7 +50,6 @@ License = "https://github.com/mattiapiazzalunga/onekit/blob/main/LICENSE"
 Documentation = "https://onekit.org/docs/"
 Issues = "https://github.com/mattiapiazzalunga/onekit/issues"
 Requests = "https://onekit.org/requests/"
-Author = "mailto:hello@mattiapiazzalunga.com"
 
 [tool.hatch.version]
 path = "src/onekit/__init__.py"

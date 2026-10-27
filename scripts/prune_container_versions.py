@@ -1,6 +1,6 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
-"""Keep the published 0.6.2 OCI graph and delete other OneKit package versions."""
+"""Keep the published 0.6.3 OCI graph and delete other OneKit package versions."""
 import hashlib
 import json
 import os
@@ -9,14 +9,14 @@ import urllib.request
 
 OWNER = "mattiapiazzalunga"
 PACKAGE = "onekit"
-KEEP_TAG = "v0.6.2"
+KEEP_TAG = "v0.6.3"
 API_PATH = f"/users/{OWNER}/packages/container/{PACKAGE}/versions"
 
 
 def deletion_plan(versions, fetch_manifest):
     roots = [item for item in versions if KEEP_TAG in item["metadata"]["container"]["tags"]]
     if len(roots) != 1:
-        raise RuntimeError("Expected exactly one published v0.6.2 package version.")
+        raise RuntimeError("Expected exactly one published v0.6.3 package version.")
     pending = [roots[0]["name"]]
     protected = set()
     while pending:
