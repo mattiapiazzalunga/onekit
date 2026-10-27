@@ -47,5 +47,5 @@ pixels. Animated images are rejected by the Python image adapters.
 
 The CLI background adapter loads U2Net directly with ONNX Runtime, avoiding
 rembg's Pillow <13 dependency constraint. Model downloads are checksum-verified
-and cached under the local Onekit model cache. Optional model engines remain
+and cached under the local OneKit model cache. Optional model engines remain
 separate from the portable `all` extra.

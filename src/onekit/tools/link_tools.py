@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 """Device-to-source downloads and HTTP inspection; no intermediary server."""
 import json
+import re
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -12,6 +13,29 @@ from .video_download import validate_url
 
 REDIRECTS = (301, 302, 303, 307, 308)
 HEADERS = ("content-type", "content-length", "location", "server", "cache-control", "expires", "last-modified", "etag", "content-encoding", "strict-transport-security", "content-security-policy", "x-content-type-options", "referrer-policy", "access-control-allow-origin")
+
+
+def download_target(value, kind):
+    """Resolve common search-result wrappers without fetching the search page."""
+    if kind not in ('image', 'audio', 'video'):
+        raise OneKitError('Choose image, audio or video.')
+    url = validate_url(value)
+    for _ in range(5):
+        parsed = urllib.parse.urlsplit(url)
+        host = (parsed.hostname or '').lower().rstrip('.')
+        google = re.fullmatch(r'(?:[a-z0-9-]+\.)*google\.(?:com|[a-z]{2,3}|co\.[a-z]{2}|com\.[a-z]{2})', host)
+        if not google:
+            break
+        query = dict(urllib.parse.parse_qsl(parsed.query, max_num_fields=1000))
+        target = query.get('imgurl') if kind == 'image' else None
+        if not target and parsed.path == '/url':
+            target = query.get('url') or query.get('q')
+        if not target or target == url:
+            break
+        url = validate_url(target)
+    host = (urllib.parse.urlsplit(url).hostname or '').lower().rstrip('.')
+    youtube = host in ('youtu.be','youtube.com','youtube-nocookie.com') or host.endswith(('.youtube.com','.youtube-nocookie.com'))
+    return {'url':url, 'requires_extractor':kind == 'video' and youtube, 'site':'youtube' if youtube else None}
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -78,33 +102,112 @@ class Sources(HTMLParser):
     def __init__(self, kind, base):
         super().__init__(convert_charrefs=True)
         self.kind, self.base, self.links = kind, base, []
+        self.featured, self.picture_depth, self.base_seen = [], 0, False
         self.audio_depth = 0
+        self.structured = None
 
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        value = None
-        if tag == "audio":
-            self.audio_depth += 1
-        if self.kind == "audio" and (tag == "audio" or tag == "source" and self.audio_depth):
-            value = attrs.get("src")
-        if self.kind == "image" and tag == "img":
-            value = attrs.get("src") or attrs.get("data-src")
-        if tag == "meta" and (attrs.get("property") or attrs.get("name", "")).lower() in ({"og:audio", "og:audio:url", "og:audio:secure_url"} if self.kind == "audio" else {"og:image", "og:image:url", "og:image:secure_url", "twitter:image"}):
-            value = attrs.get("content")
-        if value and len(self.links) < 8:
+    def add(self, value, priority=False):
+        links = self.featured if priority else self.links
+        if isinstance(value, str) and value and len(links) < (8 if priority else 32):
             try:
                 url = validate_url(urllib.parse.urljoin(self.base, value))
-                if url not in self.links and url != self.base:
-                    self.links.append(url)
+                if url not in links and url != self.base:
+                    links.append(url)
             except OneKitError:
                 pass
 
+    def structured_sources(self, value, depth=0):
+        if depth > 16:
+            return
+        if isinstance(value, list):
+            for item in value[:64]:
+                self.structured_sources(item, depth+1)
+        elif isinstance(value, dict):
+            types = value.get("@type", [])
+            if isinstance(types, str):
+                types = [types]
+            expected = {"audio": "AudioObject", "video": "VideoObject", "image": "ImageObject"}[self.kind]
+            if isinstance(types, list) and expected in types:
+                self.add(value.get("contentUrl"), priority=self.kind == "image")
+            for key in ("@graph", self.kind):
+                self.structured_sources(value.get(key), depth+1)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "script" and attrs.get("type", "").lower() == "application/ld+json":
+            self.structured = []
+        if tag == 'base' and not self.base_seen and attrs.get('href'):
+            try:
+                self.base = validate_url(urllib.parse.urljoin(self.base, attrs['href']))
+                self.base_seen = True
+            except OneKitError:
+                pass
+        if tag == 'picture':
+            self.picture_depth += 1
+        value = None
+        if tag == self.kind and self.kind in ("audio", "video"):
+            self.audio_depth += 1
+        if self.kind in ("audio", "video") and (tag == self.kind or tag == "source" and self.audio_depth):
+            value = attrs.get("src")
+        if self.kind == "image" and (tag == "img" or tag == "source" and self.picture_depth):
+            srcset = attrs.get('data-srcset') or attrs.get('srcset', '')
+            candidates = []
+            for item in srcset.split(',')[:32]:
+                parts = item.strip().split()
+                if parts:
+                    descriptor = parts[-1] if len(parts) > 1 else '1x'
+                    match = re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)[wx]', descriptor)
+                    candidates.append((float(match[1]) if match else 0, parts[0]))
+            for _, address in sorted(candidates, key=lambda item: -item[0]):
+                self.add(address)
+            for key in ('data-src', 'data-original', 'data-lazy-src', 'src'):
+                self.add(attrs.get(key))
+        properties = {"audio": {"og:audio", "og:audio:url", "og:audio:secure_url"},
+                      "video": {"og:video", "og:video:url", "og:video:secure_url", "twitter:player:stream"},
+                      "image": {"og:image", "og:image:url", "og:image:secure_url", "twitter:image"}}
+        if tag == "meta" and (attrs.get("property") or attrs.get("name", "")).lower() in properties[self.kind]:
+            self.add(attrs.get("content"), priority=self.kind == "image")
+        self.add(value)
+
+    def handle_data(self, data):
+        if self.structured is not None:
+            self.structured.append(data)
+
     def handle_endtag(self, tag):
-        if tag == "audio":
+        if tag == "picture":
+            self.picture_depth = max(0, self.picture_depth-1)
+        if tag == "script" and self.structured is not None:
+            try:
+                self.structured_sources(json.loads("".join(self.structured)))
+            except (ValueError, RecursionError):
+                pass
+            self.structured = None
+        if tag == self.kind and self.kind in ("audio", "video"):
             self.audio_depth = max(0, self.audio_depth - 1)
 
 
+def source_links(html, base, kind):
+    if kind not in ("audio", "video", "image"):
+        raise OneKitError("Choose audio, video or image source extraction.")
+    parser = Sources(kind, validate_url(base))
+    parser.feed(html)
+    parser.close()
+    return list(dict.fromkeys([*parser.featured, *parser.links]))[:8]
+
+
 def media_extension(data, kind):
+    if kind == "video":
+        if data[4:8] == b"ftyp":
+            return "mov" if data[8:12] == b"qt  " else "mp4"
+        if data.startswith(b"\x1aE\xdf\xa3"):
+            return "webm" if b"webm" in data[:4096] else "mkv"
+        if data.startswith(b"OggS") and b"theora" in data[:512]:
+            return "ogv"
+        if data.startswith((b"\x00\x00\x01\xba", b"\x00\x00\x01\xb3")):
+            return "mpeg"
+        if len(data) > 188 and data[0] == data[188] == 0x47:
+            return "ts"
+        return None
     if kind == "image":
         if data.startswith(b"\x89PNG\r\n\x1a\n"):
             return "png"
@@ -139,6 +242,7 @@ def media_extension(data, kind):
 
 
 def download_source(url, kind, limit):
+    url = download_target(url, kind)['url']
     def fetch(address, allow_page):
         response, hops = request_chain(address)
         with response:
@@ -154,9 +258,7 @@ def download_source(url, kind, limit):
                 raise OneKitError("The source exceeds the local download limit.")
             final = hops[-1]["url"]
             if page:
-                parser = Sources(kind, final)
-                parser.feed(data.decode("utf-8", errors="replace"))
-                return parser.links
+                return source_links(data.decode("utf-8", errors="replace"), final, kind)
             extension = media_extension(data, kind)
             if not extension:
                 raise OneKitError(f"The URL did not return a supported {kind} file. Protected streams, HTML and streaming playlists are not files.")

@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-make-fillable",
+  "name": "Make PDF Fillable",
+  "group": "pdf",
+  "handler": "pdf_design",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "exact",
+  "note": "Add named AcroForm text fields, checkboxes and dropdown choices using normalized top-left rectangles. Keeps existing fields and page contents. No automatic blank detection or XFA conversion; verify reader compatibility.",
+  "packages": [
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "fields"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

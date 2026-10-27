@@ -59,7 +59,7 @@ Image `format` supports PNG, JPEG, WebP, TIFF, BMP, ICO, GIF and PDF as applicab
 
 Spreadsheet `sheet` selects a worksheet, defaulting to the active one. Excel reading uses cached formula values. JSON-to-Excel expects an array of objects. CSV `delimiter` defaults to comma. Formula-like XLSX strings remain text; import untrusted CSV as text in spreadsheet applications.
 
-Encoding conversion accepts `source_encoding` and `encoding`. Other text tools use UTF-8. Metadata `metadata` is a JSON object of ExifTool tag/value pairs; coverage is limited to its supported formats. Inspector signatures do not identify every proprietary file type.
+Encoding conversion accepts `source_encoding` and `encoding`. Other text tools use UTF-8. For PDF, JPEG and PNG, `metadata` accepts the descriptive text fields `Title`, `Author`, `Subject`, `Keywords` and `Comment`. Unspecified fields are retained; an empty string clears a field's value. The Python helper `onekit.tools.file_metadata.read_metadata(artifact)` reads those fields without modifying the artifact, including supported EXIF, PNG text and XMP values. Other metadata formats use optional ExifTool tag/value pairs, within its format coverage. Inspector signatures do not identify every proprietary file type.
 
 Notebook comparison `mode` is `both`, `markdown` or `code`. LaTeX mode is `all` or heuristic `text`. PDF/Word comparison extracts text. Diff JSON contains normalized sides, changed blocks and a unified patch, including trailing-newline differences. OCR `language` uses installed Tesseract codes and `dpi` is 36–300. PDF/A conversion requires a licensed `icc_profile`; validate archival output independently.
 
@@ -132,8 +132,6 @@ or applicability of the declarations in an uploaded work.
 ## Downloads, image transforms and URL inspection
 
 ```sh
-onekit run audio-youtube-download --url 'https://www.youtube.com/watch?v=VIDEO_ID' --options '{"format":"mp3","quality":"192"}' -o downloads/
-onekit run audio-youtube-download --url 'https://youtu.be/VIDEO_ID' --options '{"format":"original"}' -o downloads/
 onekit run audio-download --url 'https://example.org/audio.flac' -o downloads/
 onekit run audio-download --url 'https://example.org/audio.wav' --options '{"format":"mp3","quality":"320"}' -o downloads/
 onekit run image-download --url 'https://example.org/photo.jpg' -o downloads/
@@ -141,17 +139,7 @@ onekit run image-rotate-flip photo.png --options '{"angle":"90","flip":"horizont
 onekit run url-inspect --url 'https://example.org/path?x=1#section' -o report.json
 ```
 
-YouTube audio extraction uses yt-dlp, EJS, Node.js, FFmpeg and FFprobe, all prepared
-automatically when missing. It supports one completed video, original audio or MP3
-at 64, 128, 192, 256 or 320 kbps, and a 128 MiB download/output limit. Higher MP3
-bitrates do not restore quality lost in the source. No DRM bypass is provided.
-Site support can change and login/protected/live/playlist content is unsupported.
-
-**Use only where the service terms and applicable rights permit downloading.**
-The tool does not establish that a particular download is authorized. Read the
-[official YouTube terms](https://www.youtube.com/t/terms), which restrict download
-and automated access except in authorized or legally permitted cases. Downloading
-an image or audio file also does not grant redistribution or reuse rights.
+Downloading an image or audio file does not grant redistribution or reuse rights.
 
 Image rotation applies EXIF orientation first, rotates clockwise by 0/90/180/270
 degrees, then reflects horizontally, vertically or both in the rotated coordinate

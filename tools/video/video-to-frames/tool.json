@@ -1,0 +1,44 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-to-frames",
+  "name": "Video to frames",
+  "group": "video",
+  "handler": "video_edit",
+  "accepts": [
+    "mp4",
+    "webm",
+    "mkv",
+    "mov",
+    "avi",
+    "gif",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "ogv",
+    "ts"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Extracts PNG frames from a video using FFmpeg. Choose start, duration and width. Up to 120 frames: original-frame mode preserves each frame in the interval; otherwise timestamps are sampled at the requested frame rate.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [
+    "start",
+    "duration",
+    "fps",
+    "width",
+    "all_frames"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

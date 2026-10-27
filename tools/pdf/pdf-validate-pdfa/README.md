@@ -1,11 +1,11 @@
 <!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
-# Validate pdfa PDF
+# Validate PDF/A
 
 Command: `onekit run pdf-validate-pdfa`. Use `onekit run --help` for input and output arguments.
 
 Category: **pdf**.
-Fidelity: **exact**. Page operations preserve content. Encryption permissions are advisory.
+Fidelity: **exact**. Validate PDF/A-1b, 2b or 3b with pikepdf. Unsupported constructs are reported as not checked, never as compliant. Other conformance levels are not supported.
 
 Accepted types: `pdf`. Output type: `json`.
 Accepts multiple inputs: **no**.
@@ -14,10 +14,10 @@ Input validation: **typed**. Required file count: **1–1**.
 CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
 Content checks run before processing. Renaming a file does not change its actual format.
 
-Options: none.
+Options: `profile`.
 
-Python packages: standard library or external engine.
-External engines: verapdf.
+Python packages: pikepdf, jsonschema, fonttools.
+External engines: see the developer engine matrix for language adapters.
 
 Processing implementation: [shared family adapter](../../../src/onekit/tools/pdf/__init__.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).

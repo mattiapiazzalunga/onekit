@@ -2,7 +2,7 @@
   "copyright": "Copyright 2026 Mattia Piazzalunga",
   "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
   "id": "pdf-validate-pdfa",
-  "name": "Validate pdfa PDF",
+  "name": "Validate PDF/A",
   "group": "pdf",
   "handler": "pdf",
   "accepts": [
@@ -10,13 +10,17 @@
   ],
   "produces": "json",
   "fidelity": "exact",
-  "note": "Page operations preserve content. Encryption permissions are advisory.",
-  "packages": [],
-  "engines": [
-    "verapdf"
+  "note": "Validate PDF/A-1b, 2b or 3b with pikepdf. Unsupported constructs are reported as not checked, never as compliant. Other conformance levels are not supported.",
+  "packages": [
+    "pikepdf",
+    "jsonschema",
+    "fonttools"
   ],
+  "engines": [],
   "multiple": false,
-  "options": [],
+  "options": [
+    "profile"
+  ],
   "input_mode": "typed",
   "min_files": 1,
   "max_files": 1,

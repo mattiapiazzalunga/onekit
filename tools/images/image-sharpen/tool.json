@@ -1,0 +1,37 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-sharpen",
+  "name": "Sharpen and Deblur Image",
+  "group": "images",
+  "handler": "photo_tools",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Unsharp masking or bounded Gaussian Richardson-Lucy deconvolution. Deblurring assumes a blur model and may amplify noise or halos; missing detail cannot be guaranteed. Deconvolution is limited to one million pixels.",
+  "packages": [
+    "Pillow",
+    "numpy"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "method",
+    "radius",
+    "amount",
+    "iterations"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

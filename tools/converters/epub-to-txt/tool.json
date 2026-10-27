@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "epub-to-txt",
+  "name": "EPUB to TXT",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "epub"
+  ],
+  "produces": "txt",
+  "fidelity": "compromise",
+  "note": "Extracts EPUB chapter text in reading order. Images, CSS and interactive content are omitted; encrypted or DRM-protected books are rejected.",
+  "packages": [
+    "defusedxml"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

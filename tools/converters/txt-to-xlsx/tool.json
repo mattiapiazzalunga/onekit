@@ -1,0 +1,28 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "txt-to-xlsx",
+  "name": "TXT to Excel",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "xlsx",
+  "fidelity": "exact",
+  "note": "Parses delimited TXT into an Excel worksheet. Cells are stored as text, preserving leading zeros and preventing formula execution. Requires consistent column counts.",
+  "packages": [
+    "openpyxl"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "delimiter",
+    "source_encoding"
+  ],
+  "input_mode": "encoded-text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

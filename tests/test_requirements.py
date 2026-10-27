@@ -55,7 +55,7 @@ def test_malformed_pipeline_is_a_cli_error_even_with_password_prompt(steps, tmp_
     source.write_text("OneKit")
     monkeypatch.setattr("getpass.getpass", lambda *_: pytest.fail("Invalid workflows must not prompt for a password"))
     assert main(["pipeline", "--steps", str(workflow), str(source), "--ask-password", "-o", str(tmp_path / "out")]) == 2
-    assert "onekit:" in capsys.readouterr().err
+    assert "OneKit:" in capsys.readouterr().err
 
 
 def test_pipeline_preflights_all_steps_before_processing(monkeypatch):

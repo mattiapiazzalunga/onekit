@@ -21,7 +21,7 @@ def no_engine(monkeypatch):
 
 
 def test_catalog_has_an_explicit_bounded_contract_for_every_tool():
-    unrestricted = {"file-inspect", "file-metadata-set", "file-metadata-remove", "security-encrypt", "text-strip-formatting"}
+    unrestricted = {"file-inspect", "file-checksum", "signature-verify", "file-metadata-set", "file-metadata-remove", "security-encrypt", "text-strip-formatting"}
     for tool in TOOLS.values():
         assert tool.input_mode in ("any", "text", "encoded-text", "typed")
         assert 1 <= tool.min_files <= tool.max_files <= 256

@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "yaml-to-txt",
+  "name": "YAML to TXT",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "yaml"
+  ],
+  "produces": "txt",
+  "fidelity": "exact",
+  "note": "Validates YAML and exports its source, including comments, as UTF-8 TXT. Unsafe tags, cyclic aliases and duplicate mapping keys are rejected.",
+  "packages": [
+    "PyYAML"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

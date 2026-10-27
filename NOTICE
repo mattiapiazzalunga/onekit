@@ -8,3 +8,11 @@ A copy of the License is available in the LICENSE file.
 
 Third-party components, if any, remain subject to their respective
 copyright notices and license terms.
+
+PDF/A backend (installed on demand):
+- pdftopdfa 0.9.24: MPL-2.0+; https://github.com/iRedPaul/pdftopdfa
+- pikepdf 10.17.0: MPL-2.0; https://github.com/pikepdf/pikepdf
+- QPDF: Apache-2.0; https://github.com/qpdf/qpdf
+Their upstream licenses, source availability and redistribution rights are retained.
+The OneKit adapter is separate; OneKit's license does not relicense these libraries,
+fonts or ICC profiles. See docs/pdfa.md for the selected API and dependency scope.

@@ -43,9 +43,8 @@ def mask_image(image, regions):
     if image.mode in ("RGB", "L") and "transparency" not in image.info:
         clean.paste(image)
     else:
-        with image.convert("RGBA") as rgba:
-            with rgba.getchannel("A") as alpha:
-                clean.paste(rgba, mask=alpha)
+        with image.convert("RGBA") as rgba, rgba.getchannel("A") as alpha:
+            clean.paste(rgba, mask=alpha)
     draw = ImageDraw.Draw(clean)
     for region in regions:
         left, top, right, bottom = pixel_box(region, *clean.size)
@@ -66,10 +65,13 @@ def run(tool, files, options):
             stream = io.BytesIO()
             image.save(stream, format="PNG", optimize=True)
         return Result([Artifact("redacted.png", stream.getvalue())], details={"areas": len(regions), "metadataRemoved": True, "flattened": True})
-    import pypdfium2 as pdfium
+    from contextlib import nullcontext
+
     from pypdf import PdfReader, PdfWriter
     from reportlab.lib.utils import ImageReader
     from reportlab.pdfgen import canvas
+
+    from ..execution import current_context
     dpi = options.get("dpi", 144)
     if isinstance(dpi, str) and dpi.isdecimal():
         dpi = int(dpi)
@@ -79,7 +81,13 @@ def run(tool, files, options):
     stream = io.BytesIO()
     writer = canvas.Canvas(stream, pageCompression=1)
     encoded_total = 0
-    with pdfium.PdfDocument(files[0].data) as document:
+    renderer = current_context().pdf_renderer
+    if renderer:
+        document_context = nullcontext(renderer(files[0], "png", dpi))
+    else:
+        import pypdfium2 as pdfium
+        document_context = pdfium.PdfDocument(files[0].data)
+    with document_context as document:
         count = len(document)
         if not 1 <= count <= 256:
             raise OneKitError("Redact at most 256 PDF pages at a time.")
@@ -88,15 +96,21 @@ def run(tool, files, options):
         for index in range(count):
             page = document[index]
             try:
-                width, height = page.get_size()
+                width, height = (page["width"], page["height"]) if renderer else page.get_size()
                 if math.ceil(width*dpi/72)*math.ceil(height*dpi/72) > 40000000:
                     raise OneKitError("A rendered page exceeds 40 million pixels. Reduce DPI.")
                 # Preserve visible annotation covers before discarding annotation objects.
-                bitmap = page.render(scale=dpi/72, draw_annots=True)
-                try:
-                    image = mask_image(bitmap.to_pil(), [region for region in regions if region["page"] == index+1])
-                finally:
-                    bitmap.close()
+                areas = [region for region in regions if region["page"] == index+1]
+                if renderer:
+                    from PIL import Image
+                    with Image.open(io.BytesIO(bytes(page["data"]))) as raster:
+                        image = mask_image(raster, areas)
+                else:
+                    bitmap = page.render(scale=dpi/72, draw_annots=True)
+                    try:
+                        image = mask_image(bitmap.to_pil(), areas)
+                    finally:
+                        bitmap.close()
                 png = io.BytesIO()
                 image.save(png, format="PNG")
                 encoded_total += png.tell()
@@ -107,7 +121,8 @@ def run(tool, files, options):
                 writer.showPage()
                 image.close()
             finally:
-                page.close()
+                if not renderer:
+                    page.close()
     writer.save()
     # Only the newly rendered pages are copied. No original PDF objects are reused.
     clean = PdfWriter()

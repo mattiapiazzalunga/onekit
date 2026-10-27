@@ -19,6 +19,7 @@ node_modules/
 .engines/
 
 # Local reports, temporary data, credentials and build artifacts
+.artifacts/
 *.log
 *.tmp
 *.temp

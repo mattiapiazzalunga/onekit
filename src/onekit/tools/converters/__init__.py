@@ -11,10 +11,28 @@ from ...models import OneKitError, Result, output, parse_json
 
 
 def pdf_images(file, format="png", dpi=144):
-    import pypdfium2 as pdfium
-    from ..images import encode
+    from ...execution import current_context
     if not 36 <= int(dpi) <= 300:
         raise OneKitError("dpi must be between 36 and 300.")
+    renderer = current_context().pdf_renderer
+    if renderer:
+        from PIL import Image
+
+        from ..images import encode
+
+        pages = renderer(file, format, int(dpi))
+        if not 1 <= len(pages) <= 256:
+            raise OneKitError("Render between 1 and 256 pages at a time.")
+        result = []
+        for index, page in enumerate(pages):
+            with Image.open(io.BytesIO(bytes(page["data"]))) as image:
+                if image.width * image.height > 40_000_000:
+                    raise OneKitError("A rendered page exceeds 40 million pixels; reduce dpi.")
+                result.append(output(file, f"page-{index+1}.{format}", encode(image, format)))
+        return result
+    import pypdfium2 as pdfium
+
+    from ..images import encode
     result = []
     with pdfium.PdfDocument(file.data) as document:
         if len(document) > 256:
@@ -62,14 +80,20 @@ def text_document(text, file, target):
 def run(tool, files, options):
     file = files[0]
     source, target = tool.id.split("-to-")
+    if source in {'md', 'html'} and target in {'pdf', 'latex'}:
+        from ...execution import current_context
+        if current_context().portable_documents:
+            from ..portable_documents import convert
+            return convert(file, source, target)
     if source == "image":
         if target == "base64":
             return Result([output(file, "base64", base64.b64encode(file.data))])
         if target == "pdf":
-            from ..images import open_image, encode
+            from ..images import encode, open_image
             return Result([output(file, "pdf", encode(open_image(file), "pdf"))])
         from pptx import Presentation
-        from ..images import open_image, encode
+
+        from ..images import encode, open_image
         image = open_image(file)
         presentation = Presentation()
         add_image_slide(presentation, encode(image, "png"))

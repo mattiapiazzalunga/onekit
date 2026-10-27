@@ -1,0 +1,26 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "mp4-to-mp3",
+  "name": "MP4 to MP3",
+  "group": "video",
+  "handler": "video_edit",
+  "accepts": [
+    "mp4"
+  ],
+  "produces": "mp3",
+  "fidelity": "compromise",
+  "note": "Extracts the first audio track of an MP4 as MP3 at 192 kbps. Requires an audio track; re-encoding may lose quality.",
+  "packages": [],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

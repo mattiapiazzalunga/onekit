@@ -1,0 +1,26 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "file-checksum",
+  "name": "Calculate checksum",
+  "group": "inspector",
+  "handler": "file_checksum",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Calculates SHA-256, SHA-512, SHA-1 or MD5 locally. An optional expected checksum can be compared against one file. A checksum does not verify a digital signature or establish file safety.",
+  "packages": [],
+  "engines": [],
+  "multiple": true,
+  "options": [
+    "algorithm",
+    "expected"
+  ],
+  "input_mode": "any",
+  "min_files": 1,
+  "max_files": 20,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

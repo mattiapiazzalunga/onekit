@@ -10,6 +10,11 @@ _FIELDS = ("id", "accepts", "produces", "multiple", "options", "input_mode",
            "min_files", "max_files", "max_file_bytes", "max_total_bytes")
 
 
+def _tool_contract(tool):
+    values = asdict(tool)
+    return {key: values[key] for key in _FIELDS}
+
+
 def contract_manifest():
     return {
         "format": "onekit-processing-contract",
@@ -19,7 +24,7 @@ def contract_manifest():
         "result": {"fields": ["files", "warnings", "details"]},
         "pipeline": {"minSteps": 1, "maxSteps": 16, "fields": ["tool", "options"]},
         "workflow": {"format": "onekit-workflow", "version": 1, "fields": ["format", "version", "steps"]},
-        "tools": [{key: asdict(tool)[key] for key in _FIELDS} for tool in TOOLS.values()],
+        "tools": [_tool_contract(tool) for tool in TOOLS.values()],
     }
 
 

@@ -45,6 +45,10 @@ def validate_inputs(tool, files, options):
             raise OneKitError(f"'{file.name}' exceeds this tool's per-file limit of {file_limit:,} bytes.")
         if tool.accepts != ("*",) and file.kind not in tool.accepts:
             raise OneKitError(f"Expected file types: {', '.join(kind or '(extensionless text)' for kind in tool.accepts)}. Rejected '{file.name}'.")
+        if tool.id == "color-picker" and file.kind == "txt":
+            if not re.fullmatch(r"#[0-9a-fA-F]{6}", file.text().strip()):
+                raise OneKitError("Provide a HEX color in #RRGGBB format.")
+            continue
         if tool.input_mode == "any":
             continue  # Inspection, metadata and encryption intentionally accept arbitrary bytes.
         if tool.input_mode in ("text", "encoded-text"):
@@ -99,7 +103,7 @@ def validate_binary(file, tool, expanded_limit):
             if tool.id == "image-to-base64":
                 with Image.open(io.BytesIO(data)) as image:
                     image.load()
-    elif kind in ("docx", "pptx", "xlsx", "zip"):
+    elif kind in ("docx", "pptx", "xlsx", "zip", "epub"):
         validate_zip(data, expanded_limit, kind, allow_encrypted=tool.id == "security-decrypt")
     elif kind in ("ttf", "otf", "woff", "woff2"):
         expected = {"ttf": (b"\x00\x01\x00\x00", b"true"), "otf": (b"OTTO",), "woff": (b"wOFF",), "woff2": (b"wOF2",)}[kind]
@@ -170,6 +174,10 @@ def validate_zip(data, limit, kind="zip", *, allow_encrypted=False):
             if total > limit or entry.file_size > max(entry.compress_size, 1) * 1000:
                 raise OneKitError("Archive expansion exceeds safety limits.")
         if kind == "zip":
+            return
+        if kind == 'epub':
+            if not {'mimetype','META-INF/container.xml'} <= names:
+                raise OneKitError('The ZIP container is not an EPUB document.')
             return
         root, tag = {"docx": ("word/document.xml", "document"), "xlsx": ("xl/workbook.xml", "workbook"), "pptx": ("ppt/presentation.xml", "presentation")}[kind]
         family = {"docx": "wordprocessingml", "xlsx": "spreadsheetml", "pptx": "presentationml"}[kind]

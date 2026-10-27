@@ -48,14 +48,12 @@ def numeric(options, name, default, low, high):
 
 def run(tool, files, options):
     if tool.id in ("scan-barcode", "barcode-to-text"):
-        import zxingcpp
-        from PIL import Image, ImageOps
-        formats = (zxingcpp.BarcodeFormat.Code128, zxingcpp.BarcodeFormat.Code39, zxingcpp.BarcodeFormat.EAN13, zxingcpp.BarcodeFormat.EAN8, zxingcpp.BarcodeFormat.UPCA, zxingcpp.BarcodeFormat.ITF)
-        with Image.open(io.BytesIO(files[0].data)) as source:
-            image = ImageOps.exif_transpose(source).convert("RGB")
-            if image.width*image.height > 16000000:
-                raise OneKitError("Barcode images must contain at most 16 million pixels.")
-            results = zxingcpp.read_barcodes(image, formats=formats, try_rotate=True, try_invert=True)
+        from ..execution import current_context
+        reader = current_context().symbol_reader
+        if reader is not None:
+            return decode_result(tool.id, reader(files[0], "linear"))
+        from .symbols import input_image, read_native
+        results = read_native(input_image(files[0], max_pixels=16000000), 'linear')
         codes = []
         for result in results:
             code = {"text": result.text, "format": str(result.format).replace(" ", "").replace("-", "").upper()}
@@ -64,11 +62,7 @@ def run(tool, files, options):
                 code = {"text": code["text"][1:], "format": "UPCA"}
             if result.valid and code not in codes:
                 codes.append(code)
-        if not codes:
-            raise OneKitError("No readable barcode found. Use a sharp image with the complete bars and clear side margins.")
-        report = {"count": len(codes), "codes": codes}
-        content = "\n".join(code["text"] for code in codes) if tool.id == "barcode-to-text" else json.dumps(report, indent=2)
-        return Result([Artifact("decoded.txt" if tool.id == "barcode-to-text" else "decoded.json", content.encode())], details=report)
+        return decode_result(tool.id, codes)
     from barcode.writer import ImageWriter, SVGWriter
     kind, fmt = options.get("barcode_type", "code128"), options.get("format", "png")
     if fmt not in ("png", "jpeg", "svg"):
@@ -98,3 +92,20 @@ def run(tool, files, options):
             stream = io.BytesIO()
             image.convert("RGB").save(stream, format="JPEG", quality=95, subsampling=0, dpi=(int(dpi), int(dpi)))
     return Result([Artifact(f"barcode.{fmt}", stream.getvalue())], details={"payload": payload, "symbology": kind.upper(), "bytes": len(payload.encode()), "checkDigitAdded": payload != files[0].text().rstrip("\r\n")})
+
+
+def decode_result(tool_id, readings):
+    codes = []
+    for reading in readings:
+        format = str(reading['format']).replace(' ', '').replace('-', '').upper()
+        format = {'CODE39STD': 'CODE39', 'CODE39EXT': 'CODE39', 'ITF14': 'ITF', 'ISBN': 'EAN13'}.get(format, format)
+        code = {"text": reading["text"], "format": format}
+        if code["format"] == "EAN13" and len(code["text"]) == 13 and code["text"].startswith("0"):
+            code = {"text": code["text"][1:], "format": "UPCA"}
+        if code not in codes:
+            codes.append(code)
+    if not codes:
+        raise OneKitError("No readable barcode found. Use a sharp image with the complete bars and clear side margins.")
+    report = {"count": len(codes), "codes": codes}
+    content = "\n".join(code["text"] for code in codes) if tool_id == "barcode-to-text" else json.dumps(report, indent=2)
+    return Result([Artifact("decoded.txt" if tool_id == "barcode-to-text" else "decoded.json", content.encode())], details=report)

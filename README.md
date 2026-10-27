@@ -1,5 +1,8 @@
 <!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
+
+Languages: [English](README.md) · [Italiano](docs/locales/it/README.md) · [Français](docs/locales/fr/README.md) · [Español](docs/locales/es/README.md) · [Deutsch](docs/locales/de/README.md) · [Русский](docs/locales/ru/README.md) · [中文](docs/locales/zh/README.md).
+
 <p align="center">
   <a href="https://onekit.org"><img src="https://raw.githubusercontent.com/mattiapiazzalunga/onekit/main/images/logo.png" alt="OneKit logo" width="112" height="112"></a>
 </p>
@@ -9,7 +12,7 @@
 
 An offline Python toolkit with 230 tools for conversions, PDFs, images, archives, fonts, file inspection, encryption, developer utilities, OCR and comparisons. Use this CLI or the graphical interface at **[onekit.org](https://onekit.org)**.
 
-**Source version:** `0.5.0`. Stable downloads exist only after the release workflow completes. The distribution is `onekit-tools`; the separately owned PyPI project called `onekit` is unrelated.
+**Source version:** `0.6.0`. Stable downloads exist only after the release workflow completes. The distribution is `onekit-tools`; the separately owned PyPI project called `onekit` is unrelated.
 
 The [contact and media guide](docs/contact-media.md) covers standalone vCard generation, QR-to-vCard extraction, image upscaling, background removal, video compression/speed/GIF and local audio transcription.
 
@@ -60,7 +63,7 @@ Options are JSON objects; pass them as one quoted shell argument. Use `--ask-pas
 | Family | Capabilities |
 | --- | --- |
 | Converters | Markdown, HTML, LaTeX, PDF, Word, PowerPoint, images, Base64, Excel, CSV and JSON |
-| PDF | Merge/split, page selection/order/removal, compression, repair, [direct text editing](docs/pdf-editing.md), text overlays, rotation, digital signatures, encryption/unlock, external PDF/A conversion/validation |
+| PDF | Merge/split, page selection/order/removal, compression, repair, [direct text editing](docs/pdf-editing.md), text overlays, rotation, digital signatures, encryption/unlock, [local PDF/A conversion/validation](docs/pdfa.md) |
 | Images | Extract embedded PDF images, compress, crop and change format |
 | Media | Audio/video conversion through separately installed FFmpeg |
 | Archives / fonts | ZIP/TAR variants; TTF/OTF containers and WOFF/WOFF2 |

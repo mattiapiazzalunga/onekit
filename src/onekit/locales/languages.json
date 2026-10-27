@@ -1,0 +1,9 @@
+{
+  "en": {"aliases": ["english", "c", "posix"]},
+  "it": {"aliases": ["italian"]},
+  "fr": {"aliases": ["french"]},
+  "es": {"aliases": ["spanish"]},
+  "de": {"aliases": ["german"]},
+  "ru": {"aliases": ["russian"]},
+  "zh": {"aliases": ["chinese", "chinese (simplified)", "chinese (traditional)", "chinese-simplified", "chinese-traditional"]}
+}

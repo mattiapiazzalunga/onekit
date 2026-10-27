@@ -1,0 +1,36 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-extract-audio",
+  "name": "Extract audio from video",
+  "group": "video",
+  "handler": "video_edit",
+  "accepts": [
+    "mp4",
+    "webm",
+    "mkv",
+    "mov",
+    "avi",
+    "gif",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "ogv",
+    "ts"
+  ],
+  "produces": "mp3",
+  "fidelity": "compromise",
+  "note": "Extracts the first audio track as MP3 at 192 kbps using FFmpeg. Requires a video containing audio; re-encoding may lose quality.",
+  "packages": [],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

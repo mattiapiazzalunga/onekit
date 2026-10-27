@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import getpass
-import gettext
 import importlib.util
 import json
 import os
@@ -20,7 +19,7 @@ from .models import Artifact, OneKitError
 from .validation import MAX_BYTES
 from .workflows import WORKFLOW_FILENAME, dump_workflow, load_workflow
 
-_ = gettext.translation("onekit", localedir=Path(__file__).parent / "locales", fallback=True).gettext
+from .i18n import LANGUAGES, configure, gettext as tr
 WEBSITE_MESSAGE = "Try the free OneKit web app at https://onekit.org"
 
 CONTRIBUTING_MESSAGE = (
@@ -31,11 +30,11 @@ HELP_EPILOG = f"{WEBSITE_MESSAGE} {CONTRIBUTING_MESSAGE}"
 
 
 def welcome(stream):
-    print(f"Welcome to OneKit {__version__}! Your files stay yours.", file=stream)
-    print(WEBSITE_MESSAGE, file=stream)
-    print(CONTRIBUTING_MESSAGE, file=stream)
+    print(tr(f"Welcome to OneKit {__version__}! Your files stay yours."), file=stream)
+    print(tr(WEBSITE_MESSAGE), file=stream)
+    print(tr(CONTRIBUTING_MESSAGE), file=stream)
 
-PACKAGE_MODULES = {"PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdown_it", "python-docx": "docx", "python-pptx": "pptx", "fonttools": "fontTools", "pycryptodome": "Crypto", "zxing-cpp": "zxingcpp", "python-barcode": "barcode"}
+PACKAGE_MODULES = {"pdfminer.six": "pdfminer", "PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdown_it", "python-docx": "docx", "python-pptx": "pptx", "fonttools": "fontTools", "pycryptodome": "Crypto", "zxing-cpp": "zxingcpp", "python-barcode": "barcode"}
 
 
 def doctor(tool_id=None):
@@ -43,6 +42,23 @@ def doctor(tool_id=None):
     activate()
     from .tools.native import COPYLEFT, command, executable
     report = []
+    # One invocation is one environment snapshot; do not retain checks across calls.
+    package_checks, engine_checks = {}, {}
+    def package_missing(name):
+        module = PACKAGE_MODULES.get(name, name.replace("-", "_"))
+        if module not in package_checks:
+            package_checks[module] = importlib.util.find_spec(module) is None
+        return package_checks[module]
+
+    def engine_missing(name):
+        if name not in engine_checks:
+            try:
+                executable(name)
+                engine_checks[name] = False
+            except OneKitError:
+                engine_checks[name] = True
+        return engine_checks[name]
+
     for tool in ([TOOLS[tool_id]] if tool_id else TOOLS.values()):
         packages = list(tool.packages)
         engines = list(tool.engines)
@@ -51,14 +67,12 @@ def doctor(tool_id=None):
             engine = engine_for(tool)
             if engine:
                 engines.append(engine)
-        missing = [name for name in packages if importlib.util.find_spec(PACKAGE_MODULES.get(name, name.replace("-", "_"))) is None]
+        missing = [name for name in packages if package_missing(name)]
         blocked = [name for name in engines if name in COPYLEFT and os.environ.get("ONEKIT_ALLOW_COPYLEFT") == "0"]
         for name in engines:
             if name in blocked:
                 continue
-            try:
-                executable(name)
-            except OneKitError:
+            if engine_missing(name):
                 missing.append(name)
         if "node" in engines and tool.id != "dev-regex-test" and not (Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node")) / "node_modules").is_dir():
             missing.append("OneKit Node engines (onekit engines install)")
@@ -136,58 +150,69 @@ def write_files(result, destination, force=False):
                 os.unlink(temporary)
         print(path)
     for warning in result.warnings:
-        print(f"Warning: {warning}", file=sys.stderr)
+        print(tr(f"{tr('Warning:')} {tr(warning)}"), file=sys.stderr)
 
 
 def parser():
-    root = argparse.ArgumentParser(prog="onekit", description=_("One simple toolkit. Your files stay yours."), epilog=HELP_EPILOG)
+    argparse._ = tr
+    argparse.ngettext = lambda singular, plural, count: tr(singular if count == 1 else plural)
+    root = argparse.ArgumentParser(prog="onekit", description=tr("One simple toolkit. Your files stay yours."), epilog=tr(WEBSITE_MESSAGE) + " " + tr(CONTRIBUTING_MESSAGE))
+    root.add_argument("--language", choices=LANGUAGES, help=tr("Interface language"))
     root.add_argument("--version", action="version", version=__version__)
     commands = root.add_subparsers(dest="command", required=True)
-    listing = commands.add_parser("list", help="Browse all tools and their fidelity notes")
+    listing = commands.add_parser("list", help=tr("Browse all tools and their fidelity notes"))
     listing.add_argument("--json", action="store_true")
     listing.add_argument("--group")
-    diagnosis = commands.add_parser("doctor", help="Check optional Python packages and system engines")
+    diagnosis = commands.add_parser("doctor", help=tr("Check optional Python packages and system engines"))
     diagnosis.add_argument("tool", nargs="?", choices=TOOLS, metavar="TOOL")
     diagnosis.add_argument("--json", action="store_true")
-    engines = commands.add_parser("engines", help="Install the optional, version-locked Node developer engines")
+    engines = commands.add_parser("engines", help=tr("Install the optional, version-locked Node developer engines"))
     engines.add_argument("action", choices=["install"])
     engines.add_argument("--directory", type=Path)
-    workflow = commands.add_parser("workflow", help="Import or export a portable .1kit workflow document")
+    workflow = commands.add_parser("workflow", help=tr("Import or export a portable .1kit workflow document"))
     workflow.add_argument("action", choices=["import", "export"])
-    workflow.add_argument("source", help="OneKit .1kit workflow document")
+    workflow.add_argument("source", help=tr("OneKit .1kit workflow document"))
     workflow.add_argument("-o", "--output", required=True)
     workflow.add_argument("--force", action="store_true")
-    download = commands.add_parser("download", help="Download one video from YouTube or another yt-dlp site (requires internet)")
+    download = commands.add_parser("download", help=tr("Download one video from YouTube or another yt-dlp site (requires internet)"))
     download.add_argument("url")
     download.add_argument("-o", "--output", required=True)
     download.add_argument("--quality", choices=("best", "360", "480", "720", "1080", "1440", "2160"), default="best")
     authentication = download.add_mutually_exclusive_group()
-    authentication.add_argument("--cookies", help="Read a Netscape cookies file for a site you are signed into")
-    authentication.add_argument("--cookies-from-browser", choices=("firefox", "chrome", "edge", "chromium", "brave", "opera", "vivaldi", "safari"), help="Explicitly read login cookies from this local browser")
-    download.add_argument("--format-id", help="A site format ID, or VIDEO_ID+AUDIO_ID")
-    download.add_argument("--list-formats", action="store_true", help="Save available stream IDs and codecs as JSON without downloading a video")
-    download.add_argument("--referer", help="HTTP(S) source page required by some direct video links")
+    authentication.add_argument("--cookies", help=tr("Read a Netscape cookies file for a site you are signed into"))
+    authentication.add_argument("--cookies-from-browser", choices=("firefox", "chrome", "edge", "chromium", "brave", "opera", "vivaldi", "safari"), help=tr("Explicitly read login cookies from this local browser"))
+    download.add_argument("--format-id", help=tr("A site format ID, or VIDEO_ID+AUDIO_ID"))
+    download.add_argument("--list-formats", action="store_true", help=tr("Save available stream IDs and codecs as JSON without downloading a video"))
+    download.add_argument("--referer", help=tr("HTTP(S) source page required by some direct video links"))
     download.add_argument("--force", action="store_true")
     for name in ("run", "pipeline"):
         command = commands.add_parser(name)
         if name == "run":
             command.add_argument("tool", choices=TOOLS, metavar="TOOL")
-            command.add_argument("--options", default="{}", help="JSON object of tool options")
+            command.add_argument("--options", default="{}", help=tr("JSON object of tool options"))
         else:
-            command.add_argument("--steps", required=True, help="Portable .1kit workflow document")
+            command.add_argument("--steps", required=True, help=tr("Portable .1kit workflow document"))
         command.add_argument("files", nargs="*" if name == "run" else "+")
         if name == "run":
-            command.add_argument("--url", help="Source URL for downloaders, URL inspector or license checkers; requests go directly from this device")
+            command.add_argument("--url", help=tr("Source URL for downloaders, URL inspector or license checkers; requests go directly from this device"))
         command.add_argument("-o", "--output", required=True)
         command.add_argument("--force", action="store_true")
-        command.add_argument("--ask-password", action="store_true", help="Read a password without exposing it in shell history")
+        command.add_argument("--ask-password", action="store_true", help=tr("Read a password without exposing it in shell history"))
     for command in commands.choices.values():
-        command.epilog = HELP_EPILOG
+        command.epilog = tr(WEBSITE_MESSAGE) + " " + tr(CONTRIBUTING_MESSAGE)
     return root
 
 
 def main(argv=None):
     arguments = list(sys.argv[1:] if argv is None else argv)
+    selected = argparse.ArgumentParser(add_help=False)
+    selected.add_argument("--language", choices=LANGUAGES)
+    language, arguments = selected.parse_known_args(arguments)
+    active_language = configure(language.language)
+    if active_language != "en":
+        for stream in (sys.stdout, sys.stderr):
+            if hasattr(stream, "reconfigure"):
+                stream.reconfigure(encoding="utf-8")
     root = parser()
     if not arguments:
         welcome(sys.stdout)
@@ -210,7 +235,7 @@ def main(argv=None):
                 print(json.dumps(tools, indent=2))
             else:
                 for tool in tools:
-                    print(f"{tool['id']:34} {'CLI':14} {tool['fidelity']}  {tool['name']}")
+                    print(tr(f"{tool['id']:34} {'CLI':14} {tr(tool['fidelity'])}  {tr(tool['name'])}"))
             return 0
         if args.command == "engines":
             install_node_engines(args.directory)
@@ -221,7 +246,7 @@ def main(argv=None):
                 print(json.dumps(report, indent=2))
             else:
                 for item in report:
-                    print(f"{item['tool']:34} {'ready' if item['ready'] else 'needs setup'}  {', '.join(item['missing'] + item['policyBlocked'])}")
+                    print(tr(f"{item['tool']:34} {tr('ready') if item['ready'] else tr('needs setup')}  {', '.join(item['missing'] + item['policyBlocked'])}"))
             return 0 if all(item["ready"] for item in report) else 1
         if args.command == "workflow":
             from .models import Result
@@ -229,18 +254,18 @@ def main(argv=None):
                 raise OneKitError("Workflow output must use the .1kit extension.")
             document = load_workflow(args.source)
             write_files(Result([Artifact(WORKFLOW_FILENAME, dump_workflow(document))]), args.output, args.force)
-            print("Workflow saved. Input files and passwords are not included.", file=sys.stderr)
+            print(tr("Workflow saved. Input files and passwords are not included."), file=sys.stderr)
             return 0
         if args.command == "run":
             options = json.loads(args.options)
             if not isinstance(options, dict):
                 raise OneKitError("--options must contain a JSON object.")
             if args.ask_password:
-                options["password"] = getpass.getpass("Password: ")
+                options["password"] = getpass.getpass(tr("Password: "))
             if args.url:
                 if args.files:
                     raise OneKitError("Choose a URL or local input files, not both.")
-                if args.tool in ("audio-youtube-download", "audio-download", "image-download", "url-inspect"):
+                if args.tool in ("audio-download", "image-download", "url-inspect"):
                     files = [Artifact("url.txt", args.url.encode("utf-8"))]
                 elif args.tool.startswith("license-"):
                     from .license_sources import download_license_source
@@ -257,7 +282,7 @@ def main(argv=None):
         else:
             steps = load_workflow(args.steps)["steps"]
             if args.ask_password:
-                password = getpass.getpass("Password: ")
+                password = getpass.getpass(tr("Password: "))
                 for step in steps:
                     step.setdefault("options", {})["password"] = password
             first = TOOLS[steps[0]["tool"]]
@@ -268,10 +293,10 @@ def main(argv=None):
         write_files(result, args.output, args.force)
         return 0
     except (OneKitError, OSError, ValueError) as exc:
-        print(f"onekit: {exc}", file=sys.stderr)
+        print(tr(f"OneKit: {tr(str(exc))}"), file=sys.stderr)
         return 2
     except KeyboardInterrupt:
-        print("onekit: cancelled", file=sys.stderr)
+        print(tr("OneKit: cancelled"), file=sys.stderr)
         return 130
 
 
@@ -289,7 +314,7 @@ def install_node_engines(directory=None):
         shutil.copyfile(source / name, target / name)
     command("npm", ["ci", "--ignore-scripts", "--no-fund", "--no-audit"], target, timeout=300)
     command("npm", ["audit", "--audit-level=low"], target)
-    print(f"Developer engines installed in {target}.")
+    print(tr(f"Developer engines installed in {target}."))
 
 
 if __name__ == "__main__":

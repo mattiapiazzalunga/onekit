@@ -19,7 +19,7 @@ Options: `speed`.
 Python packages: standard library or external engine.
 External engines: ffmpeg, ffprobe.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/video_edit/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/video_edit.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

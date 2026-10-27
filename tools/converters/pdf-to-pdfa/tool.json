@@ -10,14 +10,19 @@
   ],
   "produces": "pdfa",
   "fidelity": "compromise",
-  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
-  "packages": [],
-  "engines": [
-    "gs"
+  "note": "Convert to PDF/A-2b or 3b locally with embedded fonts. The exact output is validated before download. Unsupported content can be removed or rejected; review the result.",
+  "packages": [
+    "pdftopdfa",
+    "pikepdf",
+    "jsonschema",
+    "fonttools",
+    "pdfminer.six"
   ],
+  "engines": [],
   "multiple": false,
   "options": [
-    "icc_profile"
+    "icc_profile",
+    "profile"
   ],
   "input_mode": "typed",
   "min_files": 1,

@@ -1,0 +1,40 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-add-text",
+  "name": "Add text to image",
+  "group": "images",
+  "handler": "image_text",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Adds Western European text to a new PNG with adjustable size, color and position. Animation and metadata are not retained.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "text",
+    "font_size",
+    "color",
+    "position",
+    "margin",
+    "x",
+    "y",
+    "text_boxes"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

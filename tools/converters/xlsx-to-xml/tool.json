@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "xlsx-to-xml",
+  "name": "Excel to XML",
+  "group": "converters",
+  "handler": "structured_data",
+  "accepts": [
+    "xlsx"
+  ],
+  "produces": "xml",
+  "fidelity": "exact",
+  "note": "XML tables use repeated flat records. JSON to XML preserves types using a typed root/item schema; XML attributes use @ and text uses #text in JSON. Spreadsheet formulas are not evaluated; the first sheet is used by default. Review schema and values after conversion.",
+  "packages": [
+    "openpyxl"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "sheet"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

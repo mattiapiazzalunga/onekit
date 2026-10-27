@@ -1,0 +1,39 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-trim",
+  "name": "Trim video",
+  "group": "video",
+  "handler": "video_edit",
+  "accepts": [
+    "mp4",
+    "webm",
+    "mkv",
+    "mov",
+    "avi",
+    "gif",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "ogv",
+    "ts"
+  ],
+  "produces": "mp4",
+  "fidelity": "compromise",
+  "note": "Keeps the selected start-to-end range in seconds and exports MP4 with audio when present. Re-encoding may lose quality.",
+  "packages": [],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [
+    "start",
+    "end"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

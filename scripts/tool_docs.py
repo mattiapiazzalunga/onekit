@@ -10,10 +10,13 @@ sys.path.insert(0, str(ROOT / "src"))
 from onekit.catalog import manifest
 
 for tool in manifest():
+    if sys.argv[1:] and tool['id'] not in sys.argv[1:]:
+        continue
     directory = ROOT / "tools" / tool["group"] / tool["id"]
     directory.mkdir(parents=True, exist_ok=True)
     metadata = {"copyright": "Copyright 2026 Mattia Piazzalunga", "spdx": "LicenseRef-PolyForm-Shield-1.0.0", **tool}
     (directory / "tool.json").write_text(json.dumps(metadata, indent=2) + "\n", encoding="utf-8")
+    implementation = tool["handler"] + (".py" if (ROOT / "src" / "onekit" / "tools" / (tool["handler"] + ".py")).is_file() else "/__init__.py")
     text = f"""<!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
 # {tool['name']}
@@ -35,7 +38,7 @@ Options: {', '.join('`'+name+'`' for name in tool['options']) or 'none'}.
 Python packages: {', '.join(tool['packages']) or 'standard library or external engine'}.
 External engines: {', '.join(tool['engines']) or 'see the developer engine matrix for language adapters'}.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/{tool['handler']}/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/{implementation}).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

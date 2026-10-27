@@ -9,6 +9,12 @@ dist
 dependency-licenses.json
 node_modules
 .engines
+.artifacts/
+.wheel-check/
+.ruff_cache/
+.audit.txt
+.coverage
+requirements-audit.txt
 
 # Local reports, temporary data, credentials and build artifacts
 *.log

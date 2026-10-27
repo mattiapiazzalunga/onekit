@@ -1,0 +1,36 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-mute",
+  "name": "Remove audio from video",
+  "group": "video",
+  "handler": "video_edit",
+  "accepts": [
+    "mp4",
+    "webm",
+    "mkv",
+    "mov",
+    "avi",
+    "gif",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "ogv",
+    "ts"
+  ],
+  "produces": "mp4",
+  "fidelity": "compromise",
+  "note": "Exports MP4 without any audio tracks using FFmpeg. Video is re-encoded and may lose quality.",
+  "packages": [],
+  "engines": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

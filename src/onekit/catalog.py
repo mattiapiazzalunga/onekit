@@ -62,6 +62,57 @@ for source, targets in CONVERSIONS.items():
             packages = ("pypdf", "python-docx")
         add(f"{source}-to-{target}", f"{LABELS.get(source, source.upper())} to {LABELS.get(target, target.upper())}", "converters", "converters", IMAGE_TYPES if source == "image" else (source,), target, packages=packages, engines=engine, fidelity="exact" if pair in PURE and source != "html" else "compromise", note="Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first." if pair not in PURE else "Structured conversion; the output represents the source data.", options=("sheet",) if source == "xlsx" else ())
 
+for source,target in (('xml','xlsx'),('xlsx','xml'),('xml','csv'),('csv','xml'),('xml','json'),('json','csv'),('json','xml'),('yaml','json'),('json','yaml')):
+    add(f'{source}-to-{target}', f'{LABELS.get(source,source.upper())} to {LABELS.get(target,target.upper())}',
+        'converters','structured_data',(source,),target,
+        input_mode='typed' if source=='xlsx' else 'text',
+        packages=tuple(['defusedxml'] if source=='xml' else [])+tuple(['openpyxl'] if 'xlsx' in (source,target) else [])+tuple(['PyYAML'] if 'yaml' in (source,target) else []),
+        options=('sheet',) if source=='xlsx' else ('delimiter',) if source=='csv' else (),
+        max_file_bytes=8*1024*1024,
+        note='XML tables use repeated flat records. JSON to XML preserves types using a typed root/item schema; XML attributes use @ and text uses #text in JSON. Spreadsheet formulas are not evaluated; the first sheet is used by default. Review schema and values after conversion.')
+add('tiff-to-svg','TIFF to SVG','converters','vector_images',('tiff',),'svg',packages=('Pillow',),options=('colors','resolution'),fidelity='compromise',
+    note='Vectorizes the first TIFF frame as palette-based vector tiles, without an embedded bitmap. Gradients and fine detail are approximated.')
+add('svg-to-png','SVG to PNG','converters','vector_images',('svg',),'png',input_mode='text',packages=('Pillow','defusedxml','resvg-py'),options=('scale',),fidelity='compromise',max_file_bytes=8*1024*1024,
+    note='Renders static, self-contained SVG to PNG. External resources, scripts, animation and embedded images are rejected. Fonts may render differently across devices.')
+add('epub-to-pdf','EPUB to PDF','converters','epub_pdf',('epub',),'pdf',packages=('reportlab','Pillow','defusedxml'),fidelity='compromise',max_file_bytes=32*1024*1024,
+    note='Exports basic text in EPUB reading order. CSS, images, fixed layouts and interactive content are omitted; encrypted or DRM-protected books are rejected.')
+for target in ('xlsx','csv'):
+    add(f'pdf-tables-to-{target}',f'PDF tables to {LABELS.get(target,target.upper())}','converters','pdf_tables',('pdf',),target,
+        packages=('pypdf',)+(('openpyxl',) if target=='xlsx' else ()),options=('pages',),fidelity='compromise',
+        note='Detects tables from aligned selectable text. Scans require OCR; complex layouts, merged cells and column alignment require review. Excel uses one sheet per table; CSV exports one file per table.')
+
+TEXT_NAMES = {'md':'Markdown','html':'HTML','docx':'Word','pptx':'PowerPoint','xlsx':'Excel','csv':'CSV','json':'JSON','xml':'XML','yaml':'YAML','epub':'EPUB','txt':'TXT','pdf':'PDF'}
+TEXT_EXPORTS = {
+    'md': (('markdown-it-py',),(), 'Extracts readable Markdown text, removing markup. Headings, lists and tables lose formatting; images and scripts are not exported.'),
+    'html': ((),(), 'Extracts readable HTML body text without running scripts or fetching resources. Formatting, images, hidden content and styles are omitted.'),
+    'docx': (('defusedxml',),(), 'Extracts Word DOCX body paragraphs and tables to UTF-8. Images, headers, footers, comments and automatic numbering are not exported.'),
+    'pptx': (('defusedxml',),(), 'Extracts PowerPoint slide text in presentation order. Images, speaker notes and visual layout are not exported; review text order within slides.'),
+    'xlsx': (('openpyxl',),('sheet',), 'Exports one Excel worksheet as tab-separated UTF-8 text. Uses stored formula results without recalculation; formatting and other sheets are omitted.'),
+    'csv': ((),('delimiter',), 'Converts CSV rows into quoted, tab-separated UTF-8 TXT. Select the input delimiter. Embedded tabs and newlines remain quoted.'),
+    'json': ((),(), 'Validates and formats JSON as UTF-8 TXT, preserving its data structure rather than flattening values.'),
+    'xml': (('defusedxml',),(), 'Validates XML and exports its markup as UTF-8 TXT. DTDs and entities are rejected; this does not flatten XML into prose.'),
+    'yaml': (('PyYAML',),(), 'Validates YAML and exports its source, including comments, as UTF-8 TXT. Unsafe tags, cyclic aliases and duplicate mapping keys are rejected.'),
+    'epub': (('defusedxml',),(), 'Extracts EPUB chapter text in reading order. Images, CSS and interactive content are omitted; encrypted or DRM-protected books are rejected.'),
+}
+TEXT_IMPORTS = {
+    'pdf': (('reportlab','Pillow'),(), 'Creates a PDF with basic paragraph layout from plain text. Original TXT line breaks become paragraphs; unsupported characters or excessive page counts are reported.'),
+    'docx': (('python-docx',),(), 'Creates a Word DOCX document from plain text, using one paragraph per line. No formatting or document structure is inferred.'),
+    'html': ((),(), 'Creates a safe HTML document with escaped plain text and preserved whitespace. Source markup is displayed literally, never executed.'),
+    'md': ((),(), 'Wraps plain TXT in a literal Markdown code block, preserving whitespace and syntax. Headings, lists and links are not inferred.'),
+    'csv': ((),('delimiter',), 'Parses consistently delimited TXT rows and writes comma-separated CSV. Choose tabs, commas, semicolons, pipes or automatic detection. No column structure is guessed from prose.'),
+    'xlsx': (('openpyxl',),('delimiter',), 'Parses delimited TXT into an Excel worksheet. Cells are stored as text, preserving leading zeros and preventing formula execution. Requires consistent column counts.'),
+    'json': ((),(), 'Requires valid JSON already contained in the TXT file. Validates and formats the data; arbitrary prose is not converted into an invented JSON schema.'),
+    'xml': (('defusedxml',),(), 'Requires valid XML already contained in the TXT file. Validates its markup and writes UTF-8 XML; DTDs and entities are rejected.'),
+    'yaml': (('PyYAML',),(), 'Requires valid YAML contained in the TXT file. Validates and preserves its source and comments; unsupported values, duplicate keys and unsafe tags are rejected.'),
+}
+for source,(packages,options,note) in TEXT_EXPORTS.items():
+    add(f'{source}-to-txt',f'{TEXT_NAMES[source]} to TXT','converters','text_converters',(source,),'txt',packages=packages,options=options,
+        input_mode='typed' if source in ('docx','pptx','xlsx','epub') else 'text',
+        fidelity='exact' if source in ('json','xml','yaml','csv') else 'compromise',note=note)
+for target,(packages,options,note) in TEXT_IMPORTS.items():
+    add(f'txt-to-{target}',f'TXT to {TEXT_NAMES[target]}','converters','text_converters',('txt',),target,packages=packages,
+        options=(*options,'source_encoding'),input_mode='encoded-text',fidelity='compromise' if target in ('pdf','docx') else 'exact',note=note)
+
 PDF_OPS = ["merge", "split", "remove-pages", "organize", "extract-pages", "compress", "repair", "edit", "rotate", "sign", "protect", "unlock", "validate-pdfa"]
 for operation in PDF_OPS:
     native = operation in ("sign", "validate-pdfa")
@@ -119,7 +170,8 @@ TOOLS["pdf-rotate"] = replace(TOOLS["pdf-rotate"], options=("angle", "pages"))
 for id in ("md-to-docx",):
     TOOLS[id] = replace(TOOLS[id], packages=("markdown-it-py", "python-docx"))
 TOOLS["md-to-docx"] = replace(TOOLS["md-to-docx"], note="CommonMark headings, lists, emphasis and code are exported. Images, advanced layouts and Markdown extensions may need adjustment.")
-TOOLS["pdf-to-pdfa"] = replace(TOOLS["pdf-to-pdfa"], options=("icc_profile",))
+TOOLS["pdf-to-pdfa"] = replace(TOOLS["pdf-to-pdfa"], packages=("pdftopdfa", "pikepdf", "jsonschema", "fonttools", "pdfminer.six"), engines=(), options=("icc_profile", "profile"), note="Convert to PDF/A-2b or 3b locally with embedded fonts. The exact output is validated before download. Unsupported content can be removed or rejected; review the result.")
+TOOLS["pdf-validate-pdfa"] = replace(TOOLS["pdf-validate-pdfa"], name="Validate PDF/A", packages=("pikepdf", "jsonschema", "fonttools"), engines=(), options=("profile",), note="Validate PDF/A-1b, 2b or 3b with pikepdf. Unsupported constructs are reported as not checked, never as compliant. Other conformance levels are not supported.")
 TOOLS["ocr-to-pdf"] = replace(TOOLS["ocr-to-pdf"], packages=("pytesseract", "Pillow", "pypdfium2", "pypdf", "pycryptodome"))
 TOOLS["docx-to-png"] = replace(TOOLS["docx-to-png"], packages=("pypdfium2", "Pillow"), options=("dpi",))
 TOOLS["pptx-to-png"] = replace(TOOLS["pptx-to-png"], packages=("pypdfium2", "Pillow"), options=("dpi",))
@@ -155,7 +207,9 @@ for id, tool in list(TOOLS.items()):
         mode = "encoded-text" if id.endswith("encoding-convert") else "text"
     elif tool.accepts == ("*",):
         mode = "any"
-    elif tool.group == "converters" and tool.accepts[0] in ("md", "latex", "html", "json", "csv", "base64"):
+    elif tool.handler == 'text_converters':
+        mode = tool.input_mode
+    elif tool.group == "converters" and tool.accepts[0] in ("md", "latex", "html", "json", "csv", "base64", "xml", "yaml", "svg"):
         mode = "text"
     elif tool.group in ("audio", "video"):
         mode = "typed"
@@ -235,6 +289,13 @@ add("pdf-watermark", "Add watermark to PDF", "pdf", "pdf.watermark", ("pdf",), "
     note="Adds a text or PNG/JPEG image watermark to all or selected pages, retaining source text and graphics. Supports Western European text, single or repeated layout, rotation and opacity. The original file is unchanged.")
 
 
+add("image-add-text", "Add text to image", "images", "image_text", IMAGE_TYPES, "png",
+    packages=("Pillow",), options=("text", "font_size", "color", "position", "margin", "x", "y", "text_boxes"), fidelity="compromise",
+    note="Adds Western European text to a new PNG with adjustable size, color and position. Animation and metadata are not retained.")
+add("pdf-page-numbers", "Add page numbers to PDF", "pdf", "pdf.page_numbers", ("pdf",), "pdf",
+    packages=("pypdf", "reportlab"), options=("pages", "start_number", "number_style", "font_size", "position", "margin", "color"),
+    note="Adds sequential numbers to all or selected pages, retaining source text and graphics. Existing digital signatures are invalidated.")
+
 add("image-effects", "Blur, pixelate & image effects", "images", "image_effects", IMAGE_TYPES, "png",
     packages=("Pillow",), options=("effect", "scope", "strength", "color", "regions"), fidelity="compromise",
     note="Blur, pixelate, box blur, solid cover or grayscale in one tool. Apply to the whole image or selected areas, with adjustable intensity and a fresh PNG export. Blur and pixelation do not guarantee permanent removal of sensitive details. Single-frame images only.")
@@ -251,17 +312,43 @@ add("image-remove-background", "Remove image background", "images", "background"
     packages=("onnxruntime", "numpy", "pooch", "Pillow"), fidelity="compromise",
     note="Removes the background locally and exports a transparent PNG. Uses U2Net. Fine edges may need review. The model downloads on first use.")
 for id, name, produces, options in (
+    ("video-extract-audio", "Extract audio from video", "mp3", ()),
+    ("video-mute", "Remove audio from video", "mp4", ()),
+    ("video-trim", "Trim video", "mp4", ("start", "end")),
+    ("video-to-frames", "Video to frames", "png", ("start", "duration", "fps", "width", "all_frames")),
     ("video-compress", "Compress video", "mp4", ("compression_level",)),
     ("video-speed", "Change video speed", "mp4", ("speed",)),
     ("video-to-gif", "Video to GIF", "gif", ("start", "duration", "fps", "width")),
 ):
     add(id, name, "video", "video_edit", TOOLS["video-convert"].accepts, produces,
+        packages=("Pillow",) if id == 'video-to-frames' else (),
         engines=("ffmpeg", "ffprobe"), options=options, fidelity="compromise",
-        note="Processes locally with FFmpeg. Re-encoding may lose quality. GIF output has no audio.")
+        note={
+            "video-extract-audio": "Extracts the first audio track as MP3 at 192 kbps using FFmpeg. Requires a video containing audio; re-encoding may lose quality.",
+            "video-mute": "Exports MP4 without any audio tracks using FFmpeg. Video is re-encoded and may lose quality.",
+            "video-to-frames": "Extracts PNG frames from a video using FFmpeg. Choose start, duration and width. Up to 120 frames: original-frame mode preserves each frame in the interval; otherwise timestamps are sampled at the requested frame rate.",
+            "video-trim": "Keeps the selected start-to-end range in seconds and exports MP4 with audio when present. Re-encoding may lose quality.",
+        }.get(id, "Processes locally with FFmpeg. Re-encoding may lose quality. GIF output has no audio."))
 add("audio-to-text", "Audio to text", "audio", "transcription", TOOLS["audio-convert"].accepts, "txt",
     packages=("faster-whisper",), options=("language",), fidelity="compromise",
     note="Transcribes locally with Whisper tiny (multilingual). The model downloads on first use; no audio is uploaded. Recognition can make mistakes.")
 
+
+add('file-checksum','Calculate checksum','inspector','file_checksum',('*',),'json',input_mode='any',multiple=True,min_files=1,max_files=20,
+    options=('algorithm','expected'),note='Calculates SHA-256, SHA-512, SHA-1 or MD5 locally. An optional expected checksum can be compared against one file. A checksum does not verify a digital signature or establish file safety.')
+add('signature-verify','Verify digital signature','security','signatures',('*',),'json',input_mode='any',multiple=True,min_files=1,max_files=2,
+    packages=('pypdf','asn1crypto','pycryptodome'),
+    note='Offline cryptographic verification of PDF and CMS/P7M/P7S signatures using embedded certificates. Detached signatures require the original file. Trust chains, revocation, qualified-signature status and trusted timestamps are not checked.')
+add('pdf-to-text','PDF to text','converters','pdf_text',('pdf',),'txt',packages=('pypdf',),options=('pages','layout'),fidelity='compromise',
+    note='Extracts selectable text to UTF-8, optionally retaining approximate layout. Scans require OCR; reading order, tables and columns need review.')
+add('gif-to-images','GIF to images','converters','image_frames',('gif',),'png',packages=('Pillow',),fidelity='compromise',
+    note='Exports each GIF frame as a composed PNG, respecting disposal and transparency. Up to 120 frames and 40 million total pixels. Timing is included in the result details.')
+add('png-to-svg','PNG to SVG','converters','vector_images',('png',),'svg',packages=('Pillow',),options=('colors','resolution'),fidelity='compromise',
+    note='Vectorizes a PNG as palette-based vector tiles, without embedding a bitmap. Gradients and fine detail are approximated; transparent pixels are composited on white.')
+add('mp4-to-mp3','MP4 to MP3','video','video_edit',('mp4',),'mp3',engines=('ffmpeg','ffprobe'),fidelity='compromise',
+    note='Extracts the first audio track of an MP4 as MP3 at 192 kbps. Requires an audio track; re-encoding may lose quality.')
+add('video-to-text','Video to text','video','transcription',TOOLS['video-convert'].accepts,'txt',packages=('faster-whisper',),options=('language',),fidelity='compromise',
+    note='Transcribes the audio of a video locally with multilingual Whisper tiny. Exports UTF-8 text and timestamped segments. Recognition can make mistakes; this does not read subtitles or text visible in frames.')
 
 # All license checks report unverified declarations and heuristic indications, never permission.
 LICENSE_TYPES = {
@@ -289,12 +376,6 @@ for kind, (label, accepts, packages) in LICENSE_TYPES.items():
              "Archives are bounded and scans can be incomplete.")
 
 
-add("audio-youtube-download", "YouTube audio downloader", "audio", "audio_youtube", ("txt",), "*",
-    packages=("yt-dlp", "yt-dlp-ejs"), engines=("ffmpeg", "ffprobe", "node"), input_mode="text",
-    max_file_bytes=16384, options=("format", "quality"), fidelity="compromise",
-    note="CLI only: extract one completed YouTube video's audio as original audio or MP3 at 64–320 kbps, up to 128 MiB. "
-         "Use only when the service and applicable rights permit downloading. YouTube's terms restrict downloads; ownership alone is not a blanket authorization. "
-         "No DRM bypass. Site availability can change. A higher MP3 bitrate cannot improve the source quality.")
 add("audio-download", "Download audio", "audio", "link_tools", ("txt",), "*", input_mode="text",
     engines=("ffmpeg", "ffprobe"), max_file_bytes=16384, options=("format", "quality"), fidelity="compromise",
     note="Download a direct audio file or an audio source exposed by an accessible page. Original mode preserves downloaded bytes; MP3 conversion is lossy. "
@@ -322,3 +403,35 @@ add("text-strip-formatting", "Remove text formatting", "inspector", "plain_text"
 
 def manifest():
     return [asdict(tool) for tool in TOOLS.values()]
+
+
+add("color-palette", "Color Palette Generator", "design", "design", ("txt",), "json",
+    input_mode="text", max_file_bytes=128, max_total_bytes=1024*1024,
+    options=("harmony", "lightness", "chroma", "hue", "format"),
+    note="Five-color OKLCH palettes with sRGB chroma reduction and WCAG text contrast. Harmony rules are design heuristics, not accessibility guarantees.")
+
+
+add("color-picker", "Color Picker", "design", "photo_tools", (*IMAGE_TYPES, "txt"), "json",
+    packages=("Pillow",), options=("x", "y"),
+    note="Read a six-digit HEX color from TXT or sample an EXIF-oriented image pixel. Reports visible sRGB, original RGBA, OKLCH and text contrast. Transparent pixels are composited on white.")
+add("image-extract-colors", "Extract Image Colors", "design", "photo_tools", IMAGE_TYPES, "json",
+    packages=("Pillow",), options=("colors",),
+    note="Median-cut dominant colors from a bounded image sample. Excludes fully transparent pixels; partial transparency is composited on white. Color fractions describe the sample, not semantic objects.")
+add("jpg-to-svg", "JPG to SVG", "images", "photo_tools", ("jpeg",), "svg",
+    packages=("Pillow",), options=("colors", "resolution"), fidelity="compromise",
+    note="Creates real palette-based vector paths by merging color tiles, without embedding a bitmap. Photographs become posterized; curved outlines and fine gradients are approximated. Best for simple flat artwork.")
+add("image-repair", "Repair Photo Defects", "images", "photo_tools", IMAGE_TYPES, "png",
+    packages=("Pillow", "numpy"), options=("regions", "iterations", "size"), fidelity="compromise",
+    note="Clean small speckles with a median filter or reconstruct selected areas by harmonic diffusion. Estimates surrounding colors; cannot recover hidden originals or repair every photographic defect. Saves a new PNG.")
+add("image-remove-watermark", "Remove Image Watermark", "images", "photo_tools", IMAGE_TYPES, "png",
+    packages=("Pillow", "numpy"), options=("regions", "iterations"), fidelity="compromise",
+    note="Reconstruct manually selected watermark areas from surrounding pixels using harmonic diffusion. Estimates missing content; large marks, textures and faces may not reconstruct convincingly. No automatic mark detection.")
+add("image-sharpen", "Sharpen and Deblur Image", "images", "photo_tools", IMAGE_TYPES, "png",
+    packages=("Pillow", "numpy"), options=("method", "radius", "amount", "iterations"), fidelity="compromise",
+    note="Unsharp masking or bounded Gaussian Richardson-Lucy deconvolution. Deblurring assumes a blur model and may amplify noise or halos; missing detail cannot be guaranteed. Deconvolution is limited to one million pixels.")
+add("pdf-remove-watermark", "Remove PDF Watermark", "pdf", "pdf_design", ("pdf",), "pdf",
+    packages=("pypdf",), options=("text", "mode", "objects"), fidelity="compromise",
+    note="Inspect and remove selected text, images and form invocations, including nested forms and font-encoded text. Removes tagged watermark artifacts and watermark annotations automatically. Untagged objects require selection or exact text; flattened marks cannot be separated from their image. Review every page.")
+add("pdf-make-fillable", "Make PDF Fillable", "pdf", "pdf_design", ("pdf",), "pdf",
+    packages=("pypdf",), options=("fields",),
+    note="Add named AcroForm text fields, checkboxes and dropdown choices using normalized top-left rectangles. Keeps existing fields and page contents. No automatic blank detection or XFA conversion; verify reader compatibility.")

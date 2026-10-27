@@ -13,7 +13,7 @@ onekit run barcode-to-text photo.jpg -o identifier.txt
 
 Standards: `code128` (default, up to 60 printable ASCII characters), `code39` (up to 48 uppercase letters/digits and supported symbols, no optional Mod-43 checksum), `ean13` (12 digits or 13 including checksum), `ean8` (7/8), `upca` (11/12), `itf` (an even number of digits, up to 80), `isbn13` (EAN-13 beginning 978/979). Supplied retail check digits must be correct; they are never silently replaced. Omitted digits are calculated. Identifiers are not assigned or registered by OneKit.
 
-Install `python -m pip install "onekit-tools[qrcode]"`. All QR processing is local and works offline after dependencies are installed. The website uses the same Segno generator as the CLI and a local JavaScript image decoder; CLI scanning uses ZXing-C++ and Pillow.
+Install `python -m pip install "onekit-tools[qrcode]"`. All QR processing is local and works offline after dependencies are installed. QR generation uses Segno; CLI scanning uses ZXing-C++ and Pillow.
 
 | Tool | Input | Output |
 | --- | --- | --- |

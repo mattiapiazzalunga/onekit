@@ -19,7 +19,7 @@ Options: `angle`, `flip`.
 Python packages: Pillow.
 External engines: see the developer engine matrix for language adapters.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/image_transform/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/image_transform.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

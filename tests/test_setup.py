@@ -111,10 +111,14 @@ def test_original_audio_download_needs_no_transcoding_engine(monkeypatch):
     assert calls == [[], ["ffmpeg", "ffprobe"]]
 
 
-def test_youtube_audio_setup_does_not_install_developer_npm_bundle(monkeypatch):
+
+def test_pdfa_setup_installs_only_the_reviewed_level_b_runtime(monkeypatch):
     calls = []
-    monkeypatch.setattr(setup, "python_packages", lambda specs: None)
-    monkeypatch.setattr(setup, "native_engines", lambda engines: calls.append(list(engines)))
-    monkeypatch.setattr("onekit.cli.install_node_engines", lambda *_: pytest.fail("YouTube audio needs no developer npm engines"))
-    setup.ensure_tool(TOOLS["audio-youtube-download"])
-    assert calls == [["ffmpeg", "ffprobe", "node"]]
+    monkeypatch.setattr(setup, "run", calls.append)
+    setup.python_packages(["pdftopdfa==0.9.24"])
+    assert len(calls) == 2
+    assert "pikepdf[pdfa]==10.17.0" in calls[0]
+    assert "--no-deps" in calls[1]
+    assert calls[1][-1] == "pdftopdfa==0.9.24"
+    assert "pdfminer.six==20260107" in calls[1]
+    assert not any("paddle" in str(arg) or "cryptography" in str(arg) for call in calls for arg in call)

@@ -1,6 +1,5 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
-import hashlib
 import json
 import os
 import subprocess

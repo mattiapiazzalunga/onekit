@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "md-to-txt",
+  "name": "Markdown to TXT",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "md"
+  ],
+  "produces": "txt",
+  "fidelity": "compromise",
+  "note": "Extracts readable Markdown text, removing markup. Headings, lists and tables lose formatting; images and scripts are not exported.",
+  "packages": [
+    "markdown-it-py"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

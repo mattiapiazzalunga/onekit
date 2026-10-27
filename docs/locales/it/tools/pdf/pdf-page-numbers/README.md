@@ -1,0 +1,20 @@
+<!-- Copyright 2026 Mattia Piazzalunga -->
+<!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
+<a id="add-page-numbers-to-pdf"></a>
+# Aggiungi numeri di pagina a PDF
+
+Comando: `onekit run pdf-page-numbers`. Usa `onekit run --help` per gli argomenti di input e output.
+
+Categoria: **PDF**. Fedeltà: **esatta**. Aggiunge numeri sequenziali a tutte o ad alcune pagine, mantenendo testo e grafica originali. Le firme digitali esistenti vengono invalidate.
+
+Tipi accettati: `pdf`. Tipo di output: `pdf`. Accetta più input: **no**.
+
+Validazione dell’input: **per tipo di file**. Numero di file richiesto: **1–1**. CLI: **134,217,728 byte per file**, **134,217,728 byte totali**. Il contenuto viene controllato prima dell’elaborazione. Rinominare un file non ne cambia il formato effettivo.
+
+Opzioni: `pages`, `start_number`, `number_style`, `font_size`, `position`, `margin`, `color`.
+
+Pacchetti Python: pypdf, reportlab. Motori esterni: consultare la matrice dei motori per sviluppatori per gli adattatori dei linguaggi di programmazione.
+
+Implementazione dell’elaborazione: [adattatore condiviso della famiglia di strumenti](../../../../../../src/onekit/tools/pdf.page_numbers/__init__.py). Contratti e dati di test per le regressioni: [test](../../../../../../tests/test_core.py). Configurazione dei motori e licenze: [guida ai motori](../../../docs/engines.md).
+
+Questa directory è generata dal catalogo condiviso da `python scripts/tool_docs.py`. Modifica il registro e l'adattatore di famiglia, aggiungi dati di prova per i test di regressione, poi rigenera la directory.

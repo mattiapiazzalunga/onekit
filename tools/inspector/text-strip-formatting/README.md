@@ -19,7 +19,7 @@ Options: `input_format`.
 Python packages: markdown-it-py, defusedxml.
 External engines: see the developer engine matrix for language adapters.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/plain_text/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/plain_text.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

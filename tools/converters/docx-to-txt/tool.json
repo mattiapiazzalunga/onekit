@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "docx-to-txt",
+  "name": "Word to TXT",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "docx"
+  ],
+  "produces": "txt",
+  "fidelity": "compromise",
+  "note": "Extracts Word DOCX body paragraphs and tables to UTF-8. Images, headers, footers, comments and automatic numbering are not exported.",
+  "packages": [
+    "defusedxml"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

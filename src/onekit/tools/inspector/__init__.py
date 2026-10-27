@@ -86,22 +86,9 @@ def run(tool, files, options):
         source_encoding = options.get("source_encoding", "utf-8-sig")
         return Result([output(file, file.kind or "txt", file.data.decode(source_encoding).encode(encoding))])
     elif tool.id.startswith("file-metadata"):
-        if file.kind == "pdf":
-            from pypdf import PdfReader, PdfWriter
-            from ..pdf import save
-            writer = PdfWriter()
-            writer.append(PdfReader(io.BytesIO(file.data)))
-            if tool.id.endswith("remove"):
-                writer.metadata = None
-                writer.root_object.pop("/Metadata", None)
-                for page in writer.pages:
-                    page.pop("/Metadata", None)
-            else:
-                metadata = options.get("metadata", {})
-                if not isinstance(metadata, dict):
-                    raise OneKitError("metadata must be a JSON object.")
-                writer.add_metadata({"/" + str(key).lstrip("/"): str(value) for key, value in metadata.items()})
-            return Result([output(file, "pdf", save(writer))], ["Document information and XMP are rewritten. Visible content, attachments and embedded image metadata are not anonymized."])
+        if file.kind in ("pdf", "jpeg", "png"):
+            from ..file_metadata import run as metadata_run
+            return metadata_run(tool, files, options)
         from ..native import process_file
         arguments = ["-all="] if tool.id.endswith("remove") else []
         metadata = options.get("metadata", {})

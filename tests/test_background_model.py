@@ -15,7 +15,7 @@ np = pytest.importorskip("numpy")
 
 def model(monkeypatch, prediction):
     def retrieve(**options):
-        assert options["known_hash"] == "md5:60024c5c889badc19c04ad937298a77b"
+        assert options["known_hash"] == "sha256:8d10d2f3bb75ae3b6d527c77944fc5e7dcd94b29809d47a739a7a728a912b491"
         assert options["url"].startswith("https://github.com/")
         return "cached-u2net.onnx"
 

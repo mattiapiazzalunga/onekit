@@ -1,0 +1,33 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-extract-colors",
+  "name": "Extract Image Colors",
+  "group": "design",
+  "handler": "photo_tools",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Median-cut dominant colors from a bounded image sample. Excludes fully transparent pixels; partial transparency is composited on white. Color fractions describe the sample, not semantic objects.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "colors"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

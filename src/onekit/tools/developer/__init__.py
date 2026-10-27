@@ -143,6 +143,13 @@ def validate(language, text, options, *, filename=None):
             dialect = options.get("dialect", "ansi")
             if not isinstance(dialect, str) or not re.fullmatch(r"[a-z][a-z0-9_]{0,39}", dialect):
                 raise OneKitError("Use a SQL dialect name such as ansi or postgres.")
+            try:
+                import sqlfluff
+            except ImportError:
+                pass  # The standalone sqlfluff executable remains supported.
+            else:
+                sqlfluff.parse(text, dialect=dialect)
+                return
             args = [dialect if arg == "ansi" else arg for arg in args]
         with tempfile.TemporaryDirectory(prefix="onekit-") as directory:
             name = Path(filename).name if language == "java" and filename and filename.endswith(".java") else f"input.{suffix}"
@@ -156,6 +163,13 @@ def validate(language, text, options, *, filename=None):
 
 def external(operation, language, text):
     from ..native import command
+    if operation == 'format' and language == 'sql':
+        try:
+            import sqlparse
+        except ImportError:
+            pass  # A separately installed sqlformat executable remains supported.
+        else:
+            return sqlparse.format(text, reindent=True)
     if language in PRETTIER or operation == "minify":
         directory = Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node"))
         if not (directory / "node_modules").is_dir():

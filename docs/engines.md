@@ -10,14 +10,13 @@ The owner approved separately installed open-source engines. They are not bundle
 | Pandoc | `pandoc` | Advanced markup conversion; GPL. |
 | TeX Live/pdfTeX | `pdflatex` | LaTeX/Pandoc PDF; engine, macros and fonts have separate licenses. |
 | FFmpeg | `ffmpeg` | Media; LGPL or GPL depending on build and codecs. |
-| Ghostscript | `gs` / `gswin64c` / `gswin32c` | PDF/A; AGPL or commercial license. |
-| veraPDF | `verapdf` | Actual standards validation; upstream GPL/MPL and Java requirements. |
+| veraPDF | `verapdf` | Optional independent verification of archival outputs; upstream GPL/MPL and Java requirements. |
 | ExifTool | `exiftool` | Metadata in supported file types; upstream Perl licensing. |
 | Tesseract | `tesseract` | OCR; Apache engine and separately licensed language data. |
 
 If distributing these programs, including inside Docker, preserve their licenses/notices and provide the required corresponding-source/build materials. Assess AGPL network integrations separately. Commercial use and source/redistribution obligations are different questions. Separate processes do not universally eliminate obligations. Read authoritative [FFmpeg](https://ffmpeg.org/legal.html), [LibreOffice](https://www.libreoffice.org/licenses/), [Ghostscript](https://www.ghostscript.com/licensing/) and [MPL](https://www.mozilla.org/en-US/MPL/2.0/FAQ/) material before creating a bundled distribution.
 
-Office fidelity depends on fonts and resources. PDF-to-Word exports extracted text; PDF-to-PowerPoint creates image slides. PDF repair is best effort; compression is lossless. PDF/A needs a user-supplied licensed sRGB ICC profile and independent standards validation. OCR accuracy depends on scan quality and language packs.
+Office fidelity depends on fonts and resources. PDF-to-Word exports extracted text; PDF-to-PowerPoint creates image slides. PDF repair is best effort; compression is lossless. [PDF/A conversion and validation](pdfa.md) use separate MPL libraries through the shared Python adapter, with bundled licensed ICC profiles. Ghostscript is not required. Independent standards validation remains recommended. OCR accuracy depends on scan quality and language packs.
 
 ## Developer tools
 

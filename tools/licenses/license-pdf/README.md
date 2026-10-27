@@ -19,7 +19,7 @@ Options: `ref`.
 Python packages: license-expression, defusedxml, pypdf, pycryptodome.
 External engines: see the developer engine matrix for language adapters.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/license_check/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/license_check.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

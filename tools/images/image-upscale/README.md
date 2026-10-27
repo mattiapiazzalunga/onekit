@@ -19,7 +19,7 @@ Options: `scale`.
 Python packages: Pillow.
 External engines: see the developer engine matrix for language adapters.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/image_upscale/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/image_upscale.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

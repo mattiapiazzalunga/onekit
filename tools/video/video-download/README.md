@@ -19,7 +19,7 @@ Options: `quality`, `cookies`, `cookies_from_browser`, `format_id`, `referer`, `
 Python packages: yt-dlp.
 External engines: ffmpeg.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/video_download/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/video_download.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

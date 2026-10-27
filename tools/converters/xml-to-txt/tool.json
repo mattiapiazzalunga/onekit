@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "xml-to-txt",
+  "name": "XML to TXT",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "xml"
+  ],
+  "produces": "txt",
+  "fidelity": "exact",
+  "note": "Validates XML and exports its markup as UTF-8 TXT. DTDs and entities are rejected; this does not flatten XML into prose.",
+  "packages": [
+    "defusedxml"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

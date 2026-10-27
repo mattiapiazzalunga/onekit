@@ -12,6 +12,7 @@ import tarfile
 import tomllib
 import zipfile
 import zlib
+from functools import lru_cache
 from pathlib import PurePosixPath
 
 from license_expression import ExpressionError
@@ -39,6 +40,15 @@ COPYRIGHT = {"copyright", "copyrightnotice", "copyrightowner", "copyrightownerna
 CREATOR = {"creator", "author", "artist", "byline", "authors", "creators", "initialcreator"}
 
 
+@lru_cache(maxsize=1)
+def spdx_licensing():
+    """Reuse the public SPDX symbol index, never file contents or reports."""
+    from license_expression import get_spdx_licensing
+    licensing = get_spdx_licensing()
+    licensing.get_advanced_tokenizer()
+    return licensing
+
+
 def key(value):
     return re.sub(r"[^a-z]", "", str(value).split("}")[-1].split(":")[-1].lower())
 
@@ -51,8 +61,7 @@ def text_value(value):
 
 class Inspection:
     def __init__(self, tool, files, options):
-        from license_expression import get_spdx_licensing
-        self.licensing = get_spdx_licensing()
+        self.licensing = spdx_licensing()
         self.files = files
         self.options = options
         self.scanned = 0
@@ -127,8 +136,13 @@ class Inspection:
             return
         self.text_bytes += amount
         text = re.sub(r"REUSE-IgnoreStart.*?REUSE-IgnoreEnd", "", text, flags=re.DOTALL)
+        line, previous = 1, 0
         for match in re.finditer(r"(?im)^\s*(?:[#/*;!<\-]\s*)*SPDX-License-Identifier:\s*([^\r\n]+)", text):
-            self.add("declared_licenses", match[1].strip().removesuffix("*/").removesuffix("-->").strip(), location + f":line {text[:match.start()].count(chr(10))+1}", "SPDX declaration")
+            line += text.count('\n', previous, match.start())
+            previous = match.start()
+            self.add("declared_licenses", match[1].strip().removesuffix("*/").removesuffix("-->").strip(), location + f":line {line}", "SPDX declaration")
+            if len(self.seen) >= 500:
+                break
         for match in re.finditer(r"(?im)^\s*(?:[#/*;!<\-]\s*)*(?:SPDX-FileCopyrightText:|Copyright\b|©)\s*([^\r\n]{1,800})", text):
             self.add("copyright_notices", match.group(0).strip(), location, "Unverified copyright notice in text")
         for match in re.finditer(r"(?i)\blicen[sc]ed\s+under\s+(?:the\s+)?([a-z0-9][a-z0-9.+-]{1,70})(?:\s+licen[sc]e)?", text):
@@ -212,7 +226,10 @@ class Inspection:
             self.skip(name, "Not UTF-8/UTF-16 text; binary content was not scanned.")
             return
         base = PurePosixPath(name.rsplit("!", 1)[-1]).name.lower()
-        license_document = bool(re.match(r"^(licen[sc]e|copying|copyright|notice)([._-]|$)", base) or base.endswith(".license"))
+        # A source module such as license_check.py may contain the detector's
+        # own reference phrases. Its name alone does not make it a license text.
+        document_suffix = PurePosixPath(base).suffix in ("", ".txt", ".md", ".rst", ".html", ".htm", ".license")
+        license_document = bool(document_suffix and (re.match(r"^(licen[sc]e|copying|copyright|notice)([._-]|$)", base) or base.endswith(".license")))
         if base.endswith(".csv"):
             text = "\n".join(line for line in text.splitlines()[:40] if line.lstrip().startswith("#"))
         if not base.endswith((".json", ".jsonld")):

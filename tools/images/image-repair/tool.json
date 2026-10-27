@@ -1,0 +1,36 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-repair",
+  "name": "Repair Photo Defects",
+  "group": "images",
+  "handler": "photo_tools",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Clean small speckles with a median filter or reconstruct selected areas by harmonic diffusion. Estimates surrounding colors; cannot recover hidden originals or repair every photographic defect. Saves a new PNG.",
+  "packages": [
+    "Pillow",
+    "numpy"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "regions",
+    "iterations",
+    "size"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

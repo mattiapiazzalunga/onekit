@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "signature-verify",
+  "name": "Verify digital signature",
+  "group": "security",
+  "handler": "signatures",
+  "accepts": [
+    "*"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Offline cryptographic verification of PDF and CMS/P7M/P7S signatures using embedded certificates. Detached signatures require the original file. Trust chains, revocation, qualified-signature status and trusted timestamps are not checked.",
+  "packages": [
+    "pypdf",
+    "asn1crypto",
+    "pycryptodome"
+  ],
+  "engines": [],
+  "multiple": true,
+  "options": [],
+  "input_mode": "any",
+  "min_files": 1,
+  "max_files": 2,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "gif-to-images",
+  "name": "GIF to images",
+  "group": "converters",
+  "handler": "image_frames",
+  "accepts": [
+    "gif"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Exports each GIF frame as a composed PNG, respecting disposal and transparency. Up to 120 frames and 40 million total pixels. Timing is included in the result details.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,37 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "video-to-text",
+  "name": "Video to text",
+  "group": "video",
+  "handler": "transcription",
+  "accepts": [
+    "mp4",
+    "webm",
+    "mkv",
+    "mov",
+    "avi",
+    "gif",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "ogv",
+    "ts"
+  ],
+  "produces": "txt",
+  "fidelity": "compromise",
+  "note": "Transcribes the audio of a video locally with multilingual Whisper tiny. Exports UTF-8 text and timestamped segments. Recognition can make mistakes; this does not read subtitles or text visible in frames.",
+  "packages": [
+    "faster-whisper"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "language"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

@@ -1,0 +1,28 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "txt-to-pdf",
+  "name": "TXT to PDF",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Creates a PDF with basic paragraph layout from plain text. Original TXT line breaks become paragraphs; unsupported characters or excessive page counts are reported.",
+  "packages": [
+    "reportlab",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "source_encoding"
+  ],
+  "input_mode": "encoded-text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

@@ -8,6 +8,33 @@ import re
 from ...models import OneKitError, Result, output, parse_json
 
 
+def _unified_lines(matcher, fromfile, tofile):
+    """Format the existing line matches with the standard three-line context."""
+    def location(start, stop):
+        length = stop-start
+        return str(start+1) if length == 1 else f"{start if not length else start+1},{length}"
+
+    started = False
+    for group in matcher.get_grouped_opcodes(3):
+        if not started:
+            yield f"--- {fromfile}\n"
+            yield f"+++ {tofile}\n"
+            started = True
+        first, last = group[0], group[-1]
+        yield f"@@ -{location(first[1], last[2])} +{location(first[3], last[4])} @@\n"
+        for kind, start, end, right_start, right_end in group:
+            if kind == 'equal':
+                for line in matcher.a[start:end]:
+                    yield ' '+line
+            else:
+                if kind in ('delete', 'replace'):
+                    for line in matcher.a[start:end]:
+                        yield '-'+line
+                if kind in ('insert', 'replace'):
+                    for line in matcher.b[right_start:right_end]:
+                        yield '+'+line
+
+
 def extract(file, kind, options):
     if kind == "pdf":
         from pypdf import PdfReader
@@ -46,7 +73,7 @@ def run(tool, files, options):
         raise OneKitError("Compare at most 10,000 lines and 2 million characters at a time.")
     matcher = difflib.SequenceMatcher(None, a, b, autojunk=True)
     blocks = [{"kind": tag, "left": a[i:j], "right": b[k:l], "leftStart": i, "rightStart": k} for tag, i, j, k, l in matcher.get_opcodes()]
-    patch = "".join(line if line.endswith("\n") else line + "\n\\ No newline at end of file\n" for line in difflib.unified_diff(a, b, fromfile=files[0].name, tofile=files[1].name))
+    patch = "".join(line if line.endswith("\n") else line + "\n\\ No newline at end of file\n" for line in _unified_lines(matcher, files[0].name, files[1].name))
     details = {"left": left, "right": right, "equal": left == right, "blocks": blocks, "patch": patch}
     return Result([output(files[0], "diff.json", json.dumps(details, ensure_ascii=False, indent=2))], details=details)
 

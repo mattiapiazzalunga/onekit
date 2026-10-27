@@ -1,0 +1,35 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-remove-watermark",
+  "name": "Remove Image Watermark",
+  "group": "images",
+  "handler": "photo_tools",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Reconstruct manually selected watermark areas from surrounding pixels using harmonic diffusion. Estimates missing content; large marks, textures and faces may not reconstruct convincingly. No automatic mark detection.",
+  "packages": [
+    "Pillow",
+    "numpy"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "regions",
+    "iterations"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

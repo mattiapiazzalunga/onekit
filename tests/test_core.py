@@ -31,8 +31,42 @@ def pdf():
 
 
 def processing_case(tool):
+    if tool.id in ('file-metadata-set', 'file-metadata-remove'):
+        return [png()], {'metadata': {'Title': 'OneKit', 'Author': 'Test'}}
+    from test_text_converters import IDS as text_ids, samples as text_samples
+    if tool.id in text_ids:
+        return text_samples(tool)
+    from test_integrity_tools import IDS as integrity_ids, samples as integrity_samples
+    if tool.id in integrity_ids:
+        return integrity_samples(tool)
+    from test_new_converters import IDS, samples
+    if tool.id in IDS:
+        return samples(tool)
+    if tool.id in ("pdf-to-pdfa", "pdf-validate-pdfa"):
+        return [pdf()], {}
+    if tool.id == "color-palette":
+        return [Artifact("color.txt", b"#6750A4")], {"harmony": "analogous"}
     id = tool.id
     options = {}
+    if id == "image-add-text":
+        return [png()], {"text":"Hi", "font_size":8, "margin":1}
+    if id == "pdf-page-numbers":
+        return [pdf()], {}
+    if id in ("color-picker", "image-extract-colors", "jpg-to-svg", "image-repair", "image-remove-watermark", "image-sharpen"):
+        from PIL import Image
+        stream = io.BytesIO()
+        Image.new("RGB", (32, 32), "blue").save(stream, format="JPEG" if id == "jpg-to-svg" else "PNG")
+        return [Artifact("sample.jpg" if id == "jpg-to-svg" else "sample.png", stream.getvalue())], ({"regions":[{"x":.4,"y":.4,"width":.1,"height":.1}]} if id == "image-remove-watermark" else {})
+    if id == "pdf-make-fillable":
+        return [pdf()], {"fields":[{"name":"name", "type":"text", "page":1, "x":.1,"y":.2,"width":.3,"height":.05}]}
+    if id == "pdf-remove-watermark":
+        from reportlab.pdfgen import canvas
+        stream = io.BytesIO()
+        document = canvas.Canvas(stream)
+        document.drawString(50, 500, "WATERMARK")
+        document.save()
+        return [Artifact("marked.pdf", stream.getvalue())], {"text":"WATERMARK"}
+
     if id.startswith("license-"):
         from pathlib import Path
 

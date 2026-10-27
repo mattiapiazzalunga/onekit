@@ -244,12 +244,19 @@ def center_box(matrix, percent):
         for x, value in enumerate(row):
             summed[y + 1][x + 1] = (value not in (TYPE_DATA_DARK, TYPE_DATA_LIGHT)) + summed[y][x + 1] + summed[y + 1][x] - summed[y][x]
     for side in range(max(3, int(n * percent / 100)), 2, -1):
-        positions = sorted(((x, y) for y in range(n // 4, n * 3 // 4 - side + 1)
-                            for x in range(n // 4, n * 3 // 4 - side + 1)),
-                           key=lambda pos: (pos[0] + side / 2 - n / 2) ** 2 + (pos[1] + side / 2 - n / 2) ** 2)
-        for x, y in positions:
-            if summed[y + side][x + side] - summed[y][x + side] - summed[y + side][x] + summed[y][x] == 0:
-                return x, y, side
+        best, distance = None, float('inf')
+        for y in range(n // 4, n * 3 // 4 - side + 1):
+            for x in range(n // 4, n * 3 // 4 - side + 1):
+                if summed[y + side][x + side] - summed[y][x + side] - summed[y + side][x] + summed[y][x] != 0:
+                    continue
+                candidate = (x + side / 2 - n / 2) ** 2 + (y + side / 2 - n / 2) ** 2
+                # Strictly-less preserves the original stable row-major tie break.
+                if candidate < distance:
+                    best, distance = (x, y, side), candidate
+                    if not distance:
+                        return best
+        if best is not None:
+            return best
     raise OneKitError("No space for a center mark in this QR code. Shorten the content or remove the center mark.")
 
 
@@ -366,12 +373,12 @@ def styled_image(qr, fmt, scale, border, dark, light, shape, corners="square", c
 
 def run(tool, files, options):
     if tool.id in ("scan-qrcode", "reverse-qrcode", "qrcode-to-text", "qrcode-to-json", "qrcode-to-vcard"):
-        import zxingcpp
-        from PIL import Image, ImageOps
-        with Image.open(io.BytesIO(files[0].data)) as source:
-            image = ImageOps.exif_transpose(source).convert("RGBA")
-            image = Image.alpha_composite(Image.new("RGBA", image.size, "white"), image).convert("RGB")
-            results = zxingcpp.read_barcodes(image, formats=zxingcpp.BarcodeFormat.QRCode, try_rotate=True, try_invert=True)
+        from ..execution import current_context
+        reader = current_context().symbol_reader
+        if reader is not None:
+            return decode_result(tool.id, list(dict.fromkeys(row["text"] for row in reader(files[0], "qr"))))
+        from .symbols import input_image, read_native
+        results = read_native(input_image(files[0]), 'qr')
         return decode_result(tool.id, list(dict.fromkeys(result.text for result in results if result.valid)))
     import segno
     payload = make_payload(tool.id, files[0])

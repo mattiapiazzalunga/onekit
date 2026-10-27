@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "txt-to-html",
+  "name": "TXT to HTML",
+  "group": "converters",
+  "handler": "text_converters",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "html",
+  "fidelity": "exact",
+  "note": "Creates a safe HTML document with escaped plain text and preserved whitespace. Source markup is displayed literally, never executed.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "source_encoding"
+  ],
+  "input_mode": "encoded-text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

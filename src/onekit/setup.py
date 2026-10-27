@@ -3,6 +3,8 @@
 """Automatic CLI-only setup in the user's private OneKit cache."""
 from __future__ import annotations
 
+from .i18n import gettext as tr
+
 import importlib
 import importlib.util
 import io
@@ -18,8 +20,9 @@ from pathlib import Path
 
 from .models import OneKitError
 
-REQUIREMENTS = {'yt-dlp-ejs': 'yt-dlp-ejs==0.8.0', 'license-expression': 'license-expression==30.4.4', 'olefile': 'olefile==0.47', 'brotli': "brotli>=1.2,<2; sys_platform != 'win32' or platform_machine != 'ARM64'",
+REQUIREMENTS = {'pdfminer.six': 'pdfminer.six==20260107', 'pdftopdfa': 'pdftopdfa==0.9.24', 'pikepdf': 'pikepdf[pdfa]==10.17.0', 'yt-dlp-ejs': 'yt-dlp-ejs==0.8.0', 'license-expression': 'license-expression==30.4.4', 'olefile': 'olefile==0.47', 'brotli': "brotli>=1.2.1,<2; sys_platform != 'win32' or platform_machine != 'ARM64'",
  'defusedxml': 'defusedxml>=0.7.1,<0.8',
+ 'asn1crypto': 'asn1crypto==1.5.1',
  'faster-whisper': 'faster-whisper>=1.2.1,<2',
  'fonttools': 'fonttools>=4.67,<5',
  'json5': 'json5>=0.14,<1',
@@ -33,7 +36,7 @@ REQUIREMENTS = {'yt-dlp-ejs': 'yt-dlp-ejs==0.8.0', 'license-expression': 'licens
  'pooch': 'pooch>=1.8.2,<2',
  'pycryptodome': 'pycryptodome>=3.24.1,<4',
  'pyhanko': 'pyhanko>=0.34,<1',
- 'pypdf': 'pypdf>=6.20.1,<7',
+ 'pypdf': 'pypdf>=6.21.2,<7',
  'pypdfium2': 'pypdfium2>=5.14,<6',
  'pytesseract': 'pytesseract>=0.3.13,<0.4',
  'python-barcode': 'python-barcode==0.16.1',
@@ -41,6 +44,7 @@ REQUIREMENTS = {'yt-dlp-ejs': 'yt-dlp-ejs==0.8.0', 'license-expression': 'licens
  'python-pptx': 'python-pptx>=1.0.2,<2',
  'pyyaml': 'PyYAML>=6.0.3,<7',
  'reportlab': 'reportlab>=4.4,<5',
+ 'resvg-py': 'resvg-py==0.5.0',
  'ruff': 'ruff>=0.17,<0.18',
  'segno': 'segno>=1.6.6,<2',
  'stream-inflate': 'stream-inflate==0.0.12',
@@ -50,7 +54,7 @@ REQUIREMENTS = {'yt-dlp-ejs': 'yt-dlp-ejs==0.8.0', 'license-expression': 'licens
  'xmlschema': 'xmlschema>=4.2,<5',
  'yt-dlp': 'yt-dlp>=2026.8.19,<2027',
  'zxing-cpp': 'zxing-cpp>=3.1.1,<4'}
-MODULES = {"PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdown_it", "python-docx": "docx", "python-pptx": "pptx", "fonttools": "fontTools", "pycryptodome": "Crypto", "zxing-cpp": "zxingcpp", "python-barcode": "barcode"}
+MODULES = {"pdfminer.six": "pdfminer", "PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdown_it", "python-docx": "docx", "python-pptx": "pptx", "fonttools": "fontTools", "pycryptodome": "Crypto", "zxing-cpp": "zxingcpp", "python-barcode": "barcode"}
 # conda-forge packages supply native engines without changing the system installation.
 ENGINE_PACKAGES = {
     "ffmpeg": "ffmpeg", "ffprobe": "ffmpeg", "pandoc": "pandoc", "soffice": "libreoffice",
@@ -90,19 +94,27 @@ def activate():
 
 
 def run(arguments):
-    print("OneKit setup: " + " ".join(map(str, arguments)), file=sys.stderr)
+    print(tr("OneKit setup:") + " " + " ".join(map(str, arguments)), file=sys.stderr)
     try:
         subprocess.run(list(map(str, arguments)), check=True, stdout=sys.stderr, stderr=sys.stderr, timeout=1800)
     except (subprocess.SubprocessError, OSError) as exc:
         raise OneKitError(f"Automatic setup failed: {exc}. Check your connection, disk space and platform support, then retry.") from exc
 
 
-def python_packages(specs):
+def python_packages(specs, *, no_deps=False):
+    # Only the non-OCR API is used. Install its reviewed dependency set explicitly;
+    # upstream currently declares the optional PaddleOCR stack as mandatory.
+    if any(spec in specs for spec in ("pdftopdfa==0.9.24", "pdfminer.six==20260107")) and not no_deps:
+        if sys.version_info < (3, 12):
+            raise OneKitError("PDF/A conversion requires Python 3.12 or newer.")
+        python_packages(["pikepdf[pdfa]==10.17.0", "lxml>=6.1.1", "click>=8.4.2", "colorama>=0.4.6", "tqdm==4.70.1", "fonttools>=4.67,<5", "charset-normalizer>=3.5.2", "numpy>=2.3,<2.4"])
+        python_packages(["pdfminer.six==20260107", "pdftopdfa==0.9.24"], no_deps=True)
+        specs = [spec for spec in specs if spec not in ("pdftopdfa==0.9.24", "pdfminer.six==20260107")]
     if not specs:
         return
     target = activate()
     target.mkdir(parents=True, exist_ok=True)
-    run([sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "--target", target, *specs])
+    run([sys.executable, "-m", "pip", "install", "--disable-pip-version-check", "--target", target, *(["--no-deps"] if no_deps else []), *specs])
     importlib.invalidate_caches()
 
 
@@ -118,7 +130,7 @@ def micromamba():
               ("Darwin", "x86_64"): "osx-64", ("Darwin", "arm64"): "osx-arm64"}.get((system, machine))
     if not target:
         raise OneKitError(f"Automatic native engine setup is unavailable for {system}/{machine}.")
-    print("OneKit setup: downloading the private native-engine installer…", file=sys.stderr)
+    print(tr("OneKit setup: downloading the private native-engine installerâ€¦"), file=sys.stderr)
     try:
         with urllib.request.urlopen(f"https://micro.mamba.pm/api/micromamba/{target}/latest", timeout=120) as response:
             data = response.read(32 * 1024 * 1024 + 1)
@@ -260,7 +272,7 @@ def ensure_tool(tool, options=None):
     if tool.id == "video-download" and options.get("list_formats"):
         engines = []
     native_engines(engines)
-    if "node" in engines and tool.id not in ("dev-regex-test", "license-font", "audio-youtube-download"):
+    if "node" in engines and tool.id not in ("dev-regex-test", "license-font"):
         from .cli import install_node_engines
         target = Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node"))
         if not (target / "node_modules").is_dir():
@@ -284,7 +296,7 @@ def ensure_tool(tool, options=None):
         for code in language.split("+"):
             target = data / f"{code}.traineddata"
             if not target.is_file():
-                print(f"OneKit setup: downloading OCR language {code}…", file=sys.stderr)
+                print(tr(f"OneKit setup: downloading OCR language {code}â€¦"), file=sys.stderr)
                 try:
                     with urllib.request.urlopen(f"https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/main/{code}.traineddata", timeout=120) as response:
                         content = response.read(64 * 1024 * 1024 + 1)

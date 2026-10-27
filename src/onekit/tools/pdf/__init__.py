@@ -38,8 +38,8 @@ def run(tool, files, options):
         signers.sign_pdf(IncrementalPdfFileWriter(io.BytesIO(files[0].data)), signature_meta=signers.PdfSignatureMetadata(field_name="OneKitSignature"), signer=signer, output=stream)
         return Result([output(files[0], "signed.pdf", stream.getvalue())])
     if op == "validate-pdfa":
-        from ..native import run_verapdf
-        return run_verapdf(files[0])
+        from ..pdfa import validate
+        return validate(files[0], options)
     from pypdf import PdfReader, PdfWriter
     reader = PdfReader(io.BytesIO(files[0].data), strict=False)
     if reader.is_encrypted:

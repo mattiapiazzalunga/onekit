@@ -67,7 +67,7 @@ def test_audio_and_video_engines(tmp_path):
 def test_ocr_all_exports():
     from PIL import Image, ImageDraw, ImageFont
     image = Image.new("RGB", (900, 160), "white")
-    font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 54)
+    font = ImageFont.load_default(size=54)
     ImageDraw.Draw(image).text((30, 30), "OneKit document", fill="black", font=font)
     stream = io.BytesIO()
     image.save(stream, format="PNG")

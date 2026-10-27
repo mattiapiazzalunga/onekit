@@ -1,0 +1,28 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "tiff-to-svg",
+  "name": "TIFF to SVG",
+  "group": "converters",
+  "handler": "vector_images",
+  "accepts": [
+    "tiff"
+  ],
+  "produces": "svg",
+  "fidelity": "compromise",
+  "note": "Vectorizes the first TIFF frame as palette-based vector tiles, without an embedded bitmap. Gradients and fine detail are approximated.",
+  "packages": [
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "colors",
+    "resolution"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

@@ -7,6 +7,9 @@ from pathlib import PurePosixPath
 from typing import Any
 import json
 
+_RESERVED_NAMES = frozenset({"CON", "PRN", "AUX", "NUL", *(f"COM{i}" for i in range(1, 10)), *(f"LPT{i}" for i in range(1, 10))})
+_EXTENSION_ALIASES = {"jpg": "jpeg", "tif": "tiff", "htm": "html", "markdown": "md", "yml": "yaml", "tex": "latex"}
+
 
 class OneKitError(ValueError):
     """An actionable processing error, safe to show in the CLI or UI."""
@@ -21,16 +24,14 @@ class Artifact:
         name = self.name.replace("\\", "/")
         if not name or name.startswith("/") or ".." in name.split("/") or ":" in name:
             raise OneKitError("File names must be relative and cannot traverse directories.")
-        reserved = {"CON", "PRN", "AUX", "NUL", *(f"COM{i}" for i in range(1, 10)), *(f"LPT{i}" for i in range(1, 10))}
-        if any(ord(char) < 32 for char in name) or any(part.split(".")[0].upper() in reserved or part.endswith((" ", ".")) for part in name.split("/")):
+        if any(ord(char) < 32 for char in name) or any(part.split(".")[0].upper() in _RESERVED_NAMES or part.endswith((" ", ".")) for part in name.split("/")):
             raise OneKitError("This file name is not portable across supported operating systems.")
         object.__setattr__(self, "name", name)
 
     @property
     def kind(self) -> str:
-        aliases = {"jpg": "jpeg", "tif": "tiff", "htm": "html", "markdown": "md", "yml": "yaml", "tex": "latex"}
         ext = PurePosixPath(self.name).suffix.lower().lstrip(".")
-        return aliases.get(ext, ext)
+        return _EXTENSION_ALIASES.get(ext, ext)
 
     @property
     def stem(self) -> str:

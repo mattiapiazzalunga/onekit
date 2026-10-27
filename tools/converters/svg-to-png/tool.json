@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "svg-to-png",
+  "name": "SVG to PNG",
+  "group": "converters",
+  "handler": "vector_images",
+  "accepts": [
+    "svg"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Renders static, self-contained SVG to PNG. External resources, scripts, animation and embedded images are rejected. Fonts may render differently across devices.",
+  "packages": [
+    "Pillow",
+    "defusedxml",
+    "resvg-py"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "scale"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 8388608,
+  "max_total_bytes": 134217728
+}

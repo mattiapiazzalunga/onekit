@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-remove-watermark",
+  "name": "Remove PDF Watermark",
+  "group": "pdf",
+  "handler": "pdf_design",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Inspect and remove selected text, images and form invocations, including nested forms and font-encoded text. Removes tagged watermark artifacts and watermark annotations automatically. Untagged objects require selection or exact text; flattened marks cannot be separated from their image. Review every page.",
+  "packages": [
+    "pypdf"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "text",
+    "mode",
+    "objects"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

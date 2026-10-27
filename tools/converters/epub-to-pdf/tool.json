@@ -1,0 +1,27 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "epub-to-pdf",
+  "name": "EPUB to PDF",
+  "group": "converters",
+  "handler": "epub_pdf",
+  "accepts": [
+    "epub"
+  ],
+  "produces": "pdf",
+  "fidelity": "compromise",
+  "note": "Exports basic text in EPUB reading order. CSS, images, fixed layouts and interactive content are omitted; encrypted or DRM-protected books are rejected.",
+  "packages": [
+    "reportlab",
+    "Pillow",
+    "defusedxml"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

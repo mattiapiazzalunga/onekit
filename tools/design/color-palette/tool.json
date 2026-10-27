@@ -1,0 +1,29 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "color-palette",
+  "name": "Color Palette Generator",
+  "group": "design",
+  "handler": "design",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Five-color OKLCH palettes with sRGB chroma reduction and WCAG text contrast. Harmony rules are design heuristics, not accessibility guarantees.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "harmony",
+    "lightness",
+    "chroma",
+    "hue",
+    "format"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 128,
+  "max_total_bytes": 1048576
+}

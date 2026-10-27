@@ -2,10 +2,10 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 """Fail closed on unreviewed runtime licenses; report exact versions and source URLs."""
 import argparse
-import importlib.metadata as metadata
 import json
 import re
 import sys
+from importlib import metadata
 from pathlib import Path
 
 from packaging.requirements import Requirement
@@ -17,11 +17,16 @@ REVIEWED = {
     ("pypdfium2", "5.14.0"): "BSD-3-Clause, Apache-2.0, dependency licenses",
     # Unmodified Mozilla trust-store data. Keep upstream notices; review each update.
     ("certifi", "2026.10.19"): "MPL-2.0",
+    ("pikepdf", "10.17.0"): "MPL-2.0",
+    ("pdftopdfa", "0.9.24"): "MPL-2.0+",
+    ("tqdm", "4.70.1"): "MPL-2.0 AND MIT",
 }
 
 
-def check(*, include_signing=False):
+def check(*, include_signing=False, include_pdfa=False):
     records, seen, pending = {}, set(), [("onekit-tools", ("all", "signing") if include_signing else ("all",))]
+    if include_pdfa:
+        pending.extend((name, ()) for name in ("pdftopdfa", "pikepdf", "jsonschema", "referencing", "fonttools", "numpy", "tqdm", "click", "colorama", "lxml"))
     while pending:
         name, extras = pending.pop()
         key = (name.lower().replace("_", "-"), tuple(sorted(extras)))
@@ -39,6 +44,14 @@ def check(*, include_signing=False):
         records[key[0]] = {"name": info["Name"], "version": distribution.version, "license": license[:300], "approved": approved, "urls": info.get_all("Project-URL", [])}
         for dependency in distribution.requires or []:
             requirement = Requirement(dependency)
+            # The fixed level-B API cannot invoke OCR or A/U layout tagging.
+            # Their optional dependencies are not installed by OneKit setup.
+            if include_pdfa and key[0] == "pdftopdfa" and requirement.name.lower() in ("paddleocr",):
+                continue
+            # Only CMap/encoding utilities are used; the PDF parser requiring
+            # cryptography is not imported by the fixed level-B API.
+            if include_pdfa and key[0] == "pdfminer.six" and requirement.name.lower() == "cryptography":
+                continue
             if requirement.marker and not any(requirement.marker.evaluate({"extra": extra}) for extra in ("", *extras)):
                 continue
             pending.append((requirement.name, tuple(requirement.extras)))
@@ -56,4 +69,6 @@ def check(*, include_signing=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--include-signing", action="store_true", help="Also audit the separately installed signing extra (mandatory in CI).")
-    sys.exit(check(include_signing=parser.parse_args().include_signing))
+    parser.add_argument("--include-pdfa", action="store_true", help="Also audit the fixed non-OCR PDF/A backend installed by CLI setup.")
+    args = parser.parse_args()
+    sys.exit(check(include_signing=args.include_signing, include_pdfa=args.include_pdfa))

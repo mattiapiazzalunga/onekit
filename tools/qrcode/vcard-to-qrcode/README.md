@@ -19,7 +19,7 @@ Options: `format`, `shape`, `corner_style`, `overlay_type`, `overlay_text`, `ove
 Python packages: segno, Pillow.
 External engines: see the developer engine matrix for language adapters.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/qrcode/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/qrcode.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

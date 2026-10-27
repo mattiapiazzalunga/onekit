@@ -19,7 +19,7 @@ Options: `pattern`, `flags`, `max_matches`, `enable_replacement`, `replacement`.
 Python packages: standard library or external engine.
 External engines: node.
 
-Processing implementation: [shared family adapter](../../../src/onekit/tools/regex_tester/__init__.py).
+Processing implementation: [shared family adapter](../../../src/onekit/tools/regex_tester.py).
 Contracts and regression fixtures: [tests](../../../tests/test_core.py).
 Engine setup and licenses: [engine guide](../../../docs/engines.md).
 

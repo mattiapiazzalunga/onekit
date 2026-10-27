@@ -103,32 +103,8 @@ def convert_document(file, source, target, options):
 
 
 def pdfa(file, options):
-    from ..models import require
-    # ICC profiles have independent copyright; the caller supplies a licensed profile.
-    profile = Path(require(options, "icc_profile")).resolve()
-    if not profile.is_file():
-        raise OneKitError("icc_profile must point to an installed sRGB ICC profile.")
-    with tempfile.TemporaryDirectory(prefix="onekit-") as directory:
-        work = Path(directory)
-        (work / "input.pdf").write_bytes(file.data)
-        shutil.copyfile(profile, work / "srgb.icc")
-        (work / "pdfa.ps").write_text('%!\n/ICCProfile (srgb.icc) def\n[/_objdef {icc_PDFA} /type /stream /OBJ pdfmark\n[{icc_PDFA} << /N 3 >> /PUT pdfmark\n[{icc_PDFA} ICCProfile (r) file /PUT pdfmark\n[/_objdef {OutputIntent_PDFA} /type /dict /OBJ pdfmark\n[{OutputIntent_PDFA} << /Type /OutputIntent /S /GTS_PDFA1 /DestOutputProfile {icc_PDFA} /OutputConditionIdentifier (sRGB) >> /PUT pdfmark\n[{Catalog} << /OutputIntents [{OutputIntent_PDFA}] >> /PUT pdfmark\n', encoding="ascii")
-        command("gs", ["-dSAFER", "-dBATCH", "-dNOPAUSE", "-sDEVICE=pdfwrite", "-dPDFA=2", "-dPDFACompatibilityPolicy=1", "-sColorConversionStrategy=RGB", "-sOutputFile=output.pdf", "pdfa.ps", "input.pdf"], directory)
-        return Result([Artifact(f"{file.stem}.pdf", (work / "output.pdf").read_bytes())], ["Run a standards validator on the output before relying on PDF/A conformance."])
-
-
-def run_verapdf(file):
-    import json
-    from xml.etree import ElementTree
-
-    from ..models import output
-    with tempfile.TemporaryDirectory(prefix="onekit-") as directory:
-        Path(directory, "input.pdf").write_bytes(file.data)
-        report = command("verapdf", ["--format", "xml", "input.pdf"], directory)
-        root = ElementTree.fromstring(report)
-        validations = [element.attrib for element in root.iter() if element.tag.rsplit("}", 1)[-1] == "validationReport"]
-        details = {"compliant": bool(validations) and all(item.get("isCompliant") == "true" for item in validations), "reports": validations}
-        return Result([output(file, "validation.json", json.dumps(details, indent=2))], details=details)
+    from .pdfa import convert
+    return convert(file, options)
 
 
 def markdown_word(file):

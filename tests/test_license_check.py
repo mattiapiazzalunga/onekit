@@ -222,3 +222,22 @@ def test_legacy_office_metadata_uses_olefile(extension, monkeypatch):
     assert report["declared_creators"][0]["value"] == "Alice"
     assert report["declared_licenses"][0]["spdx_expression"] == "MIT"
     assert any("Legacy Office" in item["reason"] for item in report["coverage"]["skipped"])
+
+
+@pytest.mark.parametrize("name", ["license_check.py", "license.js", "copyright.ts", "notice.go", "copying.rs"])
+def test_source_named_like_license_is_not_a_license_document(name):
+    from pathlib import Path
+    from onekit.tools import license_check
+
+    source = Path(license_check.__file__).read_bytes()
+    report = execute("license-code", [Artifact("repository.zip", archive({"src/" + name: source}))]).details
+    assert report["estimated_license_matches"] == []
+    assert any(item["value"] == "LicenseRef-PolyForm-Shield-1.0.0" for item in report["declared_licenses"])
+
+
+@pytest.mark.parametrize("name", ["LICENSE", "LICENSE.txt", "LICENSE-MIT", "COPYING.md", "NOTICE.rst", "source.py.license"])
+def test_license_documents_still_report_tentative_matches(name):
+    text = "Permission is hereby granted without restriction. The software is provided as is."
+    report = execute("license-code", [Artifact("repository.zip", archive({name: text}))]).details
+    assert [item["value"] for item in report["estimated_license_matches"]] == ["MIT"]
+    assert report["estimated_license_matches"][0]["verified"] is False
