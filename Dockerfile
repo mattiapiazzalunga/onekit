@@ -1,6 +1,6 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
-FROM python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f AS build
+FROM python:3.14-slim@sha256:cd89c30eda26ee911a4611b18680086e0ea42e6f5f8cbe653d07fa7958c9cec8 AS build
 RUN python -m pip install --no-cache-dir uv==0.13.1
 WORKDIR /build
 COPY pyproject.toml uv.lock README.md LICENSE NOTICE ./
@@ -8,7 +8,7 @@ COPY src ./src
 ENV UV_PROJECT_ENVIRONMENT=/opt/venv
 RUN uv sync --locked --extra all --no-editable
 
-FROM python:3.13-slim@sha256:70729b46c69b4f1e97c4822c1af3df53a1476cf5ddc6c087c0c10bc3a5678c2f
+FROM python:3.14-slim@sha256:cd89c30eda26ee911a4611b18680086e0ea42e6f5f8cbe653d07fa7958c9cec8
 LABEL org.opencontainers.image.title="OneKit" \
       org.opencontainers.image.source="https://github.com/mattiapiazzalunga/onekit" \
       org.opencontainers.image.licenses="LicenseRef-PolyForm-Shield-1.0.0" \
