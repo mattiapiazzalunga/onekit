@@ -73,6 +73,21 @@ def test_formats_return_evidence_without_certification(kind, monkeypatch):
     assert len(report["files"][0]["sha256"]) == 64
 
 
+@pytest.mark.parametrize("kind,extension,part", [
+    ("powerpoint", "pptx", "ppt/presentation.xml"),
+    ("word", "docx", "word/document.xml"),
+    ("excel", "xlsx", "xl/workbook.xml"),
+])
+def test_damaged_office_xml_preserves_readable_metadata(kind, extension, part):
+    metadata = '<m><rights>MIT</rights></m>'
+    data = archive({"docProps/core.xml": metadata, part: "<broken>"})
+    report = execute("license-" + kind, [Artifact("partial." + extension, data)]).details
+    assert report["permission_to_use"] == "not-determined"
+    assert report["coverage"]["complete"] is False
+    assert any(item["spdx_expression"] == "MIT" for item in report["declared_licenses"])
+    assert any(item["location"] == part for item in report["coverage"]["skipped"])
+
+
 @pytest.mark.parametrize("kind", ["audio", "video"])
 def test_media_tags_use_ffprobe(kind, monkeypatch):
     from onekit.tools import native
