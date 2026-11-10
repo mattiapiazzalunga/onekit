@@ -103,6 +103,11 @@ def test_node_minifiers(language):
 
 
 NODE_SAMPLES = {**SAMPLES, "json5": '{unquoted: 1}', "jsonc": '{"value": 1 /* comment */}', "yaml": "value: 1\n", "svg": '<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0L10 10"/></svg>'}
+NODE_SAMPLES.update({
+    "ruby": "def greeting(name)\n  puts name\nend\n",
+    "kotlin": "fun main() { println(\"OneKit\") }\n",
+    "latex": "\\begin{itemize}\n\\item OneKit\n\\end{itemize}\n",
+})
 
 
 @pytest.mark.parametrize("tool", [tool for tool in TOOLS.values() if tool.group == "developer" and tool.id not in ['dev-format-xml', 'dev-format-svg', 'dev-format-json', 'dev-format-toml', 'dev-validate-python', 'dev-validate-xml', 'dev-validate-svg', 'dev-validate-json', 'dev-validate-json5', 'dev-validate-jsonc', 'dev-validate-yaml', 'dev-validate-toml', 'dev-validate-xsd', 'dev-validate-json-schema', 'dev-validate-csv', 'dev-minify-json'] and engine_for(tool) == "node"], ids=lambda tool: tool.id)

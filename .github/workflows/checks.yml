@@ -104,6 +104,8 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install -y --no-install-recommends ffmpeg ghostscript pandoc texlive-latex-base texlive-latex-recommended texlive-fonts-recommended lmodern libreoffice tesseract-ocr libimage-exiftool-perl fonts-dejavu-core
       - run: uv run --no-sync python -m onekit engines install
+      - name: Install the pinned optional Pandoc WASM engine
+        run: uv run --no-sync python -c "from onekit.catalog import TOOLS; from onekit.setup import ensure_tool; ensure_tool(TOOLS['latex-to-html'])"
       - run: uv run --no-sync python -m pytest -q -m native
   required:
     if: always()
