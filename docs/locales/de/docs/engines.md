@@ -22,6 +22,14 @@ Die Wiedergabetreue von Office-Dokumenten hängt von Schriftarten und Ressourcen
 <a id="developer-tools"></a>
 ## Developer tools
 
+Formatiert Kotlin mit ktfmt und Ruby mit Syntax Tree und RuboCop über WASM-Pakete mit festgelegten Versionen. Führe `onekit engines install` aus. Bis zu 256 KiB pro Eingabedatei; die Projektkonfiguration wird nicht geladen.
+
+Formatiert LaTeX mit tex-fmt und festen Einstellungen. Die Projektkonfiguration wird nicht geladen. Bis zu 256 KiB pro Eingabedatei.
+
+Konvertiert eigenständige LaTeX-Dokumente mit Pandoc 3.9. Externe Dateien und TeX-Kompilierung werden nicht unterstützt. Bis zu 256 KiB pro Eingabedatei.
+
+`dev-format-latex`: `Node.js 24+`; `tex-fmt` WASM, MIT. `latex-to-html`, `latex-to-md`: `onekit setup latex-to-html`; `pandoc-wasm@1.1.0`, GPL-2.0-or-later; `ONEKIT_PANDOC_ENGINE_PATH`, `ONEKIT_ALLOW_COPYLEFT=0`.
+
 Installieren Sie Node.js 24+ und führen Sie `onekit engines install` für gesperrte Prettier/Plugins, esbuild, HTML Minifier, SVGO und GraphQL.js aus. Sie werden im Benutzer-OneKit-Cache installiert, nicht global. `ONEKIT_NODE_ENGINE_PATH` wählt eine Alternative. Führen Sie den Installer nach einem genehmigten Engine-Update erneut aus. Die Parser-Gruppe umfasst JS/TS/JSX/TSX, Markup, Stylesheets, Markdown/MDX, GraphQL, Vue, Svelte, Astro, Solidity und PHP.
 
 Installieren Sie upstream Compiler/Launcher für Ihr Betriebssystem und fügen Sie die dokumentierten Befehle zum PATH hinzu. Einige isolierte Dateien benötigen ihre Projektabhängigkeiten oder den genauen Java Klassennamen. Formatierungs-/Parser-Validierung beweist nicht die projektweite Typkorrektheit.

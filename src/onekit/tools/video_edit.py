@@ -6,6 +6,7 @@ import math
 import tempfile
 from pathlib import Path
 
+from ..limits import LIMITS
 from ..models import Artifact, OneKitError, Result
 from .native import command
 
@@ -122,7 +123,7 @@ def frames_result(file, frames):
     artifacts = []
     for index,data in enumerate(frames,1):
         with Image.open(io.BytesIO(data)) as image:
-            if image.format != 'BMP' or image.width*image.height>40000000:
+            if image.format != 'BMP' or image.width*image.height>LIMITS.max_image_pixels:
                 raise OneKitError('The video engine returned an invalid frame image.')
             artifacts.append(Artifact(f'{file.stem}-frame-{index:04d}.png',encode(image,'png')))
     return Result(artifacts,details={'frames':len(artifacts)})

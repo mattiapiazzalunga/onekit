@@ -15,23 +15,20 @@ from pathlib import Path
 from . import __version__
 from .api import execute, pipeline
 from .catalog import TOOLS, manifest
+from .i18n import LANGUAGES, configure
+from .i18n import gettext as tr
 from .models import Artifact, OneKitError
 from .validation import MAX_BYTES
 from .workflows import WORKFLOW_FILENAME, dump_workflow, load_workflow
-
-from .i18n import LANGUAGES, configure, gettext as tr
-WEBSITE_MESSAGE = "Try the free OneKit web app at https://onekit.org"
 
 CONTRIBUTING_MESSAGE = (
     "Help build OneKit's open revolution: make everyday and agentic tools more efficient and effective. "
     "Contribute: https://github.com/mattiapiazzalunga/onekit/blob/main/CONTRIBUTING.md"
 )
-HELP_EPILOG = f"{WEBSITE_MESSAGE} {CONTRIBUTING_MESSAGE}"
 
 
 def welcome(stream):
     print(tr(f"Welcome to OneKit {__version__}! Your files stay yours."), file=stream)
-    print(tr(WEBSITE_MESSAGE), file=stream)
     print(tr(CONTRIBUTING_MESSAGE), file=stream)
 
 PACKAGE_MODULES = {"pdfminer.six": "pdfminer", "PyYAML": "yaml", "Pillow": "PIL", "markdown-it-py": "markdown_it", "python-docx": "docx", "python-pptx": "pptx", "fonttools": "fontTools", "pycryptodome": "Crypto", "zxing-cpp": "zxingcpp", "python-barcode": "barcode"}
@@ -62,6 +59,13 @@ def doctor(tool_id=None):
     for tool in ([TOOLS[tool_id]] if tool_id else TOOLS.values()):
         packages = list(tool.packages)
         engines = list(tool.engines)
+        original_dss = False
+        if tool.id == 'signature-verify':
+            from .tools.signature_dss import RUNTIME_PACKAGES, configured_runtime
+            original_dss = configured_runtime() is not None
+            if original_dss:
+                packages = [name for name in packages if name in RUNTIME_PACKAGES]
+                engines.append('node')
         if tool.group == "developer":
             from .tools.developer import engine_for
             engine = engine_for(tool)
@@ -69,13 +73,23 @@ def doctor(tool_id=None):
                 engines.append(engine)
         missing = [name for name in packages if package_missing(name)]
         blocked = [name for name in engines if name in COPYLEFT and os.environ.get("ONEKIT_ALLOW_COPYLEFT") == "0"]
+        if tool.id in ('latex-to-html', 'latex-to-md'):
+            from .tools.pandoc import engine_ready
+            if os.environ.get('ONEKIT_ALLOW_COPYLEFT') == '0':
+                blocked.append('pandoc-wasm')
+            elif not engine_ready():
+                missing.append('pandoc-wasm')
+        if original_dss and os.environ.get('ONEKIT_ALLOW_COPYLEFT') == '0':
+            blocked.append('DSS')
         for name in engines:
             if name in blocked:
                 continue
             if engine_missing(name):
                 missing.append(name)
-        if "node" in engines and tool.id != "dev-regex-test" and not (Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node")) / "node_modules").is_dir():
-            missing.append("OneKit Node engines (onekit engines install)")
+        if "node" in engines and not original_dss and tool.id != "dev-regex-test":
+            from .tools.developer import node_engines_ready
+            if not node_engines_ready(tool.id.removeprefix('dev-format-')):
+                missing.append("OneKit Node engines (onekit engines install)")
         if tool.id == "dev-format-powershell" and "pwsh" not in missing:
             try:
                 command("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){exit 1}"], Path.cwd(), timeout=10)
@@ -156,7 +170,7 @@ def write_files(result, destination, force=False):
 def parser():
     argparse._ = tr
     argparse.ngettext = lambda singular, plural, count: tr(singular if count == 1 else plural)
-    root = argparse.ArgumentParser(prog="onekit", description=tr("One simple toolkit. Your files stay yours."), epilog=tr(WEBSITE_MESSAGE) + " " + tr(CONTRIBUTING_MESSAGE))
+    root = argparse.ArgumentParser(prog="onekit", description=tr("One simple toolkit. Your files stay yours."), epilog=tr(CONTRIBUTING_MESSAGE))
     root.add_argument("--language", choices=LANGUAGES, help=tr("Interface language"))
     root.add_argument("--version", action="version", version=__version__)
     commands = root.add_subparsers(dest="command", required=True)
@@ -199,7 +213,7 @@ def parser():
         command.add_argument("--force", action="store_true")
         command.add_argument("--ask-password", action="store_true", help=tr("Read a password without exposing it in shell history"))
     for command in commands.choices.values():
-        command.epilog = tr(WEBSITE_MESSAGE) + " " + tr(CONTRIBUTING_MESSAGE)
+        command.epilog = tr(CONTRIBUTING_MESSAGE)
     return root
 
 

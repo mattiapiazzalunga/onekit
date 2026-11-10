@@ -10,10 +10,11 @@ import zipfile
 from xml.etree import ElementTree
 
 from .execution import MAX_BYTES
+from .limits import LIMITS
 from .models import Artifact, OneKitError, parse_json
 
-MAX_FILES = 256
-MAX_PIXELS = 40_000_000
+MAX_FILES = LIMITS.max_files
+MAX_PIXELS = LIMITS.max_image_pixels
 TEXT_CONTROLS = re.compile(r"[\x00-\x08\x0b\x0e-\x1f\x7f]")
 TEXT_BYTES = bytes(value for value in range(256) if value not in (*range(9), 11, *range(14, 32), 127))
 
@@ -103,6 +104,8 @@ def validate_binary(file, tool, expanded_limit):
             if tool.id == "image-to-base64":
                 with Image.open(io.BytesIO(data)) as image:
                     image.load()
+    elif kind in ('apk', 'xapk'):
+        validate_zip(data, expanded_limit)
     elif kind in ("docx", "pptx", "xlsx", "zip", "epub"):
         validate_zip(data, expanded_limit, kind, allow_encrypted=tool.id == "security-decrypt")
     elif kind in ("ttf", "otf", "woff", "woff2"):
@@ -144,17 +147,17 @@ def validate_zip(data, limit, kind="zip", *, allow_encrypted=False):
     if end < 0 or end + 22 > len(data):
         raise OneKitError("The ZIP directory is missing or truncated.")
     _, disk, directory_disk, disk_count, count, size, offset, comment = struct.unpack_from("<4s4H2LH", data, end)
-    if disk or directory_disk or disk_count != count or count > 4096 or offset + size != end or end + 22 + comment != len(data):
+    if disk or directory_disk or disk_count != count or count > LIMITS.max_archive_entries or offset + size != end or end + 22 + comment != len(data):
         raise OneKitError("Invalid, oversized, multi-volume or ZIP64 archive directory.")
     cursor, total, actual_count = offset, 0, 0
     # Inspect directory records before ZipFile allocates its complete entry table.
     while cursor < end:
-        if actual_count >= 4096 or cursor + 46 > end or data[cursor:cursor+4] != b"PK\x01\x02":
+        if actual_count >= LIMITS.max_archive_entries or cursor + 46 > end or data[cursor:cursor+4] != b"PK\x01\x02":
             raise OneKitError("Invalid or oversized ZIP directory.")
         compressed, expanded = struct.unpack_from("<II", data, cursor + 20)
         lengths = struct.unpack_from("<3H", data, cursor + 28)
         total += expanded
-        if total > limit or expanded > max(compressed, 1) * 1000:
+        if total > limit or expanded > max(compressed, 1) * LIMITS.max_archive_ratio:
             raise OneKitError("Archive expansion exceeds safety limits.")
         cursor += 46 + sum(lengths)
         actual_count += 1
@@ -162,7 +165,7 @@ def validate_zip(data, limit, kind="zip", *, allow_encrypted=False):
         raise OneKitError("The ZIP directory entry counts or lengths do not match.")
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         entries = archive.infolist()
-        if len(entries) > 4096:
+        if len(entries) > LIMITS.max_archive_entries:
             raise OneKitError("Archive contains more than 4096 entries.")
         total, names = 0, set()
         for entry in entries:
@@ -171,7 +174,7 @@ def validate_zip(data, limit, kind="zip", *, allow_encrypted=False):
                 raise OneKitError("Archive contains an unsafe path, duplicate, encrypted or linked entries.")
             names.add(name)
             total += entry.file_size
-            if total > limit or entry.file_size > max(entry.compress_size, 1) * 1000:
+            if total > limit or entry.file_size > max(entry.compress_size, 1) * LIMITS.max_archive_ratio:
                 raise OneKitError("Archive expansion exceeds safety limits.")
         if kind == "zip":
             return

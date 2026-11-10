@@ -21,3 +21,5 @@ Pour les installations sans exécutables de documents natifs, l’API Python de 
 `tools/transcription.py` expose `recognition_parameters`, y compris le modèle, la langue, le taux d’échantillonnage, la largeur du faisceau et le conditionnement du texte précédent. Un autre hôte d’inférence doit explicitement supporter ces paramètres ; des paramètres partagés n’établissent pas l’équivalence des implémentations de décodage ou des conversions de modèles quantifiés.
 
 Le gestionnaire de développement utilise directement sqlparse et SQLFluff lorsqu'ils sont installés dans son environnement Python. Les commandes autonomes originales `sqlformat` et `sqlfluff` restent prises en charge lorsque ces imports ne sont pas disponibles. La validation SQL utilise le dialecte SQLFluff demandé, avec ANSI comme valeur par défaut ; elle n'exécute pas les requêtes.
+
+Les plafonds de ressources partagés sont définis dans `src/onekit/limits.py`. Les appelants peuvent les réduire via `ExecutionContext`, mais ne peuvent pas dépasser les plafonds du cœur.

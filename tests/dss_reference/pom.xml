@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.onekit.test</groupId><artifactId>dss-reference</artifactId><version>1</version>
+  <properties><maven.compiler.release>17</maven.compiler.release></properties>
+  <dependencies>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-pades-pdfbox</artifactId><version>6.5.1</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-cades</artifactId><version>6.5.1</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-validation</artifactId><version>6.5.1</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-policy-jaxb</artifactId><version>6.5.1</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-cms-object</artifactId><version>6.5.1</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-crl-parser-x509crl</artifactId><version>6.5.1</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-utils-apache-commons</artifactId><version>6.5.1</version></dependency>
+  </dependencies>
+</project>

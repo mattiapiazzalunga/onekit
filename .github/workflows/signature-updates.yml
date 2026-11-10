@@ -1,0 +1,55 @@
+# Copyright 2026 Mattia Piazzalunga
+# SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+name: Signature dependency alerts
+on:
+  schedule:
+    - cron: '37 6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: signature-dependency-alerts
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - name: Check DSS and public trust lists
+        id: check
+        continue-on-error: true
+        run: python scripts/check_signature_updates.py
+      - name: Maintain the owner notification
+        if: always() && steps.check.outputs.attention != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ATTENTION: ${{ steps.check.outputs.attention }}
+        run: |
+          cat .artifacts/signature-maintenance/signature-updates.md >> "$GITHUB_STEP_SUMMARY"
+          issue=$(gh issue list --state open --author 'github-actions[bot]' --search '"Signature dependency updates" in:title' --json number,title --jq '.[] | select(.title == "Signature dependency updates") | .number' | head -1)
+          if [ "$ATTENTION" = true ]; then
+            if [ -n "$issue" ]; then
+              gh issue edit "$issue" --body-file .artifacts/signature-maintenance/signature-updates.md
+            else
+              gh issue create --title 'Signature dependency updates' --assignee mattiapiazzalunga --body-file .artifacts/signature-maintenance/signature-updates.md
+            fi
+          elif [ -n "$issue" ]; then
+            gh issue close "$issue"
+          fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: signature-dependency-report
+          path: .artifacts/signature-maintenance/
+      - name: Fail visibly on incomplete checks
+        if: steps.check.outcome != 'success'
+        run: exit 1

@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 
 import ctranslate2
@@ -21,6 +22,8 @@ LANGUAGES = tuple(os.environ.get("ONEKIT_TRANSLATION_LANGUAGES", ",".join(AVAILA
 TECHNICAL_ACRONYMS = ('PDF', 'PDF/A', 'DOC', 'DOCX', 'DOCM', 'ODT', 'RTF', 'TXT', 'MD', 'MDX', 'HTML', 'HTM', 'CSS', 'SCSS', 'LESS', 'XML', 'XSD', 'XSLT', 'JSON', 'JSONC', 'JSON5', 'YAML', 'YML', 'TOML', 'HCL', 'CSV', 'TSV', 'XLS', 'XLSX', 'XLSM', 'PPT', 'PPTX', 'ODP', 'EPUB', 'FB2', 'MOBI', 'AZW', 'AZW3', 'PNG', 'JPG', 'JPEG', 'TIFF', 'TIF', 'WEBP', 'AVIF', 'HEIC', 'HEIF', 'GIF', 'SVG', 'BMP', 'ICO', 'ICNS', 'APNG', 'RAW', 'DNG', 'PSD', 'WAV', 'MP3', 'MP4', 'M4A', 'M4V', 'WEBM', 'MOV', 'AVI', 'MKV', 'FLV', 'OGG', 'OGV', 'OPUS', 'FLAC', 'AAC', 'AIFF', 'AU', 'AMR', 'QR', 'AI', 'OCR', 'CLI', 'API', 'SDK', 'HTTP', 'HTTPS', 'FTP', 'SFTP', 'SSH', 'SSL', 'TLS', 'TCP', 'UDP', 'IP', 'DNS', 'URI', 'URL', 'URN', 'SPDX', 'MIME', 'UTF-8', 'UTF‑8', 'ASCII', 'POSIX', 'UNIX', 'ANSI', 'EXIF', 'XMP', 'IPTC', 'GPS', 'ICC', 'ICM', 'RGB', 'RGBA', 'CMYK', 'HSV', 'HSL', 'HSB', 'LAB', 'LCH', 'HEX', 'HSLA', 'ONNX', 'WASM', 'GPU', 'CPU', 'RAM', 'GB', 'MB', 'KB', 'MiB', 'KiB', 'GiB', 'SRT', 'VTT', 'ASS', 'SSA', 'WEBVTT', 'TTF', 'OTF', 'WOFF', 'WOFF2', 'EOT', 'CFF', 'ZIP', 'TAR', 'TGZ', 'GZ', 'BZ2', 'XZ', 'RAR', 'LZMA', 'ZSTD', 'MIT', 'BSD', 'MPL', 'GPL', 'LGPL', 'AGPL', 'OFL', 'PSF', 'ISC', 'CC0', 'CC', 'README', 'GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'DPI', 'NIST', 'BE', 'LE', 'BOM', 'AIF', 'WMA', 'MPEG', 'MPG', 'TS', 'CMU')
 PROTECT = re.compile(r"Mattia Piazzalunga|SPDX-License-Identifier|SPDX-FileCopyrightText|MIT-CMU|LicenseRef-[A-Za-z0-9._-]+|\b[A-Za-z][A-Za-z0-9._-]*-\d[0-9.]*(?:-[A-Za-z0-9]+)*\+?|\.1kit\b|Times New Roman|DejaVu Sans|Noto Sans|Courier New|<[^>]+>|`[^`\n]+`|(?<=\]\()[^)]*(?=\))|https?://[^\s<>\])]+|[\w.+-]+@[\w.-]+\.[A-Za-z]+|\{\d+\}|%\([\w]+\)[a-z]|%[a-z]|\bPolyForm Shield(?: 1\.0\.0)?\b|\b(?:AGPL|LGPL|GPL)-\d(?:\.\d+)*(?:-or-later|-only)?\b|\b(?:LaTeX|Markdown|Base64|Jupyter|OpenAPI|AsyncAPI|TypeScript|JavaScript|PowerShell|PowerPoint|Excel|Python|FFmpeg|WebAssembly|Inter|Arial|Helvetica|Georgia|Courier|OneKit|Java|Kotlin|Scala|Swift|Dart|Rust|Ruby|Haskell|Julia|Elixir|Solidity|Svelte|Vue|Lua|Bash|Shell|Terraform|GraphQL|Node\.js|vCard|Wi-Fi|Windows|macOS|Linux|Chrome|Chromium|Firefox|Safari)\b|\bWord\b(?!\s+(?:and [Cc]haracter|count))|\bonekit(?:[.-][a-z0-9]+)*\b|--[a-z][a-z0-9-]*" + r"|\b(?:" + "|".join(re.escape(term) for term in TECHNICAL_ACRONYMS) + r")\b|\b[A-Z][A-Z0-9_+/.:-]*[0-9][A-Z0-9_+/.:-]*\b|\b[A-Z]+(?:_[A-Z0-9]+)+\b")
 PROTECT = re.compile(r"\]\([^)]*\)|!?\[|\b(?:PyPI|GitHub|wheel)\b|" + PROTECT.pattern)
+PROTECT = re.compile(r"\b(?:Go|Less)\b|" + PROTECT.pattern)
+PROTECT = re.compile(r"``[^`\n]+``|" + PROTECT.pattern)
 SOURCES = {path: json.loads((path / "en.json").read_text(encoding="utf-8")) for path in DIRECTORIES}
 
 
@@ -40,7 +43,14 @@ def split_sentences(text):
 def write(path, source, catalog):
     temporary = path.with_suffix(".json.tmp")
     temporary.write_text(json.dumps({key: catalog[key] for key in source if key in catalog}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    temporary.replace(path)
+    for attempt in range(6):
+        try:
+            temporary.replace(path)
+            break
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(0.1 * (attempt + 1))
 
 
 def run(language):

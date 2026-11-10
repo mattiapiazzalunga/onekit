@@ -4,14 +4,16 @@
   "private": true,
   "license": "LicenseRef-PolyForm-Shield-1.0.0",
   "dependencies": {
-    "prettier": "3.9.10",
+    "@prettier/plugin-php": "0.26.0",
+    "@scalar/kotlin-fmt": "0.4.1",
+    "@scalar/ruby-fmt": "0.7.1",
     "esbuild": "0.28.2",
-    "html-minifier-terser": "7.2.0",
-    "svgo": "4.1.0",
     "graphql": "17.0.2",
-    "prettier-plugin-svelte": "4.1.1",
-    "prettier-plugin-astro": "1.1.1",
+    "html-minifier-terser": "7.2.0",
+    "prettier": "3.9.10",
+    "prettier-plugin-astro": "1.1.2",
     "prettier-plugin-solidity": "2.4.1",
-    "@prettier/plugin-php": "0.25.0"
+    "prettier-plugin-svelte": "4.1.1",
+    "svgo": "4.1.0"
   }
 }

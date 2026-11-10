@@ -1,6 +1,9 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 .venv/
+.venv-*/
+tests/dss_reference/target/
+tests/dss_reference/classpath.txt
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -39,3 +42,5 @@ build/
 *.pfx
 .DS_Store
 Thumbs.db
+engines/**/target/
+engines/**/classpath.txt

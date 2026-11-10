@@ -1,0 +1,5 @@
+face-astronaut.png is a resized copy of the public-domain NASA portrait of
+astronaut Eileen Collins distributed with scikit-image 0.24.0.
+Source: https://github.com/scikit-image/scikit-image/blob/v0.24.0/skimage/data/astronaut.png
+Provenance: https://scikit-image.org/docs/0.24.x/api/skimage.data.html#skimage.data.astronaut
+Used only to verify face detection and image processing. No endorsement is implied.

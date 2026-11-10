@@ -1,0 +1,38 @@
+<!-- Copyright 2026 Mattia Piazzalunga; SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.onekit</groupId><artifactId>signature-engine</artifactId><version>0.1.0</version>
+  <properties><maven.compiler.release>17</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><dss.version>6.5.1</dss.version></properties>
+  <dependencies>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-validation</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>2.0.17</version><scope>runtime</scope></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-pades-pdfbox</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-cades</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-xades</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-jades</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-asic-cades</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-asic-xades</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-tsl-validation</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>specs-trusted-list-v211</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-policy-jaxb</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-cms-object</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-crl-parser-x509crl</artifactId><version>${dss.version}</version></dependency>
+    <dependency><groupId>eu.europa.ec.joinup.sd-dss</groupId><artifactId>dss-utils-apache-commons</artifactId><version>${dss.version}</version></dependency>
+  </dependencies>
+  <build><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><version>3.6.1</version>
+      <executions><execution><phase>package</phase><goals><goal>shade</goal></goals><configuration>
+        <createDependencyReducedPom>false</createDependencyReducedPom>
+        <filters><filter><artifact>*:*</artifact><excludes>
+          <exclude>META-INF/*.SF</exclude><exclude>META-INF/*.RSA</exclude><exclude>META-INF/*.DSA</exclude><exclude>META-INF/*.EC</exclude>
+          <exclude>module-info.class</exclude><exclude>META-INF/versions/**/module-info.class</exclude>
+        </excludes></filter></filters>
+        <transformers>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer"/>
+          <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"><manifestEntries><Multi-Release>true</Multi-Release></manifestEntries></transformer>
+        </transformers>
+      </configuration></execution></executions>
+    </plugin>
+  </plugins></build>
+</project>

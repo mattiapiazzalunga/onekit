@@ -18,12 +18,12 @@ MAX_TEXT = 8*1024*1024
 _BINARY_CONTROLS = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f]')
 
 
-def read_text(file, options):
+def read_text(file, options, *, allow_page_breaks=False):
     try:
         text = file.data.decode(options.get('source_encoding','utf-8-sig'))
     except (UnicodeError,LookupError) as error:
         raise OneKitError('Choose the correct input encoding, or convert the file to UTF-8 first.') from error
-    if _BINARY_CONTROLS.search(text):
+    if _BINARY_CONTROLS.search(text.replace('\f', '') if allow_page_breaks else text):
         raise OneKitError('Choose a text file without binary control characters.')
     return text.replace('\r\n','\n').replace('\r','\n')
 
@@ -168,7 +168,7 @@ def run(tool, files, options):
         if len(data)>MAX_TEXT:
             raise OneKitError('Extracted text exceeds 8 MiB. Split the source document.')
         return Result([output(file,'txt',data)],warnings,{**details,'characters':len(text),'outputEncoding':'UTF-8'})
-    text = read_text(file,options)
+    text = read_text(file,options,allow_page_breaks=target=='docx')
     if target in ('json','xml','yaml'):
         return Result([output(file,target,validate_structured(text,target))])
     if target in ('csv','xlsx'):

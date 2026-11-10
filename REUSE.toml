@@ -2,7 +2,66 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 version = 1
 [[annotations]]
-path = ["**/*.json", "**/package-lock.json", "uv.lock"]
-precedence = "aggregate"
+path = [".github/**", "contracts/**", "docs/**", "tools/**", "scripts/**", "src/onekit/**", "tests/**", "engines/signatures/**", "images/**", "AGENTS.md", "AUTHORS.txt", "CONTRIBUTORS.txt", "NOTICE", "pyproject_license.toml", "uv.lock"]
+precedence = "closest"
 SPDX-FileCopyrightText = "2026 Mattia Piazzalunga"
 SPDX-License-Identifier = "LicenseRef-PolyForm-Shield-1.0.0"
+
+# Upstream assets retain their original rights; never apply the OneKit fallback.
+[[annotations]]
+path = ["src/onekit/data/yunet.onnx", "src/onekit/data/yunet-LICENSE.txt"]
+precedence = "override"
+SPDX-FileCopyrightText = "2020 Shiqi Yu <shiqi.yu@gmail.com>"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "tests/fixtures/resvg-py-0.5.0-LICENSE.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "2024 baseplate-admin"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "engines/signatures/third-party/JSON-SKEMA-LICENSE.md"
+precedence = "override"
+SPDX-FileCopyrightText = "2023 Bence Erős <ebence88@gmail.com>"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "engines/signatures/third-party/JMAIL-LICENSE.md"
+precedence = "override"
+SPDX-FileCopyrightText = "2021 Rohan Nagar"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "engines/signatures/third-party/ZSTD-LICENSE.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "2016-present Facebook, Inc."
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
+path = "engines/signatures/third-party/DSS-LGPL-2.1.txt"
+precedence = "override"
+SPDX-FileCopyrightText = "1991, 1999 Free Software Foundation, Inc."
+SPDX-License-Identifier = "LicenseRef-FSF-License-Text"
+
+[[annotations]]
+path = "tests/fixtures/face-astronaut.png"
+precedence = "override"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "LicenseRef-NASA-Public-Domain"
+
+# These files contain SPDX expressions as test data/parser syntax, not licences.
+# Their real licensing is already declared in their own file headers.
+[[annotations]]
+path = ["tests/test_license_check.py", "src/onekit/tools/license_check.py"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Mattia Piazzalunga"
+SPDX-License-Identifier = "LicenseRef-PolyForm-Shield-1.0.0"
+
+# Publisher terms need verification. Intentionally omit a licence rather than
+# falsely relicensing signed third-party trust lists as OneKit source code.
+[[annotations]]
+path = "src/onekit/data/eu-trust-lists.zip"
+precedence = "override"
+SPDX-FileCopyrightText = "NOASSERTION"
+SPDX-FileComment = "Signed EU/EEA trust lists: redistribution terms require publisher-specific verification."

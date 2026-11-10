@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "apk-to-xapk",
+  "name": "APK to XAPK",
+  "group": "converters",
+  "handler": "android_packages",
+  "accepts": [
+    "apk"
+  ],
+  "produces": "xapk",
+  "fidelity": "exact",
+  "note": "Packages one standalone APK and its metadata into an XAPK archive without rewriting APK bytes. Split APKs are rejected. Requires an XAPK-compatible installer; signatures are not verified.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

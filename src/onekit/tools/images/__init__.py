@@ -3,6 +3,7 @@
 import io
 import warnings
 
+from ...limits import LIMITS
 from ...models import OneKitError, Result, output
 
 
@@ -11,7 +12,7 @@ def open_image(file):
     with warnings.catch_warnings():
         warnings.simplefilter("error", Image.DecompressionBombWarning)
         image = Image.open(io.BytesIO(file.data))
-        if image.width * image.height > 40_000_000:
+        if image.width * image.height > LIMITS.max_image_pixels:
             raise OneKitError("Images must contain no more than 40 million pixels.")
         image.load()
         return ImageOps.exif_transpose(image)

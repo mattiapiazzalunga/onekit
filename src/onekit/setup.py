@@ -3,11 +3,10 @@
 """Automatic CLI-only setup in the user's private OneKit cache."""
 from __future__ import annotations
 
-from .i18n import gettext as tr
-
 import importlib
 import importlib.util
 import io
+import json
 import os
 import platform
 import re
@@ -18,6 +17,7 @@ import tarfile
 import urllib.request
 from pathlib import Path
 
+from .i18n import gettext as tr
 from .models import OneKitError
 
 REQUIREMENTS = {'pdfminer.six': 'pdfminer.six==20260107', 'pdftopdfa': 'pdftopdfa==0.9.24', 'pikepdf': 'pikepdf[pdfa]==10.17.0', 'yt-dlp-ejs': 'yt-dlp-ejs==0.8.0', 'license-expression': 'license-expression==30.4.4', 'olefile': 'olefile==0.47', 'brotli': "brotli>=1.2.1,<2; sys_platform != 'win32' or platform_machine != 'ARM64'",
@@ -35,15 +35,19 @@ REQUIREMENTS = {'pdfminer.six': 'pdfminer.six==20260107', 'pdftopdfa': 'pdftopdf
  'pillow': 'Pillow>=13,<14',
  'pooch': 'pooch>=1.8.2,<2',
  'pycryptodome': 'pycryptodome>=3.24.1,<4',
- 'pyhanko': 'pyhanko>=0.34,<1',
- 'pypdf': 'pypdf>=6.21.2,<7',
+ 'pyhanko': 'pyhanko[etsi]==0.38.0',
+ 'pyhanko-certvalidator': 'pyhanko-certvalidator==0.33.0',
+ 'cryptography': 'cryptography==50.0.2',
+ 'signxml': 'signxml==5.2.0',
+ 'xsdata': 'xsdata==26.10',
+ 'pypdf': 'pypdf>=6.21.4,<7',
  'pypdfium2': 'pypdfium2>=5.14,<6',
  'pytesseract': 'pytesseract>=0.3.13,<0.4',
  'python-barcode': 'python-barcode==0.16.1',
  'python-docx': 'python-docx>=1.2,<2',
  'python-pptx': 'python-pptx>=1.0.2,<2',
  'pyyaml': 'PyYAML>=6.0.3,<7',
- 'reportlab': 'reportlab>=4.4,<5',
+ 'reportlab': 'reportlab>=4.4,<6',
  'resvg-py': 'resvg-py==0.5.0',
  'ruff': 'ruff>=0.17,<0.18',
  'segno': 'segno>=1.6.6,<2',
@@ -248,6 +252,23 @@ def ensure_tool(tool, options=None):
     options = options or {}
     activate()
     engines = list(tool.engines)
+    if tool.id in ('latex-to-html', 'latex-to-md'):
+        if os.environ.get('ONEKIT_ALLOW_COPYLEFT') == '0':
+            raise OneKitError('A required engine is disabled by ONEKIT_ALLOW_COPYLEFT=0.')
+        from .tools.pandoc import engine_directory, engine_ready
+        if not engine_ready():
+            native_engines(['node', 'npm'])
+            target = engine_directory()
+            target.mkdir(parents=True, exist_ok=True)
+            source = Path(__file__).parent / 'data/pandoc-node'
+            if (target / 'package.json').exists() and json.loads((target / 'package.json').read_text())['name'] != 'onekit-pandoc-engine':
+                raise OneKitError('Document conversion failed.')
+            for name in ('package.json', 'package-lock.json'):
+                shutil.copyfile(source / name, target / name)
+            from .tools.native import command
+            command('npm', ['ci', '--ignore-scripts', '--no-audit', '--no-fund'], target, timeout=300)
+            if not engine_ready():
+                raise OneKitError('Document conversion failed.')
     if tool.id == "audio-download" and options.get("format", "original") == "original":
         engines = []
     if tool.group == "developer":
@@ -257,9 +278,32 @@ def ensure_tool(tool, options=None):
             engines.append(engine)
     if os.environ.get("ONEKIT_ALLOW_COPYLEFT") == "0" and set(engines) & COPYLEFT:
         raise OneKitError("A required engine is disabled by ONEKIT_ALLOW_COPYLEFT=0.")
-    missing = [name for name in tool.packages
+    packages = tool.packages
+    original_dss = False
+    if tool.id == 'signature-verify':
+        from .tools.signature_dss import RUNTIME_PACKAGES, configured_runtime
+        original_dss = configured_runtime() is not None
+        if original_dss:
+            packages = [name for name in packages if name in RUNTIME_PACKAGES]
+            if os.environ.get('ONEKIT_ALLOW_COPYLEFT') == '0':
+                raise OneKitError('A required engine is disabled by ONEKIT_ALLOW_COPYLEFT=0.')
+            native_engines(['node'])
+    missing = [name for name in packages
                if MODULES.get(name, name.replace("-", "_")) not in sys.modules
                and importlib.util.find_spec(MODULES.get(name, name.replace("-", "_"))) is None]
+    if tool.id == 'signature-verify':
+        from importlib.metadata import PackageNotFoundError, version
+
+        from .tools.signature_validation import ENGINE_VERSIONS
+        for name, pin in ENGINE_VERSIONS.items():
+            if original_dss and name not in packages:
+                continue
+            try:
+                matches = version(name) == pin
+            except PackageNotFoundError:
+                matches = False
+            if not matches and name not in missing:
+                missing.append(name)
     python_packages([REQUIREMENTS.get(name.lower(), name) for name in missing])
     if tool.id == "license-font" and not any(importlib.util.find_spec(name) for name in ("brotli", "brotlicffi")):
         # Windows ARM has no prebuilt Python Brotli wheel; Node ships a decoder.
@@ -272,10 +316,11 @@ def ensure_tool(tool, options=None):
     if tool.id == "video-download" and options.get("list_formats"):
         engines = []
     native_engines(engines)
-    if "node" in engines and tool.id not in ("dev-regex-test", "license-font"):
+    if "node" in engines and tool.id not in ("dev-regex-test", "dev-format-latex", "latex-to-html", "latex-to-md", "license-font"):
         from .cli import install_node_engines
         target = Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node"))
-        if not (target / "node_modules").is_dir():
+        from .tools.developer import node_engines_ready
+        if not node_engines_ready(tool.id.removeprefix('dev-format-')):
             install_node_engines(target)
     if tool.id == "dev-format-powershell":
         from .tools.native import command

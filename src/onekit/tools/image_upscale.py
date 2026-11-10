@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 import io
 
+from ..limits import LIMITS
 from ..models import Artifact, OneKitError, Result
 
 
@@ -15,7 +16,7 @@ def run(tool, files, options):
             raise OneKitError("Upscaling supports single-frame images only.")
         image = ImageOps.exif_transpose(source).convert("RGBA")
         size = (image.width * int(scale), image.height * int(scale))
-        if size[0] * size[1] > 40_000_000:
+        if size[0] * size[1] > LIMITS.max_image_pixels:
             raise OneKitError("Upscaled output exceeds 40 million pixels. Choose a smaller factor or source.")
         image = image.resize(size, Image.Resampling.LANCZOS)
         output = io.BytesIO()

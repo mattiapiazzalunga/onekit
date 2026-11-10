@@ -4,14 +4,18 @@
 export const parsers={javascript:'babel',typescript:'typescript',jsx:'babel',tsx:'typescript',html:'html',css:'css',scss:'scss',less:'less',json5:'json5',jsonc:'json',yaml:'yaml',markdown:'markdown',mdx:'mdx',graphql:'graphql',vue:'vue',svelte:'svelte',astro:'astro',solidity:'antlr',php:'php'};
 export const pluginPackages={svelte:'prettier-plugin-svelte',astro:'prettier-plugin-astro',solidity:'prettier-plugin-solidity',php:'@prettier/plugin-php'};
 export const minifierLanguages=new Set(['javascript','typescript','jsx','tsx','css','html','svg','graphql']);
+export const portableFormatters=Object.freeze({kotlin:'@scalar/kotlin-fmt',ruby:'@scalar/ruby-fmt'});
 // Native formatter hosts implement this small interface without exposing their
 // process, library or filesystem management to the source processing rules.
-export const formatterExtensions={python:'py',java:'java',c:'c',cpp:'cpp',csharp:'cs',go:'go',dart:'dart',lua:'lua',bash:'bash',shell:'sh',sql:'sql',hcl:'hcl',terraform:'tf'};
+export const formatterExtensions={latex:'tex',rust:'rs',swift:'swift',python:'py',java:'java',c:'c',cpp:'cpp',csharp:'cs',go:'go',dart:'dart',lua:'lua',bash:'bash',shell:'sh',sql:'sql',hcl:'hcl',terraform:'tf'};
 
 export async function transformSource({operation,language,text},{load,plugins=async()=>[],nativeFormat,nativeValidate}){
   if(typeof text!=='string')throw new Error('Source text must be a string.');
+  if(operation==='format'&&portableFormatters[language]&&new TextEncoder().encode(text).byteLength>256*1024)throw new Error('Source is too complex. Split it into smaller files.');
   let result;
-  if(operation==='minify'){
+  if(operation==='format'&&portableFormatters[language]){
+    result=await (await load(portableFormatters[language])).format(text);
+  }else if(operation==='minify'){
     if(['javascript','typescript','jsx','tsx','css'].includes(language))result=(await (await load('esbuild')).transform(text,{minify:true,loader:({javascript:'js',typescript:'ts'})[language]||language})).code;
     else if(language==='html')result=await (await load('html-minifier-terser')).minify(text,{collapseWhitespace:true,conservativeCollapse:true,removeComments:true,minifyJS:false,minifyCSS:false});
     else if(language==='svg'){

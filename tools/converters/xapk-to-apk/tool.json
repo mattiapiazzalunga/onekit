@@ -1,0 +1,23 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "xapk-to-apk",
+  "name": "XAPK to APK",
+  "group": "converters",
+  "handler": "android_packages",
+  "accepts": [
+    "xapk"
+  ],
+  "produces": "*",
+  "fidelity": "exact",
+  "note": "Extracts original APKs and OBB data without rewriting APK bytes. Split APKs must be installed together; they are not merged into a universal APK. Signatures are not verified.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

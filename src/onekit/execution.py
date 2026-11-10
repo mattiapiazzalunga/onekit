@@ -9,9 +9,10 @@ from contextvars import ContextVar
 from dataclasses import dataclass, field, replace
 from types import MappingProxyType
 
+from .limits import LIMITS
 from .models import Artifact, OneKitError
 
-MAX_BYTES = 128 * 1024 * 1024
+MAX_BYTES = LIMITS.max_bytes
 
 
 def _budget(value):
@@ -75,13 +76,19 @@ class ExecutionContext:
     ocr_reader: Callable[[Artifact, str, int, bool], list[dict]] | None = None
     speech_reader: Callable[[Artifact, str], dict] | None = None
     foreground_reader: Callable[[Artifact], bytes] | None = None
+    face_reader: Callable[[Artifact], list[dict]] | None = None
     pdf_renderer: Callable[[Artifact, str, int], list[dict]] | None = None
+    pdf_validator: Callable[[Artifact, str], dict] | None = None
     svg_renderer: Callable[[dict], bytes] | None = None
+    document_converter: Callable[[dict], dict] | None = None
     portable_documents: bool = False
+    signature_certificate_only: bool = False
     document_limits: DocumentLimits = field(default_factory=DocumentLimits)
 
     def __post_init__(self):
         _budget(self.max_batch_bytes)
+        if type(self.signature_certificate_only) is not bool:
+            raise TypeError('signature_certificate_only')
         if type(self.portable_documents) is not bool:
             raise OneKitError('portable_documents must be a boolean.')
         if not isinstance(self.document_limits, DocumentLimits):
@@ -91,7 +98,7 @@ class ExecutionContext:
             raise OneKitError("Tool budgets must map tool identifiers to ToolLimits.")
         if self.media_probe is not None and not callable(self.media_probe):
             raise OneKitError("The media metadata reader must be callable.")
-        for name in ("symbol_reader", "ocr_reader", "speech_reader", "foreground_reader", "pdf_renderer", "svg_renderer"):
+        for name in ("symbol_reader", "ocr_reader", "speech_reader", "foreground_reader", "face_reader", "pdf_renderer", "svg_renderer", "document_converter"):
             service = getattr(self, name)
             if service is not None and not callable(service):
                 raise OneKitError(f"{name} must be callable.")

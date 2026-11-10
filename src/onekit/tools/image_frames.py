@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 import io
 
+from ..limits import LIMITS
 from ..models import Artifact, OneKitError, Result
 from .images import encode
 
@@ -12,7 +13,7 @@ def run(tool, files, options):
     frames, durations = [], []
     with Image.open(io.BytesIO(file.data)) as image:
         count = getattr(image,'n_frames',1)
-        if count>120 or image.width*image.height*count>40000000:
+        if count>120 or image.width*image.height*count>LIMITS.max_image_pixels:
             raise OneKitError('Extract at most 120 GIF frames and 40 million total pixels.')
         for index in range(count):
             image.seek(index)

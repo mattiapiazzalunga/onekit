@@ -2,6 +2,14 @@
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
 version: 2
 updates:
+  - package-ecosystem: maven
+    directory: /engines/signatures
+    schedule: {interval: daily, time: "07:00", timezone: Europe/Rome}
+    open-pull-requests-limit: 10
+    assignees: [mattiapiazzalunga]
+    groups:
+      dss:
+        patterns: ["eu.europa.ec.joinup.sd-dss:*"]
   - package-ecosystem: npm
     directory: /src/onekit/tools/developer/node
     schedule: {interval: weekly, day: monday, time: "06:00", timezone: Europe/Rome}

@@ -22,6 +22,14 @@
 <a id="developer-tools"></a>
 ## Developer tools
 
+Форматирует Kotlin с помощью ktfmt, а Ruby — с помощью Syntax Tree и RuboCop, используя пакеты WASM с фиксированными версиями. Выполните `onekit engines install`. До 256 КиБ на входной файл; конфигурация проекта не загружается.
+
+Форматирует LaTeX с помощью tex-fmt с фиксированными настройками. Конфигурация проекта не загружается. До 256 KiB на входной файл.
+
+Преобразует автономные документы LaTeX с помощью Pandoc 3.9. Внешние файлы и компиляция TeX не поддерживаются. До 256 KiB на входной файл.
+
+`dev-format-latex`: `Node.js 24+`; `tex-fmt` WASM, MIT. `latex-to-html`, `latex-to-md`: `onekit setup latex-to-html`; `pandoc-wasm@1.1.0`, GPL-2.0-or-later; `ONEKIT_PANDOC_ENGINE_PATH`, `ONEKIT_ALLOW_COPYLEFT=0`.
+
 Установите Node.js 24+ и запустите `onekit engines install` для Prettier/плагинов с зафиксированными версиями, esbuild, HTML минификатора, SVGO и GraphQL.js. Они устанавливаются в кэш пользователя OneKit, а не глобально. `ONEKIT_NODE_ENGINE_PATH` выбирает альтернативу. Перезапустите установщик после обновления одобренного движка. Группа парсеров охватывает JS/TS/JSX/TSX, разметку, стили, Markdown/MDX, GraphQL, Vue, Svelte, Astro, Solidity и PHP.
 
 Установите компиляторы/запускатели upstream для вашей ОС и добавьте задокументированные команды в PATH. Некоторым изолированным файлам нужны зависимости проекта или точное имя файла класса Java. Форматирование/валидация парсера не подтверждает корректность типов по всему проекту.

@@ -1,0 +1,25 @@
+<a id="processing-services"></a>
+# Serviços de processamento
+
+`ExecutionContext` pode fornecer primitivos motores locais confiáveis independentemente das opções de ferramenta. O processamento API continua a validar artefatos de entrada, aplicar orçamentos e verificar artefatos de saída. Um serviço de motor retorna leituras ou pixels; o manipulador de processamento público interpreta essas leituras e constrói o resultado. Os serviços são abrangidos por uma execução e não alteram os motores CLI.
+
+Os serviços opcionais estão documentados em `ExecutionContext`: leitura de símbolos, OCR, reconhecimento de fala, máscaras de primeiro plano e PDF Rasterização. PDF os registros de páginas carregam dados codificados e dimensões físicas em pontos. Codificação raster, montagem de slides e reduction destrutivo permanecem nos manipuladores públicos. Os registros de fala utilizam uma linguagem e uma lista de segmentos start/end/text. OCR registros contêm texto ou pesquisável PDF bytes por página, com dimensões físicas opcionais para redimensionamento.
+
+Os módulos de processamento JavaScript são utilizáveis independentemente do driver Python:
+
+- `tools/developer/source_engine.mjs` exporta transformação de fonte e manipulação de resultados, uma interface de host formatador nativo, verificação de sintaxe-árvore, validação local JSON Pointer, seleção de especificação API e processamento de receita de recipiente. O carregamento do motor, o isolamento do processo e a vida útil do analisador pertencem ao chamador.
+- `tools/document_engine.mjs` exporta conversão de documento semântico básico usando um subconjunto de nós de documento Pandoc. Aceita Markdown e HTML serviços de analisador, omite conteúdo ativo e carregamento de imagem externa, e escreve standalone LaTeX. Um serviço de escritor PDF recebe o documento semântico; layout, recursos de fonte e renderização pertencem a esse escritor. Os limites de complexidade do analisador são parâmetros de chamada.
+
+O subconjunto do documento abrange parágrafos, cabeçalhos, ênfase, código, links, listas, citações e regras horizontais. As tabelas são representadas por linhas de texto. Não reivindica a funcionalidade completa de um motor de tipografia de documentos. Conversão de documento nativa existente CLI permanece disponível com seus contratos originais do motor.
+
+Para instalações sem executáveis de documentos nativos, o Python processamento API também aceita `ExecutionContext(portable_documents=True)`. Markdown/HTML para PDF ou LaTeX em seguida, usa `tools/portable_documents.py`: local delimitado HTML análise, MarkdownIt, escapou LaTeX, e layout ReportLab com suas fontes Vera empacotadas. Ele nunca obtém recursos ou executa a marcação de origem. Este modo deliberadamente básico omite CSS e conteúdo ativo, representa tabelas como linhas de texto, rejeita sem suporte PDF Glyphs. `DocumentLimits` nó de controle, aninhamento, bloco e PDF orçamentos de página independentemente dos limites de entrada e saída do byte. Instalar o `documents` e `pdf` Extras. A conversão nativa do Pandoc/TeX permanece como padrão; as alterações exclusivas desses caminhos nativos não afetam o modo portátil.
+
+`tools/symbols.py` expõe as configurações do leitor ZXing usadas pela digitalização nativa. Os leitores fornecidos podem consumir os mesmos formatos, configurações de rotação e inversão. O manipulador de código de barras normaliza os aliases do formato antes de montar o resultado público. `input_image` e `pixel_input` partilham orientação de imagem e composição alfa branca entre leitura nativa e leitores fornecidos com base em pixels. Chamadores podem reduzir o orçamento de pixels independentemente das configurações de detecção.
+
+`tools/background.py` expõe o modelo U2Net checksum, `foreground_input` e `foreground_output`. A entrada é um tensor little-endian contíguo de float32 com forma `[1,3,320,320]`; a previsão fornecida é a primeira saída float 32 com forma `[1,1,320,320]`. Tanto a inferência nativa quanto as predições fornecidas utilizam o mesmo tensor de preparação, normalização da máscara e redimensionamento da imagem. Diferenças de tempo de execução de inferência ainda podem afetar os resultados do ponto flutuante.
+
+`tools/transcription.py` expõe `recognition_parameters`, incluindo modelo, linguagem, taxa de amostragem, largura do feixe e condicionamento de texto anterior. Um host de inferência diferente deve apoiar explicitamente essas configurações; configurações compartilhadas não estabelecem equivalência de implementações de decodificação ou conversões de modelos quantizados.
+
+O manipulador do desenvolvedor usa sqlparse e SQLFluff diretamente quando instalado em seu ambiente Python. Os comandos autónomos `sqlformat` e `sqlfluff` originais permanecem suportados quando essas importações não estão disponíveis. A validação SQL usa o dialeto SQLFluff solicitado, com ANSI como padrão; ele não executa consultas.
+
+Os limites máximos de recursos partilhados são definidos em `src/onekit/limits.py`. Os ouvintes podem apertá-los através de `ExecutionContext`; não podem elevar os limites máximos fundamentais.

@@ -5,18 +5,18 @@
 Command: `onekit run signature-verify`. Use `onekit run --help` for input and output arguments.
 
 Category: **security**.
-Fidelity: **exact**. Offline cryptographic verification of PDF and CMS/P7M/P7S signatures using embedded certificates. Detached signatures require the original file. Trust chains, revocation, qualified-signature status and trusted timestamps are not checked.
+Fidelity: **exact**. Checks PDF and CMS signatures locally with AdES validation. Detached signatures require the original file. Optionally add one signature evidence ZIP. Missing trust or revocation evidence gives an indeterminate result.
 
 Accepted types: `*`. Output type: `json`.
 Accepts multiple inputs: **yes**.
 
-Input validation: **any**. Required file count: **1–2**.
+Input validation: **any**. Required file count: **1–3**.
 CLI: **134,217,728 bytes per file**, **134,217,728 bytes total**.
 Content checks run before processing. Renaming a file does not change its actual format.
 
 Options: none.
 
-Python packages: pypdf, asn1crypto, pycryptodome.
+Python packages: pypdf, asn1crypto, pycryptodome, pyhanko, pyhanko-certvalidator, cryptography, signxml, xsdata.
 External engines: see the developer engine matrix for language adapters.
 
 Processing implementation: [shared family adapter](../../../src/onekit/tools/signatures.py).

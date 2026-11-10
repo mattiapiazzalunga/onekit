@@ -8,6 +8,7 @@ import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
 
+from ..limits import LIMITS
 from ..models import Artifact, OneKitError, Result
 from .video_download import validate_url
 
@@ -285,7 +286,7 @@ def run(tool, files, options):
     if kind == "audio" and (format not in ("original", "mp3") or quality not in ("64", "128", "192", "256", "320")):
         raise OneKitError("Choose original audio or MP3 at 64, 128, 192, 256 or 320 kbps.")
     try:
-        result = download_source(url, kind, 128 * 1024 * 1024)
+        result = download_source(url, kind, LIMITS.max_bytes)
     except OSError as error:
         raise OneKitError("Cannot download directly from this source: " + str(error)[:300]) from error
     if kind == "audio" and format == "mp3":

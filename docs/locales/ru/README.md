@@ -1,7 +1,7 @@
 <!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
 
-Языки: [English](../../../README.md) · [Italiano](../it/README.md) · [Français](../fr/README.md) · [Español](../es/README.md) · [Deutsch](../de/README.md) · [Русский](README.md) · [中文](../zh/README.md).
+Языки: [English](../../../README.md) · [Italiano](../it/README.md) · [Français](../fr/README.md) · [Español](../es/README.md) · [Deutsch](../de/README.md) · [Русский](README.md) · [中文](../zh/README.md) · [Português](../pt/README.md) · [हिन्दी](../hi/README.md).
 
 <p align="center">
   <a href="https://onekit.org"><img src="https://raw.githubusercontent.com/mattiapiazzalunga/onekit/main/images/logo.png" alt="OneKit logo" width="112" height="112"></a>
@@ -15,6 +15,8 @@
 **Исходная версия:** `0.6.3`. Стабильные загрузки становятся доступны только после завершения рабочего процесса релиза. Распространяемая версия — `onekit-tools`; отдельный проект PyPI под названием `onekit` не имеет отношения.
 
 [Руководство по контактам и мультимедиа](docs/contact-media.md) описывает создание отдельных vCard, извлечение vCard из QR-кодов, увеличение разрешения изображений, удаление фона, сжатие и изменение скорости видео и GIF, а также локальную расшифровку аудио.
+
+См. [Пакеты Android и автоматическое размытие лиц](docs/android-and-face-tools.md).
 
 Проверка лицензий: проверяйте PDF, Word, PowerPoint, Excel, видео, аудио, изображения, шрифты, EPUB, код/проекты и наборы данных из файлов или публичных URL. Анализ остаётся локальным; отчёты — это **неподтверждённые оценки, а не свидетельства собственности или разрешение на использование**. Смотрите [использование проверки лицензий и ограничения](docs/cli.md#local-license-and-copyright-estimates).
 

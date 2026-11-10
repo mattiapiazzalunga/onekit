@@ -241,3 +241,14 @@ def test_license_documents_still_report_tentative_matches(name):
     report = execute("license-code", [Artifact("repository.zip", archive({name: text}))]).details
     assert [item["value"] for item in report["estimated_license_matches"]] == ["MIT"]
     assert report["estimated_license_matches"][0]["verified"] is False
+
+
+@pytest.mark.parametrize('kind,prefix,extension', [('powerpoint','ppt','pptx'),('word','word','docx'),('excel','xl','xlsx')])
+def test_office_malformed_xml_does_not_discard_other_readable_metadata(kind, prefix, extension):
+    data = archive({prefix + '/document.xml': '<broken>',
+                    'docProps/core.xml': '<m><rights>MIT</rights></m>'})
+    report = execute('license-' + kind, [Artifact('sample.' + extension, data)]).details
+    assert report['permission_to_use'] == 'not-determined'
+    assert report['coverage']['complete'] is False
+    assert any(row['spdx_expression'] == 'MIT' for row in report['declared_licenses'])
+    assert any(row['location'] == 'document.xml' or row['location'].startswith(prefix + '/') for row in report['coverage']['skipped'])

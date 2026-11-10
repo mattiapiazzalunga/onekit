@@ -1,0 +1,33 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "image-blur-faces",
+  "name": "Automatically blur faces",
+  "group": "images",
+  "handler": "face_blur",
+  "accepts": [
+    "png",
+    "jpeg",
+    "webp",
+    "gif",
+    "bmp",
+    "tiff",
+    "ico"
+  ],
+  "produces": "png",
+  "fidelity": "compromise",
+  "note": "Detects faces locally with YuNet and blurs them in a fresh PNG. Review every face before sharing: automatic detection can miss faces and blur does not guarantee anonymity. Single-frame images, up to 16 million pixels.",
+  "packages": [
+    "onnxruntime",
+    "numpy",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}

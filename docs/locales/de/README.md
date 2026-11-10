@@ -1,7 +1,7 @@
 <!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
 
-Sprachen: [English](../../../README.md) · [Italiano](../it/README.md) · [Français](../fr/README.md) · [Español](../es/README.md) · [Deutsch](README.md) · [Русский](../ru/README.md) · [中文](../zh/README.md).
+Sprachen: [English](../../../README.md) · [Italiano](../it/README.md) · [Français](../fr/README.md) · [Español](../es/README.md) · [Deutsch](README.md) · [Русский](../ru/README.md) · [中文](../zh/README.md) · [Português](../pt/README.md) · [हिन्दी](../hi/README.md).
 
 <p align="center">
   <a href="https://onekit.org"><img src="https://raw.githubusercontent.com/mattiapiazzalunga/onekit/main/images/logo.png" alt="OneKit logo" width="112" height="112"></a>
@@ -15,6 +15,8 @@ Ein offline nutzbares Python-Toolkit mit 230 Werkzeugen für Konvertierungen, PD
 **Quellversion:** `0.6.3`. Stabile Downloads gibt es nur, nachdem der Release-Workflow abgeschlossen ist. Die Distribution ist `onekit-tools`; das separat gehörende PyPI-Projekt namens `onekit` ist nicht damit verwandt.
 
 Der [Leitfaden zu Kontakten und Medien](docs/contact-media.md) behandelt die Erstellung eigenständiger vCards, das Auslesen von vCards aus QR-Codes, die Bildvergrößerung, das Entfernen von Hintergründen, die Komprimierung und Geschwindigkeitsanpassung von Videos und GIFs sowie die lokale Audiotranskription.
+
+Siehe [Android-Pakete und automatisches Weichzeichnen von Gesichtern](docs/android-and-face-tools.md).
 
 Lizenzprüfungen: Überprüfen Sie PDF, Word, PowerPoint, Excel, Video, Audio, Bilder, Schriftarten, EPUB, Code/Projekte und Datensätze aus Dateien oder öffentlichen URLs. Die Analyse bleibt lokal; Berichte sind **unverifizierte Schätzungen, keine Eigentumsnachweise oder Nutzungserlaubnis**. Siehe [Lizenzprüfungsnutzung und -grenzen](docs/cli.md#local-license-and-copyright-estimates).
 

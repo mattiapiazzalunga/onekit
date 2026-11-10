@@ -15,7 +15,7 @@ from xml.etree import ElementTree
 from ...models import Artifact, OneKitError, Result, output, parse_json
 
 PRETTIER = {"javascript": "babel", "typescript": "typescript", "jsx": "babel", "tsx": "typescript", "html": "html", "css": "css", "scss": "scss", "less": "less", "json5": "json5", "jsonc": "json", "yaml": "yaml", "markdown": "markdown", "mdx": "mdx", "graphql": "graphql", "vue": "vue", "svelte": "svelte", "astro": "astro", "solidity": "solidity", "php": "php"}
-FORMATTERS = {"java": ("google-java-format", ["-"], "java"), "c": ("clang-format", [], "c"), "cpp": ("clang-format", [], "cpp"), "csharp": ("clang-format", [], "cs"), "go": ("gofmt", [], "go"), "rust": ("rustfmt", ["--emit", "stdout"], "rs"), "ruby": ("rufo", [], "rb"), "kotlin": ("ktfmt", ["--stdin-name=input.kt", "-"], "kt"), "swift": ("swift-format", ["format"], "swift"), "dart": ("dart", ["format", "--output=show"], "dart"), "scala": ("scalafmt", ["--stdin"], "scala"), "lua": ("lua-format", [], "lua"), "bash": ("shfmt", [], "sh"), "shell": ("shfmt", [], "sh"), "sql": ("sqlformat", ["--reindent", "-"], "sql"), "latex": ("latexindent", ["-"], "tex"), "hcl": ("hclfmt", [], "hcl"), "terraform": ("tofu", ["fmt", "-"], "tf"), "dockerfile": ("dockerfmt", [], "Dockerfile"), "r": ("Rscript", ["-e", 'cat(paste(styler::style_text(readLines(file("stdin"))), collapse="\\n"))'], "R"), "julia": ("julia", ["--startup-file=no", "-e", "using JuliaFormatter; print(format_text(read(stdin, String)))"], "jl"), "elixir": ("mix", ["format", "-"], "ex"), "haskell": ("ormolu", [], "hs"), "powershell": ("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){[Console]::Error.Write('Install PSScriptAnalyzer with Install-Module PSScriptAnalyzer -Scope CurrentUser.');exit 1};$s=[Console]::In.ReadToEnd();Invoke-Formatter -ScriptDefinition $s"], "ps1")}
+FORMATTERS = {"java": ("google-java-format", ["-"], "java"), "c": ("clang-format", [], "c"), "cpp": ("clang-format", [], "cpp"), "csharp": ("clang-format", [], "cs"), "go": ("gofmt", [], "go"), "rust": ("rustfmt", ["--emit", "stdout"], "rs"), "swift": ("swift-format", ["format"], "swift"), "dart": ("dart", ["format", "--output=show"], "dart"), "scala": ("scalafmt", ["--stdin"], "scala"), "lua": ("lua-format", [], "lua"), "bash": ("shfmt", [], "sh"), "shell": ("shfmt", [], "sh"), "sql": ("sqlformat", ["--reindent", "-"], "sql"), "hcl": ("hclfmt", [], "hcl"), "terraform": ("tofu", ["fmt", "-"], "tf"), "dockerfile": ("dockerfmt", [], "Dockerfile"), "r": ("Rscript", ["-e", 'cat(paste(styler::style_text(readLines(file("stdin"))), collapse="\\n"))'], "R"), "julia": ("julia", ["--startup-file=no", "-e", "using JuliaFormatter; print(format_text(read(stdin, String)))"], "jl"), "elixir": ("mix", ["format", "-"], "ex"), "haskell": ("ormolu", [], "hs"), "powershell": ("pwsh", ["-NoProfile", "-NonInteractive", "-Command", "if(-not (Get-Module -ListAvailable PSScriptAnalyzer)){[Console]::Error.Write('Install PSScriptAnalyzer with Install-Module PSScriptAnalyzer -Scope CurrentUser.');exit 1};$s=[Console]::In.ReadToEnd();Invoke-Formatter -ScriptDefinition $s"], "ps1")}
 VALIDATORS = {"javascript": ("node", ["--check", "input.js"], "js"), "typescript": ("tsc", ["--noEmit", "--strict", "input.ts"], "ts"), "jsx": ("tsc", ["--noEmit", "--allowJs", "--jsx", "preserve", "input.jsx"], "jsx"), "tsx": ("tsc", ["--noEmit", "--jsx", "preserve", "input.tsx"], "tsx"), "java": ("javac", ["-proc:none", "input.java"], "java"), "c": ("clang", ["-fsyntax-only", "input.c"], "c"), "cpp": ("clang++", ["-fsyntax-only", "input.cpp"], "cpp"), "go": ("gofmt", ["-e", "input.go"], "go"), "rust": ("rustfmt", ["--check", "input.rs"], "rs"), "php": ("php", ["-l", "input.php"], "php"), "ruby": ("ruby", ["-c", "input.rb"], "rb"), "bash": ("bash", ["-n", "input.sh"], "sh"), "shell": ("sh", ["-n", "input.sh"], "sh"), "lua": ("luac", ["-p", "input.lua"], "lua"), "dart": ("dart", ["analyze", "input.dart"], "dart"), "dockerfile": ("hadolint", ["input.Dockerfile"], "Dockerfile"), "terraform": ("terraform", ["fmt", "-check", "input.tf"], "tf"), "hcl": ("hclfmt", ["input.hcl"], "hcl"), "haskell": ("ghc", ["-fno-code", "input.hs"], "hs"), "elixir": ("elixir", ["--no-halt", "-e", 'Code.string_to_quoted!(File.read!("input.ex")); System.halt(0)'], "ex")}
 
 
@@ -34,6 +34,21 @@ VALIDATORS.update({
 })
 
 
+def node_engines_ready(language=None):
+    directory = Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node"))
+    if not (directory / 'node_modules').is_dir():
+        return False
+    if language in ('kotlin', 'ruby'):
+        package = f'@scalar/{language}-fmt'
+        try:
+            expected = json.loads(Path(__file__).with_name('node').joinpath('package.json').read_text(encoding='utf-8'))['dependencies'][package]
+            installed = json.loads((directory / 'node_modules' / package / 'package.json').read_text(encoding='utf-8'))['version']
+            return installed == expected
+        except (OSError, ValueError, KeyError):
+            return False
+    return True
+
+
 def engine_for(tool):
     # These operations are handled in-process and require no external executable.
     _, operation, language = tool.id.split("-", 2)
@@ -47,7 +62,9 @@ def engine_for(tool):
         return "node"
     if language == "python" and operation == "format":
         return "ruff"
-    if language in PRETTIER:
+    if language == "latex" and operation == "format":
+        return "node"
+    if language in PRETTIER or operation == 'format' and language in ('kotlin', 'ruby'):
         return "node"
     if operation == "format" and language in FORMATTERS:
         return FORMATTERS[language][0]
@@ -59,6 +76,8 @@ def engine_for(tool):
 def run(tool, files, options):
     file = files[0]
     _, operation, language = tool.id.split("-", 2)
+    if operation == 'format' and language in ('latex', 'kotlin', 'ruby') and len(file.data) > 256 * 1024:
+        raise OneKitError('Source is too complex. Split it into smaller files.')
     text = file.text()
     if operation == "validate":
         try:
@@ -163,6 +182,9 @@ def validate(language, text, options, *, filename=None):
 
 def external(operation, language, text):
     from ..native import command
+    if operation == 'format' and language == 'latex':
+        script = Path(__file__).with_name('texfmt-runner.mjs')
+        return command('node', [str(script.resolve())], Path.cwd(), stdin=text.encode('utf-8'), timeout=15).decode('utf-8')
     if operation == 'format' and language == 'sql':
         try:
             import sqlparse
@@ -170,9 +192,9 @@ def external(operation, language, text):
             pass  # A separately installed sqlformat executable remains supported.
         else:
             return sqlparse.format(text, reindent=True)
-    if language in PRETTIER or operation == "minify":
+    if language in PRETTIER or operation == "minify" or operation == 'format' and language in ('kotlin', 'ruby'):
         directory = Path(os.environ.get("ONEKIT_NODE_ENGINE_PATH", Path.home() / ".cache" / "onekit" / "node"))
-        if not (directory / "node_modules").is_dir():
+        if not node_engines_ready(language):
             raise OneKitError("Install the optional Node engines with 'onekit engines install' (requires Node.js 24+).")
         script = Path(__file__).with_name("node-engine.mjs")
         payload = json.dumps({"operation": operation, "language": language, "text": text}).encode()

@@ -4,6 +4,7 @@
 import io
 import math
 
+from ..limits import LIMITS
 from ..models import Artifact, OneKitError, Result, parse_json
 
 
@@ -97,7 +98,7 @@ def run(tool, files, options):
             page = document[index]
             try:
                 width, height = (page["width"], page["height"]) if renderer else page.get_size()
-                if math.ceil(width*dpi/72)*math.ceil(height*dpi/72) > 40000000:
+                if math.ceil(width*dpi/72)*math.ceil(height*dpi/72) > LIMITS.max_image_pixels:
                     raise OneKitError("A rendered page exceeds 40 million pixels. Reduce DPI.")
                 # Preserve visible annotation covers before discarding annotation objects.
                 areas = [region for region in regions if region["page"] == index+1]

@@ -1,0 +1,8 @@
+Copyright (C) 1991, 1999 Free Software Foundation, Inc.
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+This permission covers the GNU Lesser General Public License 2.1 document
+copied in engines/signatures/third-party/DSS-LGPL-2.1.txt. It is the permission
+for the licence document itself, not the licence of the DSS library.

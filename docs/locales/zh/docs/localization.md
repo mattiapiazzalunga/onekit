@@ -1,9 +1,9 @@
 <a id="cli-localization"></a>
 # CLI 本地化
 
-语言：`en`、`it`、`fr`、`es`、`de`、`ru`、`zh`（简体中文）。选择 `onekit --language it ...` 或 `ONEKIT_LANGUAGE=it`。两者都未设置时使用操作系统的区域设置。不支持的区域设置使用英语。命令名称、选项键、路径、格式标识符和机器可读的 JSON 合同保持不变。人工帮助、状态、警告和已知错误会本地化。外部引擎诊断保留其上游文本。
+语言:`en`;`it`;`fr`;`es`;`de`;`ru`;`zh` (简体中文)`pt` (葡萄牙语)`hi` (Hindi). 选择一个与`onekit --language it ...`或`ONEKIT_LANGUAGE=it`. 操作系统 locale 既不设,也不设时使用。 不支持的本地人使用英语. 命令名称、选项密钥、路径、格式标识符和机器可读性JSON合同保持稳定。 人类的帮助,状态,警告和已知出错都是本地化的. 外部引擎诊断保留了它们的上游文本.
 
-任何人或 AI 在添加或修改工具时，都必须在同一次更改中更新全部七种语言的文本目录。名称、帮助、描述、错误消息、提示、README 和工具文档必须保持一一对应。不得用英语文本代替缺失的翻译。占位符、代码示例、URL 及依法必须逐字保留的声明应保持原样。请结合上下文审查含义和术语。
+每个人或AI个添加或更改一个工具MUST在同一变化中更新了所有9个演示文稿目录. 姓名、帮助、描述、错误信息、通知、README和工具文档必须保留在一对一的通信中。 不要以英语作为快捷键来填充缺失的翻译 。 保持占位符,代码示例,URL和法律要求的逐字记录完整. 审查上下文的含义和术语。
 
 目录：`src/onekit/locales/{language}.json`。展示层代码：`i18n.py`。英文消息是标准化的键；处理算法保持独立。独立语言注册表为 `src/onekit/locales/languages.json`，包括操作系统别名。添加注册表项和完整目录。已审核术语记录在 `scripts/localization-reviewed.json`；在审核前使用 `python scripts/apply_localization_review.py src/onekit/locales` 应用它。
 

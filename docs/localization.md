@@ -1,13 +1,13 @@
 # CLI localization
 
-Languages: `en`, `it`, `fr`, `es`, `de`, `ru`, `zh` (Simplified Chinese).
+Languages: `en`, `it`, `fr`, `es`, `de`, `ru`, `zh` (Simplified Chinese), `pt` (Portuguese), `hi` (Hindi).
 Select one with `onekit --language it ...`, or `ONEKIT_LANGUAGE=it`.
 The operating system locale is used when neither is set. Unsupported locales
 use English. Command names, option keys, paths, format identifiers and machine
 readable JSON contracts stay stable. Human help, status, warnings and known errors
 are localized. External engine diagnostics retain their upstream text.
 
-Every person or AI adding or changing a tool MUST update all seven presentation
+Every person or AI adding or changing a tool MUST update all nine presentation
 catalogs in the same change. Names, help, descriptions, error messages, notices,
 README and tool documentation must remain in a one-to-one correspondence.
 Do not fill missing translations with English as a shortcut. Keep placeholders,

@@ -4,6 +4,7 @@ import io
 import json
 import re
 
+from ...limits import LIMITS
 from ...models import OneKitError, Result, output
 
 
@@ -25,7 +26,7 @@ def run(tool, files, options):
     pages = []
     for image in images:
         opened = Image.open(io.BytesIO(image.data))
-        if opened.width * opened.height > 40_000_000:
+        if opened.width * opened.height > LIMITS.max_image_pixels:
             raise OneKitError("Image exceeds 40 million pixels.")
         if target == "pdf":
             pages.append({"pdf": pytesseract.image_to_pdf_or_hocr(opened, extension="pdf", lang=language, timeout=120)})

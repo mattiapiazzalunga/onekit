@@ -1,0 +1,9 @@
+{
+  "name": "onekit-pandoc-engine",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "pandoc-wasm": "1.1.0",
+    "@bjorn3/browser_wasi_shim": "0.4.2"
+  }
+}

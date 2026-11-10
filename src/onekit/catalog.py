@@ -3,6 +3,8 @@
 """Tool registry and processing contracts for the CLI and Python API."""
 from dataclasses import asdict, dataclass, replace
 
+from .limits import LIMITS
+
 
 @dataclass(frozen=True)
 class Tool:
@@ -21,8 +23,8 @@ class Tool:
     input_mode: str = "typed"
     min_files: int = 1
     max_files: int = 1
-    max_file_bytes: int = 128 * 1024 * 1024
-    max_total_bytes: int = 128 * 1024 * 1024
+    max_file_bytes: int = LIMITS.max_bytes
+    max_total_bytes: int = LIMITS.max_bytes
 
 
 
@@ -56,6 +58,8 @@ for source, targets in CONVERSIONS.items():
             engine = ("gs",) if target == "pdfa" else ()
         if pair == ("md", "pdf") or pair == ("html", "pdf"):
             engine = ("pandoc", "pdflatex")
+        if source == 'latex' and target in ('html', 'md'):
+            engine = ('node',)
         if pair == ("image", "pptx"):
             packages = ("python-pptx", "Pillow")
         if pair == ("pdf", "docx"):
@@ -144,6 +148,7 @@ for kind in ("text", "json", "notebook", "latex", "pdf", "word", "code"):
     add(f"diff-{kind}", f"Compare {LABELS.get(kind, kind).replace('word', 'Word')} files", "diff", "diff", produces="json", packages=("pypdf",) if kind == "pdf" else ("python-docx",) if kind == "word" else (), multiple=True, fidelity="compromise" if kind in ("pdf", "word", "latex") else "exact", note="Compares extracted text, not visual layout." if kind in ("pdf", "word") else "Notebook comparison can include Markdown, code or both. LaTeX text mode omits commands.", options=("mode",) if kind in ("notebook", "latex") else ())
 
 
+
 for id in ("docx-to-md", "md-to-docx", "image-to-pptx", "pdf-to-md", "pdf-to-html", "pdf-to-docx", "pdf-protect", "pdf-unlock", "diff-pdf", "diff-word", "font-convert", "dev-format-xml", "dev-format-svg", "dev-format-toml", "dev-validate-json5", "dev-validate-jsonc", "dev-validate-yaml", "dev-validate-json-schema", "dev-validate-xsd"):
     TOOLS[id] = replace(TOOLS[id], engines=())
 for id, packages in {"docx-to-md": ("python-docx",), "md-to-docx": ("python-docx",), "font-convert": ("fonttools", "brotli"), "dev-format-toml": ("tomli-w",), "dev-validate-json5": ("json5",), "dev-validate-jsonc": ("json5",), "dev-validate-yaml": ("PyYAML",), "dev-validate-json-schema": ("jsonschema",), "dev-validate-xsd": ("xmlschema",)}.items():
@@ -219,8 +224,12 @@ for id, tool in list(TOOLS.items()):
     elif id == "video-convert":
         accepts = ("mp4", "webm", "mkv", "mov", "avi", "gif", "mpeg", "mpg", "m4v", "ogv", "ts")
         mode = "typed"
-    limit = 8 * 1024 * 1024 if mode in ("text", "encoded-text") else 16 * 1024 * 1024 if tool.group == "fonts" else 64 * 1024 * 1024 if tool.group == "images" or tool.accepts == IMAGE_TYPES else 128 * 1024 * 1024
-    TOOLS[id] = replace(tool, accepts=accepts, input_mode=mode, min_files=2 if tool.group == "diff" or id == "pdf-merge" else 1, max_files=2 if tool.group == "diff" else 256 if tool.multiple else 1, max_file_bytes=limit)
+    limit = LIMITS.text_file_bytes if mode in ("text", "encoded-text") else LIMITS.font_file_bytes if tool.group == "fonts" else LIMITS.image_file_bytes if tool.group == "images" or tool.accepts == IMAGE_TYPES else LIMITS.max_bytes
+    TOOLS[id] = replace(tool, accepts=accepts, input_mode=mode, min_files=2 if tool.group == "diff" or id == "pdf-merge" else 1, max_files=2 if tool.group == "diff" else LIMITS.max_files if tool.multiple else 1, max_file_bytes=limit)
+for identifier in ('latex-to-html', 'latex-to-md', 'dev-format-latex'):
+    TOOLS[identifier] = replace(TOOLS[identifier],
+        note='Formats LaTeX with tex-fmt and fixed settings. Project configuration is not loaded. Up to 256 KiB per input file.' if identifier == 'dev-format-latex' else 'Converts self-contained LaTeX with Pandoc 3.9. External files and TeX compilation are not supported. Up to 256 KiB per input file.')
+
 TOOLS["image-to-base64"] = replace(TOOLS["image-to-base64"], packages=("Pillow",))
 TOOLS["base64-to-image"] = replace(TOOLS["base64-to-image"], accepts=("base64", "txt"))
 for id in ("dev-minify-typescript", "dev-minify-jsx", "dev-minify-tsx"):
@@ -308,6 +317,13 @@ add("qrcode-to-vcard", "QR code to vCard", "converters", "qrcode", ("png", "jpeg
 add("image-upscale", "Upscale image", "images", "image_upscale", IMAGE_TYPES, "png",
     packages=("Pillow",), options=("scale",), fidelity="compromise",
     note="Enlarges a single-frame image 2×, 3× or 4× with Lanczos resampling. This is not AI detail reconstruction. Exports PNG, up to 40 million output pixels.")
+add('xapk-to-apk', 'XAPK to APK', 'converters', 'android_packages', ('xapk',), '*',
+    note='Extracts original APKs and OBB data without rewriting APK bytes. Split APKs must be installed together; they are not merged into a universal APK. Signatures are not verified.')
+add('apk-to-xapk', 'APK to XAPK', 'converters', 'android_packages', ('apk',), 'xapk',
+    note='Packages one standalone APK and its metadata into an XAPK archive without rewriting APK bytes. Split APKs are rejected. Requires an XAPK-compatible installer; signatures are not verified.')
+add('image-blur-faces', 'Automatically blur faces', 'images', 'face_blur', IMAGE_TYPES, 'png',
+    packages=('onnxruntime', 'numpy', 'Pillow'), fidelity='compromise',
+    note='Detects faces locally with YuNet and blurs them in a fresh PNG. Review every face before sharing: automatic detection can miss faces and blur does not guarantee anonymity. Single-frame images, up to 16 million pixels.')
 add("image-remove-background", "Remove image background", "images", "background", IMAGE_TYPES, "png",
     packages=("onnxruntime", "numpy", "pooch", "Pillow"), fidelity="compromise",
     note="Removes the background locally and exports a transparent PNG. Uses U2Net. Fine edges may need review. The model downloads on first use.")
@@ -336,9 +352,9 @@ add("audio-to-text", "Audio to text", "audio", "transcription", TOOLS["audio-con
 
 add('file-checksum','Calculate checksum','inspector','file_checksum',('*',),'json',input_mode='any',multiple=True,min_files=1,max_files=20,
     options=('algorithm','expected'),note='Calculates SHA-256, SHA-512, SHA-1 or MD5 locally. An optional expected checksum can be compared against one file. A checksum does not verify a digital signature or establish file safety.')
-add('signature-verify','Verify digital signature','security','signatures',('*',),'json',input_mode='any',multiple=True,min_files=1,max_files=2,
-    packages=('pypdf','asn1crypto','pycryptodome'),
-    note='Offline cryptographic verification of PDF and CMS/P7M/P7S signatures using embedded certificates. Detached signatures require the original file. Trust chains, revocation, qualified-signature status and trusted timestamps are not checked.')
+add('signature-verify','Verify digital signature','security','signatures',('*',),'json',input_mode='any',multiple=True,min_files=1,max_files=3,
+    packages=('pypdf','asn1crypto','pycryptodome','pyhanko','pyhanko-certvalidator','cryptography','signxml','xsdata'),
+    note='Checks PDF and CMS signatures locally with AdES validation. Detached signatures require the original file. Optionally add one signature evidence ZIP. Missing trust or revocation evidence gives an indeterminate result.')
 add('pdf-to-text','PDF to text','converters','pdf_text',('pdf',),'txt',packages=('pypdf',),options=('pages','layout'),fidelity='compromise',
     note='Extracts selectable text to UTF-8, optionally retaining approximate layout. Scans require OCR; reading order, tables and columns need review.')
 add('gif-to-images','GIF to images','converters','image_frames',('gif',),'png',packages=('Pillow',),fidelity='compromise',
@@ -435,3 +451,11 @@ add("pdf-remove-watermark", "Remove PDF Watermark", "pdf", "pdf_design", ("pdf",
 add("pdf-make-fillable", "Make PDF Fillable", "pdf", "pdf_design", ("pdf",), "pdf",
     packages=("pypdf",), options=("fields",),
     note="Add named AcroForm text fields, checkboxes and dropdown choices using normalized top-left rectangles. Keeps existing fields and page contents. No automatic blank detection or XFA conversion; verify reader compatibility.")
+
+add('txt-to-pdfua', 'Text to PDF/UA', 'pdf', 'pdfua', ('txt',), 'pdf',
+    packages=('reportlab', 'pypdf', 'Pillow'), options=('title', 'language'), input_mode='text',
+    max_file_bytes=256 * 1024, max_total_bytes=8 * 1024 * 1024,
+    note='Create a tagged PDF/UA-1 from plain text with a title and language. Blank lines separate paragraphs. Latin fonts only; review reading order and meaning. Automatic checks do not replace manual accessibility review.')
+add('pdf-validate-pdfua', 'Validate PDF/UA', 'pdf', 'pdf_conformance', ('pdf',), 'json',
+    options=('profile',),
+    note='Check PDF/UA-1 automatically with a local validation engine. A passing result still requires manual accessibility review. The report identifies the engine, profile and exact file hash.')

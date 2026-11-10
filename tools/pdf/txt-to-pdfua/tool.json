@@ -1,0 +1,30 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "txt-to-pdfua",
+  "name": "Text to PDF/UA",
+  "group": "pdf",
+  "handler": "pdfua",
+  "accepts": [
+    "txt"
+  ],
+  "produces": "pdf",
+  "fidelity": "exact",
+  "note": "Create a tagged PDF/UA-1 from plain text with a title and language. Blank lines separate paragraphs. Latin fonts only; review reading order and meaning. Automatic checks do not replace manual accessibility review.",
+  "packages": [
+    "reportlab",
+    "pypdf",
+    "Pillow"
+  ],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "title",
+    "language"
+  ],
+  "input_mode": "text",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 262144,
+  "max_total_bytes": 8388608
+}

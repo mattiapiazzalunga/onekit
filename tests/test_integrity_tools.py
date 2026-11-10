@@ -141,8 +141,9 @@ def test_pdf_text_page_selection_and_png_vector_output():
     assert '<path' in result.files[0].text() and '<image' not in result.files[0].text()
 
 
-def test_unsupported_ecdsa_curve_is_not_reported_as_a_broken_signature():
+def test_weak_ecdsa_curve_separates_valid_math_from_policy_rejection():
     signature = Artifact('signed.p7m',signed_cms(b'original',algorithm='ec224'))
     result = execute('signature-verify',[signature])
-    assert result.details['verdict']=='not_checked'
-    assert result.details['signatures'][0]['reason']=='Unsupported ECDSA curve.'
+    assert result.details['verdict']=='cryptographic_match'
+    assert result.details['validation']['indication']=='INDETERMINATE'
+    assert result.details['validation']['signatures'][0]['subindication']=='CRYPTO_CONSTRAINTS_FAILURE_NO_POE'

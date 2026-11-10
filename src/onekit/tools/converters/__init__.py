@@ -7,6 +7,7 @@ import io
 import json
 import re
 
+from ...limits import LIMITS
 from ...models import OneKitError, Result, output, parse_json
 
 
@@ -26,7 +27,7 @@ def pdf_images(file, format="png", dpi=144):
         result = []
         for index, page in enumerate(pages):
             with Image.open(io.BytesIO(bytes(page["data"]))) as image:
-                if image.width * image.height > 40_000_000:
+                if image.width * image.height > LIMITS.max_image_pixels:
                     raise OneKitError("A rendered page exceeds 40 million pixels; reduce dpi.")
                 result.append(output(file, f"page-{index+1}.{format}", encode(image, format)))
         return result
@@ -40,7 +41,7 @@ def pdf_images(file, format="png", dpi=144):
         for index in range(len(document)):
             page = document[index]
             width, height = page.get_size()
-            if width * height * (dpi / 72) ** 2 > 40_000_000:
+            if width * height * (dpi / 72) ** 2 > LIMITS.max_image_pixels:
                 raise OneKitError("A rendered page exceeds 40 million pixels; reduce dpi.")
             bitmap = page.render(scale=dpi / 72)
             result.append(output(file, f"page-{index+1}.{format}", encode(bitmap.to_pil(), format)))
@@ -63,9 +64,16 @@ def add_image_slide(presentation, data):
 def text_document(text, file, target):
     if target == "docx":
         from docx import Document
+        # Word uses XML 1.0: reject binary controls before passing text to lxml.
+        # Form feeds in plain text represent page breaks, not invalid XML text.
+        if re.search(r"(?:[\x00-\x08\x0b\x0e-\x1f\ud800-\udfff\ufffe\uffff])", text):
+            raise OneKitError("Binary content is not accepted by this text tool.")
         document = Document()
-        for paragraph in text.split("\n"):
-            document.add_paragraph(paragraph)
+        for index, page in enumerate(text.split("\f")):
+            if index:
+                document.add_page_break()
+            for paragraph in page.split("\n"):
+                document.add_paragraph(paragraph)
         buffer = io.BytesIO()
         document.save(buffer)
         return output(file, "docx", buffer.getvalue())
@@ -80,6 +88,9 @@ def text_document(text, file, target):
 def run(tool, files, options):
     file = files[0]
     source, target = tool.id.split("-to-")
+    if source == 'latex' and target in ('html', 'md'):
+        from ..pandoc import convert
+        return convert(file, target)
     if source in {'md', 'html'} and target in {'pdf', 'latex'}:
         from ...execution import current_context
         if current_context().portable_documents:

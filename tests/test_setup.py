@@ -24,6 +24,39 @@ def test_ready_tool_does_not_install_or_download(monkeypatch):
     setup.ensure_tool(TOOLS["file-count"])
 
 
+@pytest.mark.parametrize('identifier', ['dev-format-latex', 'latex-to-html', 'latex-to-md'])
+def test_aligned_document_engines_do_not_install_the_developer_bundle(monkeypatch, identifier):
+    monkeypatch.setattr('onekit.tools.pandoc.engine_ready', lambda: True)
+    monkeypatch.setattr('onekit.cli.install_node_engines', lambda *args: pytest.fail('Unexpected developer engine bundle'))
+    monkeypatch.setattr(setup, 'run', lambda *args: pytest.fail('Unexpected installation'))
+    engines = []
+    monkeypatch.setattr(setup, 'native_engines', engines.extend)
+    setup.ensure_tool(TOOLS[identifier])
+    assert engines == ['node']
+
+
+def test_pandoc_policy_blocks_setup_before_installation(monkeypatch):
+    monkeypatch.setenv('ONEKIT_ALLOW_COPYLEFT', '0')
+    monkeypatch.setattr(setup, 'native_engines', lambda *args: pytest.fail('Unexpected installation'))
+    with pytest.raises(OneKitError, match='disabled'):
+        setup.ensure_tool(TOOLS['latex-to-html'])
+
+
+def test_original_dss_runtime_does_not_install_the_parallel_ades_engine(monkeypatch):
+    from onekit.tools import signature_dss
+
+    monkeypatch.setattr(signature_dss, 'configured_runtime', lambda: object())
+    monkeypatch.setattr(setup.importlib.util, 'find_spec', lambda name: None)
+    for name in ('pypdf', 'asn1crypto', 'Crypto', 'cryptography'):
+        monkeypatch.delitem(setup.sys.modules, name, raising=False)
+    installed = []
+    monkeypatch.setattr(setup, 'python_packages', installed.extend)
+    monkeypatch.setattr(setup, 'native_engines', lambda engines: None)
+    setup.ensure_tool(TOOLS['signature-verify'])
+    assert any(name.startswith('cryptography') for name in installed)
+    assert not any(name.startswith(('pyhanko', 'signxml', 'xsdata')) for name in installed)
+
+
 def test_missing_python_dependencies_use_private_cache_and_catalog_constraints(monkeypatch):
     monkeypatch.setattr(setup.importlib.util, "find_spec", lambda name: None)
     calls = []

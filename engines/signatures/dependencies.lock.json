@@ -1,0 +1,2190 @@
+{
+  "schema": "onekit-dss-java-dependencies-v1",
+  "dssVersion": "6.5.1",
+  "licenseReview": "required",
+  "components": [
+    {
+      "coordinate": "com.fasterxml.woodstox:woodstox-core:6.5.1",
+      "binary": {
+        "path": "com/fasterxml/woodstox/woodstox-core/6.5.1/woodstox-core-6.5.1.jar",
+        "sha256": "c928d60665c6415fb1c39775cf95cfc44f7f4580cf5ab01b1c380ebffd76887f",
+        "bytes": 1586395
+      },
+      "source": {
+        "path": "com/fasterxml/woodstox/woodstox-core/6.5.1/woodstox-core-6.5.1-sources.jar",
+        "sha256": "b38b99fbd3fdc8acd843a9ffc2fcc6be54158dcd233c6d5a8397181f16caaac4",
+        "bytes": 550243
+      },
+      "poms": [
+        {
+          "path": "com/fasterxml/woodstox/woodstox-core/6.5.1/woodstox-core-6.5.1.pom",
+          "sha256": "4839654e16b1714e74f51abcb378d8356814ab8f4d5273d1dd2f1ce8a390addc",
+          "bytes": 9595
+        },
+        {
+          "path": "com/fasterxml/oss-parent/50/oss-parent-50.pom",
+          "sha256": "f5da55dd7b88fb170c46801d17774a652fb2f4581fb5b1d0a5fc86aa182b8577",
+          "bytes": 23614
+        }
+      ],
+      "licenses": [
+        {
+          "name": "The Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "com.github.erosb:json-sKema:0.32.0",
+      "binary": {
+        "path": "com/github/erosb/json-sKema/0.32.0/json-sKema-0.32.0.jar",
+        "sha256": "5a0d470b66495ca08da5e5f44a5faae05f072272a96d7deb2cbfcef91a9e78e5",
+        "bytes": 452460
+      },
+      "source": {
+        "path": "com/github/erosb/json-sKema/0.32.0/json-sKema-0.32.0-sources.jar",
+        "sha256": "f7c078cb1043b02190036b3c075c0ef577c99ec848b7e61e293962af376feffd",
+        "bytes": 61986
+      },
+      "poms": [
+        {
+          "path": "com/github/erosb/json-sKema/0.32.0/json-sKema-0.32.0.pom",
+          "sha256": "29d5c9a2bec30192e8bcb8263a21275185e7f196a7324e68a39fb626ca04e4d8",
+          "bytes": 8581
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MIT",
+          "url": "https://opensource.org/license/mit/"
+        }
+      ]
+    },
+    {
+      "coordinate": "com.sanctionco.jmail:jmail:2.1.0",
+      "binary": {
+        "path": "com/sanctionco/jmail/jmail/2.1.0/jmail-2.1.0.jar",
+        "sha256": "7789f9e86aa02a9c308a650c4e44e17cc4b6caac7f43e261701b0ceefdd4ead4",
+        "bytes": 44132
+      },
+      "source": {
+        "path": "com/sanctionco/jmail/jmail/2.1.0/jmail-2.1.0-sources.jar",
+        "sha256": "44111eda650b0dc963f30cea0ae34fdd3e71ac6ee3960287d086ea322a2df002",
+        "bytes": 41158
+      },
+      "poms": [
+        {
+          "path": "com/sanctionco/jmail/jmail/2.1.0/jmail-2.1.0.pom",
+          "sha256": "b06e306d917b9d1554f5fc92e8e31786edfc1191c1f908c53f95d64cc7e8aa6c",
+          "bytes": 11393
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MIT License",
+          "url": "https://opensource.org/licenses/mit-license.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "com.sun.activation:jakarta.activation:2.0.1",
+      "binary": {
+        "path": "com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar",
+        "sha256": "b9e24b7dd6e07495562ea96531be3130c96dba4d78e1dfd88adbbdebf4332871",
+        "bytes": 62154
+      },
+      "source": {
+        "path": "com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1-sources.jar",
+        "sha256": "bf9e7ae8cc8a92a6e2e7f7b3d27b35c4194002dcb90ae8e66b4333a742d3c597",
+        "bytes": 57217
+      },
+      "poms": [
+        {
+          "path": "com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.pom",
+          "sha256": "8a068592db08e6853204ff0b625a301438e3c36ea5f1ae65babfed208502781a",
+          "bytes": 1998
+        },
+        {
+          "path": "com/sun/activation/all/2.0.1/all-2.0.1.pom",
+          "sha256": "648d5d62b6153f42f190ced2d6e70c1e6442550c9cfeb66fbee0961c6616b2cc",
+          "bytes": 22830
+        },
+        {
+          "path": "org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom",
+          "sha256": "4e7d8329d8da7dcf30779d824241be145f27108932f5a5a24eb907677bc8d72d",
+          "bytes": 13331
+        }
+      ],
+      "licenses": [
+        {
+          "name": "EDL 1.0",
+          "url": "http://www.eclipse.org/org/documents/edl-v10.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "com.sun.istack:istack-commons-runtime:4.0.1",
+      "binary": {
+        "path": "com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.jar",
+        "sha256": "9f91115f449384886f572bd62c8812ee1004273d4b5c85cac65179ad4c16990f",
+        "bytes": 29896
+      },
+      "source": {
+        "path": "com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1-sources.jar",
+        "sha256": "e4487bccc48dc11c19e6ff200d3665f43fc25e2aa5aa8a7e59878b94b16d1cec",
+        "bytes": 27423
+      },
+      "poms": [
+        {
+          "path": "com/sun/istack/istack-commons-runtime/4.0.1/istack-commons-runtime-4.0.1.pom",
+          "sha256": "38fb6ac1b3d9b549adf21f7dc84cd15c1bb7c75cceb58126e9bd16cbe6ddeeef",
+          "bytes": 4782
+        },
+        {
+          "path": "com/sun/istack/istack-commons/4.0.1/istack-commons-4.0.1.pom",
+          "sha256": "cc3bcf26d42c2e023a4a90e47f331793e0d9476baf2727ad9ddc8bbe735216c2",
+          "bytes": 23619
+        },
+        {
+          "path": "org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom",
+          "sha256": "4e7d8329d8da7dcf30779d824241be145f27108932f5a5a24eb907677bc8d72d",
+          "bytes": 13331
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Eclipse Distribution License - v 1.0",
+          "url": "http://www.eclipse.org/org/documents/edl-v10.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "commons-codec:commons-codec:1.18.0",
+      "binary": {
+        "path": "commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.jar",
+        "sha256": "ba005f304cef92a3dede24a38ad5ac9b8afccf0d8f75839d6c1338634cf7f6e4",
+        "bytes": 373045
+      },
+      "source": {
+        "path": "commons-codec/commons-codec/1.18.0/commons-codec-1.18.0-sources.jar",
+        "sha256": "6c50e3dd81284139baddf94b3d0f78d25135eea0853f6495267196cdcf5949e3",
+        "bytes": 374262
+      },
+      "poms": [
+        {
+          "path": "commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.pom",
+          "sha256": "74b916da4b0384c619e6dd4c18defe8aa4387f795205253cfb4bbb2f458cddce",
+          "bytes": 17813
+        },
+        {
+          "path": "org/apache/commons/commons-parent/79/commons-parent-79.pom",
+          "sha256": "628df30148acd3c491cfcb6b73c7ae4b5989e5526ab13a2f428dea5d4ad10d7a",
+          "bytes": 76949
+        },
+        {
+          "path": "org/apache/apache/33/apache-33.pom",
+          "sha256": "d78bd8524c5f8380a190a6525686629a95dfe512df21111383a6d8c0923a4415",
+          "bytes": 24184
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "commons-io:commons-io:2.22.0",
+      "binary": {
+        "path": "commons-io/commons-io/2.22.0/commons-io-2.22.0.jar",
+        "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758",
+        "bytes": 609182
+      },
+      "source": {
+        "path": "commons-io/commons-io/2.22.0/commons-io-2.22.0-sources.jar",
+        "sha256": "de5acfae5fa2735276df7facf46cdb0347374208ea47db246b554fae59277fb5",
+        "bytes": 610277
+      },
+      "poms": [
+        {
+          "path": "commons-io/commons-io/2.22.0/commons-io-2.22.0.pom",
+          "sha256": "6425cec0ea760035efa77277de85f89fa6dbed147ab3dd95b8d2cbc55340accf",
+          "bytes": 20275
+        },
+        {
+          "path": "org/apache/commons/commons-parent/98/commons-parent-98.pom",
+          "sha256": "d40318527f56033e0ff0789971cc38c856aa99a685eea11270814e7f1eda9fba",
+          "bytes": 79787
+        },
+        {
+          "path": "org/apache/apache/37/apache-37.pom",
+          "sha256": "524ec4787aff73af6b3a9fafa154c7f1881b648299b663fdbfcadda1286f2353",
+          "bytes": 25620
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "commons-logging:commons-logging:1.4.0",
+      "binary": {
+        "path": "commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar",
+        "sha256": "d175dbd751dd782a63bde28c7a039520e971f25e84b79c19b8435edc3603e0dc",
+        "bytes": 75828
+      },
+      "source": {
+        "path": "commons-logging/commons-logging/1.4.0/commons-logging-1.4.0-sources.jar",
+        "sha256": "28104e5057a11c6e9cda72e973d767b3a0185e65363fede91bc848bc6a309634",
+        "bytes": 85970
+      },
+      "poms": [
+        {
+          "path": "commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.pom",
+          "sha256": "92d9c735808eda632a214c7f2c1640266cfc7269c3a63fd2346e15c988aeb11e",
+          "bytes": 32668
+        },
+        {
+          "path": "org/apache/commons/commons-parent/102/commons-parent-102.pom",
+          "sha256": "1a3775fa4b265910941ca7f09c6b0df4b30f61e301f03dbebbfd35c49ca740af",
+          "bytes": 79549
+        },
+        {
+          "path": "org/apache/apache/38/apache-38.pom",
+          "sha256": "9b0a5f28ddfb4b7500a37022bee8245efdd044fb9a3d79fb827550923eccc4b5",
+          "bytes": 25608
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-alert:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-alert/6.5.1/dss-alert-6.5.1.jar",
+        "sha256": "76640b1f47035da75337d624557aaf948df4933f6d19c36dbe3b620f9bddf721",
+        "bytes": 15621
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-alert/6.5.1/dss-alert-6.5.1-sources.jar",
+        "sha256": "629f1b4ca39589467e5f1b93ac87b51023ef827e3357859b5cdb5357cdbd3979",
+        "bytes": 21845
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-alert/6.5.1/dss-alert-6.5.1.pom",
+          "sha256": "8f4486fb06335f5f7d22fbac81c9fa99cdbb9a7c72a592126d71214647fb270f",
+          "bytes": 1251
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-asic-cades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-asic-cades/6.5.1/dss-asic-cades-6.5.1.jar",
+        "sha256": "526e06a716f851a21b6d08d4a6c54a45f3799b74695e25a11192599a6d9de988",
+        "bytes": 90169
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-asic-cades/6.5.1/dss-asic-cades-6.5.1-sources.jar",
+        "sha256": "ca27dde8c9e943bc96f71750445f9502cfe7dcfa14db5d5316e26063f1858d23",
+        "bytes": 83251
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-asic-cades/6.5.1/dss-asic-cades-6.5.1.pom",
+          "sha256": "58c2fcd034b79df90588a69dd5316fe19d2a3c5b2c015dd7b9d266dd95db277b",
+          "bytes": 2132
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-asic-common:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-asic-common/6.5.1/dss-asic-common-6.5.1.jar",
+        "sha256": "b9c36647989f8728978127b25db1a96bf6d5a2970056a41d54761ded6ca4589a",
+        "bytes": 100892
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-asic-common/6.5.1/dss-asic-common-6.5.1-sources.jar",
+        "sha256": "eb3d1a9e02671d414c49f82299397513af5de4b2b9b60ff84f18badddef0ff82",
+        "bytes": 97659
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-asic-common/6.5.1/dss-asic-common-6.5.1.pom",
+          "sha256": "aa1685c2b334adb41cf55198945c5e36ae9073d091418fd12c91ed9e4adf14f9",
+          "bytes": 2513
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-asic-xades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-asic-xades/6.5.1/dss-asic-xades-6.5.1.jar",
+        "sha256": "50053530596ebe3441d2619379bf644880c17d99ca7ec6dc6ae0f57d261c702d",
+        "bytes": 62594
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-asic-xades/6.5.1/dss-asic-xades-6.5.1-sources.jar",
+        "sha256": "bacedfa7a6700784a9d5381a7d0e595f2b65cc425ff8ff9844c9c100ce2e68e7",
+        "bytes": 58470
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-asic-xades/6.5.1/dss-asic-xades-6.5.1.pom",
+          "sha256": "b7e738f1a8f1312797ff0c0f34076b0c456635bca7ea85be30c52ae35ef9e121",
+          "bytes": 1823
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-cades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-cades/6.5.1/dss-cades-6.5.1.jar",
+        "sha256": "5eef82c33a652d62835799669c97897b87fc9a9996a6ca358c2521fd0750fec5",
+        "bytes": 162554
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-cades/6.5.1/dss-cades-6.5.1-sources.jar",
+        "sha256": "16f13b1daae565c0ddc374323f24e8b33926d6cd8db6681ffb2c7ee3ec0eb8a4",
+        "bytes": 123489
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-cades/6.5.1/dss-cades-6.5.1.pom",
+          "sha256": "517138484b650964546d24dcbf4dc3aa35b8c35235bd74c87c4a589a19aee5e1",
+          "bytes": 2450
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-cms-object:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-cms-object/6.5.1/dss-cms-object-6.5.1.jar",
+        "sha256": "d766f4c73347ea95baf61a7e5c9bdfbf094487f31a2090e035cd30dd4bc9dc6c",
+        "bytes": 12939
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-cms-object/6.5.1/dss-cms-object-6.5.1-sources.jar",
+        "sha256": "8bfd4e76bd21db8dc76a39d04deca71f2acc82fed088b7c7b0cb4c584a9eff13",
+        "bytes": 9725
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-cms-object/6.5.1/dss-cms-object-6.5.1.pom",
+          "sha256": "2e3cb1eed5adbfad4b5888e532bdad408b5d5cb9f2e601b5e7e7294d0afdd3df",
+          "bytes": 2378
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-cms:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-cms/6.5.1/dss-cms-6.5.1.jar",
+        "sha256": "394c818f246125f2ee06146b7d4085bdcedc8cb044e0c39f0fbcbc4bf375f939",
+        "bytes": 31358
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-cms/6.5.1/dss-cms-6.5.1-sources.jar",
+        "sha256": "6da2e2a43f955f459231a5c4c33593b7b3d3f85587b3301ba3265ae197297dd9",
+        "bytes": 33741
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-cms/6.5.1/dss-cms-6.5.1.pom",
+          "sha256": "e8b39750dc112594656880bf31269c402d610c66c51c5498ef06f26adbb84370",
+          "bytes": 1456
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-crl-parser-x509crl:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-crl-parser-x509crl/6.5.1/dss-crl-parser-x509crl-6.5.1.jar",
+        "sha256": "98b0e6d6a0c8fcdfb447a1dbc724db17ab40fa5d83f79613cc084ab243c93d1c",
+        "bytes": 7471
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-crl-parser-x509crl/6.5.1/dss-crl-parser-x509crl-6.5.1-sources.jar",
+        "sha256": "42124f42f987c04b7cf10fdac890bbe6c1bfd7048c5fcaa2dbfdac5c645984b9",
+        "bytes": 6675
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-crl-parser-x509crl/6.5.1/dss-crl-parser-x509crl-6.5.1.pom",
+          "sha256": "89bc2f301978a282a864bdf419c5b42124c8aa32f0fb1e4e7b4ef6960eaeb437",
+          "bytes": 1583
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-crl-parser:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-crl-parser/6.5.1/dss-crl-parser-6.5.1.jar",
+        "sha256": "1f4531373432659ff1577a1fe69d9e64acced6ea6db3d9145f9dd7403dc6bd4b",
+        "bytes": 11843
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-crl-parser/6.5.1/dss-crl-parser-6.5.1-sources.jar",
+        "sha256": "1634022c6d366d045956221eb44ccd8ea245d5b39d1fd036cdd07c75b7d821aa",
+        "bytes": 13248
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-crl-parser/6.5.1/dss-crl-parser-6.5.1.pom",
+          "sha256": "0150eee5c4a2dc84c455f9b47bad0c0372c612b8bfa52c051c91217b7ac2feed",
+          "bytes": 1719
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-detailed-report-jaxb:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-detailed-report-jaxb/6.5.1/dss-detailed-report-jaxb-6.5.1.jar",
+        "sha256": "3e05f8df288a12f76a13b7ab1c1334f6414b9abad557720be95c66610e975220",
+        "bytes": 117417
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-detailed-report-jaxb/6.5.1/dss-detailed-report-jaxb-6.5.1-sources.jar",
+        "sha256": "75cdd66695aa9c15b67fd781e507ac773b3017a055da7cf73425ccd9a65aa714",
+        "bytes": 123808
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-detailed-report-jaxb/6.5.1/dss-detailed-report-jaxb-6.5.1.pom",
+          "sha256": "b92471bc3705cb8e517c4f843b39bce601e3e42525b41013cd97354432fb7b0f",
+          "bytes": 4859
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-diagnostic-jaxb:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-diagnostic-jaxb/6.5.1/dss-diagnostic-jaxb-6.5.1.jar",
+        "sha256": "c339a38e5db439caab8fea02636b4aa77c73cffdf03cece0aaa8d8a2ac2cc7c9",
+        "bytes": 364943
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-diagnostic-jaxb/6.5.1/dss-diagnostic-jaxb-6.5.1-sources.jar",
+        "sha256": "ccc4aa26b000764c272e744fc1c57006bb1193b851adaa77cae3c47558e4baa4",
+        "bytes": 382179
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-diagnostic-jaxb/6.5.1/dss-diagnostic-jaxb-6.5.1.pom",
+          "sha256": "67854b7cbd5afcd6e3893b12107b09be163f15da876cef6e75a70f3039f775cb",
+          "bytes": 3908
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-document:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-document/6.5.1/dss-document-6.5.1.jar",
+        "sha256": "5431df4d0cb33c620fedb18d0d858dfd815808e50dbaf6ebaee4e783c42a2554",
+        "bytes": 35082
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-document/6.5.1/dss-document-6.5.1-sources.jar",
+        "sha256": "3c88408ec551f53a2125cd400ffb4aa52d3fc5a616d5a006cefc61ac974cd77d",
+        "bytes": 39903
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-document/6.5.1/dss-document-6.5.1.pom",
+          "sha256": "b511e9576b5ee2cb966d388077fa87b04d26e68fd6b054061b2679bf7d0f9adc",
+          "bytes": 2494
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-enumerations:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-enumerations/6.5.1/dss-enumerations-6.5.1.jar",
+        "sha256": "01c81e7c0dd53d55cf6bf72deb2346b60c5e339825d7b5bf6ea22a9ad616a18b",
+        "bytes": 182782
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-enumerations/6.5.1/dss-enumerations-6.5.1-sources.jar",
+        "sha256": "053f75489f502a8fb78c5db39f25ac79baf607a7e4994f6f784c33a8c20b6922",
+        "bytes": 171718
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-enumerations/6.5.1/dss-enumerations-6.5.1.pom",
+          "sha256": "ed04199b61e5407df97b7bb2f9b4918dc180f86ec21f74201808490ff33c2c29",
+          "bytes": 1223
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-i18n:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-i18n/6.5.1/dss-i18n-6.5.1.jar",
+        "sha256": "20829b5c26feca7a6566ea8700bc8cf4016d70d607f95c45e4cb5f2d19e4dabf",
+        "bytes": 55573
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-i18n/6.5.1/dss-i18n-6.5.1-sources.jar",
+        "sha256": "96bf4eb5f2ae7829a62d75541756a6d58e23d53e0515eb4885c76c124d04b75c",
+        "bytes": 27125
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-i18n/6.5.1/dss-i18n-6.5.1.pom",
+          "sha256": "c3aa24e4337def140808f1b27e9ebe7e6b664fd6a3cdfd62c03a9f809838a258",
+          "bytes": 1413
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-jades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-jades/6.5.1/dss-jades-6.5.1.jar",
+        "sha256": "6214d7b336a9c9787c9c0f255f56ae3bd90231a24faeda31295fef86cc2de773",
+        "bytes": 196590
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-jades/6.5.1/dss-jades-6.5.1-sources.jar",
+        "sha256": "1875df40de247a0268dca7b1e7bde7a41cf5079ca644c618bb0539069dd5f01d",
+        "bytes": 155658
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-jades/6.5.1/dss-jades-6.5.1.pom",
+          "sha256": "ecf3c8879e5b2d4f34213eaace0e189feb97e871886c90db9d48f61da0640d80",
+          "bytes": 1737
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-jaxb-common:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-jaxb-common/6.5.1/dss-jaxb-common-6.5.1.jar",
+        "sha256": "fd12a00f81a2efb2de0f7e5edd28df3eb1ccaf51a1be5742710ee725bf1627db",
+        "bytes": 6984
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-jaxb-common/6.5.1/dss-jaxb-common-6.5.1-sources.jar",
+        "sha256": "254bba8348712ed3722fc746f5ddf746671f7909458f68294331b205bed57497",
+        "bytes": 6823
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-jaxb-common/6.5.1/dss-jaxb-common-6.5.1.pom",
+          "sha256": "a61727de3545af6c4aa52095333f1017f1e3a450ae5e4af37446d628220117d1",
+          "bytes": 1925
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-jaxb-parsers:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-jaxb-parsers/6.5.1/dss-jaxb-parsers-6.5.1.jar",
+        "sha256": "b20f4392bac848846c23f502a12926d99f68e7b21a632d91f86dd12bafce6e1f",
+        "bytes": 36436
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-jaxb-parsers/6.5.1/dss-jaxb-parsers-6.5.1-sources.jar",
+        "sha256": "9a09e8515f9e5b2690884d2c5759ef587fee99c6830c3d0ba950b2118a9561b9",
+        "bytes": 57159
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-jaxb-parsers/6.5.1/dss-jaxb-parsers-6.5.1.pom",
+          "sha256": "ec34c47177c51f34550d8ec021801aafd20c9d26faf5bfaf506e84d725153e92",
+          "bytes": 1668
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-json-common:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-json-common/6.5.1/dss-json-common-6.5.1.jar",
+        "sha256": "ee679ea157733a9c1277c0ef0f1ce81c9880da64d6e8917d00352b200a4554da",
+        "bytes": 14049
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-json-common/6.5.1/dss-json-common-6.5.1-sources.jar",
+        "sha256": "e1036fb7ecbacf9ab11142cc2016e3235775693418d39426f7a05dc10162044b",
+        "bytes": 11966
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-json-common/6.5.1/dss-json-common-6.5.1.pom",
+          "sha256": "4994485af88a7e504495367a03cc9687a886530b0add6a510eb5b3ea54420ff8",
+          "bytes": 1627
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-model:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-model/6.5.1/dss-model-6.5.1.jar",
+        "sha256": "997a9c1974d2f72aee13f9cd39ab9d1e35f0ae553d9c0d50bd05d3db6b2b46b4",
+        "bytes": 212144
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-model/6.5.1/dss-model-6.5.1-sources.jar",
+        "sha256": "f20e8c09519234a04f4763306df86cadd4d4f7d9aa91be8bcecc96cf008e8394",
+        "bytes": 283089
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-model/6.5.1/dss-model-6.5.1.pom",
+          "sha256": "da12e16a04490874081081a8e470739cdaaa89515a8798449a98e4be71b6fe1a",
+          "bytes": 1589
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-pades-pdfbox:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-pades-pdfbox/6.5.1/dss-pades-pdfbox-6.5.1.jar",
+        "sha256": "be5930bb5e66d97fa44fe6b4b3c67aee61bbbd87a0a6c9b88205d172d23b2959",
+        "bytes": 73748
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-pades-pdfbox/6.5.1/dss-pades-pdfbox-6.5.1-sources.jar",
+        "sha256": "c27501ffabbdfc09b7908991d1b040729a45dfeee776a202f93f845c09c31b9d",
+        "bytes": 51563
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-pades-pdfbox/6.5.1/dss-pades-pdfbox-6.5.1.pom",
+          "sha256": "1d5017006e3917318d64a90d9034262a97387c6fd8b05d133db84a82d0da4c43",
+          "bytes": 2549
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-pades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-pades/6.5.1/dss-pades-6.5.1.jar",
+        "sha256": "ddb74ea6b1d59def5f4434a9f1bcf4e9d8b68236d457455682b310bf7d9fb5fd",
+        "bytes": 371310
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-pades/6.5.1/dss-pades-6.5.1-sources.jar",
+        "sha256": "ca822dc5e69b1ef7c390c78d9d75563ef248ae89566212ba2cc191bf615c69b5",
+        "bytes": 361610
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-pades/6.5.1/dss-pades-6.5.1.pom",
+          "sha256": "13ea1cb45aece86daafc90e85c1f5a1b1616516c46312d0a97b4ac15c86a32fb",
+          "bytes": 1764
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-policy-jaxb:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-policy-jaxb/6.5.1/dss-policy-jaxb-6.5.1.jar",
+        "sha256": "a7b6190222f8ed018c4e7305469d26c091a23c635e34b0af611205bf83ae4a71",
+        "bytes": 97744
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-policy-jaxb/6.5.1/dss-policy-jaxb-6.5.1-sources.jar",
+        "sha256": "47c3139aa7210006af1d512a9a0991ec6244e0f2dfc03842b20ddc613a4a0624",
+        "bytes": 95230
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-policy-jaxb/6.5.1/dss-policy-jaxb-6.5.1.pom",
+          "sha256": "8a11753ad53c52d3fc81da250810943ab7f29c217af919f99ff923f9803b6559",
+          "bytes": 3404
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-simple-certificate-report-jaxb:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-simple-certificate-report-jaxb/6.5.1/dss-simple-certificate-report-jaxb-6.5.1.jar",
+        "sha256": "637f038fff59ff27730eca0f2ddf80ef351bc68cc3516672e76b9fcf921932be",
+        "bytes": 56294
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-simple-certificate-report-jaxb/6.5.1/dss-simple-certificate-report-jaxb-6.5.1-sources.jar",
+        "sha256": "b14f2c4fe0c75e284b877b592206401fff8cad08d52153c385991fd3a14f45d9",
+        "bytes": 55578
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-simple-certificate-report-jaxb/6.5.1/dss-simple-certificate-report-jaxb-6.5.1.pom",
+          "sha256": "06310fcc65e9a5de596b5f26f320f0959172c193370931ae3cebd4792c54d0c0",
+          "bytes": 5204
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-simple-report-jaxb:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-simple-report-jaxb/6.5.1/dss-simple-report-jaxb-6.5.1.jar",
+        "sha256": "58ef0e4ddc36b37970d2b4e6112502ecbc25db48c4badbfef351b3b7a2973c41",
+        "bytes": 74956
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-simple-report-jaxb/6.5.1/dss-simple-report-jaxb-6.5.1-sources.jar",
+        "sha256": "af6589a8c5e764e3cd43fba5767f9f22d00a9a1c647fca7ce5b22dfe21b0fd14",
+        "bytes": 80522
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-simple-report-jaxb/6.5.1/dss-simple-report-jaxb-6.5.1.pom",
+          "sha256": "9945c1c9a79c600eef9a28b7ed7e7c42e7fe148e0a2df48ce5f8e0068e72812c",
+          "bytes": 4837
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-spi:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-spi/6.5.1/dss-spi-6.5.1.jar",
+        "sha256": "63d48cb2c8ea85b5ebcef5443b3f26cc13bbff189606540fb0e148657a45220e",
+        "bytes": 474111
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-spi/6.5.1/dss-spi-6.5.1-sources.jar",
+        "sha256": "d340d718bca8ff07c533cc29e394d2196b9769fa9e449c736cb0be4d6ecaa8bb",
+        "bytes": 448647
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-spi/6.5.1/dss-spi-6.5.1.pom",
+          "sha256": "151f2dfb892f22bfd4bc8d048c4d4b4bfc37e8ab90757365a032429598099e88",
+          "bytes": 2953
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-tsl-validation:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-tsl-validation/6.5.1/dss-tsl-validation-6.5.1.jar",
+        "sha256": "dc691091e3c7c1f5fc42d0d039067f858fcc39fbd8894a151c2dce10ed0eec9d",
+        "bytes": 160401
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-tsl-validation/6.5.1/dss-tsl-validation-6.5.1-sources.jar",
+        "sha256": "efb80e75ec6ab2ed63d997439d60a90ce715eeb42ca4240f47b68132a7f973aa",
+        "bytes": 149993
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-tsl-validation/6.5.1/dss-tsl-validation-6.5.1.pom",
+          "sha256": "82ff07f4fac0927adf29c166b7dc3acb30a9aa80cad1f76b299c60a88239ec65",
+          "bytes": 1391
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-utils-apache-commons:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-utils-apache-commons/6.5.1/dss-utils-apache-commons-6.5.1.jar",
+        "sha256": "62aaa0e764c7b364256000a0e98feb948089641bcb43a8070d0bf07bd6fdebb9",
+        "bytes": 7226
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-utils-apache-commons/6.5.1/dss-utils-apache-commons-6.5.1-sources.jar",
+        "sha256": "3ae3bc233c0c8bfca724b4fbdc33fd51f677b651632fe975b5912746861d81ba",
+        "bytes": 5679
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-utils-apache-commons/6.5.1/dss-utils-apache-commons-6.5.1.pom",
+          "sha256": "e27552908423521b83cbf9c6fe8348f7db425834c9d5130aaadfaaaa29b44d5a",
+          "bytes": 1982
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-utils:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-utils/6.5.1/dss-utils-6.5.1.jar",
+        "sha256": "c2bcc1176bf1b1e447dfa779bca689efa9f33d1b356d87e44f61d5b88b03cef1",
+        "bytes": 6667
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-utils/6.5.1/dss-utils-6.5.1-sources.jar",
+        "sha256": "0771a68fbf2dd81577f20c0fa57794e165c71283e28c51abb6bc5133a86f7f7e",
+        "bytes": 9401
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-utils/6.5.1/dss-utils-6.5.1.pom",
+          "sha256": "eeee51e422e2e68e5a0b18e7a3fbe73dcc02f464245eb004452871c925d4633b",
+          "bytes": 1173
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-validation-job:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-validation-job/6.5.1/dss-validation-job-6.5.1.jar",
+        "sha256": "86ee08b19ce017fcd2968289104f130de9f0f9a64c261138f38e9a4e674a7803",
+        "bytes": 63823
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-validation-job/6.5.1/dss-validation-job-6.5.1-sources.jar",
+        "sha256": "123913e5947e3c5682a41f2c7cef1fa76837173ae40bb5e79de3ca318d20856e",
+        "bytes": 71548
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-validation-job/6.5.1/dss-validation-job-6.5.1.pom",
+          "sha256": "e0cc7a8654ba99eb9c465b8bf57228fea6e89627b6d76433051bff727584cfd9",
+          "bytes": 2214
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-validation:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-validation/6.5.1/dss-validation-6.5.1.jar",
+        "sha256": "853034ada02bef6653c8df8ed09c284ad6e6428a98098edd06ea140e5ad8cda3",
+        "bytes": 1180154
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-validation/6.5.1/dss-validation-6.5.1-sources.jar",
+        "sha256": "64c009e113333675b92b8661498462d0a7c7a4efa2fc85be8043b6b311474f52",
+        "bytes": 1059721
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-validation/6.5.1/dss-validation-6.5.1.pom",
+          "sha256": "bc1c3690ad642d97a2b45ce36165004087d0a059691889f2dde67d9bc14ad9bf",
+          "bytes": 3998
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-xades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-xades/6.5.1/dss-xades-6.5.1.jar",
+        "sha256": "b9b77518a3186ace086dd4af7b5ac863a408e9997e492e6e900a96abd8897c14",
+        "bytes": 369422
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-xades/6.5.1/dss-xades-6.5.1-sources.jar",
+        "sha256": "8f92f63e5dbaac836ee11166fbb3769347bcbdb93f8b1d1ee7a79ff4cdf0821e",
+        "bytes": 296594
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-xades/6.5.1/dss-xades-6.5.1.pom",
+          "sha256": "8aa488b12665907860c7ebdbc7f32c359b406fb2db515f094f4415a79c0dfb8a",
+          "bytes": 1954
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-xml-common:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-xml-common/6.5.1/dss-xml-common-6.5.1.jar",
+        "sha256": "d500ec144aabdecc5cdd399898835a7fbeb052e13f1eb1dabe330d1fee9ced49",
+        "bytes": 52143
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-xml-common/6.5.1/dss-xml-common-6.5.1-sources.jar",
+        "sha256": "75b1b1ee818f5f910c03039a762359037df0f5c79986e092d80b53d0613430e5",
+        "bytes": 55503
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-xml-common/6.5.1/dss-xml-common-6.5.1.pom",
+          "sha256": "59139cd1b51bcc4e13b49bc2f3b18bc6c59baad9fec39f707e6922e90acbdd9c",
+          "bytes": 1986
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:dss-xml-utils:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-xml-utils/6.5.1/dss-xml-utils-6.5.1.jar",
+        "sha256": "998df67148d18cf750e8b714b49efe1134c759d1a03a9dcfab2fa11d17df0844",
+        "bytes": 31613
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/dss-xml-utils/6.5.1/dss-xml-utils-6.5.1-sources.jar",
+        "sha256": "e555d9cab9fa50ae7468cb88972432d5d6afc9ec12b230dcd8307811f77a18ed",
+        "bytes": 31175
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/dss-xml-utils/6.5.1/dss-xml-utils-6.5.1.pom",
+          "sha256": "a902957e96dbdb6efe6521add59aa2fb88b92d0f38436b051508463d417b6aa3",
+          "bytes": 2306
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-jades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-jades/6.5.1/specs-jades-6.5.1.jar",
+        "sha256": "2e14b8f0817b60bfffe802066597c07aff97c87764865220f9471d3224eb20bb",
+        "bytes": 9588
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-jades/6.5.1/specs-jades-6.5.1-sources.jar",
+        "sha256": "8b8c1e04ee1cba472f73448badbcaa8a3aea43a657a3dcf65474e791ed336be5",
+        "bytes": 10458
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-jades/6.5.1/specs-jades-6.5.1.pom",
+          "sha256": "751a1d08f845970b18f05eec74643b29cab0ed557cca6622250492b4ca4359cf",
+          "bytes": 1159
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-jws:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-jws/6.5.1/specs-jws-6.5.1.jar",
+        "sha256": "635d7dba577cafb746a5c1fd819da6a054e143e10bdaac81cdddeb70a6c13c4d",
+        "bytes": 7532
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-jws/6.5.1/specs-jws-6.5.1-sources.jar",
+        "sha256": "ed07ce4ebbb000fd8dd879044cc6448c5eb0715e3464284c7fef20b4c6c19b60",
+        "bytes": 8592
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-jws/6.5.1/specs-jws-6.5.1.pom",
+          "sha256": "6fe09eddf38f544775b0d7200a5347c41b3481a8a3cb401198b2c4d6d4e7f865",
+          "bytes": 1254
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-trusted-list-v211:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-trusted-list-v211/6.5.1/specs-trusted-list-v211-6.5.1.jar",
+        "sha256": "949601c4545a53a4aa0a6b24edfc43d249f9ed3dec1de1e1edd33e625ddb953e",
+        "bytes": 66838
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-trusted-list-v211/6.5.1/specs-trusted-list-v211-6.5.1-sources.jar",
+        "sha256": "7cda65c016755591bd2d4da967e191977d1ef7c3ac55f5ebaa6f70f37f85ea15",
+        "bytes": 80178
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-trusted-list-v211/6.5.1/specs-trusted-list-v211-6.5.1.pom",
+          "sha256": "9309fee9d9fcb6c27a2e566b9a0287d3d9353bb88aabedbd46f5a55b8cf129ae",
+          "bytes": 6691
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-trusted-list:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-trusted-list/6.5.1/specs-trusted-list-6.5.1.jar",
+        "sha256": "ccfffb0249f62c2b6a7b0e409ebc070530fd3210337767778fc92375d97ef7e0",
+        "bytes": 98766
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-trusted-list/6.5.1/specs-trusted-list-6.5.1-sources.jar",
+        "sha256": "58b44f88423f2fc84db9a19231ba141c3de85738346de3539474743049a58ed6",
+        "bytes": 118866
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-trusted-list/6.5.1/specs-trusted-list-6.5.1.pom",
+          "sha256": "013d2b181487020499f4a0bfd3082dd2a6c7801b62f7ea5044a8d7ac6a229f23",
+          "bytes": 5112
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-validation-report:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-validation-report/6.5.1/specs-validation-report-6.5.1.jar",
+        "sha256": "957687d68fe3af3fdadd4a23cb8f50296fde1449da92477fbebd3318228180eb",
+        "bytes": 96485
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-validation-report/6.5.1/specs-validation-report-6.5.1-sources.jar",
+        "sha256": "d87fa9424dc98332e8dbf07a483005952762b7a963eddf4ea282a78432634f4d",
+        "bytes": 111018
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-validation-report/6.5.1/specs-validation-report-6.5.1.pom",
+          "sha256": "5123d9f372aea879daa4aac881b4ff2050c240fa9eb05e7c09592b2f2058092b",
+          "bytes": 4990
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-xades:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-xades/6.5.1/specs-xades-6.5.1.jar",
+        "sha256": "6b009cf19061c90a4badabb7c4870d08bdb2eab40ff3a8a7bedc1f1c13fd5f8c",
+        "bytes": 174593
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-xades/6.5.1/specs-xades-6.5.1-sources.jar",
+        "sha256": "c97650ce67aecd6c918a6c32a387e5d4be615883a4b3ba79369ed3160288ef11",
+        "bytes": 215366
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-xades/6.5.1/specs-xades-6.5.1.pom",
+          "sha256": "b13190857e76532a5a363070942bbefd94a91dc0120eef7c52308469e920e989",
+          "bytes": 4855
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "eu.europa.ec.joinup.sd-dss:specs-xmldsig:6.5.1",
+      "binary": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-xmldsig/6.5.1/specs-xmldsig-6.5.1.jar",
+        "sha256": "cff449c6f58831b1401e6a5a5b8937a3b93bea44089016b97801b07fdbcfdccc",
+        "bytes": 34909
+      },
+      "source": {
+        "path": "eu/europa/ec/joinup/sd-dss/specs-xmldsig/6.5.1/specs-xmldsig-6.5.1-sources.jar",
+        "sha256": "e925c3d30259afa3712c8430e195f3f21aa17f2fa4f179b23c6ea77ee505c848",
+        "bytes": 42489
+      },
+      "poms": [
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/specs-xmldsig/6.5.1/specs-xmldsig-6.5.1.pom",
+          "sha256": "8219d7e49d6c4b73d7b3491ca0a871b522793b46221a65d9b2cd45493fff951c",
+          "bytes": 4117
+        },
+        {
+          "path": "eu/europa/ec/joinup/sd-dss/sd-dss/6.5.1/sd-dss-6.5.1.pom",
+          "sha256": "f6c79ffe7b893951b1ad5594ea59fbe0422457a6a33a8e5f75b6141812904321",
+          "bytes": 47514
+        }
+      ],
+      "licenses": [
+        {
+          "name": "GNU Lesser General Public License",
+          "url": "https://www.gnu.org/licenses/lgpl-2.1.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "jakarta.xml.bind:jakarta.xml.bind-api:3.0.1",
+      "binary": {
+        "path": "jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.jar",
+        "sha256": "b8fb4bee3ff5b5c1ef77144d8411316018d7bbd41fcf1ede0646f7978546b867",
+        "bytes": 128941
+      },
+      "source": {
+        "path": "jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1-sources.jar",
+        "sha256": "3a2971696cba5ceefe2e730a05b3c5e8dd610e35396c16208597d74aae7dcbd4",
+        "bytes": 206266
+      },
+      "poms": [
+        {
+          "path": "jakarta/xml/bind/jakarta.xml.bind-api/3.0.1/jakarta.xml.bind-api-3.0.1.pom",
+          "sha256": "a273dac9741412fd9dccce9911298706d789e582dcb35197075f6fd2a5b0ebea",
+          "bytes": 13236
+        },
+        {
+          "path": "jakarta/xml/bind/jakarta.xml.bind-api-parent/3.0.1/jakarta.xml.bind-api-parent-3.0.1.pom",
+          "sha256": "9f1fb5d4a02e9f8fdd62ef3beab94b8fea7b81643748c86f68a31f40f774ad56",
+          "bytes": 9527
+        },
+        {
+          "path": "org/eclipse/ee4j/project/1.0.6/project-1.0.6.pom",
+          "sha256": "4e7d8329d8da7dcf30779d824241be145f27108932f5a5a24eb907677bc8d72d",
+          "bytes": 13331
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Eclipse Distribution License - v 1.0",
+          "url": "http://www.eclipse.org/org/documents/edl-v10.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.commons:commons-collections4:4.6.0",
+      "binary": {
+        "path": "org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.jar",
+        "sha256": "4e0d0896bac5356cead277bac0283f09813e14417e3e84e0c86b573b54d218a3",
+        "bytes": 934384
+      },
+      "source": {
+        "path": "org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0-sources.jar",
+        "sha256": "2caf7d2e94b12b3433f9f12ab3b37b7d16626deb2ed4ed13d401ac53d2f5d5c5",
+        "bytes": 830635
+      },
+      "poms": [
+        {
+          "path": "org/apache/commons/commons-collections4/4.6.0/commons-collections4-4.6.0.pom",
+          "sha256": "94e5772ea3c7ba80f7c345a6950cc7a4015463f08a2a7be82e8ce8584c3978c3",
+          "bytes": 27763
+        },
+        {
+          "path": "org/apache/commons/commons-parent/103/commons-parent-103.pom",
+          "sha256": "07407815f3c1441a078e16e5dde2deaf652a3dbdfbf2eba3b563d561210794bf",
+          "bytes": 79549
+        },
+        {
+          "path": "org/apache/apache/39/apache-39.pom",
+          "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+          "bytes": 27054
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.commons:commons-lang3:3.21.0",
+      "binary": {
+        "path": "org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.jar",
+        "sha256": "a2af247ec4db6eb8947e18e23e0433e4871a7c5d0a40e1f92e46ede54ae1defe",
+        "bytes": 749083
+      },
+      "source": {
+        "path": "org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0-sources.jar",
+        "sha256": "e0467ff7412bbedf5f120e78de484cddc0afcf995b8ef3e7cd132ef4bd101d01",
+        "bytes": 811443
+      },
+      "poms": [
+        {
+          "path": "org/apache/commons/commons-lang3/3.21.0/commons-lang3-3.21.0.pom",
+          "sha256": "9420ac3c5efb5bcf804552a7bec00a2d857120977fc12151f7606a67ba7a184d",
+          "bytes": 35594
+        },
+        {
+          "path": "org/apache/commons/commons-parent/105/commons-parent-105.pom",
+          "sha256": "31a68daabb4b361453788b9045ac87a6ae87c705e578facd99e4d9ddb6a481e9",
+          "bytes": 80140
+        },
+        {
+          "path": "org/apache/apache/39/apache-39.pom",
+          "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+          "bytes": 27054
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.pdfbox:fontbox:3.0.8",
+      "binary": {
+        "path": "org/apache/pdfbox/fontbox/3.0.8/fontbox-3.0.8.jar",
+        "sha256": "a1915c24e3edbe0ecec93896dfbf6d41427810b663ade97bd4e8bae86ec3fdab",
+        "bytes": 1647000
+      },
+      "source": {
+        "path": "org/apache/pdfbox/fontbox/3.0.8/fontbox-3.0.8-sources.jar",
+        "sha256": "ccb9a570f102b776974dd3ab5a5dd96972c90e2dd30cd3e9ecc59d854f1dc1b0",
+        "bytes": 1570814
+      },
+      "poms": [
+        {
+          "path": "org/apache/pdfbox/fontbox/3.0.8/fontbox-3.0.8.pom",
+          "sha256": "17805de8dae9e80519661dd1c0a623d699590f212ceccdb1dc9852733f1ae96f",
+          "bytes": 9969
+        },
+        {
+          "path": "org/apache/pdfbox/pdfbox-parent/3.0.8/pdfbox-parent-3.0.8.pom",
+          "sha256": "f031373f03c0f92fb4e49210645cd53e40e9579219655363ce19644ff779283e",
+          "bytes": 16493
+        },
+        {
+          "path": "org/apache/apache/39/apache-39.pom",
+          "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+          "bytes": 27054
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.pdfbox:pdfbox-io:3.0.8",
+      "binary": {
+        "path": "org/apache/pdfbox/pdfbox-io/3.0.8/pdfbox-io-3.0.8.jar",
+        "sha256": "36a0e04001010b4c764857817412b96339930b19755e728959805cc0352061b2",
+        "bytes": 51906
+      },
+      "source": {
+        "path": "org/apache/pdfbox/pdfbox-io/3.0.8/pdfbox-io-3.0.8-sources.jar",
+        "sha256": "c0ce16d1ea7b2e68607741e43b2ea14a2e9193eb7a2b344853c4c64b397fb250",
+        "bytes": 49627
+      },
+      "poms": [
+        {
+          "path": "org/apache/pdfbox/pdfbox-io/3.0.8/pdfbox-io-3.0.8.pom",
+          "sha256": "cad8e929af82493947713b03a44d08c1c9b7839aa8935ec69793da59b06b04f7",
+          "bytes": 3256
+        },
+        {
+          "path": "org/apache/pdfbox/pdfbox-parent/3.0.8/pdfbox-parent-3.0.8.pom",
+          "sha256": "f031373f03c0f92fb4e49210645cd53e40e9579219655363ce19644ff779283e",
+          "bytes": 16493
+        },
+        {
+          "path": "org/apache/apache/39/apache-39.pom",
+          "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+          "bytes": 27054
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.pdfbox:pdfbox:3.0.8",
+      "binary": {
+        "path": "org/apache/pdfbox/pdfbox/3.0.8/pdfbox-3.0.8.jar",
+        "sha256": "97647cfbde61ebcfc06b4cf8c9b0ffcaaee073396eceb4a7f6836a9b9128903c",
+        "bytes": 2070583
+      },
+      "source": {
+        "path": "org/apache/pdfbox/pdfbox/3.0.8/pdfbox-3.0.8-sources.jar",
+        "sha256": "eaed642d27599c78229857e4ab571805979f828f5ec8c695e3135ca933766132",
+        "bytes": 1855792
+      },
+      "poms": [
+        {
+          "path": "org/apache/pdfbox/pdfbox/3.0.8/pdfbox-3.0.8.pom",
+          "sha256": "1acfce718edc900dff75b17afd44272b022a4f0e914adbe76531df56862403dd",
+          "bytes": 59250
+        },
+        {
+          "path": "org/apache/pdfbox/pdfbox-parent/3.0.8/pdfbox-parent-3.0.8.pom",
+          "sha256": "f031373f03c0f92fb4e49210645cd53e40e9579219655363ce19644ff779283e",
+          "bytes": 16493
+        },
+        {
+          "path": "org/apache/apache/39/apache-39.pom",
+          "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+          "bytes": 27054
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.santuario:xmlsec:3.0.6",
+      "binary": {
+        "path": "org/apache/santuario/xmlsec/3.0.6/xmlsec-3.0.6.jar",
+        "sha256": "395eccc3496063ac7b1d6af2422a11670ee5ded807f51542818eccd5fbb5e20c",
+        "bytes": 1197468
+      },
+      "source": {
+        "path": "org/apache/santuario/xmlsec/3.0.6/xmlsec-3.0.6-sources.jar",
+        "sha256": "41233e260fe1fcb3c01924ef6acd4e3b5dc0c854e91dd3480b8ce771d7fd1092",
+        "bytes": 910957
+      },
+      "poms": [
+        {
+          "path": "org/apache/santuario/xmlsec/3.0.6/xmlsec-3.0.6.pom",
+          "sha256": "53b879224c62a45505bb2dc2f4c93e30943a0bcdfb0ce1a18f43d38db3b358c0",
+          "bytes": 29181
+        },
+        {
+          "path": "org/apache/apache/34/apache-34.pom",
+          "sha256": "3671ae9d4d062ae3bb985731c76088bb2f6f7d7254e2d304ee9f690b97651328",
+          "bytes": 24249
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.bitbucket.b_c:jose4j:0.9.7",
+      "binary": {
+        "path": "org/bitbucket/b_c/jose4j/0.9.7/jose4j-0.9.7.jar",
+        "sha256": "f2da13ca454cb04af926b9d830fd429169e0198adbbbd0bd64f6ae94f7b3d3fb",
+        "bytes": 299330
+      },
+      "source": {
+        "path": "org/bitbucket/b_c/jose4j/0.9.7/jose4j-0.9.7-sources.jar",
+        "sha256": "fd0e74aab0375ae1b9d55a3a628797c4a8c6971367ba053a22d00f0e63f9a05b",
+        "bytes": 224047
+      },
+      "poms": [
+        {
+          "path": "org/bitbucket/b_c/jose4j/0.9.7/jose4j-0.9.7.pom",
+          "sha256": "b5d9405da5dd2fff5591c08490cb262e80d60f15d903b12515cf8031571fc579",
+          "bytes": 8766
+        }
+      ],
+      "licenses": [
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.bouncycastle:bcpkix-jdk18on:1.86",
+      "binary": {
+        "path": "org/bouncycastle/bcpkix-jdk18on/1.86/bcpkix-jdk18on-1.86.jar",
+        "sha256": "8d8b41a4b149bdae8d331f059a578870954d1e3ff29f8269a9eb3ee19a7e4ef7",
+        "bytes": 1341621
+      },
+      "source": {
+        "path": "org/bouncycastle/bcpkix-jdk18on/1.86/bcpkix-jdk18on-1.86-sources.jar",
+        "sha256": "0bb00b50a80404e40c6465cb8012d3835d2a9100d94d16eaa9efed4587d7e34d",
+        "bytes": 969954
+      },
+      "poms": [
+        {
+          "path": "org/bouncycastle/bcpkix-jdk18on/1.86/bcpkix-jdk18on-1.86.pom",
+          "sha256": "44989844fb17b39eb08eabeaf81e1fd16ac50c994d5c02119f891220c3ac5878",
+          "bytes": 1522
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Bouncy Castle Licence",
+          "url": "https://www.bouncycastle.org/licence.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.bouncycastle:bcprov-jdk18on:1.86",
+      "binary": {
+        "path": "org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.jar",
+        "sha256": "2af190b300cbb0b35e248ccf5f4a06b6072030aeb3da7a98ec73abe5b4cb371f",
+        "bytes": 7224011
+      },
+      "source": {
+        "path": "org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86-sources.jar",
+        "sha256": "34a8b7dcb030a08ddd5356d3d5be962f9299ca5275e1460273186f8fdbe44c34",
+        "bytes": 4909869
+      },
+      "poms": [
+        {
+          "path": "org/bouncycastle/bcprov-jdk18on/1.86/bcprov-jdk18on-1.86.pom",
+          "sha256": "970b70cb75a184639b6fb9ba3c465aca6a4e1a5f3fff4d65ce8574b2fd79ef38",
+          "bytes": 1160
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Bouncy Castle Licence",
+          "url": "https://www.bouncycastle.org/licence.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.bouncycastle:bcutil-jdk18on:1.86",
+      "binary": {
+        "path": "org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86.jar",
+        "sha256": "1c268e15f785aafb1e4670d8d6e5f856f69475e96c162dadcd1ff9b350e9139f",
+        "bytes": 789287
+      },
+      "source": {
+        "path": "org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86-sources.jar",
+        "sha256": "a79e8cdbc04a24aecf64503eda9a4aa61019132484c64f7ce32a68ac30ef6df7",
+        "bytes": 601111
+      },
+      "poms": [
+        {
+          "path": "org/bouncycastle/bcutil-jdk18on/1.86/bcutil-jdk18on-1.86.pom",
+          "sha256": "2209b3e5d1eb2bb3c593b824c1b8f142b05dea8e9df7400b0f33f2b91a0741fa",
+          "bytes": 1344
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Bouncy Castle Licence",
+          "url": "https://www.bouncycastle.org/licence.html"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.codehaus.woodstox:stax2-api:4.2.1",
+      "binary": {
+        "path": "org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.jar",
+        "sha256": "678567e48b51a42c65c699f266539ad3d676d4b1a5b0ad7d89ece8b9d5772579",
+        "bytes": 195909
+      },
+      "source": {
+        "path": "org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1-sources.jar",
+        "sha256": "f12158ed9f34ae2e95916bdf6e4277719e354b2522c0e6720b29012273f6c6ed",
+        "bytes": 189357
+      },
+      "poms": [
+        {
+          "path": "org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.pom",
+          "sha256": "79da410c8c0f46a3f8e8adb30d6c24ccd6065b6ef6bfde87bd97e9881ea0a2e7",
+          "bytes": 6287
+        },
+        {
+          "path": "com/fasterxml/oss-parent/38/oss-parent-38.pom",
+          "sha256": "c83f8f45dfdca8d0b6b3661c60b3f84780f671b12e06f91ad5d1c1a1d1f966e8",
+          "bytes": 23048
+        }
+      ],
+      "licenses": [
+        {
+          "name": "The BSD License",
+          "url": "http://www.opensource.org/licenses/bsd-license.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.glassfish.jaxb:jaxb-core:3.0.2",
+      "binary": {
+        "path": "org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2.jar",
+        "sha256": "f9a360b939597643b2676e35fc497afb561d20e8a513128a5c0070366db11bbd",
+        "bytes": 139727
+      },
+      "source": {
+        "path": "org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2-sources.jar",
+        "sha256": "cfc6274b3d7d451c3429a0aa0908077ad654cd48ec3cb72556180a311a5e8790",
+        "bytes": 134096
+      },
+      "poms": [
+        {
+          "path": "org/glassfish/jaxb/jaxb-core/3.0.2/jaxb-core-3.0.2.pom",
+          "sha256": "60c2e1a9bb7ab16ba9ca526c471e0330db57c8739e2c0bad0d990e9ed6c7ce8e",
+          "bytes": 5831
+        },
+        {
+          "path": "com/sun/xml/bind/mvn/jaxb-parent/3.0.2/jaxb-parent-3.0.2.pom",
+          "sha256": "1df0217784257f7fc3ab45c8cee214ec2058ae76c41fbcd9cf8394d5e98c9673",
+          "bytes": 28656
+        },
+        {
+          "path": "com/sun/xml/bind/jaxb-bom-ext/3.0.2/jaxb-bom-ext-3.0.2.pom",
+          "sha256": "8d448852996c758311a5bb3da1e7234c6a8679f4d13b52275b14a9f517af8c10",
+          "bytes": 3474
+        },
+        {
+          "path": "org/glassfish/jaxb/jaxb-bom/3.0.2/jaxb-bom-3.0.2.pom",
+          "sha256": "062a1332f8cb4bed0dd9cd58bb4cc07501fa44c90daa17fec1079f450b9d5703",
+          "bytes": 10312
+        },
+        {
+          "path": "org/eclipse/ee4j/project/1.0.7/project-1.0.7.pom",
+          "sha256": "205c039a42cbae3556efbeb04a483eb3a3cf9550bd75bf84260dc8f28218f105",
+          "bytes": 14181
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Eclipse Distribution License - v 1.0",
+          "url": "http://www.eclipse.org/org/documents/edl-v10.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.glassfish.jaxb:jaxb-runtime:3.0.2",
+      "binary": {
+        "path": "org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2.jar",
+        "sha256": "7b3a3784b9c6e343a8d38fc108602ba810177f03f2d8d1e7258b1cef7fd9d4c7",
+        "bytes": 913701
+      },
+      "source": {
+        "path": "org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2-sources.jar",
+        "sha256": "fae5365c974aecd17b6ab307592d0ae496a8afdefd18182cac16b71dc60261c9",
+        "bytes": 640507
+      },
+      "poms": [
+        {
+          "path": "org/glassfish/jaxb/jaxb-runtime/3.0.2/jaxb-runtime-3.0.2.pom",
+          "sha256": "018d81f023f29ee7c555d6f597206e2d4c2fb80b6dbc18545ae8ad7baf8b1907",
+          "bytes": 6684
+        },
+        {
+          "path": "com/sun/xml/bind/mvn/jaxb-runtime-parent/3.0.2/jaxb-runtime-parent-3.0.2.pom",
+          "sha256": "985009de59b42555e88fee17f2d4467d84f6c227646f83e6fc1b31f346b8ebdd",
+          "bytes": 1188
+        },
+        {
+          "path": "com/sun/xml/bind/mvn/jaxb-parent/3.0.2/jaxb-parent-3.0.2.pom",
+          "sha256": "1df0217784257f7fc3ab45c8cee214ec2058ae76c41fbcd9cf8394d5e98c9673",
+          "bytes": 28656
+        },
+        {
+          "path": "com/sun/xml/bind/jaxb-bom-ext/3.0.2/jaxb-bom-ext-3.0.2.pom",
+          "sha256": "8d448852996c758311a5bb3da1e7234c6a8679f4d13b52275b14a9f517af8c10",
+          "bytes": 3474
+        },
+        {
+          "path": "org/glassfish/jaxb/jaxb-bom/3.0.2/jaxb-bom-3.0.2.pom",
+          "sha256": "062a1332f8cb4bed0dd9cd58bb4cc07501fa44c90daa17fec1079f450b9d5703",
+          "bytes": 10312
+        },
+        {
+          "path": "org/eclipse/ee4j/project/1.0.7/project-1.0.7.pom",
+          "sha256": "205c039a42cbae3556efbeb04a483eb3a3cf9550bd75bf84260dc8f28218f105",
+          "bytes": 14181
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Eclipse Distribution License - v 1.0",
+          "url": "http://www.eclipse.org/org/documents/edl-v10.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.glassfish.jaxb:txw2:3.0.2",
+      "binary": {
+        "path": "org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.jar",
+        "sha256": "b4bcf94fb0a759456e2521724513baec94b78e93127544af162e3cff08d93343",
+        "bytes": 72003
+      },
+      "source": {
+        "path": "org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2-sources.jar",
+        "sha256": "817bb3ab4c53ea15db7f247a8e7fc1ecd511d2865e06eed70af0b29797f7e6f9",
+        "bytes": 69257
+      },
+      "poms": [
+        {
+          "path": "org/glassfish/jaxb/txw2/3.0.2/txw2-3.0.2.pom",
+          "sha256": "699fa82ac3076fd64dba37e4c3c0d22556a53f847500b2be10dfc729423e78b9",
+          "bytes": 1751
+        },
+        {
+          "path": "com/sun/xml/bind/mvn/jaxb-txw-parent/3.0.2/jaxb-txw-parent-3.0.2.pom",
+          "sha256": "0d5abccc805a2ebbf25c3f2ec1b3e42dcdeb16ea9c905b985674620168c1a0ab",
+          "bytes": 1199
+        },
+        {
+          "path": "com/sun/xml/bind/mvn/jaxb-parent/3.0.2/jaxb-parent-3.0.2.pom",
+          "sha256": "1df0217784257f7fc3ab45c8cee214ec2058ae76c41fbcd9cf8394d5e98c9673",
+          "bytes": 28656
+        },
+        {
+          "path": "com/sun/xml/bind/jaxb-bom-ext/3.0.2/jaxb-bom-ext-3.0.2.pom",
+          "sha256": "8d448852996c758311a5bb3da1e7234c6a8679f4d13b52275b14a9f517af8c10",
+          "bytes": 3474
+        },
+        {
+          "path": "org/glassfish/jaxb/jaxb-bom/3.0.2/jaxb-bom-3.0.2.pom",
+          "sha256": "062a1332f8cb4bed0dd9cd58bb4cc07501fa44c90daa17fec1079f450b9d5703",
+          "bytes": 10312
+        },
+        {
+          "path": "org/eclipse/ee4j/project/1.0.7/project-1.0.7.pom",
+          "sha256": "205c039a42cbae3556efbeb04a483eb3a3cf9550bd75bf84260dc8f28218f105",
+          "bytes": 14181
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Eclipse Distribution License - v 1.0",
+          "url": "http://www.eclipse.org/org/documents/edl-v10.php"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:2.4.20",
+      "binary": {
+        "path": "org/jetbrains/kotlin/kotlin-stdlib/2.4.20/kotlin-stdlib-2.4.20.jar",
+        "sha256": "2226de463d309d4a5500a481320b3dea515a6981dcae1def531fbc158884e25f",
+        "bytes": 1853314
+      },
+      "source": {
+        "path": "org/jetbrains/kotlin/kotlin-stdlib/2.4.20/kotlin-stdlib-2.4.20-sources.jar",
+        "sha256": "9a2ce1266925b3cb0ff361392b91c3e288d3e78ca0961bb39e33e27aa6d1749a",
+        "bytes": 767009
+      },
+      "poms": [
+        {
+          "path": "org/jetbrains/kotlin/kotlin-stdlib/2.4.20/kotlin-stdlib-2.4.20.pom",
+          "sha256": "bd69b382dba8e2b7ae3846375eb2f1389017eb908987277051ae4e3acec8c938",
+          "bytes": 2301
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache-2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.jetbrains:annotations:13.0",
+      "binary": {
+        "path": "org/jetbrains/annotations/13.0/annotations-13.0.jar",
+        "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478",
+        "bytes": 17536
+      },
+      "source": {
+        "path": "org/jetbrains/annotations/13.0/annotations-13.0-sources.jar",
+        "sha256": "42a5e144b8e81d50d6913d1007b695e62e614705268d8cf9f13dbdc478c2c68e",
+        "bytes": 17566
+      },
+      "poms": [
+        {
+          "path": "org/jetbrains/annotations/13.0/annotations-13.0.pom",
+          "sha256": "965aeb2bedff369819bdde1bf7a0b3b89b8247dd69c88b86375d76163bb8c397",
+          "bytes": 4930
+        }
+      ],
+      "licenses": [
+        {
+          "name": "The Apache Software License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.slf4j:slf4j-api:2.0.20",
+      "binary": {
+        "path": "org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar",
+        "sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439",
+        "bytes": 70255
+      },
+      "source": {
+        "path": "org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20-sources.jar",
+        "sha256": "565e509928d095e20c5d93ca5e3a528e98fc7410c3ca4e84b05ccfadf21b40ba",
+        "bytes": 77456
+      },
+      "poms": [
+        {
+          "path": "org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.pom",
+          "sha256": "2e625c3f553cddd49f8554cea9926cbf70673b3d6833464f0c5a02f4d9130594",
+          "bytes": 2826
+        },
+        {
+          "path": "org/slf4j/slf4j-parent/2.0.20/slf4j-parent-2.0.20.pom",
+          "sha256": "d931cf99cfd3554d322809df03c43ef897082cd480d6ff91b44d8f067ca324c8",
+          "bytes": 13541
+        },
+        {
+          "path": "org/slf4j/slf4j-bom/2.0.20/slf4j-bom-2.0.20.pom",
+          "sha256": "351a3d34f0886942268efcf291708c48dfadce7f2643837efdb4a6954d4e6c62",
+          "bytes": 7874
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MIT",
+          "url": "https://opensource.org/license/mit"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.slf4j:slf4j-simple:2.0.17",
+      "binary": {
+        "path": "org/slf4j/slf4j-simple/2.0.17/slf4j-simple-2.0.17.jar",
+        "sha256": "ddfea59ac074c6d3e24ac2c38622d2d963895e17f70b38ed4bdae4d780be6964",
+        "bytes": 15716
+      },
+      "source": {
+        "path": "org/slf4j/slf4j-simple/2.0.17/slf4j-simple-2.0.17-sources.jar",
+        "sha256": "30b660e79419bfcebd678e75bdfe3644eaf325f50253a68395d93634da5953df",
+        "bytes": 13258
+      },
+      "poms": [
+        {
+          "path": "org/slf4j/slf4j-simple/2.0.17/slf4j-simple-2.0.17.pom",
+          "sha256": "fb30e8e2f6aea2d29842798677ed4541b9b2255715c158350ca2c5f5c7b864b0",
+          "bytes": 1313
+        },
+        {
+          "path": "org/slf4j/slf4j-parent/2.0.17/slf4j-parent-2.0.17.pom",
+          "sha256": "95cd71e852dfdb29126e58b7b939d57ec2b2e6024391852e0b545dee082bbf3b",
+          "bytes": 13366
+        },
+        {
+          "path": "org/slf4j/slf4j-bom/2.0.17/slf4j-bom-2.0.17.pom",
+          "sha256": "f78d27b642b4b886eb839fc102b5cd9fe7f30f37599ffe68185be4e1609031e9",
+          "bytes": 7308
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MIT",
+          "url": "https://opensource.org/license/mit"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.yaml:snakeyaml:2.6",
+      "binary": {
+        "path": "org/yaml/snakeyaml/2.6/snakeyaml-2.6.jar",
+        "sha256": "c8f7a98e7394adda02f6317249710e4d1b4c7a25aa8c7eace0c2eea52eb8bf85",
+        "bytes": 340068
+      },
+      "source": {
+        "path": "org/yaml/snakeyaml/2.6/snakeyaml-2.6-sources.jar",
+        "sha256": "cd719ff3e52eec48ef7c541ba4f178c2eff0f6719fd0abe4f4e44bde41138ca2",
+        "bytes": 209741
+      },
+      "poms": [
+        {
+          "path": "org/yaml/snakeyaml/2.6/snakeyaml-2.6.pom",
+          "sha256": "2773b0e948964d21e37b0e1dcf39025e627b873e0ce6aa2a47e23c374303e0c4",
+          "bytes": 21277
+        }
+      ],
+      "licenses": [
+        {
+          "name": "Apache License, Version 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+      ]
+    }
+  ]
+}

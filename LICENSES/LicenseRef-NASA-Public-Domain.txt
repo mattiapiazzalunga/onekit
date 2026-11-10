@@ -1,0 +1,14 @@
+NASA astronaut portrait of Eileen Collins
+
+The original NASA image is in the public domain in the United States as a
+work of the United States Government. No copyright licence is granted or
+claimed by OneKit for the original image.
+
+Source and provenance:
+https://scikit-image.org/docs/0.24.x/api/skimage.data.html#skimage.data.astronaut
+https://github.com/scikit-image/scikit-image/blob/v0.24.0/skimage/data/astronaut.png
+https://www.nasa.gov/nasa-brand-center/images-and-media/
+
+Use of the image does not imply endorsement by NASA or by the person depicted.
+Rights of publicity, privacy and endorsement are not granted by this statement.
+See tests/fixtures/face-astronaut-NOTICE.txt for the local image provenance.

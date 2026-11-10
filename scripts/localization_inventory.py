@@ -8,6 +8,8 @@ from pathlib import Path
 from localization_markdown import blocks, table_parts
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from onekit.catalog import manifest
 texts = set()
 
 
@@ -33,6 +35,12 @@ for source in (ROOT / "src/onekit").rglob("*.py"):
                     parts.append("{" + str(number) + "}")
                     number += 1
             add("".join(parts))
+
+# Registry loops construct tool names and notes at runtime; AST literals alone
+# do not cover the text shown by `onekit list`.
+for tool in manifest():
+    for field in ("name", "note"):
+        add(tool[field])
 
 for text in json.loads((ROOT / "scripts/argparse-messages.json").read_text(encoding="utf-8"))["messages"]:
     add(text)

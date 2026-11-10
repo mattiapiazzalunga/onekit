@@ -5,5 +5,7 @@
   "es": {"aliases": ["spanish"]},
   "de": {"aliases": ["german"]},
   "ru": {"aliases": ["russian"]},
-  "zh": {"aliases": ["chinese", "chinese (simplified)", "chinese (traditional)", "chinese-simplified", "chinese-traditional"]}
+  "zh": {"aliases": ["chinese", "chinese (simplified)", "chinese (traditional)", "chinese-simplified", "chinese-traditional"]},
+  "pt": {"aliases": ["portuguese", "português", "portugues", "portuguese (brazil)", "portuguese (portugal)"]},
+  "hi": {"aliases": ["hindi", "हिन्दी", "हिंदी"]}
 }

@@ -1,0 +1,11 @@
+{
+  "engine": "tex-fmt",
+  "distribution": "wasm-latex-tools",
+  "distribution_version": "0.2.0",
+  "license": "MIT",
+  "source": "https://github.com/TeXlyre/wasm-latex-tools",
+  "files": {
+    "tex_fmt.mjs": "a1a07c50aa28c4e390774948b22e319c448bd6d8fdf1d46728c8a9890f8baf3b",
+    "tex_fmt_bg.wasm": "6f65f4eadabbf105bbf59065e3c1cdfb08a7563b9938730794ff3c0016d456e0"
+  }
+}

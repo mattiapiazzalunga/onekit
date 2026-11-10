@@ -22,6 +22,14 @@ Office 文档的转换保真度取决于字体和资源。PDF 转 Word 会导出
 <a id="developer-tools"></a>
 ## Developer tools
 
+使用固定版本的 WASM 软件包，通过 ktfmt 格式化 Kotlin，通过 Syntax Tree 和 RuboCop 格式化 Ruby。运行 `onekit engines install`。每个输入文件最多 256 KiB；不加载项目配置。
+
+使用 tex-fmt 和固定设置格式化 LaTeX。不加载项目配置。每个输入文件最大 256 KiB。
+
+使用 Pandoc 3.9 转换自包含的 LaTeX 文档。不支持外部文件和 TeX 编译。每个输入文件最大 256 KiB。
+
+`dev-format-latex`: `Node.js 24+`; `tex-fmt` WASM, MIT. `latex-to-html`, `latex-to-md`: `onekit setup latex-to-html`; `pandoc-wasm@1.1.0`, GPL-2.0-or-later; `ONEKIT_PANDOC_ENGINE_PATH`, `ONEKIT_ALLOW_COPYLEFT=0`.
+
 安装 Node.js 24+ 并运行 `onekit engines install` 来安装版本已锁定的 Prettier/插件、esbuild、HTML 压缩器、SVGO 和 GraphQL.js。它们会安装在用户的 OneKit 缓存中，而不是全局安装。`ONEKIT_NODE_ENGINE_PATH` 可选择替代方案。在经过批准的引擎更新后重新运行安装程序。解析器组涵盖 JS/TS/JSX/TSX、标记语言、样式表、Markdown/MDX、GraphQL、Vue、Svelte、Astro、Solidity 和 PHP。
 
 为您的操作系统安装上游编译器/启动器，并将文档中记录的命令添加到 PATH。某些独立文件需要其项目依赖或确切的 Java 类文件名。格式化/解析验证并不保证整个项目类型的正确性。

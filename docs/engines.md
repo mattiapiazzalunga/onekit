@@ -20,6 +20,17 @@ Office fidelity depends on fonts and resources. PDF-to-Word exports extracted te
 
 ## Developer tools
 
+Formats Kotlin with ktfmt and Ruby with Syntax Tree and RuboCop using pinned WASM packages. Run `onekit engines install`. Up to 256 KiB per input file; project configuration is not loaded.
+
+Formats LaTeX with tex-fmt and fixed settings. Project configuration is not loaded. Up to 256 KiB per input file.
+
+Converts self-contained LaTeX with Pandoc 3.9. External files and TeX compilation are not supported. Up to 256 KiB per input file.
+
+`dev-format-latex`: `Node.js 24+`; `tex-fmt` WASM, MIT.
+`latex-to-html`, `latex-to-md`: `onekit setup latex-to-html`;
+`pandoc-wasm@1.1.0`, GPL-2.0-or-later;
+`ONEKIT_PANDOC_ENGINE_PATH`, `ONEKIT_ALLOW_COPYLEFT=0`.
+
 Install Node.js 24+ and run `onekit engines install` for locked Prettier/plugins, esbuild, HTML minifier, SVGO and GraphQL.js. They install in the user's OneKit cache, not globally. `ONEKIT_NODE_ENGINE_PATH` selects an alternative. Rerun the installer after an approved engine update. The parser group covers JS/TS/JSX/TSX, markup, stylesheets, Markdown/MDX, GraphQL, Vue, Svelte, Astro, Solidity and PHP.
 
 Install upstream compilers/launchers for your OS and add the documented commands to PATH. Some isolated files need their project dependencies or exact Java class filename. Formatting/parser validation does not prove project-wide type correctness.

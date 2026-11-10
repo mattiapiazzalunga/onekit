@@ -14,6 +14,7 @@ import zipfile
 import zlib
 from functools import lru_cache
 from pathlib import PurePosixPath
+from xml.etree.ElementTree import ParseError
 
 from license_expression import ExpressionError
 
@@ -355,7 +356,7 @@ class Inspection:
                 self.scanned += 1
                 try:
                     self.xml(data, file.name + "!" + name, body=True)
-                except (ValueError, TypeError) as exc:
+                except (ValueError, TypeError, ParseError) as exc:
                     self.skip(name, "XML could not be inspected: " + str(exc)[:120])
             elif selected:
                 self.skip(name, "Document-part inspection limit reached.")

@@ -9,6 +9,24 @@ A copy of the License is available in the LICENSE file.
 Third-party components, if any, remain subject to their respective
 copyright notices and license terms.
 
+Bundled tex-fmt WebAssembly: MIT, Copyright (c) 2024 William George Underwood.
+The unmodified WASM and wasm-bindgen glue are taken from the tex-fmt asset
+directory in wasm-latex-tools 0.2.0; the AGPL application wrapper is not included.
+License and checksums: src/onekit/data/texfmt/LICENSE and provenance.json.
+
+Optional Pandoc WASM engine: pandoc-wasm 1.1.0 / Pandoc 3.9, GPL-2.0-or-later.
+Installed independently on demand. The standalone engine host files in
+src/onekit/data/pandoc-node/{host,runner,worker}.mjs are GPL-2.0-or-later,
+as marked in each file; the Python API communicates across a process boundary.
+License: src/onekit/data/pandoc-node/LICENSE.
+Sources: https://github.com/pandoc/pandoc-wasm and
+https://github.com/jgm/pandoc/releases/tag/3.9.
+
+Bundled YuNet face detector: MIT, Copyright (c) 2020 Shiqi Yu.
+Source: https://github.com/opencv/opencv_zoo/tree/f12e12798e8314f7c074a6656816c048dcc95b7a/models/face_detection_yunet
+Model SHA-256: 8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4
+Full license: src/onekit/data/yunet-LICENSE.txt (included in distributions).
+
 PDF/A backend (installed on demand):
 - pdftopdfa 0.9.24: MPL-2.0+; https://github.com/iRedPaul/pdftopdfa
 - pikepdf 10.17.0: MPL-2.0; https://github.com/pikepdf/pikepdf
@@ -16,3 +34,11 @@ PDF/A backend (installed on demand):
 Their upstream licenses, source availability and redistribution rights are retained.
 The OneKit adapter is separate; OneKit's license does not relicense these libraries,
 fonts or ICC profiles. See docs/pdfa.md for the selected API and dependency scope.
+Signature validation uses pyHanko and pyhanko-certvalidator (MIT), SignXML
+(Apache-2.0), xsdata (MIT), cryptography (Apache-2.0 OR BSD-3-Clause) and their
+separately licensed dependencies. EU trust-list documents retain their publishers'
+rights and signatures; their presence does not certify OneKit as a qualified
+validation service. DSS is an optional test reference, not the shipped engine.
+
+The optional Windows trust-list updater uses truststore 0.10.5 (MIT).
+Certificate verification remains enabled; the operating system builds TLS chains.

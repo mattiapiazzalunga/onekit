@@ -7,12 +7,14 @@ from pathlib import PurePosixPath
 
 from ...models import Artifact, OneKitError, Result, output
 
-LIMIT = 128 * 1024 * 1024
+from ...limits import LIMITS
+
+LIMIT = LIMITS.max_bytes
 
 
 def tar_payload(data, limit):
     # Bound decompression before tarfile parses PAX/sparse metadata or member sizes.
-    budget = limit + 4096 * 1024
+    budget = limit + LIMITS.max_archive_entries * 1024
     if data.startswith(b"\x1f\x8b"):
         import zlib
         decoder = zlib.decompressobj(16 + zlib.MAX_WBITS)
@@ -50,7 +52,7 @@ def unpack(data, *, limit=LIMIT):
         validate_zip(data, limit)
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
             entries = archive.infolist()
-            if len(entries) > 4096:
+            if len(entries) > LIMITS.max_archive_entries:
                 raise OneKitError("Archive contains too many entries.")
             for entry in entries:
                 name = safe_name(entry.filename)
@@ -59,14 +61,14 @@ def unpack(data, *, limit=LIMIT):
                 if entry.external_attr >> 16 & 0o170000 == 0o120000:
                     raise OneKitError("Archive symlinks are not supported.")
                 total += entry.file_size
-                if total > limit or entry.file_size > max(entry.compress_size, 1) * 1000:
+                if total > limit or entry.file_size > max(entry.compress_size, 1) * LIMITS.max_archive_ratio:
                     raise OneKitError("Archive expansion exceeds safety limits.")
                 files.append(Artifact(name, archive.read(entry)))
     else:
         with tarfile.open(fileobj=io.BytesIO(tar_payload(data, limit)), mode="r:") as archive:
             seen = set()
             for index, entry in enumerate(archive):
-                if index >= 4096:
+                if index >= LIMITS.max_archive_entries:
                     raise OneKitError("Archive contains too many entries.")
                 name = safe_name(entry.name)
                 if name in seen:

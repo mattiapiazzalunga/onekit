@@ -1,5 +1,6 @@
 # Copyright 2026 Mattia Piazzalunga
 # SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0
+from ...limits import LIMITS
 from ...models import Artifact, OneKitError, Result, output, require
 
 def run(tool, files, options):
@@ -18,5 +19,5 @@ def run(tool, files, options):
         return Result([output(files[0], "zip", encrypt_zip(files, password))],
                       warnings=["ZIP encrypts file contents; file and folder names remain visible."])
     from .zip_aes import decrypt_zip
-    restored = decrypt_zip(files[0].data, password, options.get("_max_expanded_bytes", 128 * 1024 * 1024))
+    restored = decrypt_zip(files[0].data, password, options.get("_max_expanded_bytes", LIMITS.max_bytes))
     return Result([Artifact("restored.zip", pack(restored))] if restore == "zip" else restored)

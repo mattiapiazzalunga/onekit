@@ -31,6 +31,16 @@ def pdf():
 
 
 def processing_case(tool):
+    if tool.id == "pdf-sign":
+        from test_pdf_signing import signing_case
+        return signing_case()
+    if tool.id == "txt-to-pdfua":
+        return [Artifact("document.txt", b"Accessible document.\n\nSecond paragraph.")], {"title": "OneKit", "language": "en"}
+    if tool.id == "pdf-validate-pdfua":
+        return [pdf()], {}
+    if tool.id in ('apk-to-xapk', 'xapk-to-apk'):
+        from test_android_packages import apk, bundle
+        return ([Artifact('app.apk', apk())] if tool.id == 'apk-to-xapk' else [bundle([('base.apk', apk())])]), {}
     if tool.id in ('file-metadata-set', 'file-metadata-remove'):
         return [png()], {'metadata': {'Title': 'OneKit', 'Author': 'Test'}}
     from test_text_converters import IDS as text_ids, samples as text_samples

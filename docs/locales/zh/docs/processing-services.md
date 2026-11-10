@@ -21,3 +21,5 @@ JavaScript 处理模块可以独立于 Python 驱动使用：
 `tools/transcription.py` 暴露了 `recognition_parameters`，包括模型、语言、采样率、束宽和前文本条件。不同的推理主机必须明确支持这些设置；共享设置并不意味着解码实现或量化模型转换的等效性。
 
 开发者处理程序在其 Python 环境安装 sqlparse 和 SQLFluff 后会直接使用它们。原来的独立 `sqlformat` 和 `sqlfluff` 命令在这些导入不可用时仍然受支持。SQL 验证使用请求的 SQLFluff 方言，默认使用 ANSI；它不会执行查询。
+
+共享资源上限在 `src/onekit/limits.py` 中定义。调用方可通过 `ExecutionContext` 降低这些限制，但不能超过核心上限。

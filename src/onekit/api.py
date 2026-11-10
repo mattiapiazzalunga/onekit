@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+from contextlib import contextmanager
 
 from .catalog import TOOLS
 from .execution import DEFAULT_CONTEXT, ExecutionContext, use_context
@@ -10,7 +11,7 @@ from .models import Artifact, OneKitError, Result
 from .validation import MAX_BYTES, check_batch, validate_inputs
 
 
-def execute(tool_id: str, files: list[Artifact], options: dict | None = None, *, context: ExecutionContext | None = None) -> Result:
+def _prepare_execution(tool_id, files, options, context):
     if not isinstance(tool_id, str):
         raise OneKitError("The tool identifier must be a string.")
     if options is not None and not isinstance(options, dict):
@@ -22,20 +23,44 @@ def execute(tool_id: str, files: list[Artifact], options: dict | None = None, *,
     if tool is None:
         raise OneKitError(f"Unknown tool: {tool_id}. Run 'onekit list'.")
     tool = context.constrain(tool)
+    validate_inputs(tool, files, options or {})
+    settings = dict(options or {})
+    settings["_max_expanded_bytes"] = min(MAX_BYTES, tool.max_total_bytes)
+    return tool, settings, context
+
+
+@contextmanager
+def _processing_errors(tool_id):
     try:
-        validate_inputs(tool, files, options or {})
-        settings = dict(options or {})
-        settings["_max_expanded_bytes"] = min(MAX_BYTES, tool.max_total_bytes)
-        with use_context(context):
-            result = importlib.import_module(f"onekit.tools.{tool.handler}").run(tool, files, settings)
-        check_batch(result.files, output=True,
-                    max_bytes=tool.max_total_bytes)
+        yield
     except OneKitError:
         raise
     except ImportError as exc:
         raise OneKitError(f"Missing optional dependency '{exc.name}'. Install the matching OneKit extra; see 'onekit doctor {tool_id}'.") from exc
     except Exception as exc:
         raise OneKitError(f"Cannot process this input: {str(exc)[:500]}") from exc
+
+
+def execute(tool_id: str, files: list[Artifact], options: dict | None = None, *, context: ExecutionContext | None = None) -> Result:
+    with _processing_errors(tool_id):
+        tool, settings, context = _prepare_execution(tool_id, files, options, context)
+        with use_context(context):
+            result = importlib.import_module(f"onekit.tools.{tool.handler}").run(tool, files, settings)
+        return _finish_execution(tool, result)
+
+
+async def execute_async(tool_id: str, files: list[Artifact], options: dict | None = None, *, context: ExecutionContext | None = None) -> Result:
+    """The same processing contract for hosts with an existing async event loop."""
+    with _processing_errors(tool_id):
+        tool, settings, context = _prepare_execution(tool_id, files, options, context)
+        handler = importlib.import_module(f"onekit.tools.{tool.handler}")
+        with use_context(context):
+            result = await handler.run_async(tool, files, settings) if hasattr(handler, 'run_async') else handler.run(tool, files, settings)
+        return _finish_execution(tool, result)
+
+
+def _finish_execution(tool, result):
+    check_batch(result.files, output=True, max_bytes=tool.max_total_bytes)
     if tool.fidelity == "compromise" and tool.note not in result.warnings:
         result.warnings.insert(0, tool.note)
     if not result.files:
@@ -80,3 +105,30 @@ def pipeline(steps: list[dict], files: list[Artifact], *, context: ExecutionCont
         warnings.extend(result.warnings)
         trace.append({"tool": tool_id, "outputs": [file.name for file in files]})
     return Result(files, list(dict.fromkeys(warnings)), {"steps": trace})
+
+
+async def pipeline_async(steps: list[dict], files: list[Artifact], *, context: ExecutionContext | None = None) -> Result:
+    """Sequential pipeline with the same budgets and contracts on async hosts."""
+    context = context or DEFAULT_CONTEXT
+    if not isinstance(context, ExecutionContext):
+        raise OneKitError("Expected an ExecutionContext.")
+    validate_steps(steps)
+    check_batch(files, max_bytes=context.max_batch_bytes)
+    warnings, trace = [], []
+    for step in steps:
+        tool_id = step['tool']
+        tool = context.constrain(TOOLS[tool_id])
+        check_batch(files, max_bytes=tool.max_total_bytes)
+        if len(files) > 1 and not tool.multiple:
+            result = Result([])
+            for file in files:
+                part = await execute_async(tool_id, [file], step.get('options', {}), context=context)
+                result.files.extend(part.files)
+                result.warnings.extend(part.warnings)
+                check_batch(result.files, output=True, max_bytes=tool.max_total_bytes)
+        else:
+            result = await execute_async(tool_id, files, step.get('options', {}), context=context)
+        files = result.files
+        warnings.extend(result.warnings)
+        trace.append({'tool': tool_id, 'outputs': [file.name for file in files]})
+    return Result(files, list(dict.fromkeys(warnings)), {'steps': trace})

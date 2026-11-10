@@ -1,0 +1,40 @@
+OneKit signature-engine adapter
+Copyright 2026 Mattia Piazzalunga
+
+Original OneKit adapter sources are subject to the repository's PolyForm Shield
+1.0.0 license. Third-party components retain their own licenses and rights.
+
+LGPL library exception for the OneKit adapter: permission is expressly granted
+to modify copies of the combined application for your own use and to reverse
+engineer them for debugging such modifications, including replacement or
+relinking of LGPL-covered libraries. OneKit's restrictions do not prohibit
+these activities or restrict rights granted under the applicable LGPL.
+
+DSS 6.5.1 is LGPL-2.1-or-later. Preserve the upstream license, copyright notices
+and corresponding sources, and provide a working way to replace the library.
+This directory contains an adapter, not a relicensed copy of DSS.
+
+Local replacement of LGPL components is permitted. Rebuild the Java adapter
+with Maven, supply the modified original JARs, and update dependencies.lock.json
+to describe those local replacements. prepare_engine_root.py assembles the
+guest; pack_filesystem.py and make_manifest.py author its assets. Use
+capture_snapshot.mjs with coldStart authoring to regenerate a snapshot before
+processing any user document, then compress_snapshot.mjs, attach_snapshot.py,
+chunk_filesystem.py and chunk_snapshot.mjs to regenerate the model and hashes.
+The CLI selects this replacement through ONEKIT_DSS_MODEL; a browser host can
+select the same model when building its distribution. Existing snapshots must
+not be reused after changing JARs: they contain already loaded Java classes.
+The above permission covers local changes to the adapter, dependency lock and
+build tools necessary for replacement, relinking and debugging of LGPL libraries.
+
+A prepared browser VM is a separate distribution. It also includes a JVM,
+operating-system kernel, C libraries, boot firmware and other dependencies.
+Their licenses, notices, corresponding sources and required build materials
+must accompany the distribution as applicable. A warm snapshot contains copies
+of these components too. Publishing only upstream links or only this adapter's
+source is not a complete distribution process.
+
+The Python wheel does not currently contain a Java VM, Linux kernel or warm
+snapshot. The experimental VM assets are not a production release. The presence
+of this notice does not establish legal compliance of a future VM distribution,
+qualification as a validation service, or complete conformance testing.

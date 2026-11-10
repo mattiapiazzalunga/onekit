@@ -9,7 +9,7 @@ const {operation,language,text}=JSON.parse(Buffer.concat(chunks).toString());
 try{
   const {transformSource,pluginPackages}=await import('./source_engine.mjs');
   const result=await transformSource({operation,language,text},{
-    load:async name=>require(name),
+    load:async name=>name.startsWith('@scalar/')?import(pathToFileURL(require.resolve(name)).href):require(name),
     plugins:async language=>{
       const name=pluginPackages[language];if(!name)return [];
       const loaded=await import(pathToFileURL(require.resolve(name)).href);

@@ -5,15 +5,15 @@
 
 Comando: `onekit run signature-verify`. Usa `onekit run --help` per gli argomenti di input e output.
 
-Categoria: **Sicurezza**. Fedeltà: **esatta**. Verifica crittografica offline delle firme PDF e CMS/P7M/P7S usando certificati incorporati. Le firme separate richiedono il file originale. Catene di fiducia, revoche, stato della firma qualificata e timestamp fidati non vengono controllati.
+Categoria: **Sicurezza**. Fedeltà: **esatta**. Verifica localmente le firme PDF e CMS con validazione AdES. Le firme separate richiedono il file originale. Puoi aggiungere un archivio ZIP di prove della firma. Se mancano prove di fiducia o revoca, l’esito è indeterminato.
 
 Tipi accettati: `*`. Tipo di output: `json`. Accetta più input: **sì**.
 
-Validazione dell’input: **qualsiasi tipo di file**. Numero di file richiesto: **1–2**. CLI: **134,217,728 byte per file**, **134,217,728 byte totali**. Il contenuto viene controllato prima dell’elaborazione. Rinominare un file non ne cambia il formato effettivo.
+Validazione dell’input: **qualsiasi tipo di file**. Numero di file richiesto: **1–3**. CLI: **134,217,728 byte per file**, **134,217,728 byte totali**. Il contenuto viene controllato prima dell’elaborazione. Rinominare un file non ne cambia il formato effettivo.
 
 Opzioni: nessuna.
 
-Pacchetti Python: pypdf, asn1crypto, pycryptodome. Motori esterni: consultare la matrice dei motori per sviluppatori per gli adattatori dei linguaggi di programmazione.
+Pacchetti Python: pypdf, asn1crypto, pycryptodome, pyhanko, pyhanko-certvalidator, cryptography, signxml, xsdata. Motori esterni: consultare la matrice dei motori per sviluppatori per gli adattatori dei linguaggi di programmazione.
 
 Implementazione dell’elaborazione: [adattatore condiviso della famiglia di strumenti](../../../../../../src/onekit/tools/signatures.py). Contratti e dati di test per le regressioni: [test](../../../../../../tests/test_core.py). Configurazione dei motori e licenze: [guida ai motori](../../../docs/engines.md).
 

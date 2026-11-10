@@ -21,3 +21,5 @@ Für Installationen ohne native Dokumentausführungen akzeptiert die Python-Vera
 `tools/transcription.py` zeigt `recognition_parameters`, einschließlich Modell, Sprache, Abtastrate, Breite der Beam-Suche und vorheriger Textkonditionierung. Ein anderer Inferenz-Host muss diese Einstellungen ausdrücklich unterstützen; gemeinsame Einstellungen bedeuten keine Gleichwertigkeit von Dekodierungsimplementierungen oder quantisierten Modellkonversionen.
 
 Der Entwickler-Handler verwendet sqlparse und SQLFluff direkt, wenn sie in seiner Python-Umgebung installiert sind. Die ursprünglichen eigenständigen `sqlformat`- und `sqlfluff`-Befehle werden weiterhin unterstützt, wenn diese Importe nicht verfügbar sind. Die SQL-Validierung verwendet den angeforderten SQLFluff-Dialekt, standardmäßig ANSI; Abfragen werden nicht ausgeführt.
+
+Die gemeinsamen Ressourcenobergrenzen sind in `src/onekit/limits.py` definiert. Aufrufer können sie über `ExecutionContext` verringern, aber die Obergrenzen des Kerns nicht überschreiten.

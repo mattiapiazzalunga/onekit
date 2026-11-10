@@ -64,3 +64,5 @@ The developer handler uses sqlparse and SQLFluff directly when installed in its
 Python environment. The original standalone `sqlformat` and `sqlfluff` commands
 remain supported when those imports are unavailable. SQL validation uses the
 requested SQLFluff dialect, with ANSI as the default; it does not execute queries.
+
+Shared resource ceilings are defined in `src/onekit/limits.py`. Callers may tighten them through `ExecutionContext`; they cannot raise the core ceilings.

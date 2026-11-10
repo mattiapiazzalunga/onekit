@@ -14,6 +14,24 @@ from ..models import OneKitError, Result, output
 SUPPORTED = ("1b", "2b", "3b")
 
 
+def _normalize_empty_encodings(document, *, apply=True):
+    """Canonical spelling of an unmodified standard font encoding."""
+    import pikepdf
+    changed = False
+    for obj in document.objects:
+        if not isinstance(obj, pikepdf.Dictionary) or obj.get('/Type') != pikepdf.Name.Font:
+            continue
+        encoding = obj.get('/Encoding')
+        if (isinstance(encoding, pikepdf.Dictionary)
+                and encoding.get('/BaseEncoding') in (pikepdf.Name.WinAnsiEncoding, pikepdf.Name.MacRomanEncoding)
+                and isinstance(encoding.get('/Differences', []), (pikepdf.Array, list))
+                and not len(encoding.get('/Differences', []))):
+            changed = True
+            if apply:
+                obj['/Encoding'] = encoding['/BaseEncoding']
+    return changed
+
+
 def _normalize_type1_widths(document, directory, report):
     """Reconcile simple Type 1 width tables with their embedded font programs."""
     import pikepdf
@@ -101,6 +119,10 @@ def _details(report):
 
 
 def validate(file, options=None):
+    from ..execution import current_context
+    if current_context().pdf_validator is not None:
+        from .pdf_conformance import validate as validate_independent
+        return validate_independent(file, {'profile': (options or {}).get('profile', 'auto')})
     pikepdf, pdfa = _backend()
     options = options or {}
     profile = str(options.get("profile", "auto")).lower()
@@ -181,7 +203,7 @@ def convert(file, options=None):
                             del metadata[key]
                 if claimed:
                     existing = pdfa.validate_written(io.BytesIO(file.data), profile)
-                    if existing.passed and intent is None and not flattened_forms:
+                    if existing.passed and intent is None and not flattened_forms and not _normalize_empty_encodings(original, apply=False):
                         return Result([output(file, "pdf", file.data)],
                                       ["This PDF already passes the selected PDF/A profile; the original bytes are unchanged."], _details(existing))
                 if claimed or flattened_forms:
@@ -225,6 +247,7 @@ def convert(file, options=None):
                 )
                 if has_type1:
                     repaired_widths = _normalize_type1_widths(document, directory, pdfa.check(document, profile))
+                _normalize_empty_encodings(document)
                 report = pdfa.save(document, stream, profile, output_intent=intent)
             data = stream.getvalue()
             # pdfa.save reopens and validates the written bytes before copying

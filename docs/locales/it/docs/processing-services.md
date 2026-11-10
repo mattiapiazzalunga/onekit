@@ -21,3 +21,5 @@ Per installazioni senza eseguibili di documenti nativi, l’API Python di elabor
 `tools/transcription.py` espone `recognition_parameters`, incluso modello, lingua, frequenza di campionamento, ampiezza della ricerca a fascio (beam search) e condizionamento del testo precedente. Un host di inferenza diverso deve supportare esplicitamente tali impostazioni; le impostazioni condivise non stabiliscono l'equivalenza delle implementazioni di decodifica o delle conversioni di modelli quantizzati.
 
 Il gestore dello sviluppatore usa sqlparse e SQLFluff direttamente quando sono installati nel suo ambiente Python. I comandi standalone originali `sqlformat` e `sqlfluff` rimangono supportati quando quegli import non sono disponibili. La validazione SQL usa il dialetto SQLFluff richiesto, con ANSI come default; non esegue query.
+
+I limiti di risorse condivisi sono definiti in `src/onekit/limits.py`. Chi usa la libreria può ridurli tramite `ExecutionContext`, ma non può superare i massimi del core.

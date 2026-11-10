@@ -1,7 +1,7 @@
 <!-- Copyright 2026 Mattia Piazzalunga -->
 <!-- SPDX-License-Identifier: LicenseRef-PolyForm-Shield-1.0.0 -->
 
-语言： [English](../../../README.md) · [Italiano](../it/README.md) · [Français](../fr/README.md) · [Español](../es/README.md) · [Deutsch](../de/README.md) · [Русский](../ru/README.md) · [中文](README.md).
+语言： [English](../../../README.md) · [Italiano](../it/README.md) · [Français](../fr/README.md) · [Español](../es/README.md) · [Deutsch](../de/README.md) · [Русский](../ru/README.md) · [中文](README.md) · [Português](../pt/README.md) · [हिन्दी](../hi/README.md).
 
 <p align="center">
   <a href="https://onekit.org"><img src="https://raw.githubusercontent.com/mattiapiazzalunga/onekit/main/images/logo.png" alt="OneKit logo" width="112" height="112"></a>
@@ -15,6 +15,8 @@
 **源版本:** `0.6.3`。稳定下载只有在发布工作流完成后才可用。分发版本是 `onekit-tools`；独立拥有的 PyPI 项目 `onekit` 无关联。
 
 [联系人与媒体指南](docs/contact-media.md)介绍独立 vCard 的生成、从二维码中提取 vCard、图像放大、背景移除、视频和 GIF 的压缩与速度调整，以及本地音频转写。
+
+参阅 [Android 安装包与自动人脸模糊](docs/android-and-face-tools.md)。
 
 许可证检查：检查 PDF、Word、PowerPoint、Excel、视频、音频、图像、字体、EPUB、文件或公共 URL 中的代码/项目和数据集。分析保持在本地；报告为**未经验证的估算，而非所有权证明或使用许可**。请参阅 [许可证检查的用法和限制](docs/cli.md#local-license-and-copyright-estimates)。
 

@@ -30,12 +30,8 @@ def run(tool, files, options):
     op = tool.id.removeprefix("pdf-")
     if op == "sign":
         from pyhanko.sign import signers
-        from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
-        signer = signers.SimpleSigner.load_pkcs12(require(options, "certificate"), passphrase=str(require(options, "password")).encode())
-        if signer is None:
-            raise OneKitError("Cannot load the certificate; check its password and format.")
-        stream = io.BytesIO()
-        signers.sign_pdf(IncrementalPdfFileWriter(io.BytesIO(files[0].data)), signature_meta=signers.PdfSignatureMetadata(field_name="OneKitSignature"), signer=signer, output=stream)
+        writer, signer, metadata, stream = _signing_job(files, options)
+        signers.sign_pdf(writer, signature_meta=metadata, signer=signer, output=stream)
         return Result([output(files[0], "signed.pdf", stream.getvalue())])
     if op == "validate-pdfa":
         from ..pdfa import validate
@@ -101,3 +97,40 @@ def run(tool, files, options):
             page.merge_page(PdfReader(io.BytesIO(stream.getvalue())).pages[0])
     data = save(writer)
     return Result([output(files[0], "pdf", data)])
+
+
+def _signing_job(files, options):
+    from pyhanko.sign import signers
+    from pyhanko.pdf_utils.incremental_writer import IncrementalPdfFileWriter
+    import base64
+
+    password = str(require(options, "password")).encode()
+    if "certificate_data" in options:
+        data = options["certificate_data"]
+        try:
+            if isinstance(data, str):
+                if len(data) > 4 * 1024 * 1024 // 3 + 4:
+                    raise ValueError()
+                data = base64.b64decode(data, validate=True)
+            elif not isinstance(data, (bytes, bytearray, memoryview)):
+                raise ValueError()
+            if not 0 < len(data) <= 1024 * 1024:
+                raise ValueError()
+            signer = signers.SimpleSigner.load_pkcs12_data(bytes(data), other_certs=[], passphrase=password)
+        except (ValueError, TypeError):
+            raise OneKitError("Cannot load the certificate; check its password and format.") from None
+    else:
+        signer = signers.SimpleSigner.load_pkcs12(require(options, "certificate"), passphrase=password)
+    if signer is None:
+        raise OneKitError("Cannot load the certificate; check its password and format.")
+    return (IncrementalPdfFileWriter(io.BytesIO(files[0].data)), signer,
+            signers.PdfSignatureMetadata(field_name="OneKitSignature"), io.BytesIO())
+
+
+async def run_async(tool, files, options):
+    if tool.id != "pdf-sign":
+        return run(tool, files, options)
+    from pyhanko.sign import signers
+    writer, signer, metadata, stream = _signing_job(files, options)
+    await signers.async_sign_pdf(writer, signature_meta=metadata, signer=signer, output=stream)
+    return Result([output(files[0], "signed.pdf", stream.getvalue())])

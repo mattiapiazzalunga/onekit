@@ -4,6 +4,7 @@ import json
 import tempfile
 from pathlib import Path
 
+from ...limits import LIMITS
 from ...models import Artifact, OneKitError, Result
 from ..native import command
 
@@ -45,6 +46,6 @@ def run(tool, files, options):
             raise OneKitError(f"The input does not contain a supported {tool.group} stream for this tool.")
         arguments = ["-nostdin", "-hide_banner", "-loglevel", "error", "-protocol_whitelist", "file,pipe", "-i", source.name, "-map_metadata", "-1"]
         arguments += plan["args"]
-        arguments += ["-fs", str(128 * 1024 * 1024), f"output.{format}"]
+        arguments += ["-fs", str(LIMITS.max_bytes), f"output.{format}"]
         command("ffmpeg", arguments, directory, timeout=300)
         return Result([Artifact(f"{files[0].stem}.{format}", (work / f"output.{format}").read_bytes())])

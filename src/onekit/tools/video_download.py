@@ -7,6 +7,7 @@ import tempfile
 from pathlib import Path
 from urllib.parse import urlsplit
 
+from ..limits import LIMITS
 from ..models import Artifact, OneKitError, Result
 
 
@@ -43,7 +44,7 @@ def run(tool, files, options):
 
     from .native import executable
     ffmpeg = executable("ffmpeg") if not options.get("list_formats") else None
-    limit = options.get("_max_expanded_bytes", 128 * 1024 * 1024)
+    limit = options.get("_max_expanded_bytes", LIMITS.max_bytes)
 
     transferred = {}
     def check_progress(progress):

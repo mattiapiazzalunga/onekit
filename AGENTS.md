@@ -1,7 +1,7 @@
 # OneKit CLI contribution guidance
 
 For every tool or presentation-text change, read [docs/localization.md](docs/localization.md).
-Update English, Italian, French, Spanish, German, Russian and Chinese together.
+Update English, Italian, French, Spanish, German, Russian, Chinese, Portuguese and Hindi together.
 Run the localization audit and regenerate translated documentation. Missing,
 obsolete or placeholder-only translations must not be published.
 

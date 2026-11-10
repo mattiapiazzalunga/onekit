@@ -1,0 +1,25 @@
+{
+  "copyright": "Copyright 2026 Mattia Piazzalunga",
+  "spdx": "LicenseRef-PolyForm-Shield-1.0.0",
+  "id": "pdf-validate-pdfua",
+  "name": "Validate PDF/UA",
+  "group": "pdf",
+  "handler": "pdf_conformance",
+  "accepts": [
+    "pdf"
+  ],
+  "produces": "json",
+  "fidelity": "exact",
+  "note": "Check PDF/UA-1 automatically with a local validation engine. A passing result still requires manual accessibility review. The report identifies the engine, profile and exact file hash.",
+  "packages": [],
+  "engines": [],
+  "multiple": false,
+  "options": [
+    "profile"
+  ],
+  "input_mode": "typed",
+  "min_files": 1,
+  "max_files": 1,
+  "max_file_bytes": 134217728,
+  "max_total_bytes": 134217728
+}
