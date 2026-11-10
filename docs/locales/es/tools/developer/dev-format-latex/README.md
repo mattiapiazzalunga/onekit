@@ -5,7 +5,7 @@
 
 Comando: `onekit run dev-format-latex`. Utiliza `onekit run --help` para consultar los argumentos de entrada y salida.
 
-Categoría: **Desarrollo**. Fidelidad: **exacta**. La validación verifica el parser o compilador configurado; los tipos, importaciones y dependencias de todo el proyecto pueden requerir un proyecto local.
+Categoría: **Desarrollo**. Fidelidad: **exacta**. Formatea LaTeX con tex-fmt y ajustes fijos. No carga la configuración del proyecto. Hasta 256 KiB por archivo de entrada.
 
 Tipos admitidos: `latex, txt`. Tipo de salida: `*`. Admite varias entradas: **no**.
 

@@ -5,7 +5,7 @@
 
 Commande : `onekit run latex-to-html`. Utilisez `onekit run --help` pour les arguments d’entrée et de sortie.
 
-Catégorie : **Convertisseurs**. Fidélité : **avec des compromis**. Le formatage, les polices, la mise en page, les formules ou les éléments non pris en charge peuvent changer. Les PDF scannés nécessitent OCR d'abord.
+Catégorie : **Convertisseurs**. Fidélité : **avec des compromis**. Convertit les documents LaTeX autonomes avec Pandoc 3.9. Les fichiers externes et la compilation TeX ne sont pas pris en charge. Jusqu’à 256 KiB par fichier d’entrée.
 
 Types acceptés : `latex`. Type de sortie : `html`. Accepte plusieurs entrées : **non**.
 
@@ -13,7 +13,7 @@ Validation de l’entrée : **texte**. Nombre de fichiers requis : **1–1**. CL
 
 Options : aucun.
 
-Paquets Python : bibliothèque standard ou moteur externe. Moteurs externes : pandoc.
+Paquets Python : bibliothèque standard ou moteur externe. Moteurs externes : node.
 
 Implémentation du traitement : [adaptateur partagé de la famille d’outils](../../../../../../src/onekit/tools/converters/__init__.py). Contrats et données de test de non-régression : [tests](../../../../../../tests/test_core.py). Configuration des moteurs et licences : [guide des moteurs](../../../docs/engines.md).
 

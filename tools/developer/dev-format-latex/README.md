@@ -5,7 +5,7 @@
 Command: `onekit run dev-format-latex`. Use `onekit run --help` for input and output arguments.
 
 Category: **developer**.
-Fidelity: **exact**. Validation checks the configured parser or compiler; project-wide types, imports and dependencies may require a local project.
+Fidelity: **exact**. Formats LaTeX with tex-fmt and fixed settings. Project configuration is not loaded. Up to 256 KiB per input file.
 
 Accepted types: `latex, txt`. Output type: `*`.
 Accepts multiple inputs: **no**.

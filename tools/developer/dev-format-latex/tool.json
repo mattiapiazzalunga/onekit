@@ -11,7 +11,7 @@
   ],
   "produces": "*",
   "fidelity": "exact",
-  "note": "Validation checks the configured parser or compiler; project-wide types, imports and dependencies may require a local project.",
+  "note": "Formats LaTeX with tex-fmt and fixed settings. Project configuration is not loaded. Up to 256 KiB per input file.",
   "packages": [],
   "engines": [],
   "multiple": false,

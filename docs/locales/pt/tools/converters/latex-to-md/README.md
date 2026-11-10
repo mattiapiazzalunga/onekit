@@ -5,7 +5,7 @@
 
 Comando: `onekit run latex-to-md`. Use `onekit run --help` para argumentos de entrada e saída.
 
-Categoria: **conversores**. Fidelidade: ** compromisso**. Formatação, fontes, layout, fórmulas ou elementos não suportados podem mudar. PDFs digitalizados requerem OCR primeiro.
+Categoria: **conversores**. Fidelidade: ** compromisso**. Converte documentos LaTeX autónomos com Pandoc 3.9. Não suporta ficheiros externos nem compilação TeX. Até 256 KiB por ficheiro de entrada.
 
 Tipos aceites: `latex`. Tipo de saída: `md`. Aceita múltiplas entradas: **no**.
 
@@ -13,7 +13,7 @@ Validação de entrada: **text**. Contagem de ficheiros necessária: **1-1**. CL
 
 Opções: nenhuma.
 
-Python pacotes: biblioteca padrão ou motor externo. Motores externos: pandoc.
+Python pacotes: biblioteca padrão ou motor externo. Motores externos: node.
 
 Execução da transformação: [adaptador de família compartilhado](../../../../../../src/onekit/tools/converters/__init__.py). Contratos e dispositivos de regressão: [testes](../../../../../../tests/test_core.py). Configuração do motor e licenças: [guia do motor](../../../docs/engines.md).
 

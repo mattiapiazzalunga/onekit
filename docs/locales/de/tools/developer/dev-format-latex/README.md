@@ -5,7 +5,7 @@
 
 Befehl: `onekit run dev-format-latex`. Informationen zu Eingabe- und Ausgabeargumenten erhalten Sie mit `onekit run --help`.
 
-Kategorie: **Entwicklung**. Wiedergabetreue: **exakt**. Die Validierung überprüft den konfigurierten Parser oder Compiler; projektweite Typen, Importe und Abhängigkeiten können ein lokales Projekt erfordern.
+Kategorie: **Entwicklung**. Wiedergabetreue: **exakt**. Formatiert LaTeX mit tex-fmt und festen Einstellungen. Die Projektkonfiguration wird nicht geladen. Bis zu 256 KiB pro Eingabedatei.
 
 Akzeptierte Typen: `latex, txt`. Ausgabetyp: `*`. Mehrere Eingaben möglich: **nein**.
 

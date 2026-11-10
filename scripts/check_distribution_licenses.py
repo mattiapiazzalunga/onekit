@@ -31,7 +31,11 @@ def check(directory):
 
     def validate(files):
         for name in ("LICENSE", "NOTICE"):
-            matches = [data for path, data in files.items() if path.endswith("/" + name)]
+            # Bundled engines retain their own LICENSE files. Validate the
+            # distribution's top-level license, not third-party engine notices.
+            matches = [data for path, data in files.items()
+                       if path.endswith(".dist-info/licenses/" + name)
+                       or (path.count("/") == 1 and path.endswith("/" + name))]
             if len(matches) != 1 or matches[0] != (root / name).read_bytes():
                 raise ValueError("Missing or stale distribution " + name)
         metadata = [data for path, data in files.items() if path.endswith(("/METADATA", "/PKG-INFO"))]

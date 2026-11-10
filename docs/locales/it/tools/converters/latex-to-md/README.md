@@ -5,7 +5,7 @@
 
 Comando: `onekit run latex-to-md`. Usa `onekit run --help` per gli argomenti di input e output.
 
-Categoria: **Convertitori**. Fedeltà: **con limitazioni**. La formattazione, i font, il layout, le formule o elementi non supportati potrebbero cambiare. I PDF scansionati richiedono prima OCR.
+Categoria: **Convertitori**. Fedeltà: **con limitazioni**. Converte documenti LaTeX autonomi con Pandoc 3.9. I file esterni e la compilazione TeX non sono supportati. Fino a 256 KiB per file di input.
 
 Tipi accettati: `latex`. Tipo di output: `md`. Accetta più input: **no**.
 
@@ -13,7 +13,7 @@ Validazione dell’input: **testo**. Numero di file richiesto: **1–1**. CLI: *
 
 Opzioni: nessuna.
 
-Pacchetti Python: libreria standard o motore esterno. Motori esterni: pandoc.
+Pacchetti Python: libreria standard o motore esterno. Motori esterni: node.
 
 Implementazione dell’elaborazione: [adattatore condiviso della famiglia di strumenti](../../../../../../src/onekit/tools/converters/__init__.py). Contratti e dati di test per le regressioni: [test](../../../../../../tests/test_core.py). Configurazione dei motori e licenze: [guida ai motori](../../../docs/engines.md).
 

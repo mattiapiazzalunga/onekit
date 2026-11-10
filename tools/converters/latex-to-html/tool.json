@@ -10,10 +10,10 @@
   ],
   "produces": "html",
   "fidelity": "compromise",
-  "note": "Formatting, fonts, layout, formulas or unsupported elements may change. Scanned PDFs require OCR first.",
+  "note": "Converts self-contained LaTeX with Pandoc 3.9. External files and TeX compilation are not supported. Up to 256 KiB per input file.",
   "packages": [],
   "engines": [
-    "pandoc"
+    "node"
   ],
   "multiple": false,
   "options": [],
