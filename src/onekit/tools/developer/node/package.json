@@ -6,7 +6,7 @@
   "dependencies": {
     "@prettier/plugin-php": "0.26.0",
     "@scalar/kotlin-fmt": "0.4.1",
-    "@scalar/ruby-fmt": "0.7.1",
+    "@scalar/ruby-fmt": "0.9.0",
     "esbuild": "0.28.2",
     "graphql": "17.0.2",
     "html-minifier-terser": "7.2.0",
