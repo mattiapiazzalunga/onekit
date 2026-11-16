@@ -184,7 +184,8 @@ def external(operation, language, text):
     from ..native import command
     if operation == 'format' and language == 'latex':
         script = Path(__file__).with_name('texfmt-runner.mjs')
-        return command('node', [str(script.resolve())], Path.cwd(), stdin=text.encode('utf-8'), timeout=15).decode('utf-8')
+        # Cold WASM startup under Windows ARM x64 emulation can exceed 15s.
+        return command('node', [str(script.resolve())], Path.cwd(), stdin=text.encode('utf-8'), timeout=60).decode('utf-8')
     if operation == 'format' and language == 'sql':
         try:
             import sqlparse
