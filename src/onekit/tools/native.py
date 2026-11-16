@@ -66,6 +66,12 @@ def process_file(file, engine, arguments, *, in_place=False):
 
 
 def convert_document(file, source, target, options):
+    if source == 'docx' and target == 'pdf':
+        from ..execution import current_context
+        service = current_context().document_converter
+        if service is not None:
+            from .office import convert
+            return convert(file, service)
     # Semantic conversion stays useful even without a full office suite.
     if source == "docx" and target == "md":
         import io
