@@ -10,9 +10,9 @@
 <p align="center">एक आसान टूलकिट। आपकी फ़ाइलें आपकी ही रहती हैं।</p>
 <p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub सितारों" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
 
-एक ऑफलाइन Python उपकरण किट के साथ 230 उपकरणों के लिए रूपांतरण, पीडीएफ, छवियों, अभिलेखागार, फ़ॉन्ट्स, फ़ाइल निरीक्षण, एन्क्रिप्शन, डेवलपर उपयोगिताएँ, OCR और तुलना इसका प्रयोग करें CLI या ***** पर चित्रमय इंटरफ़ेस[onekit.org](https://onekit.org)**.
+एक ऑफलाइन Python उपकरण किट के साथ 289 उपकरणों के लिए रूपांतरण, पीडीएफ, छवियों, अभिलेखागार, फ़ॉन्ट्स, फ़ाइल निरीक्षण, एन्क्रिप्शन, डेवलपर उपयोगिताएँ, OCR और तुलना इसका प्रयोग करें CLI या ***** पर चित्रमय इंटरफ़ेस[onekit.org](https://onekit.org)**.
 
-** स्रोत संस्करण:* `0.6.3` रिलीज वर्कफ़्लो पूरा होने के बाद ही स्थिर डाउनलोड मौजूद हैं। वितरण `onekit-tools` है; अलग से स्वामित्व वाली PyPI परियोजना जिसे `onekit` कहा जाता है, असंबंधित है।
+** स्रोत संस्करण:* `0.7.0` रिलीज वर्कफ़्लो पूरा होने के बाद ही स्थिर डाउनलोड मौजूद हैं। वितरण `onekit-tools` है; अलग से स्वामित्व वाली PyPI परियोजना जिसे `onekit` कहा जाता है, असंबंधित है।
 
 [ संपर्क और मीडिया गाइड](docs/contact-media.md) स्टैंडअलोन vCard पीढ़ी, QR-to-vCard निष्कर्षण, छवि upscaling, पृष्ठभूमि हटाने, वीडियो संपीड़न/गति/GIF और स्थानीय ऑडियो transcription शामिल हैं।
 

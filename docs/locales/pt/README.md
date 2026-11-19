@@ -10,9 +10,9 @@ Idiomas: [English](../../../README.md) · [Italiano](../it/README.md) · [Franç
 <p align="center">Um conjunto de ferramentas simples. Os seus ficheiros continuam a ser seus.</p>
 <p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub estrelas" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
 
-Um offline Python toolkit com 230 ferramentas para conversões, PDFs, imagens, arquivos, fontes, inspeção de arquivos, criptografia, utilitários de desenvolvimento, OCR e comparações. Usar isto CLI ou a interface gráfica em **[onekit.org](https://onekit.org)**.
+Um offline Python toolkit com 289 ferramentas para conversões, PDFs, imagens, arquivos, fontes, inspeção de arquivos, criptografia, utilitários de desenvolvimento, OCR e comparações. Usar isto CLI ou a interface gráfica em **[onekit.org](https://onekit.org)**.
 
-** Versão fonte:** `0.6.3`. Os downloads estáveis só existem após o workflow de lançamento terminar. A distribuição é `onekit-tools`; o projeto PyPI de propriedade separada chamado `onekit` não tem relação.
+** Versão fonte:** `0.7.0`. Os downloads estáveis só existem após o workflow de lançamento terminar. A distribuição é `onekit-tools`; o projeto PyPI de propriedade separada chamado `onekit` não tem relação.
 
 A [guia de contato e mídia](docs/contact-media.md) Abrange o autônomo vCard geração, QR- Para...vCard extração, aumento da imagem, remoção de fundo, compressão de vídeo/velocidade/GIF e transcrição de áudio local.
 
