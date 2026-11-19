@@ -347,10 +347,12 @@ def test_detached_signature_can_have_a_zip_original(with_evidence):
     original = io.BytesIO()
     with zipfile.ZipFile(original, 'w') as archive:
         archive.writestr('manifest.json', '{"application":"example"}')
-        archive.writestr('document.txt', 'original')
+        archive.writestr('document.txt', b'original\nwith binary line endings\r\n')
     content = original.getvalue()
     signature = pkcs7.PKCS7SignatureBuilder().set_data(content).add_signer(
-        leaf, pki.signer_key, hashes.SHA256()).sign(serialization.Encoding.DER, [pkcs7.PKCS7Options.DetachedSignature])
+        leaf, pki.signer_key, hashes.SHA256()).sign(
+            serialization.Encoding.DER,
+            [pkcs7.PKCS7Options.DetachedSignature, pkcs7.PKCS7Options.Binary])
     files = [Artifact('signature.p7s', signature), Artifact('original.zip', content)]
     if with_evidence:
         evidence = io.BytesIO()
