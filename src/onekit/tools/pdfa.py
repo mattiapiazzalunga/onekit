@@ -248,7 +248,13 @@ def convert(file, options=None):
                 if has_type1:
                     repaired_widths = _normalize_type1_widths(document, directory, pdfa.check(document, profile))
                 _normalize_empty_encodings(document)
-                report = pdfa.save(document, stream, profile, output_intent=intent)
+                # Use a classic cross-reference table. A compressed xref stream
+                # can end in a binary CR byte followed by the writer's LF separator;
+                # independent readers can mistake that pair for a CRLF separator
+                # and reject its otherwise correct /Length. Keep content streams
+                # compressed, without introducing that ambiguity in the xref data.
+                report = pdfa.save(document, stream, profile, output_intent=intent,
+                                   object_stream_mode=pikepdf.ObjectStreamMode.disable)
             data = stream.getvalue()
             # pdfa.save reopens and validates the written bytes before copying
             # them to this stream; revalidating would repeat the same full scan.

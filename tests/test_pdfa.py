@@ -83,6 +83,15 @@ def test_pdfa_converts_and_validates_exact_bytes(profile):
     from pypdf import PdfReader
     assert 'OneKit' in PdfReader(io.BytesIO(result.files[0].data)).pages[0].extract_text()
     assert result.files[0].data != source.data
+    # A classic xref table avoids binary stream-ending ambiguity in independent
+    # readers. Parse the actual startxref offset rather than searching content.
+    data = result.files[0].data
+    xref_offset = int(data.rsplit(b'startxref', 1)[1].split()[0])
+    assert data[xref_offset:xref_offset+4] == b'xref'
+    with pikepdf.open(io.BytesIO(data)) as pdf:
+        assert not any(isinstance(obj, pikepdf.Stream)
+                       and obj.get('/Type') in (pikepdf.Name.XRef, pikepdf.Name.ObjStm)
+                       for obj in pdf.objects)
 
 
 def test_pdfa_validator_does_not_trust_declaration_or_rewrite_input():
