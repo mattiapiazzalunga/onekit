@@ -8,7 +8,7 @@ Idiomas: [English](../../../README.md) · [Italiano](../it/README.md) · [Franç
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">Un solo conjunto de herramientas. Tus archivos siguen siendo tuyos.</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="Estrellas en GitHub" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="Estrellas en GitHub" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 Un kit de herramientas Python sin conexión con 289 herramientas para conversiones, PDFs, imágenes, archivos, fuentes, inspección de archivos, encriptación, utilidades de desarrollador, OCR y comparaciones. Usa este CLI o la interfaz gráfica en **[onekit.org](https://onekit.org)**.
 
@@ -25,7 +25,7 @@ Verificación de licencias: inspeccionar PDF, Word, PowerPoint, Excel, video, au
 <a id="install"></a>
 ## Install
 
-Se requiere Python 3.11 o posterior. El paquete wheel universal es compatible con Windows, macOS y Linux en x64/ARM64. Las bibliotecas nativas opcionales y los motores externos tienen requisitos de plataforma adicionales.
+Se requiere Python 3.11.5 o posterior. El paquete wheel universal es compatible con Windows, macOS y Linux en x64/ARM64. Las bibliotecas nativas opcionales y los motores externos tienen requisitos de plataforma adicionales.
 
 Después de la publicación:
 

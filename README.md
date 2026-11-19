@@ -8,7 +8,7 @@ Languages: [English](README.md) · [Italiano](docs/locales/it/README.md) · [Fra
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">One simple toolkit. Your files stay yours.</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 An offline Python toolkit with 289 tools for conversions, PDFs, images, archives, fonts, file inspection, encryption, developer utilities, OCR and comparisons. Use this CLI or the graphical interface at **[onekit.org](https://onekit.org)**.
 
@@ -24,7 +24,7 @@ License checks: inspect PDF, Word, PowerPoint, Excel, video, audio, images, font
 
 ## Install
 
-Python 3.11+ is required. The universal wheel supports Windows, macOS and Linux on x64/ARM64. Optional native libraries and external engines have additional platform requirements.
+Python 3.11.5+ is required. The universal wheel supports Windows, macOS and Linux on x64/ARM64. Optional native libraries and external engines have additional platform requirements.
 
 After publication:
 

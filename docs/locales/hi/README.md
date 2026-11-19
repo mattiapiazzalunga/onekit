@@ -8,7 +8,7 @@
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">एक आसान टूलकिट। आपकी फ़ाइलें आपकी ही रहती हैं।</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub सितारों" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub सितारों" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 एक ऑफलाइन Python उपकरण किट के साथ 289 उपकरणों के लिए रूपांतरण, पीडीएफ, छवियों, अभिलेखागार, फ़ॉन्ट्स, फ़ाइल निरीक्षण, एन्क्रिप्शन, डेवलपर उपयोगिताएँ, OCR और तुलना इसका प्रयोग करें CLI या ***** पर चित्रमय इंटरफ़ेस[onekit.org](https://onekit.org)**.
 
@@ -25,7 +25,7 @@
 <a id="install"></a>
 ## इंस्टॉल करें
 
-Python 3.11+ की आवश्यकता है। यूनिवर्सल wheel x64/ARM64 पर Windows, macOS और Linux का समर्थन करता है। वैकल्पिक मूल पुस्तकालयों और बाहरी इंजनों में अतिरिक्त प्लेटफ़ॉर्म आवश्यकताएं होती हैं।
+Python 3.11.5+ की आवश्यकता है। यूनिवर्सल wheel x64/ARM64 पर Windows, macOS और Linux का समर्थन करता है। वैकल्पिक मूल पुस्तकालयों और बाहरी इंजनों में अतिरिक्त प्लेटफ़ॉर्म आवश्यकताएं होती हैं।
 
 प्रकाशन के बाद:
 

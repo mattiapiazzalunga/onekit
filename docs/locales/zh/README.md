@@ -8,7 +8,7 @@
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">一个工具箱，您的文件始终属于您。</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub 星标" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub 星标" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 一个离线 Python 工具包，带有用于转换、PDF、图片、压缩文件、字体、文件检查、加密、开发者工具、OCR 和比较的 289 个工具。使用这个 CLI 或者在 **[onekit.org](https://onekit.org)** 的图形界面。
 
@@ -25,7 +25,7 @@
 <a id="install"></a>
 ## Install
 
-需要 Python 3.11 或更高版本。通用 wheel 安装包支持 x64/ARM64 平台上的 Windows、macOS 和 Linux。可选的原生库和外部引擎另有平台要求。
+需要 Python 3.11.5 或更高版本。通用 wheel 安装包支持 x64/ARM64 平台上的 Windows、macOS 和 Linux。可选的原生库和外部引擎另有平台要求。
 
 发布后：
 

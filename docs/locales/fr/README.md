@@ -8,7 +8,7 @@ Langues : [English](../../../README.md) · [Italiano](../it/README.md) · [Fran�
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">Une seule boîte à outils. Vos fichiers restent les vôtres.</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="Étoiles sur GitHub" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="Étoiles sur GitHub" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 Une trousse hors ligne Python avec 289 outils pour les conversions, PDF, images, archives, polices, inspection de fichiers, cryptage, utilitaires pour développeurs, OCR et comparaisons. Utilisez ce CLI ou l'interface graphique à **[onekit.org](https://onekit.org)**.
 
@@ -25,7 +25,7 @@ Vérifications de licence : inspectez PDF, Word, PowerPoint, Excel, vidéo, audi
 <a id="install"></a>
 ## Install
 
-Python 3.11 ou une version ultérieure est requis. Le paquet wheel universel prend en charge Windows, macOS et Linux sur x64/ARM64. Les bibliothèques natives facultatives et les moteurs externes imposent des exigences supplémentaires selon la plateforme.
+Python 3.11.5 ou une version ultérieure est requis. Le paquet wheel universel prend en charge Windows, macOS et Linux sur x64/ARM64. Les bibliothèques natives facultatives et les moteurs externes imposent des exigences supplémentaires selon la plateforme.
 
 Après la publication :
 

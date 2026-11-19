@@ -25,7 +25,7 @@ requirements for APIs OneKit does not invoke. The optional `[pdfa]` extra instal
 Python API use, install that extra and then `pip install --no-deps pdfminer.six==20260107 pdftopdfa==0.9.24`.
 Do not install upstream's OCR extras for this adapter. Upstream's mandatory OCR
 requirements currently pin an older PyYAML incompatible with OneKit.
-Conversion requires Python 3.12+; standalone validation works on Python 3.11+.
+Conversion requires Python 3.12+; standalone validation works on Python 3.11.5+.
 Run `python scripts/check_licenses.py --include-pdfa` to audit the selected runtime.
 
 The former `icc_profile` option remains accepted as an optional local ICC file;

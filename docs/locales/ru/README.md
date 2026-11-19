@@ -8,7 +8,7 @@
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">Один набор инструментов. Ваши файлы остаются вашими.</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="Звёзды на GitHub" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="Звёзды на GitHub" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 Офлайн-набор инструментов Python с 289 инструментами для конвертации, PDF, изображений, архивов, шрифтов, проверки файлов, шифрования, утилит для разработчиков, OCR и сравнений. Используйте этот CLI или графический интерфейс на **[onekit.org](https://onekit.org)**.
 
@@ -25,7 +25,7 @@
 <a id="install"></a>
 ## Install
 
-Требуется Python 3.11 или новее. Универсальный пакет wheel поддерживает Windows, macOS и Linux на x64/ARM64. Для необязательных нативных библиотек и внешних движков действуют дополнительные требования к платформе.
+Требуется Python 3.11.5 или новее. Универсальный пакет wheel поддерживает Windows, macOS и Linux на x64/ARM64. Для необязательных нативных библиотек и внешних движков действуют дополнительные требования к платформе.
 
 После публикации:
 

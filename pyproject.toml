@@ -9,7 +9,7 @@ name = "onekit-tools"
 dynamic = ["version"]
 description = "One simple toolkit. An offline CLI and Python processing library."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11.5"
 license = "LicenseRef-PolyForm-Shield-1.0.0"
 license-files = ["LICENSE", "NOTICE"]
 authors = [{name = "Mattia Piazzalunga", email = "hello@mattiapiazzalunga.com"}]
@@ -22,7 +22,9 @@ licenses = ["license-expression==30.4.4", "defusedxml==0.7.1", "olefile==0.47", 
 video = ["yt-dlp>=2026.8.19,<2027", "yt-dlp-ejs==0.8.0"]
 qrcode = ["segno>=1.6.6,<2", "python-barcode==0.16.1", "zxing-cpp>=3.1.1,<4", "Pillow>=13,<14"]
 barcode = ["python-barcode==0.16.1", "zxing-cpp>=3.1.1,<4", "Pillow>=13,<14"]
-documents = ["markdown-it-py>=4.2,<5", "markdownify>=1.2.3,<2", "python-docx>=1.2,<2", "python-pptx>=1.0.2,<2", "openpyxl>=3.1.5,<4"]
+# Patched Soup Sieve requires Python 3.11.5; retain the security floor even
+# when pip can otherwise reuse an older transitive Beautiful Soup dependency.
+documents = ["markdown-it-py>=4.2,<5", "markdownify>=1.2.3,<2", "soupsieve>=4.1.1,<5", "python-docx>=1.2,<2", "python-pptx>=1.0.2,<2", "openpyxl>=3.1.5,<4"]
 pdf = ["pypdf>=6.21.4,<7", "pypdfium2>=5.14,<6", "reportlab>=4.4,<6", "Pillow>=13,<14"]
 # Runtime prerequisites; the CLI installs the upstream converter separately with
 # --no-deps, since its unused OCR requirements conflict with supported PyYAML.

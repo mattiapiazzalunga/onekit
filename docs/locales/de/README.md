@@ -8,7 +8,7 @@ Sprachen: [English](../../../README.md) · [Italiano](../it/README.md) · [Fran�
 </p>
 <h1 align="center">OneKit</h1>
 <p align="center">Ein Werkzeugkasten. Ihre Dateien bleiben Ihre Dateien.</p>
-<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub-Sterne" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></p>
+<p align="center"><a href="https://github.com/mattiapiazzalunga/onekit/stargazers"><img alt="GitHub-Sterne" src="https://img.shields.io/github/stars/mattiapiazzalunga/onekit"></a> <a href="https://pypi.org/project/onekit-tools/"><img alt="PyPI" src="https://img.shields.io/pypi/v/onekit-tools"></a> <img alt="PolyForm-Shield-1.0.0" src="https://img.shields.io/badge/license-PolyForm_Shield_1.0.0-blue"> <img alt="Python 3.11.5+" src="https://img.shields.io/badge/python-3.11.5%2B-blue"></p>
 
 Ein offline nutzbares Python-Toolkit mit 289 Werkzeugen für Konvertierungen, PDF-Dateien, Bilder, Archive, Schriftarten, Dateiprüfung, Verschlüsselung, Entwickleraufgaben, OCR und Vergleichen Sie. Verwenden Sie diese CLI oder die grafische Oberfläche unter **[onekit.org](https://onekit.org)**.
 
@@ -25,7 +25,7 @@ Lizenzprüfungen: Überprüfen Sie PDF, Word, PowerPoint, Excel, Video, Audio, B
 <a id="install"></a>
 ## Install
 
-Python 3.11 oder neuer ist erforderlich. Das universelle Wheel-Paket unterstützt Windows, macOS und Linux auf x64/ARM64. Für optionale native Bibliotheken und externe Engines gelten zusätzliche Plattformanforderungen.
+Python 3.11.5 oder neuer ist erforderlich. Das universelle Wheel-Paket unterstützt Windows, macOS und Linux auf x64/ARM64. Für optionale native Bibliotheken und externe Engines gelten zusätzliche Plattformanforderungen.
 
 Nach der Veröffentlichung:
 
