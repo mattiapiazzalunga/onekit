@@ -58,10 +58,11 @@ precedence = "override"
 SPDX-FileCopyrightText = "2026 Mattia Piazzalunga"
 SPDX-License-Identifier = "LicenseRef-PolyForm-Shield-1.0.0"
 
-# Publisher terms need verification. Intentionally omit a licence rather than
-# falsely relicensing signed third-party trust lists as OneKit source code.
+# Publisher permissions remain unverified; this LicenseRef records the absence
+# of a redistribution grant, without applying the OneKit source-code licence.
 [[annotations]]
 path = "src/onekit/data/eu-trust-lists.zip"
 precedence = "override"
 SPDX-FileCopyrightText = "NOASSERTION"
-SPDX-FileComment = "Signed EU/EEA trust lists: redistribution terms require publisher-specific verification."
+SPDX-License-Identifier = "LicenseRef-Trust-Lists-No-Permission-Granted"
+SPDX-FileComment = "Publisher-specific redistribution permission remains unverified; see the referenced rights notice."

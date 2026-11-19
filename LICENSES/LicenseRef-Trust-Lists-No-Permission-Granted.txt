@@ -1,0 +1,17 @@
+EU/EEA trust-list publisher rights notice
+
+Applies to src/onekit/data/eu-trust-lists.zip, containing signed trust lists
+issued by the European Commission and the respective national publishers.
+
+No copyright licence or redistribution permission is granted by OneKit for
+these third-party materials. Their respective publishers retain any rights
+that apply. Publisher-specific permission to redistribute the bundled lists
+has not been verified. This notice does not supply that permission, assert
+public-domain status, or place these materials under OneKit's source licence.
+
+Consult the publisher and the terms accompanying each original signed list
+before redistribution. Original source locations are recorded in the archive's
+manifest and signed XML documents. Applicable statutory rights are unaffected.
+
+This LicenseRef documents the restrictive, unverified rights status for REUSE
+inventory purposes. It is not a licence grant or a legal clearance.
