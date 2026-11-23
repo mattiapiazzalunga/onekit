@@ -13,7 +13,7 @@
     "prettier": "3.9.10",
     "prettier-plugin-astro": "1.1.2",
     "prettier-plugin-solidity": "2.4.1",
-    "prettier-plugin-svelte": "4.1.1",
+    "prettier-plugin-svelte": "4.2.0",
     "svgo": "4.1.0"
   }
 }
